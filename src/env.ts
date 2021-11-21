@@ -3,6 +3,7 @@ export interface ENV {
   root: string;
   pageTitle: string;
   tokenKey: string;
+  token:string;
 }
 
 const cwd = process.cwd();
@@ -12,6 +13,7 @@ const env: ENV = {
   root,
   pageTitle: process.env.REACT_APP_PAGE_TITLE || '',
   tokenKey: process.env.REACT_APP_TOKEN_KEY || '',
+  token:process.env.REACT_APP_TOKEN||''
 };
 
 export default env;

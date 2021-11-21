@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ElementConfig from './elementConfig';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 ReactDOM.render(
   <BrowserRouter>
-    <ElementConfig />
+    <Provider store={store}>
+      <ElementConfig />
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root'),
 );
