@@ -1,12 +1,8 @@
+import { LoginInput } from "commons/type";
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
-
-export interface LoginInput {
-  username: string;
-  password: string;
-}
 
 export interface UserInfo {
   token: string;

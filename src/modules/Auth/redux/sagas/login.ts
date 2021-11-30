@@ -1,19 +1,23 @@
 import env from 'env';
 import { getNavigate } from 'helpers/history';
-import { put } from 'redux-saga/effects';
-import { LoginAction, LoginActionSuccess } from '../action-types';
+import { delay, put } from 'redux-saga/effects';
+import { actionLoadingError, actionLoadingSuccess } from 'redux/actions';
+import { LoginAction, LoginActionSuccess, UserInfo } from '../action-types';
 import { loginError, loginSuccess } from '../actions';
-import { UserInfo } from './../action-types/login';
-import { CommonPath } from './../../../../commons/base-routes';
+import { CommonPath } from 'commons/base-routes';
 const TOKEN_KEY = env.tokenKey;
 const token = env.token;
 
 export function* loginAsync(action: LoginAction) {
-  const { username, password } = action.payload;
-  if (username === 'admin' && password === '123456') {
+  const { userName, passWord } = action.payload;
+  if (userName === 'admin' && passWord === '123456') {
     const user: UserInfo = { token };
+    yield delay(1000);
     yield put(loginSuccess(user));
+    yield put(actionLoadingSuccess());
   } else {
+    yield delay(1000);
+    yield put(actionLoadingError());
     yield put(loginError());
   }
 }

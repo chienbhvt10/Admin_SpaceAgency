@@ -7,6 +7,7 @@ import { CommonPath } from './commons/base-routes';
 import env from './env';
 import { appStart } from './redux/actions';
 import routes from './router';
+import 'antd/dist/antd.css';
 
 function ElementConfig() {
   const element = useRoutes(routes);

@@ -1,27 +1,30 @@
-import { LoginActionTypes, LoginState, LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from '../action-types/login';
+import {
+  ACTION_LOADING,
+  ACTION_LOADING_ERROR,
+  ACTION_LOADING_SUCCESS,
+  LoadingActionTypes,
+  LoadingState,
+} from 'redux/action-types';
 
 const initialState = {
   loading: false,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initialState, action: LoginActionTypes): LoginState => {
+export default (state = initialState, action: LoadingActionTypes): LoadingState => {
   switch (action.type) {
-    case LOGIN:
+    case ACTION_LOADING:
       return {
         ...state,
         loading: true,
       };
 
-    case LOGIN_SUCCESS:
+    case ACTION_LOADING_SUCCESS:
       return {
         ...state,
-        userInfo: {
-          ...action.payload,
-        },
         loading: false,
       };
-    case LOGIN_ERROR:
+    case ACTION_LOADING_ERROR:
       return {
         ...state,
         loading: false,

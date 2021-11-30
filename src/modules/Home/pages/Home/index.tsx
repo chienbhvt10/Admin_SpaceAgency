@@ -1,7 +1,12 @@
+import HomeLayout from 'commons/components/layouts/Home';
 import React from 'react';
 
 function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <HomeLayout>
+      <div id="homePage">Home</div>
+    </HomeLayout>
+  );
 }
 
 export default HomePage;

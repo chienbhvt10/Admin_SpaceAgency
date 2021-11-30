@@ -1,0 +1,16 @@
+#headerPage {
+  .site-layout {
+    .site-layout-background {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      h3 {
+        color: #fff;
+        font-size: 14px;
+        margin-right: 40px;
+        cursor: pointer;
+      }
+    }
+  }
+}

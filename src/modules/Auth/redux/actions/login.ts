@@ -1,4 +1,5 @@
-import { LoginActionTypes, LOGIN, LoginInput, LOGIN_ERROR, LOGIN_SUCCESS, UserInfo } from '../action-types/login';
+import { LoginInput } from 'commons/type';
+import { LoginActionTypes, LOGIN, LOGIN_ERROR, LOGIN_SUCCESS, UserInfo } from '../action-types/login';
 
 export const login = (payload: LoginInput): LoginActionTypes => ({
   type: LOGIN,
