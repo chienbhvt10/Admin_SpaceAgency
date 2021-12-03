@@ -5,10 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 import ElementConfig from './elementConfig';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { CookiesProvider } from 'react-cookie';
+
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <ElementConfig />
+      <CookiesProvider>
+        <ElementConfig />
+      </CookiesProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById('root'),

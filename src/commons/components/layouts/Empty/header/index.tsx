@@ -1,14 +1,17 @@
 import { Layout } from 'antd';
 import { CommonPath } from 'commons/base-routes';
+import { NEXT_LOCALE } from 'commons/type';
 import env from 'env';
-import { getNavigate } from 'helpers/history';
-import React from 'react';
+import { getNavigate, setRedirectUrl } from 'helpers/history';
+import { useCookies } from 'react-cookie';
 
 const { Header } = Layout;
 const HeaderLayout = () => {
+  const [cookies] = useCookies([NEXT_LOCALE]);
   const onLogout = () => {
     localStorage.removeItem(env.tokenKey);
     getNavigate(CommonPath.LOGIN_PATH);
+    setRedirectUrl(cookies.NEXT_LOCALE);
   };
   return (
     <div id="headerPage">

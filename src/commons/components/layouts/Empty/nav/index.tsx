@@ -1,24 +1,45 @@
-import { PieChartOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
+import { dataNav } from 'commons/type';
+import { getNavigate } from 'helpers/history';
+import { findDataNav } from 'helpers/string';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import RenderIcon from './component/renderIcon';
 const { Sider } = Layout;
 interface IProps {
   children: React.ReactNode;
 }
 function NavBar(props: IProps) {
+  const [collapsed, setCollapsed] = React.useState<boolean>(false);
+  const [keyNav, setKeyNav] = React.useState<string>('1');
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    if (pathname) {
+      const objNav = dataNav.find((item) => item.router === pathname);
+      setKeyNav(objNav?.key || '1');
+    }
+  }, [pathname]);
   const onCollapse = () => {
     setCollapsed(!collapsed);
   };
-  const [collapsed, setCollapsed] = React.useState<boolean>(false);
+  const onSelect = ({ item, key }: any) => {
+    const itemNav = findDataNav(key);
+    getNavigate(itemNav?.router || '');
+  };
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Dashboard
-          </Menu.Item>
+        <Menu theme="dark" selectedKeys={[`${keyNav}`]} mode="inline" onSelect={onSelect}>
+          {dataNav.map((item) => {
+            return (
+              <Menu.Item key={item.key} icon={<RenderIcon item={item} />}>
+                {item.name}
+              </Menu.Item>
+            );
+          })}
         </Menu>
       </Sider>
       <Layout style={{ padding: '0 18px 18px' }}>

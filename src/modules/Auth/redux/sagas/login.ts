@@ -1,5 +1,5 @@
 import env from 'env';
-import { getNavigate } from 'helpers/history';
+import { getNavigate, getRedirectUrl } from 'helpers/history';
 import { delay, put } from 'redux-saga/effects';
 import { actionLoadingError, actionLoadingSuccess } from 'redux/actions';
 import { LoginAction, LoginActionSuccess, UserInfo } from '../action-types';
@@ -24,8 +24,9 @@ export function* loginAsync(action: LoginAction) {
 
 export function loginSuccessAsync(action: LoginActionSuccess) {
   const user = action.payload;
+  const redirectUrl = getRedirectUrl();
   if (user?.token) {
-    getNavigate(CommonPath.DEFAULT_PATH);
+    getNavigate(redirectUrl || CommonPath.DEFAULT_PATH);
     localStorage.setItem(TOKEN_KEY, user.token);
   }
 }
