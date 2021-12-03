@@ -1,3 +1,8 @@
+/**
+ * config component hỗ trợ router
+ * các route khi được bọc bởi component này sẽ được kiểm tra đã đăng nhập chưa
+ * nếu chưa đăng nhập sẽ đưa ra trang đăng nhập và lưu lại redirect url
+ */
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NEXT_LOCALE } from 'commons/type';
