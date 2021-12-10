@@ -1,0 +1,11 @@
+fragment JWTFields on JWT {
+  expiresAt
+  user {
+    id
+    email
+    firstName
+    lastName
+    createAt
+  }
+  token
+}

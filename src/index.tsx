@@ -1,11 +1,11 @@
 import React from 'react';
+import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import ElementConfig from './elementConfig';
-import { Provider } from 'react-redux';
 import store from './redux/store';
-import { CookiesProvider } from 'react-cookie';
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>

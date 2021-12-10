@@ -16,9 +16,6 @@ export default (state = initialState, action: LoginActionTypes): LoginState => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        userInfo: {
-          ...action.payload,
-        },
         loading: false,
       };
     case LOGIN_ERROR:

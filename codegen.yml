@@ -1,0 +1,12 @@
+schema: http://192.168.143.185:4000/graphql
+documents: 'src/**/*.graphql'
+generates:
+  src/graphql/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'
+    config:
+      useTypeImports: true
+      omitOperationSuffix: true
+      namingConvention: pascal-case#pascalCase

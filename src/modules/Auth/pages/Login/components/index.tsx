@@ -1,5 +1,5 @@
 import { Button, Form, Input } from 'antd';
-import { LoginInput } from 'commons/type';
+import { LoginUserInput } from 'graphql/generated/graphql';
 import { login } from 'modules/Auth/redux/actions/login';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,10 +11,10 @@ function FormLogin(props: any) {
   const dispatch = useDispatch();
   const stateLoading = useSelector((state: RootState) => state.loadingReducer.loading);
 
-  const onFinish = (values: LoginInput) => {
-    const loginInput: LoginInput = {
-      userName: values.userName,
-      passWord: values.passWord,
+  const onFinish = (values: LoginUserInput) => {
+    const loginInput: LoginUserInput = {
+      email: values.email,
+      password: values.password,
     };
     dispatch(actionLoading());
     dispatch(login(loginInput));
@@ -36,17 +36,13 @@ function FormLogin(props: any) {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
-            label="Username"
-            name="userName"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-          >
+          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your username!' }]}>
             <Input />
           </Form.Item>
 
           <Form.Item
             label="Password"
-            name="passWord"
+            name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password />

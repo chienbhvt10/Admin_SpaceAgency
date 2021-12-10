@@ -41,7 +41,7 @@ function ElementConfig() {
     if (token === null) {
       navigate(CommonPath.LOGIN_PATH);
     } else {
-      navigate(cookies.NEXT_LOCALE);
+      navigate(cookies.NEXT_LOCALE || CommonPath.DEFAULT_PATH);
     }
     // eslint-disable-next-line
   }, [token]);

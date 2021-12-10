@@ -1,18 +1,24 @@
-// import { NotificationError, NotificationSuccess } from 'commons/components/Notification';
-import { take } from 'redux-saga/effects';
-
-// eslint-disable-next-line require-yield
+import { put, take } from 'redux-saga/effects';
+import { NotificationError, NotificationSuccess } from 'commons/components/Notification';
+import { actionLoadingError } from './actions';
+export interface ResponseGenerator {
+  payload: any;
+}
 export function* checkErrorAsync() {
   while (true) {
-    yield take((action: any) => /.+_ERROR/.test(action.type));
-    alert('Có lỗi xảy ra vui lòng thử lại sau');
+    const action: ResponseGenerator = yield take((action: any) => /.+_ERROR/.test(action.type));
+    yield put(actionLoadingError());
+    let message = action.payload.message || 'Có lỗi xảy ra vui lòng thử lại sau';
+    if (action.payload.response && action.payload.response?.errors?.length) {
+      message = action.payload.response?.errors[0].message;
+    }
+    NotificationError('Cảnh báo', message);
   }
 }
 
-// eslint-disable-next-line require-yield
 export function* checkUpdateSuccessAsync() {
   while (true) {
-    yield take((action: any) => /.+_UPDATED_SUCCESS/.test(action.type));
-    alert('Cập nhật thành công');
+    const action: ResponseGenerator = yield take((action: any) => /.+_UPDATED_SUCCESS/.test(action.type));
+    NotificationSuccess('Thông báo', action.payload.message || 'Cập nhật thành công');
   }
 }

@@ -1,12 +1,25 @@
-// import { NotificationManager } from 'react-notifications';
+import { notification } from 'antd';
+
 export const NotificationInfo = (title: string, message: string) => {
-  // NotificationManager.info(title, message);
+  notification.info({
+    message: title,
+    description: message,
+    placement: 'bottomRight',
+  });
 };
 
 export const NotificationSuccess = (title: string, message: string) => {
-  // NotificationManager.success(title, message);
+  notification.success({
+    message: title,
+    description: message,
+    placement: 'bottomRight',
+  });
 };
 
 export const NotificationError = (title: string, message: string) => {
-  // NotificationManager.error(title, message);
+  notification.error({
+    message: title,
+    description: message,
+    placement: 'bottomRight',
+  });
 };
