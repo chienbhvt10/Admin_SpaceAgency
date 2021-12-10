@@ -1,14 +1,13 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
-import env from 'env';
 import { Login } from 'graphql/generated/graphql';
 import { getNavigate, getRedirectUrl } from 'helpers/history';
+import { getAuthLocalData, setAuthData } from 'helpers/token';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import * as apis from '../../servieces/apis';
-import { LoginAction, LoginActionSuccess } from '../action-types';
+import { AutoLoginFlow, LoginAction, LoginActionSuccess } from '../action-types';
 import { loginError, loginSuccess } from '../actions';
-const TOKEN_KEY = env.tokenKey;
 
 export function* loginAsync(action: LoginAction) {
   try {
@@ -26,11 +25,19 @@ export function loginSuccessAsync(action: LoginActionSuccess) {
   if (user?.token) {
     getNavigate(redirectUrl || CommonPath.DEFAULT_PATH);
     NotificationSuccess('Thông báo', 'Đăng nhập thành công');
-    localStorage.setItem(TOKEN_KEY, user.token);
+    setAuthData(user);
   }
 }
 
-export function* autoLoginFlow() {}
+export function autoLoginFlow(action: AutoLoginFlow) {
+  const authData = getAuthLocalData();
+  const cookies = action.payload;
+  if (!authData) {
+    getNavigate(CommonPath.LOGIN_PATH);
+  } else {
+    getNavigate(cookies.NEXT_LOCALE || CommonPath.DEFAULT_PATH);
+  }
+}
 
 // export function* logoutFlow() {
 //   localStorage.removeItem(TOKEN_KEY);

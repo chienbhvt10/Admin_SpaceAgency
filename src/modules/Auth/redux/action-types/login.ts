@@ -4,6 +4,7 @@ import { Jwt, Login, LoginUserInput } from 'graphql/generated/graphql';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const AUTO_LOGIN_FLOW = 'AUTO_LOGIN_FLOW';
 
 export interface LoginState {
   loading: boolean;
@@ -25,4 +26,8 @@ export interface LoginActionError {
   payload: AppError;
 }
 
-export type LoginActionTypes = LoginAction | LoginActionSuccess | LoginActionError;
+export interface AutoLoginFlow {
+  type: typeof AUTO_LOGIN_FLOW;
+  payload?: any;
+}
+export type LoginActionTypes = LoginAction | LoginActionSuccess | LoginActionError | AutoLoginFlow;

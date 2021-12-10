@@ -32,7 +32,7 @@ export type ICats = {
 
 export type IUsers = {
   __typename?: 'IUsers';
-  createAt: Scalars['String'];
+  createAt: Scalars['Float'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
@@ -41,7 +41,7 @@ export type IUsers = {
 
 export type Jwt = {
   __typename?: 'JWT';
-  expiresAt: Scalars['String'];
+  expiresAt: Scalars['Float'];
   token: Scalars['String'];
   user: IUsers;
 };
@@ -73,9 +73,9 @@ export type Query = {
 
 export type JwtFields = {
   __typename?: 'JWT';
-  expiresAt: string;
+  expiresAt: number;
   token: string;
-  user: { __typename?: 'IUsers'; id: string; email: string; firstName: string; lastName: string; createAt: string };
+  user: { __typename?: 'IUsers'; id: string; email: string; firstName: string; lastName: string; createAt: number };
 };
 
 export type LoginVariables = Exact<{
@@ -86,9 +86,9 @@ export type Login = {
   __typename?: 'Mutation';
   login: {
     __typename?: 'JWT';
-    expiresAt: string;
+    expiresAt: number;
     token: string;
-    user: { __typename?: 'IUsers'; id: string; email: string; firstName: string; lastName: string; createAt: string };
+    user: { __typename?: 'IUsers'; id: string; email: string; firstName: string; lastName: string; createAt: number };
   };
 };
 // eslint-disable-next-line
