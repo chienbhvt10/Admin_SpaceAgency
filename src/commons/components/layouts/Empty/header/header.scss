@@ -5,6 +5,13 @@
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
+      .ant-dropdown-link {
+        text-decoration: none !important;
+        color: #fff;
+        font-size: 14px;
+        margin-right: 40px;
+        cursor: pointer;
+      }
       h3 {
         color: #fff;
         font-size: 14px;

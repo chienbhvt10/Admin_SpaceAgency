@@ -13,7 +13,6 @@ import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import { useNavigate, useRoutes } from 'react-router-dom';
-import { appStart } from './redux/actions';
 import routes from './router';
 
 function ElementConfig() {
@@ -32,7 +31,6 @@ function ElementConfig() {
 
   React.useEffect(() => {
     setNavigate(navigate);
-    dispatch(appStart());
     dispatch(autoLoginFlow(cookies));
     // eslint-disable-next-line
   }, []);

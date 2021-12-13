@@ -1,0 +1,7 @@
+fragment IUsersFields on IUsers {
+  id
+  email
+  firstName
+  lastName
+  createAt
+}

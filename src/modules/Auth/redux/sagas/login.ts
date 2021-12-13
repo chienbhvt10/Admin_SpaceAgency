@@ -5,7 +5,7 @@ import { getNavigate, getRedirectUrl } from 'helpers/history';
 import { getAuthLocalData, setAuthData } from 'helpers/token';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
-import * as apis from '../../servieces/apis';
+import * as apis from '../../services/apis';
 import { AutoLoginFlow, LoginAction, LoginActionSuccess } from '../action-types';
 import { loginError, loginSuccess } from '../actions';
 

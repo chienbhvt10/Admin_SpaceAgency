@@ -42,6 +42,7 @@ export type IUsers = {
 export type Jwt = {
   __typename?: 'JWT';
   expiresAt: Scalars['Float'];
+  refreshToken: Scalars['String'];
   token: Scalars['String'];
   user: IUsers;
 };
@@ -57,9 +58,11 @@ export type Mutation = {
   login: Jwt;
 };
 
+
 export type MutationCreateUserArgs = {
   createUserInput: CreateUserInput;
 };
+
 
 export type MutationLoginArgs = {
   loginInput: LoginUserInput;
@@ -71,65 +74,69 @@ export type Query = {
   me: IUsers;
 };
 
-export type JwtFields = {
-  __typename?: 'JWT';
-  expiresAt: number;
-  token: string;
-  user: { __typename?: 'IUsers'; id: string; email: string; firstName: string; lastName: string; createAt: number };
-};
+export type JwtFields = { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number } };
+
+export type IUsersFields = { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number };
 
 export type LoginVariables = Exact<{
   loginInput: LoginUserInput;
 }>;
 
-export type Login = {
-  __typename?: 'Mutation';
-  login: {
-    __typename?: 'JWT';
-    expiresAt: number;
-    token: string;
-    user: { __typename?: 'IUsers'; id: string; email: string; firstName: string; lastName: string; createAt: number };
-  };
-};
-// eslint-disable-next-line
-export const JwtFields = gql`
-  fragment JWTFields on JWT {
-    expiresAt
-    user {
-      id
-      email
-      firstName
-      lastName
-      createAt
-    }
-    token
-  }
-`;
-export const LoginDocument = gql`
-  mutation login($loginInput: LoginUserInput!) {
-    login(loginInput: $loginInput) {
-      ...JWTFields
-    }
-  }
-  ${JwtFields}
-`;
 
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string,
-) => Promise<T>;
+export type Login = { __typename?: 'Mutation', login: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number } } };
+
+export type MeVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Me = { __typename?: 'Query', me: { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number } };
+
+export const IUsersFields = gql`
+    fragment IUsersFields on IUsers {
+  id
+  email
+  firstName
+  lastName
+  createAt
+}
+    `;
+export const JwtFields = gql`
+    fragment JWTFields on JWT {
+  expiresAt
+  refreshToken
+  user {
+    ...IUsersFields
+  }
+  token
+}
+    ${IUsersFields}`;
+export const LoginDocument = gql`
+    mutation login($loginInput: LoginUserInput!) {
+  login(loginInput: $loginInput) {
+    ...JWTFields
+  }
+}
+    ${JwtFields}`;
+export const MeDocument = gql`
+    query me {
+  me {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
+
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    login(variables: LoginVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<Login> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<Login>(LoginDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'login',
-      );
+    login(variables: LoginVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Login> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Login>(LoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'login');
     },
+    me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
+    }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

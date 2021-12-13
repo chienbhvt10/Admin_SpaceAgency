@@ -10,11 +10,13 @@
   "linterOptions": {
     "exclude": [
       "bin",
-      "generated/*/**.ts",
+      "/src/graphql/generated/*.ts",
+      "generated/*.ts",
       "**/*.js"
     ]
   },
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "quotemark": [
       true,
       "single",

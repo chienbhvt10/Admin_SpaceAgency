@@ -1,9 +1,8 @@
 import authSaga from 'modules/Auth/redux/sagas';
-import { all, take } from 'redux-saga/effects';
-import { APP_STARTED } from './action-types';
+import userSagas from 'modules/User/redux/sagas';
+import { all } from 'redux-saga/effects';
 import * as commonSaga from './common-saga';
 
 export default function* rootSaga() {
-  yield take(APP_STARTED);
-  yield all([authSaga(), commonSaga.checkErrorAsync()]);
+  yield all([authSaga(), userSagas(), commonSaga.checkErrorAsync()]);
 }

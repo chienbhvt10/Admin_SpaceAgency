@@ -20,7 +20,7 @@ export const getClient = (auth = true, signal?: AbortSignal) => {
   const headers: any = {};
 
   if (auth) {
-    headers.authorization = auth ? getAuthToken() : undefined;
+    headers.authorization = auth ? `Bearer ${getAuthToken()}` : undefined;
   }
 
   const graphQLClient = new GraphQLClient(endpoint, {
