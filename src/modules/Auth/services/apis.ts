@@ -1,7 +1,7 @@
-import { LoginUserInput } from 'graphql/generated/graphql';
+import { LoginAdminInput } from 'graphql/generated/graphql';
 import { getSDK } from 'services/graphql-caller';
 
-export const loginApi = async (loginInput: LoginUserInput) => {
+export const loginApi = async (loginAdminInput: LoginAdminInput) => {
   const sdk = getSDK(false);
-  return sdk.login({ loginInput });
+  return sdk.loginAdmin({ loginAdminInput });
 };

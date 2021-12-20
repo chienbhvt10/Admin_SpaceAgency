@@ -15,28 +15,22 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreateUserInput = {
-  email: Scalars['String'];
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
-};
-
-export type ICats = {
-  __typename?: 'ICats';
-  age: Scalars['Float'];
-  breed: Scalars['String'];
+export type Cats = {
+  __typename?: 'Cats';
+  description: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
 };
 
-export type IUsers = {
-  __typename?: 'IUsers';
-  createAt: Scalars['Float'];
+export type CreateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  id: Scalars['ID'];
-  lastName: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  phone?: InputMaybe<Scalars['String']>;
+  role: RolesName;
 };
 
 export type Jwt = {
@@ -44,7 +38,12 @@ export type Jwt = {
   expiresAt: Scalars['Float'];
   refreshToken: Scalars['String'];
   token: Scalars['String'];
-  user: IUsers;
+  user: Users;
+};
+
+export type LoginAdminInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type LoginUserInput = {
@@ -56,6 +55,8 @@ export type Mutation = {
   __typename?: 'Mutation';
   createUser: Jwt;
   login: Jwt;
+  loginAdmin: Jwt;
+  logout: Scalars['Boolean'];
 };
 
 
@@ -65,38 +66,67 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationLoginArgs = {
-  loginInput: LoginUserInput;
+  loginUserInput: LoginUserInput;
+};
+
+
+export type MutationLoginAdminArgs = {
+  loginAdminInput: LoginAdminInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  getAllCats: Array<ICats>;
-  me: IUsers;
+  getAllCats: Array<Cats>;
+  me: Users;
 };
 
-export type JwtFields = { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number } };
+/** Roles name ! */
+export enum RolesName {
+  Admin = 'ADMIN',
+  User = 'USER',
+  Req = 'req'
+}
 
-export type IUsersFields = { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number };
+export type Users = {
+  __typename?: 'Users';
+  _id: Scalars['String'];
+  address: Scalars['String'];
+  createAt: Scalars['String'];
+  email: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  phone?: Maybe<Scalars['String']>;
+  role: Scalars['String'];
+};
 
-export type LoginVariables = Exact<{
-  loginInput: LoginUserInput;
+export type JwtFields = { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string } };
+
+export type IUsersFields = { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string };
+
+export type LoginAdminVariables = Exact<{
+  loginAdminInput: LoginAdminInput;
 }>;
 
 
-export type Login = { __typename?: 'Mutation', login: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number } } };
+export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string } } };
 
 export type MeVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Me = { __typename?: 'Query', me: { __typename?: 'IUsers', id: string, email: string, firstName: string, lastName: string, createAt: number } };
+export type Me = { __typename?: 'Query', me: { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string } };
 
 export const IUsersFields = gql`
-    fragment IUsersFields on IUsers {
-  id
+    fragment IUsersFields on Users {
+  _id
   email
+  name
+  phone
   firstName
   lastName
   createAt
+  address
+  role
 }
     `;
 export const JwtFields = gql`
@@ -109,13 +139,18 @@ export const JwtFields = gql`
   token
 }
     ${IUsersFields}`;
-export const LoginDocument = gql`
-    mutation login($loginInput: LoginUserInput!) {
-  login(loginInput: $loginInput) {
-    ...JWTFields
+export const LoginAdminDocument = gql`
+    mutation loginAdmin($loginAdminInput: LoginAdminInput!) {
+  loginAdmin(loginAdminInput: $loginAdminInput) {
+    expiresAt
+    refreshToken
+    user {
+      ...IUsersFields
+    }
+    token
   }
 }
-    ${JwtFields}`;
+    ${IUsersFields}`;
 export const MeDocument = gql`
     query me {
   me {
@@ -131,8 +166,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    login(variables: LoginVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Login> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Login>(LoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'login');
+    loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
     },
     me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');

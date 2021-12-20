@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { IUsers, Me } from 'graphql/generated/graphql';
+import { Users, Me } from 'graphql/generated/graphql';
 
 export const GET_USER = 'GET_USER';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
@@ -7,7 +7,7 @@ export const GET_USER_ERROR = 'GET_USER_ERROR';
 
 export interface UserState {
   loading: boolean;
-  data?: IUsers;
+  data?: Users;
 }
 
 export interface GetUserAction {
@@ -16,7 +16,7 @@ export interface GetUserAction {
 
 export interface GetUserActionSuccess {
   type: typeof GET_USER_SUCCESS;
-  payload: IUsers;
+  payload: Users;
 }
 
 export interface GetUserActionError {

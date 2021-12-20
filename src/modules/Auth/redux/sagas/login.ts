@@ -1,6 +1,6 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
-import { Login } from 'graphql/generated/graphql';
+import { LoginAdmin } from 'graphql/generated/graphql';
 import { getNavigate, getRedirectUrl } from 'helpers/history';
 import { getAuthLocalData, setAuthData } from 'helpers/token';
 import { put } from 'redux-saga/effects';
@@ -11,7 +11,7 @@ import { loginError, loginSuccess } from '../actions';
 
 export function* loginAsync(action: LoginAction) {
   try {
-    const payload: Login = yield apis.loginApi(action.payload);
+    const payload: LoginAdmin = yield apis.loginApi(action.payload);
     yield put(loginSuccess(payload));
     yield put(actionLoadingSuccess());
   } catch (err: any) {
@@ -20,7 +20,7 @@ export function* loginAsync(action: LoginAction) {
 }
 
 export function loginSuccessAsync(action: LoginActionSuccess) {
-  const user = action.payload.login;
+  const user = action.payload.loginAdmin;
   const redirectUrl = getRedirectUrl();
   if (user?.token) {
     getNavigate(redirectUrl || CommonPath.DEFAULT_PATH);

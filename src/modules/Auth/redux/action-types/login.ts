@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { Jwt, Login, LoginUserInput } from 'graphql/generated/graphql';
+import { Jwt, LoginAdmin, LoginUserInput } from 'graphql/generated/graphql';
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -18,7 +18,7 @@ export interface LoginAction {
 
 export interface LoginActionSuccess {
   type: typeof LOGIN_SUCCESS;
-  payload: Login;
+  payload: LoginAdmin;
 }
 
 export interface LoginActionError {

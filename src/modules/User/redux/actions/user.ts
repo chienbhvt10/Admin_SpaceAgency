@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { IUsers } from 'graphql/generated/graphql';
+import { Users } from 'graphql/generated/graphql';
 import { GetUserActionTypes, GET_USER, GET_USER_ERROR, GET_USER_SUCCESS } from '../action-types';
 
 export const getUser = (): GetUserActionTypes => ({
@@ -11,7 +11,7 @@ export const getUserError = (payload: AppError): GetUserActionTypes => ({
   payload,
 });
 
-export const getUserSuccess = (payload: IUsers): GetUserActionTypes => ({
+export const getUserSuccess = (payload: Users): GetUserActionTypes => ({
   type: GET_USER_SUCCESS,
   payload,
 });

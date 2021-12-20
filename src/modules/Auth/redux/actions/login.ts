@@ -1,8 +1,8 @@
 import { AppError } from 'commons/type';
-import { Login, LoginUserInput } from 'graphql/generated/graphql';
+import { LoginAdmin, LoginAdminInput } from 'graphql/generated/graphql';
 import { AUTO_LOGIN_FLOW, LOGIN, LoginActionTypes, LOGIN_ERROR, LOGIN_SUCCESS } from '../action-types/login';
 
-export const login = (payload: LoginUserInput): LoginActionTypes => ({
+export const login = (payload: LoginAdminInput): LoginActionTypes => ({
   type: LOGIN,
   payload,
 });
@@ -12,7 +12,7 @@ export const loginError = (payload: AppError): LoginActionTypes => ({
   payload,
 });
 
-export const loginSuccess = (payload: Login): LoginActionTypes => ({
+export const loginSuccess = (payload: LoginAdmin): LoginActionTypes => ({
   type: LOGIN_SUCCESS,
   payload,
 });

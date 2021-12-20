@@ -1,6 +1,10 @@
-# Write your query or mutation here
-mutation login($loginInput: LoginUserInput!) {
-  login(loginInput: $loginInput) {
-    ...JWTFields
+mutation loginAdmin($loginAdminInput: LoginAdminInput!) {
+  loginAdmin(loginAdminInput: $loginAdminInput) {
+    expiresAt
+    refreshToken
+    user {
+      ...IUsersFields
+    }
+    token
   }
 }

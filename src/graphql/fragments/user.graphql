@@ -1,7 +1,11 @@
-fragment IUsersFields on IUsers {
-  id
+fragment IUsersFields on Users {
+  _id
   email
+  name
+  phone
   firstName
   lastName
   createAt
+  address
+  role
 }
