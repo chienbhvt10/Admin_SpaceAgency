@@ -14,7 +14,7 @@ function EmptyLayout(props: IProps) {
   }, []);
   return (
     <div id="emptyLayout">
-      <HeaderLayout />
+      {/* <HeaderLayout /> */}
       <NavBar>{props.children}</NavBar>
     </div>
   );

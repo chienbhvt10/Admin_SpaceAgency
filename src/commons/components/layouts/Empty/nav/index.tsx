@@ -5,6 +5,7 @@ import { getNavigate } from 'helpers/history';
 import { findDataNav } from 'helpers/string';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import HeaderLayout from '../header';
 import RenderIcon from './component/renderIcon';
 const { Sider } = Layout;
 interface IProps {
@@ -38,6 +39,7 @@ function NavBar(props: IProps) {
           overflow: 'auto',
           height: '100vh',
           position: 'fixed',
+          paddingTop: 64,
           left: 0,
         }}
       >
@@ -52,8 +54,12 @@ function NavBar(props: IProps) {
           })}
         </Menu>
       </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200, minHeight: '100vh' }}>
-        <Content className="site-layout-background" style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+      <Layout className="site-layout" style={{ minHeight: '100vh' }}>
+        <HeaderLayout />
+        <Content
+          className="site-layout-background"
+          style={{ margin: '24px 16px 0', paddingLeft: 200, overflow: 'initial' }}
+        >
           {props.children}
         </Content>
       </Layout>
