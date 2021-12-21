@@ -29,8 +29,18 @@ function NavBar(props: IProps) {
     getNavigate(itemNav?.router || '');
   };
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+    <Layout>
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+        }}
+      >
         <div className="logo" />
         <Menu theme="dark" selectedKeys={[`${keyNav}`]} mode="inline" onSelect={onSelect}>
           {dataNav.map((item) => {
@@ -42,15 +52,8 @@ function NavBar(props: IProps) {
           })}
         </Menu>
       </Sider>
-      <Layout style={{ padding: '0 18px 18px' }}>
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}
-        >
+      <Layout className="site-layout" style={{ marginLeft: 200, minHeight: '100vh' }}>
+        <Content className="site-layout-background" style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           {props.children}
         </Content>
       </Layout>

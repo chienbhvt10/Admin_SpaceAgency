@@ -31,7 +31,6 @@ function ElementConfig() {
 
   React.useEffect(() => {
     setNavigate(navigate);
-    dispatch(autoLoginFlow(cookies));
     // eslint-disable-next-line
   }, []);
   React.useEffect(() => {}, []);

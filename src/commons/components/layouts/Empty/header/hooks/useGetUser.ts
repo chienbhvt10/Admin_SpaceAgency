@@ -8,6 +8,7 @@ export const useGetUser = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getUser());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return {
     loading,
