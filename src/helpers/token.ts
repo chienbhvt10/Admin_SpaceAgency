@@ -1,7 +1,7 @@
 import { isJsonString } from './string';
 import moment from 'moment';
 import env from 'env';
-import { Jwt } from 'graphql/generated/graphql';
+import { Jwt, LoginAdmin } from 'graphql/generated/graphql';
 
 let TOKEN: any = '';
 const TOKEN_KEY = env.tokenKey;

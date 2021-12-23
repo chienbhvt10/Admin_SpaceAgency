@@ -1,11 +1,14 @@
 fragment IUsersFields on Users {
+  __typename
   _id
   email
   name
   phone
   firstName
   lastName
-  createAt
+  createdAt
   address
   role
+  updatedAt
+  Confirmed
 }

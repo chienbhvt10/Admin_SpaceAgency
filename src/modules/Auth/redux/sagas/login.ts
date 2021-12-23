@@ -11,8 +11,8 @@ import { loginError, loginSuccess } from '../actions';
 
 export function* loginAsync(action: LoginAction) {
   try {
-    const payload: LoginAdmin = yield apis.loginApi(action.payload);
-    yield put(loginSuccess(payload));
+    const data: LoginAdmin = yield apis.loginApi(action.payload);
+    yield put(loginSuccess(data.loginAdmin));
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(loginError(err));
@@ -20,9 +20,9 @@ export function* loginAsync(action: LoginAction) {
 }
 
 export function loginSuccessAsync(action: LoginActionSuccess) {
-  const user = action.payload.loginAdmin;
+  const user = action.payload;
   const redirectUrl = getRedirectUrl();
-  if (user?.token) {
+  if (user) {
     getNavigate(redirectUrl || CommonPath.DEFAULT_PATH);
     NotificationSuccess('Thông báo', 'Đăng nhập thành công');
     setAuthData(user);

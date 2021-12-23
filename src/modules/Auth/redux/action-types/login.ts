@@ -18,7 +18,7 @@ export interface LoginAction {
 
 export interface LoginActionSuccess {
   type: typeof LOGIN_SUCCESS;
-  payload: LoginAdmin;
+  payload: Jwt;
 }
 
 export interface LoginActionError {

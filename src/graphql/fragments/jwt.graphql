@@ -1,4 +1,5 @@
 fragment JWTFields on JWT {
+  __typename
   expiresAt
   refreshToken
   user {

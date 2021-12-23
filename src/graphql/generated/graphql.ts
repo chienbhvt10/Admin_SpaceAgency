@@ -22,6 +22,12 @@ export type Cats = {
   name: Scalars['String'];
 };
 
+export type ChangePasswordInput = {
+  confirmPassword: Scalars['String'];
+  oldPassword: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type CreateUserInput = {
   address?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
@@ -53,15 +59,38 @@ export type LoginUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  changePassword: Scalars['Boolean'];
+  confirmEmailToken: Scalars['Boolean'];
   createUser: Jwt;
+  deleteCurrentUser: Scalars['Boolean'];
+  deleteUser: Scalars['Boolean'];
   login: Jwt;
   loginAdmin: Jwt;
   logout: Scalars['Boolean'];
+  restoreUser: Scalars['Boolean'];
+  sendEmailConfirmation: Scalars['Boolean'];
+  updateUser: Scalars['Boolean'];
+};
+
+
+export type MutationChangePasswordArgs = {
+  id: Scalars['String'];
+  passwordInput: ChangePasswordInput;
+};
+
+
+export type MutationConfirmEmailTokenArgs = {
+  token: Scalars['String'];
 };
 
 
 export type MutationCreateUserArgs = {
   createUserInput: CreateUserInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -74,10 +103,38 @@ export type MutationLoginAdminArgs = {
   loginAdminInput: LoginAdminInput;
 };
 
+
+export type MutationRestoreUserArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationSendEmailConfirmationArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationUpdateUserArgs = {
+  id: Scalars['String'];
+  userInfo: UpdateUserInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   getAllCats: Array<Cats>;
+  getAllUser: Array<Users>;
+  getUser: Users;
   me: Users;
+};
+
+
+export type QueryGetAllUserArgs = {
+  deleted?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryGetUserArgs = {
+  id: Scalars['String'];
 };
 
 /** Roles name ! */
@@ -87,50 +144,65 @@ export enum RolesName {
   Req = 'req'
 }
 
+export type UpdateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  phone?: InputMaybe<Scalars['String']>;
+};
+
 export type Users = {
   __typename?: 'Users';
+  Confirmed: Scalars['Boolean'];
   _id: Scalars['String'];
   address: Scalars['String'];
-  createAt: Scalars['String'];
+  createdAt: Scalars['String'];
   email: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   phone?: Maybe<Scalars['String']>;
   role: Scalars['String'];
+  updatedAt: Scalars['String'];
 };
 
-export type JwtFields = { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string } };
+export type JwtFields = { __typename: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: string, address: string, role: string, updatedAt: string, Confirmed: boolean } };
 
-export type IUsersFields = { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string };
+export type IUsersFields = { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: string, address: string, role: string, updatedAt: string, Confirmed: boolean };
 
 export type LoginAdminVariables = Exact<{
   loginAdminInput: LoginAdminInput;
 }>;
 
 
-export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string } } };
+export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: string, address: string, role: string, updatedAt: string, Confirmed: boolean } } };
 
 export type MeVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Me = { __typename?: 'Query', me: { __typename?: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createAt: string, address: string, role: string } };
+export type Me = { __typename?: 'Query', me: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: string, address: string, role: string, updatedAt: string, Confirmed: boolean } };
 
 export const IUsersFields = gql`
     fragment IUsersFields on Users {
+  __typename
   _id
   email
   name
   phone
   firstName
   lastName
-  createAt
+  createdAt
   address
   role
+  updatedAt
+  Confirmed
 }
     `;
 export const JwtFields = gql`
     fragment JWTFields on JWT {
+  __typename
   expiresAt
   refreshToken
   user {
