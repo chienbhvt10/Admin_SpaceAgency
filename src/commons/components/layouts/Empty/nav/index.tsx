@@ -11,17 +11,27 @@ const { Sider } = Layout;
 interface IProps {
   children: React.ReactNode;
 }
+
 function NavBar(props: IProps) {
   const [collapsed, setCollapsed] = React.useState<boolean>(false);
-  const [keyNav, setKeyNav] = React.useState<string>('1');
+  const [keyNav, setKeyNav] = React.useState<string>();
   const { pathname } = useLocation();
 
   React.useEffect(() => {
     if (pathname) {
-      const objNav = dataNav.find((item) => item.router === pathname);
-      setKeyNav(objNav?.key || '1');
+      dataNav.map((item) => {
+        const path = pathname.indexOf(item.router);
+        if (path > -1) {
+          const objNav = dataNav.find((i) => i.router === item.router);
+          setKeyNav(objNav?.key);
+        } else {
+          setKeyNav('1');
+        }
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
   const onCollapse = () => {
     setCollapsed(!collapsed);
   };

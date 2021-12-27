@@ -1,0 +1,5 @@
+query getAllUser($deleted: Boolean) {
+  getAllUser(deleted: $deleted) {
+    ...IUsersFields
+  }
+}

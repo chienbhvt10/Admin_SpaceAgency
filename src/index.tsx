@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ElementConfig from './elementConfig';
 import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <BrowserRouter>

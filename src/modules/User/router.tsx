@@ -1,8 +1,13 @@
+import { CommonPath } from 'commons/base-routes';
 import { RouteObject } from 'react-router-dom';
-import UserPage from './pages';
+import UserPage from './pages/list';
+import NewUser from './pages/new';
 
 export const userRouter: RouteObject = {
-  path: '/user/',
+  path: CommonPath.USERS_PATH,
   element: <UserPage />,
-  children: [],
+};
+export const newUserRouter: RouteObject = {
+  path: CommonPath.USERS_PATH_NEW,
+  element: <NewUser />,
 };
