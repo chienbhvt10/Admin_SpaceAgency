@@ -1,0 +1,49 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  cache:
+    policy: pull-push
+    key: app_cache
+    paths:
+    - node_modules/
+    - .next/
+    - .env
+    - yarn.lock
+  script:
+    - node -v
+    - yarn -v
+    - echo $CI_JOB_ID    
+    - cat "$DEV_ENV" > ".env"
+    - echo "Installing dependence..."
+    - yarn    
+    - echo "Installing dependence complete."  
+    - echo "Start build project..."
+    - cat "$DEV_ENV" > "$(pwd)/.env"
+    - yarn build
+    - echo "Build project complete."
+
+deploy:      # This job runs in the deploy stage.
+  tags: [deploy]
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  before_script:
+  - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"'\"$CI_PROJECT_NAMESPACE - $CI_PROJECT_NAME - $CI_COMMIT_BRANCH - #'$CI_JOB_ID\"' Deploying...\"}' https://hooks.slack.com/services/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"
+  script:    
+    - echo "FAIL" > .job_status
+    - echo "Deploying application..."
+    - cat "$DEV_ENV" > ".env"
+    - echo $SERVER_USER@$SERVER_IP:$SERVER_PORT
+    - scp -o StrictHostKeyChecking=no .env $SERVER_USER@$SERVER_IP:$SRC_PATH
+    - ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP -p $SERVER_PORT "cd $SRC_PATH && git pull && docker-compose up -d --build --remove-orphans"
+    - echo "Application successfully deployed."
+    - echo "SUCCESS" > .job_status
+  after_script:
+    - cat .job_status
+    - JOB_STATUS=`cat .job_status`
+    - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"'\"$CI_PROJECT_NAMESPACE - $CI_PROJECT_NAME - $CI_COMMIT_BRANCH - #'$CI_JOB_ID\"' Deploy Complete! Status: '\"$JOB_STATUS\"'\"}' https://hooks.slack.com/services/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"
+  only:
+    - develop
+    # - feature/cicd
