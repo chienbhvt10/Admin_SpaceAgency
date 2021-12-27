@@ -27,6 +27,7 @@ build:
     - echo "Build project complete."
 
 deploy:      # This job runs in the deploy stage.
+  tags: [deploy]
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   before_script:
   - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"'\"$CI_PROJECT_NAMESPACE - $CI_PROJECT_NAME - $CI_COMMIT_BRANCH - #'$CI_JOB_ID\"' Deploying...\"}' https://hooks.slack.com/services/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"
