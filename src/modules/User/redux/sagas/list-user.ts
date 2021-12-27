@@ -3,7 +3,7 @@ import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import * as apis from '../../services/apis';
 import { GetListUserAction } from '../action-types';
-import { getAllUserError, getAllUserSuccess } from '../actions/list-user';
+import { getAllUserError, getAllUserSuccess } from '../actions';
 
 export function* getAllUserAsync(action: GetListUserAction) {
   try {

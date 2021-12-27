@@ -20,13 +20,13 @@ export const dataNav: DataNav[] = [
     id: 0,
     key: '1',
     name: INameNav.DASHBOARD,
-    router: CommonPath.DEFAULT_PATH,
+    router: '/',
   },
   {
     id: 1,
     key: '2',
     name: INameNav.USERS,
-    router: CommonPath.USERS_PATH,
+    router: '/user',
   },
 ];
 enum ErrorCodes {
@@ -44,4 +44,9 @@ export class AppError extends Error {
     super(message);
     this.code = code;
   }
+}
+
+export enum TypeForm {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE',
 }

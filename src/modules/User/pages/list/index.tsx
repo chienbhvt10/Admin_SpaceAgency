@@ -1,5 +1,4 @@
 import { CommonPath } from 'commons/base-routes';
-import NewLayout from 'commons/components/layouts/New';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import UserLayout from 'commons/components/layouts/User';
 import { setTitle } from 'helpers/dom';
@@ -21,17 +20,17 @@ const UserPage = () => {
   const onChange = () => {};
   const routes = [
     {
-      path: '/',
+      path: CommonPath.DEFAULT_PATH,
       breadcrumbName: 'Home',
     },
     {
-      path: '/user/',
+      path: CommonPath.USERS_PATH,
       breadcrumbName: 'User',
     },
   ];
   return (
     <UserLayout>
-      <PageHeader title="List User" breadcrumb={{ routes }} />
+      <PageHeader title="" breadcrumb={{ routes }} />
       <TableUser items={items} rowKey={rowKey} loading={loading} onChange={onChange} handleAdd={handleAdd} />
     </UserLayout>
   );

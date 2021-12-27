@@ -30,6 +30,27 @@ export type ChangePasswordInput = {
   password: Scalars['String'];
 };
 
+export type ContentDto = {
+  __typename?: 'ContentDto';
+  _id: Scalars['ID'];
+  code: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  groupName: Scalars['String'];
+  images?: Maybe<Array<ContentImageDto>>;
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  type: TypeName;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type ContentImageDto = {
+  __typename?: 'ContentImageDto';
+  _id: Scalars['String'];
+  content?: Maybe<ContentDto>;
+  name?: Maybe<Scalars['String']>;
+  path: Scalars['String'];
+};
+
 export type ContentImageInput = {
   contentId: Scalars['String'];
   isDefault: Scalars['Boolean'];
@@ -37,12 +58,15 @@ export type ContentImageInput = {
   path: Scalars['String'];
 };
 
-export type ContentImages = {
-  __typename?: 'ContentImages';
-  _id: Scalars['String'];
-  content?: Maybe<Contents>;
-  name?: Maybe<Scalars['String']>;
-  path: Scalars['String'];
+export type ContentImageSearch = {
+  regex?: InputMaybe<Scalars['String']>;
+  value: Scalars['String'];
+};
+
+export type ContentImageTableParameter = {
+  length: Scalars['Int'];
+  search?: InputMaybe<ContentImageSearch>;
+  start: Scalars['Int'];
 };
 
 /** content input */
@@ -54,17 +78,26 @@ export type ContentInput = {
   type: TypeName;
 };
 
-export type Contents = {
-  __typename?: 'Contents';
-  _id: Scalars['ID'];
-  code: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  groupName: Scalars['String'];
-  images?: Maybe<Array<ContentImages>>;
+export type ContentSearch = {
+  regex?: InputMaybe<Scalars['String']>;
+  typeNames: TypeNamesExtend;
+  value: Scalars['String'];
+};
+
+export type ContentTableParameter = {
+  length: Scalars['Int'];
+  search?: InputMaybe<ContentSearch>;
+  start: Scalars['Int'];
+};
+
+export type CreateUserByAdminInput = {
+  address?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
-  price: Scalars['Float'];
-  type: TypeName;
-  updatedAt: Scalars['DateTime'];
+  password: Scalars['String'];
+  phone?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateUserInput = {
@@ -101,9 +134,9 @@ export type Mutation = {
   changePassword: Scalars['Boolean'];
   confirmResetPasswordEmailToken: Scalars['Boolean'];
   confirmVerifyEmailToken: Scalars['Boolean'];
-  createContent: Contents;
-  createContentImage: ContentImages;
-  createUser: Jwt;
+  createContent: ContentDto;
+  createContentImage: ContentImageDto;
+  createUser: Scalars['Boolean'];
   deleteContent: Scalars['Float'];
   deleteContentImage: Scalars['Float'];
   deleteCurrentUser: Scalars['Boolean'];
@@ -111,10 +144,12 @@ export type Mutation = {
   login: Jwt;
   loginAdmin: Jwt;
   logout: Scalars['Boolean'];
+  register: Jwt;
   resetPassword: Scalars['Boolean'];
   restoreContent: Scalars['Float'];
   restoreUser: Scalars['Boolean'];
-  sendEmailConfirmation: Scalars['Boolean'];
+  sendResetPasswordEmailToken: Scalars['Boolean'];
+  sendUserVerifyEmailToken: Scalars['Boolean'];
   updateContent: Scalars['Boolean'];
   updateContentImage: Scalars['Boolean'];
   updateUser: Scalars['Boolean'];
@@ -148,7 +183,7 @@ export type MutationCreateContentImageArgs = {
 
 
 export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput;
+  createUserInput: CreateUserByAdminInput;
 };
 
 
@@ -177,6 +212,11 @@ export type MutationLoginAdminArgs = {
 };
 
 
+export type MutationRegisterArgs = {
+  createUserInput: CreateUserInput;
+};
+
+
 export type MutationResetPasswordArgs = {
   newPassword: Scalars['String'];
   token: Scalars['String'];
@@ -193,7 +233,12 @@ export type MutationRestoreUserArgs = {
 };
 
 
-export type MutationSendEmailConfirmationArgs = {
+export type MutationSendResetPasswordEmailTokenArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationSendUserVerifyEmailTokenArgs = {
   email: Scalars['String'];
 };
 
@@ -215,17 +260,32 @@ export type MutationUpdateUserArgs = {
   userInfo: UpdateUserInput;
 };
 
+export type PaginatedContentImageResponse = {
+  __typename?: 'PaginatedContentImageResponse';
+  items: Array<ContentImageDto>;
+  total: Scalars['Int'];
+  totalFilter: Scalars['Int'];
+};
+
+export type PaginatedContentResponse = {
+  __typename?: 'PaginatedContentResponse';
+  items: Array<ContentDto>;
+  total: Scalars['Int'];
+  totalFilter: Scalars['Int'];
+};
+
 export type Query = {
   __typename?: 'Query';
   getAllCats: Array<Cats>;
-  getAllContentImages: Array<ContentImages>;
-  getAllContents: Array<Contents>;
+  getAllContentImages: Array<ContentImageDto>;
+  getAllContents: Array<ContentDto>;
   getAllUser: Array<Users>;
-  getContent: Contents;
-  getContentImage: ContentImages;
+  getContent: ContentDto;
+  getContentImage: ContentImageDto;
+  getPaginationContent: PaginatedContentResponse;
+  getPaginationContentImage: PaginatedContentImageResponse;
   getUser: Users;
   me: Users;
-  searchContents: Array<Contents>;
 };
 
 
@@ -249,14 +309,18 @@ export type QueryGetContentImageArgs = {
 };
 
 
-export type QueryGetUserArgs = {
-  id: Scalars['String'];
+export type QueryGetPaginationContentArgs = {
+  data: ContentTableParameter;
 };
 
 
-export type QuerySearchContentsArgs = {
-  keyword: Scalars['String'];
-  type: TypeNamesExtend;
+export type QueryGetPaginationContentImageArgs = {
+  data: ContentImageTableParameter;
+};
+
+
+export type QueryGetUserArgs = {
+  id: Scalars['String'];
 };
 
 /** Roles name ! */
@@ -316,12 +380,41 @@ export type LoginAdminVariables = Exact<{
 
 export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } } };
 
+export type CreateUserVariables = Exact<{
+  createUserInput: CreateUserByAdminInput;
+}>;
+
+
+export type CreateUser = { __typename?: 'Mutation', createUser: boolean };
+
+export type DeleteUserVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteUser = { __typename?: 'Mutation', deleteUser: boolean };
+
+export type UpdateUserVariables = Exact<{
+  userInfo: UpdateUserInput;
+  id: Scalars['String'];
+}>;
+
+
+export type UpdateUser = { __typename?: 'Mutation', updateUser: boolean };
+
 export type GetAllUserVariables = Exact<{
   deleted?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 
 export type GetAllUser = { __typename?: 'Query', getAllUser: Array<{ __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean }> };
+
+export type GetUserVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetUser = { __typename?: 'Query', getUser: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } };
 
 export type MeVariables = Exact<{ [key: string]: never; }>;
 
@@ -367,9 +460,31 @@ export const LoginAdminDocument = gql`
   }
 }
     ${IUsersFields}`;
+export const CreateUserDocument = gql`
+    mutation createUser($createUserInput: CreateUserByAdminInput!) {
+  createUser(createUserInput: $createUserInput)
+}
+    `;
+export const DeleteUserDocument = gql`
+    mutation deleteUser($id: String!) {
+  deleteUser(id: $id)
+}
+    `;
+export const UpdateUserDocument = gql`
+    mutation updateUser($userInfo: UpdateUserInput!, $id: String!) {
+  updateUser(userInfo: $userInfo, id: $id)
+}
+    `;
 export const GetAllUserDocument = gql`
     query getAllUser($deleted: Boolean) {
   getAllUser(deleted: $deleted) {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
+export const GetUserDocument = gql`
+    query getUser($id: String!) {
+  getUser(id: $id) {
     ...IUsersFields
   }
 }
@@ -392,8 +507,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
       return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
     },
+    createUser(variables: CreateUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateUser>(CreateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createUser');
+    },
+    deleteUser(variables: DeleteUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUser>(DeleteUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUser');
+    },
+    updateUser(variables: UpdateUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUser>(UpdateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUser');
+    },
     getAllUser(variables?: GetAllUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllUser> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAllUser>(GetAllUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllUser');
+    },
+    getUser(variables: GetUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUser>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser');
     },
     me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
