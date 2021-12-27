@@ -10,5 +10,5 @@ fragment IUsersFields on Users {
   address
   role
   updatedAt
-  Confirmed
+  confirmed
 }

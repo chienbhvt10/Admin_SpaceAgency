@@ -1,0 +1,3 @@
+mutation updateUser($userInfo: UpdateUserInput!, $id: String!) {
+  updateUser(userInfo: $userInfo, id: $id)
+}
