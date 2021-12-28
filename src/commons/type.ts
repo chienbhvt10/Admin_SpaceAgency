@@ -7,6 +7,7 @@ export interface LoginInput {
 export enum INameNav {
   DASHBOARD = 'Dashboard',
   USERS = 'Users',
+  CONTENT = 'Content',
 }
 export interface DataNav {
   id: number;
@@ -27,6 +28,12 @@ export const dataNav: DataNav[] = [
     key: '2',
     name: INameNav.USERS,
     router: '/user',
+  },
+  {
+    id: 2,
+    key: '3',
+    name: INameNav.CONTENT,
+    router: '/content',
   },
 ];
 enum ErrorCodes {

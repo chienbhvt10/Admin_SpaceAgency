@@ -1,3 +1,4 @@
+import { contentRouter } from 'modules/Contents/router';
 import { detailUserRouter, newUserRouter, userRouter } from 'modules/User/router';
 import { RouteObject } from 'react-router-dom';
 import { authRouter } from './modules/Auth/router';
@@ -9,6 +10,7 @@ const routes: RouteObject[] = [
   { ...userRouter },
   { ...newUserRouter },
   { ...detailUserRouter },
+  { ...contentRouter },
 ];
 
 export default routes;
