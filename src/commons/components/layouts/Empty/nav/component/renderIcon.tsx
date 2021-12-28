@@ -1,4 +1,4 @@
-import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
+import { PieChartOutlined, UserOutlined, ContainerOutlined } from '@ant-design/icons';
 import { DataNav, INameNav } from 'commons/type';
 import React from 'react';
 interface IProps {
@@ -11,6 +11,9 @@ const renderIcon = (props: IProps) => {
   }
   if (name === INameNav.USERS) {
     return <UserOutlined />;
+  }
+  if (name === INameNav.CONTENT) {
+    return <ContainerOutlined />;
   }
   return <PieChartOutlined />;
 };
