@@ -47,4 +47,3 @@ deploy:      # This job runs in the deploy stage.
     - "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"<!channel> '\"<https://gitlab.com//$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID|#$CI_JOB_ID> $CI_PROJECT_NAMESPACE - $CI_PROJECT_NAME - $CI_COMMIT_BRANCH\"' Deploy Complete! Status: '\"$JOB_STATUS\"'\"}' $SLACK_WEB_HOOK"
   only:
     - develop
-    # - feature/cicd
