@@ -15,6 +15,8 @@ export type Scalars = {
   Float: number;
   /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
   DateTime: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
 
 export type Cats = {
@@ -30,23 +32,21 @@ export type ChangePasswordInput = {
   password: Scalars['String'];
 };
 
-export type ContentDto = {
-  __typename?: 'ContentDto';
+export type Content = {
+  __typename?: 'Content';
   _id: Scalars['ID'];
   code: Scalars['String'];
   createdAt: Scalars['DateTime'];
   groupName: Scalars['String'];
-  images?: Maybe<Array<ContentImageDto>>;
   name: Scalars['String'];
   price: Scalars['Float'];
   type: TypeName;
   updatedAt: Scalars['DateTime'];
 };
 
-export type ContentImageDto = {
-  __typename?: 'ContentImageDto';
+export type ContentImage = {
+  __typename?: 'ContentImage';
   _id: Scalars['String'];
-  content?: Maybe<ContentDto>;
   name?: Maybe<Scalars['String']>;
   path: Scalars['String'];
 };
@@ -67,6 +67,14 @@ export type ContentImageTableParameter = {
   length: Scalars['Int'];
   search?: InputMaybe<ContentImageSearch>;
   start: Scalars['Int'];
+};
+
+export type ContentImages = {
+  __typename?: 'ContentImages';
+  _id: Scalars['String'];
+  content?: Maybe<Content>;
+  name?: Maybe<Scalars['String']>;
+  path: Scalars['String'];
 };
 
 /** content input */
@@ -90,8 +98,22 @@ export type ContentTableParameter = {
   start: Scalars['Int'];
 };
 
+export type Contents = {
+  __typename?: 'Contents';
+  _id: Scalars['ID'];
+  code: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  groupName: Scalars['String'];
+  images?: Maybe<Array<ContentImage>>;
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  type: TypeName;
+  updatedAt: Scalars['DateTime'];
+};
+
 export type CreateUserByAdminInput = {
   address?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -102,6 +124,7 @@ export type CreateUserByAdminInput = {
 
 export type CreateUserInput = {
   address?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -134,13 +157,14 @@ export type Mutation = {
   changePassword: Scalars['Boolean'];
   confirmResetPasswordEmailToken: Scalars['Boolean'];
   confirmVerifyEmailToken: Scalars['Boolean'];
-  createContent: ContentDto;
-  createContentImage: ContentImageDto;
-  createUser: Scalars['Boolean'];
+  createContent: Contents;
+  createContentImage: ContentImages;
+  createUser: Users;
   deleteContent: Scalars['Float'];
   deleteContentImage: Scalars['Float'];
   deleteCurrentUser: Scalars['Boolean'];
   deleteUser: Scalars['Boolean'];
+  deleteUserPermanently: Scalars['Boolean'];
   login: Jwt;
   loginAdmin: Jwt;
   logout: Scalars['Boolean'];
@@ -153,6 +177,7 @@ export type Mutation = {
   updateContent: Scalars['Boolean'];
   updateContentImage: Scalars['Boolean'];
   updateUser: Scalars['Boolean'];
+  uploadSingleFile: Scalars['String'];
 };
 
 
@@ -173,12 +198,12 @@ export type MutationConfirmVerifyEmailTokenArgs = {
 
 
 export type MutationCreateContentArgs = {
-  newContent: ContentInput;
+  input: ContentInput;
 };
 
 
 export type MutationCreateContentImageArgs = {
-  newImage: ContentImageInput;
+  input: ContentImageInput;
 };
 
 
@@ -198,6 +223,11 @@ export type MutationDeleteContentImageArgs = {
 
 
 export type MutationDeleteUserArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationDeleteUserPermanentlyArgs = {
   id: Scalars['String'];
 };
 
@@ -244,14 +274,14 @@ export type MutationSendUserVerifyEmailTokenArgs = {
 
 
 export type MutationUpdateContentArgs = {
-  content: ContentInput;
   id: Scalars['String'];
+  input: ContentInput;
 };
 
 
 export type MutationUpdateContentImageArgs = {
   id: Scalars['String'];
-  image: ContentImageInput;
+  input: ContentImageInput;
 };
 
 
@@ -260,16 +290,28 @@ export type MutationUpdateUserArgs = {
   userInfo: UpdateUserInput;
 };
 
+
+export type MutationUploadSingleFileArgs = {
+  file: Scalars['Upload'];
+};
+
 export type PaginatedContentImageResponse = {
   __typename?: 'PaginatedContentImageResponse';
-  items: Array<ContentImageDto>;
+  items: Array<ContentImages>;
   total: Scalars['Int'];
   totalFilter: Scalars['Int'];
 };
 
 export type PaginatedContentResponse = {
   __typename?: 'PaginatedContentResponse';
-  items: Array<ContentDto>;
+  items: Array<Contents>;
+  total: Scalars['Int'];
+  totalFilter: Scalars['Int'];
+};
+
+export type PaginatedUserResponse = {
+  __typename?: 'PaginatedUserResponse';
+  items: Array<Users>;
   total: Scalars['Int'];
   totalFilter: Scalars['Int'];
 };
@@ -277,13 +319,15 @@ export type PaginatedContentResponse = {
 export type Query = {
   __typename?: 'Query';
   getAllCats: Array<Cats>;
-  getAllContentImages: Array<ContentImageDto>;
-  getAllContents: Array<ContentDto>;
+  getAllContentImages: Array<ContentImages>;
+  getAllContents: Array<Contents>;
+  getAllStaticFile: Array<Scalars['String']>;
   getAllUser: Array<Users>;
-  getContent: ContentDto;
-  getContentImage: ContentImageDto;
+  getContent: Contents;
+  getContentImage: ContentImages;
   getPaginationContent: PaginatedContentResponse;
   getPaginationContentImage: PaginatedContentImageResponse;
+  getPaginationUser: PaginatedUserResponse;
   getUser: Users;
   me: Users;
 };
@@ -291,6 +335,11 @@ export type Query = {
 
 export type QueryGetAllContentsArgs = {
   deleted?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryGetAllStaticFileArgs = {
+  dir?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -316,6 +365,11 @@ export type QueryGetPaginationContentArgs = {
 
 export type QueryGetPaginationContentImageArgs = {
   data: ContentImageTableParameter;
+};
+
+
+export type QueryGetPaginationUserArgs = {
+  data: UserTableParameter;
 };
 
 
@@ -347,6 +401,7 @@ export enum TypeNamesExtend {
 
 export type UpdateUserInput = {
   address?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -354,10 +409,22 @@ export type UpdateUserInput = {
   phone?: InputMaybe<Scalars['String']>;
 };
 
+export type UserSearch = {
+  regex?: InputMaybe<Scalars['String']>;
+  value: Scalars['String'];
+};
+
+export type UserTableParameter = {
+  length: Scalars['Int'];
+  search?: InputMaybe<UserSearch>;
+  start: Scalars['Int'];
+};
+
 export type Users = {
   __typename?: 'Users';
   _id: Scalars['String'];
   address: Scalars['String'];
+  avatar?: Maybe<Scalars['String']>;
   confirmed: Scalars['Boolean'];
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
@@ -385,7 +452,7 @@ export type CreateUserVariables = Exact<{
 }>;
 
 
-export type CreateUser = { __typename?: 'Mutation', createUser: boolean };
+export type CreateUser = { __typename?: 'Mutation', createUser: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } };
 
 export type DeleteUserVariables = Exact<{
   id: Scalars['String'];
@@ -462,9 +529,11 @@ export const LoginAdminDocument = gql`
     ${IUsersFields}`;
 export const CreateUserDocument = gql`
     mutation createUser($createUserInput: CreateUserByAdminInput!) {
-  createUser(createUserInput: $createUserInput)
+  createUser(createUserInput: $createUserInput) {
+    ...IUsersFields
+  }
 }
-    `;
+    ${IUsersFields}`;
 export const DeleteUserDocument = gql`
     mutation deleteUser($id: String!) {
   deleteUser(id: $id)

@@ -1,3 +1,5 @@
 mutation createUser($createUserInput: CreateUserByAdminInput!) {
-  createUser(createUserInput: $createUserInput)
+  createUser(createUserInput: $createUserInput) {
+    ...IUsersFields
+  }
 }
