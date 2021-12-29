@@ -23,7 +23,7 @@ build:
     - echo "Installing dependence complete."  
     - echo "Start build project..."
     - cat "$DEV_ENV" > "$(pwd)/.env"
-    - yarn build
+    - yarn build:prod
     - echo "Build project complete."
 
 deploy:      # This job runs in the deploy stage.
