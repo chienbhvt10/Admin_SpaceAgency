@@ -19,8 +19,10 @@ function NavBar(props: IProps) {
 
   React.useEffect(() => {
     if (pathname) {
+      console.log(pathname);
       dataNav.map((item) => {
         const path = pathname.indexOf(item.router);
+        console.log(path, pathname, item.router);
         if (path > -1) {
           const objNav = dataNav.find((i) => i.router === item.router);
           setKeyNav(objNav?.key);
