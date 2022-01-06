@@ -14,6 +14,5 @@ export const isJsonString = (str: string) => {
 };
 export const findDataNav = (selectedKeys: any[]) => {
   const findMenu = dataNav.find((i) => i.key === selectedKeys[1]);
-  console.log(findMenu);
   return findMenu?.item?.find((item) => item.key === selectedKeys[0]);
 };

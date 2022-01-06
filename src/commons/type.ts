@@ -26,7 +26,7 @@ export interface DataNav {
 export const dataNav: DataNav[] = [
   {
     id: 0,
-    key: '1',
+    key: 'menu_1',
     name: INameNav.CONTENT_MANAGEMENT,
     item: [
       {
@@ -48,7 +48,7 @@ export const dataNav: DataNav[] = [
   },
   {
     id: 1,
-    key: '2',
+    key: 'menu_2',
     name: INameNav.SIMULATION_MANAGEMENT,
     router: '/user',
     item: [
@@ -66,19 +66,19 @@ export const dataNav: DataNav[] = [
   },
   {
     id: 2,
-    key: '3',
+    key: 'menu_3',
     name: INameNav.ADMINISTRATOR,
     router: '/content',
     item: [
       {
         key: '6',
         nameSub: 'User Management',
-        router: 'user-management',
+        router: '/user-management',
       },
       {
         key: '7',
         nameSub: 'Roles List',
-        router: 'roles-list',
+        router: '/roles-list',
       },
     ],
   },
