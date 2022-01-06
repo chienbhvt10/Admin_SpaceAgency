@@ -2,7 +2,7 @@ import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import UserLayout from 'commons/components/layouts/User';
 import { setTitle } from 'helpers/dom';
-import { useListUser } from 'modules/User/hooks/useListUser';
+import { useListUser } from 'modules/UserManagement/hooks/useListUser';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import TableUser from './Table';
@@ -15,7 +15,7 @@ const UserPage = () => {
   }, []);
   const rowKey = (item: any) => `${item._id}`;
   const handleAdd = () => {
-    navigate(CommonPath.USERS_PATH_NEW);
+    navigate(CommonPath.USERS_MANAGEMENT_NEW);
   };
   const onChange = () => {};
   const routes = [
@@ -24,8 +24,8 @@ const UserPage = () => {
       breadcrumbName: 'Home',
     },
     {
-      path: CommonPath.USERS_PATH,
-      breadcrumbName: 'User',
+      path: CommonPath.USERS_MANAGEMENT,
+      breadcrumbName: 'User Management',
     },
   ];
   return (

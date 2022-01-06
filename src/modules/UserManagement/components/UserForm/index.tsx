@@ -9,7 +9,7 @@ import {
   UpdateUserVariables,
   Users,
 } from 'graphql/generated/graphql';
-import { updateUser } from 'modules/User/redux/actions';
+import { updateUser } from 'modules/UserManagement/redux/actions';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createUser } from '../../redux/actions/create-user';

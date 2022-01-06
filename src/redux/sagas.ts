@@ -1,5 +1,5 @@
 import authSaga from 'modules/Auth/redux/sagas';
-import userSagas from 'modules/User/redux/sagas';
+import userSagas from 'modules/UserManagement/redux/sagas';
 import { all } from 'redux-saga/effects';
 import * as commonSaga from './common-saga';
 

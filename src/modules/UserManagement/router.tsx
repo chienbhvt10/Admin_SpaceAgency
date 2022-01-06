@@ -5,14 +5,14 @@ import NewUser from './pages/new';
 import DetailUser from './pages/details/index';
 
 export const userRouter: RouteObject = {
-  path: '/user',
+  path: '/user-management',
   element: <UserPage />,
 };
 export const newUserRouter: RouteObject = {
-  path: '/user/new',
+  path: '/user-management/new',
   element: <NewUser />,
 };
 export const detailUserRouter: RouteObject = {
-  path: '/user/detail/:id',
+  path: '/user-management/detail/:id',
   element: <DetailUser />,
 };
