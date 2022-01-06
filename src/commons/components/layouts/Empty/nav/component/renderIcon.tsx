@@ -6,13 +6,13 @@ interface IProps {
 }
 const renderIcon = (props: IProps) => {
   const { name } = props.item;
-  if (name === INameNav.DASHBOARD) {
+  if (name === INameNav.SIMULATION_MANAGEMENT) {
     return <PieChartOutlined />;
   }
-  if (name === INameNav.USERS) {
+  if (name === INameNav.CONTENT_MANAGEMENT) {
     return <UserOutlined />;
   }
-  if (name === INameNav.CONTENT) {
+  if (name === INameNav.ADMINISTRATOR) {
     return <ContainerOutlined />;
   }
   return <PieChartOutlined />;

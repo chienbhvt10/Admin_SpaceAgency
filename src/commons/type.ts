@@ -6,34 +6,81 @@ export interface LoginInput {
 }
 export enum INameNav {
   DASHBOARD = 'Dashboard',
-  USERS = 'Users',
-  CONTENT = 'Content',
+  CONTENT_MANAGEMENT = 'Content Management',
+  SIMULATION_MANAGEMENT = 'Simulation Management',
+  ADMINISTRATOR = 'Administrator',
+}
+export interface ItemNav {
+  key: string;
+  nameSub: string;
+  router: string;
 }
 export interface DataNav {
   id: number;
   key: string;
   name: INameNav;
-  router: string;
+  router?: string;
+  item?: ItemNav[];
 }
 
 export const dataNav: DataNav[] = [
   {
     id: 0,
     key: '1',
-    name: INameNav.DASHBOARD,
-    router: '/',
+    name: INameNav.CONTENT_MANAGEMENT,
+    item: [
+      {
+        key: '1',
+        nameSub: 'Themes Collection',
+        router: '/themes-collection',
+      },
+      {
+        key: '2',
+        nameSub: 'Styles Collection',
+        router: '/styles-collection',
+      },
+      {
+        key: '3',
+        nameSub: 'Material Collection',
+        router: '/material-collection',
+      },
+    ],
   },
   {
     id: 1,
     key: '2',
-    name: INameNav.USERS,
+    name: INameNav.SIMULATION_MANAGEMENT,
     router: '/user',
+    item: [
+      {
+        key: '4',
+        nameSub: 'User Simulate Collection',
+        router: '/user-sumulate-collection',
+      },
+      {
+        key: '5',
+        nameSub: 'Contact Request',
+        router: '/contact-request',
+      },
+    ],
   },
   {
     id: 2,
     key: '3',
-    name: INameNav.CONTENT,
+    name: INameNav.ADMINISTRATOR,
     router: '/content',
+    item: [
+      {
+        key: '6',
+        nameSub: 'User Management',
+        router: 'user-management',
+      },
+      {
+        key: '7',
+        nameSub: 'Roles List',
+        router: 'roles-list',
+      },
+    ],
   },
 ];
 enum ErrorCodes {

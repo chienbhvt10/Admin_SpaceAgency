@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run gen:types && react-scripts build",
+    "build": "react-scripts build",
     "build:react": "react-scripts build",
     "build:prod": "yarn gen:types && yarn build:react",
     "test": "react-scripts test",
