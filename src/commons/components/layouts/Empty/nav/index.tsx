@@ -28,6 +28,11 @@ function NavBar(props: IProps) {
         i?.item?.map((ii) => {
           if (ii.router === pathname) {
             setKeyNav(ii?.key || '-1');
+          } else {
+            const searchRouter = pathname.search(ii.router);
+            if (searchRouter > -1) {
+              setKeyNav(ii?.key || '-1');
+            }
           }
         });
       });
@@ -45,7 +50,7 @@ function NavBar(props: IProps) {
   const onTitleClick = (i: DataNav) => () => {
     const arr = [...openKeys];
     arr.push(i.key);
-    // setOpenKeys(arr);
+    setOpenKeys(['menu_1', 'menu_2', 'menu_3']);
   };
   return (
     <Layout className="layout-nav">

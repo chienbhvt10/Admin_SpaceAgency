@@ -15,7 +15,7 @@ const UserPage = () => {
   }, []);
   const rowKey = (item: any) => `${item._id}`;
   const handleAdd = () => {
-    navigate(CommonPath.USERS_PATH_NEW);
+    navigate(CommonPath.USERS_MANAGEMENT_NEW);
   };
   const onChange = () => {};
   const routes = [
@@ -24,7 +24,7 @@ const UserPage = () => {
       breadcrumbName: 'Home',
     },
     {
-      path: CommonPath.USERS_PATH,
+      path: CommonPath.USERS_MANAGEMENT,
       breadcrumbName: 'User',
     },
   ];

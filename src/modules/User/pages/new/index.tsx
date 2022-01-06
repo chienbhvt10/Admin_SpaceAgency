@@ -18,11 +18,11 @@ function NewUser() {
       breadcrumbName: 'Home',
     },
     {
-      path: CommonPath.USERS_PATH,
+      path: CommonPath.USERS_MANAGEMENT_NEW,
       breadcrumbName: 'User',
     },
     {
-      path: CommonPath.USERS_PATH_NEW,
+      path: CommonPath.USERS_MANAGEMENT_DETAIL,
       breadcrumbName: 'Create User',
     },
   ];

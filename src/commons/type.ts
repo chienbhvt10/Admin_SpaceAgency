@@ -1,4 +1,4 @@
-import { CommonPath } from './base-routes';
+import { CommonPath } from 'commons/base-routes';
 export const NEXT_LOCALE = 'NEXT_LOCALE';
 export interface LoginInput {
   userName: String;
@@ -32,17 +32,17 @@ export const dataNav: DataNav[] = [
       {
         key: '1',
         nameSub: 'Themes Collection',
-        router: '/themes-collection',
+        router: CommonPath.THEME_COLLECTION,
       },
       {
         key: '2',
         nameSub: 'Styles Collection',
-        router: '/styles-collection',
+        router: CommonPath.STYLES_COLLECTION,
       },
       {
         key: '3',
         nameSub: 'Material Collection',
-        router: '/material-collection',
+        router: CommonPath.MATERIAL_COLLECTION,
       },
     ],
   },
@@ -55,12 +55,12 @@ export const dataNav: DataNav[] = [
       {
         key: '4',
         nameSub: 'User Simulate Collection',
-        router: '/user-sumulate-collection',
+        router: CommonPath.USER_SIMULATE_COLLECTION,
       },
       {
         key: '5',
         nameSub: 'Contact Request',
-        router: '/contact-request',
+        router: CommonPath.CONTACT_REQUEST,
       },
     ],
   },
@@ -73,12 +73,12 @@ export const dataNav: DataNav[] = [
       {
         key: '6',
         nameSub: 'User Management',
-        router: '/user-management',
+        router: CommonPath.USERS_MANAGEMENT,
       },
       {
         key: '7',
         nameSub: 'Roles List',
-        router: '/roles-list',
+        router: CommonPath.ROLES_LIST,
       },
     ],
   },

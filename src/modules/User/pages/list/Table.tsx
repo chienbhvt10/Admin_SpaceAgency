@@ -10,7 +10,6 @@ import moment from 'moment';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { getDetailUser } from '../../redux/actions/get-user';
 
 interface IProps {
   items: Users[];
@@ -30,7 +29,7 @@ function TableUser(props: IProps) {
   };
 
   const onEdit = (record: Users) => () => {
-    navigate(CommonPath.USERS_PATH_DETAIL + record._id);
+    navigate(CommonPath.USERS_MANAGEMENT_DETAIL + record._id);
   };
 
   const columns: ColumnsType<Users> = [
