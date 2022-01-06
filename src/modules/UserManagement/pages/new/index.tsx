@@ -3,8 +3,8 @@ import PageHeader from 'commons/components/layouts/PageHeader';
 import UserLayout from 'commons/components/layouts/User';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
-import CreateUserForm from 'modules/User/components/UserForm';
-import { useCreateUser } from 'modules/User/hooks/useCreateUser';
+import CreateUserForm from 'modules/UserManagement/components/UserForm';
+import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import React from 'react';
 
 function NewUser() {
@@ -18,12 +18,12 @@ function NewUser() {
       breadcrumbName: 'Home',
     },
     {
-      path: CommonPath.USERS_MANAGEMENT_NEW,
-      breadcrumbName: 'User',
+      path: CommonPath.USERS_MANAGEMENT,
+      breadcrumbName: 'User Management',
     },
     {
-      path: CommonPath.USERS_MANAGEMENT_DETAIL,
-      breadcrumbName: 'Create User',
+      path: CommonPath.USERS_MANAGEMENT_NEW,
+      breadcrumbName: 'Create User Management',
     },
   ];
   return (

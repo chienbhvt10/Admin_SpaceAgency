@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import auth, { AuthModuleState } from 'modules/Auth/redux/reducers';
-import user, { UserModuleState } from 'modules/User/redux/reducers';
+import user, { UserModuleState } from 'modules/UserManagement/redux/reducers';
 
 import loadingReducer from '../utils/loading/redux/loadingReducer';
 import { LoadingState } from './action-types';

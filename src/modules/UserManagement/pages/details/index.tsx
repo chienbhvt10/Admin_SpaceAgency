@@ -3,9 +3,9 @@ import PageHeader from 'commons/components/layouts/PageHeader';
 import UserLayout from 'commons/components/layouts/User';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
-import DetailUserForm from 'modules/User/components/UserForm';
-import { useDetailUser } from 'modules/User/hooks/useDetailUser';
-import { useUpdateUser } from 'modules/User/hooks/useUpdateUser';
+import DetailUserForm from 'modules/UserManagement/components/UserForm';
+import { useDetailUser } from 'modules/UserManagement/hooks/useDetailUser';
+import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
 import { useParams } from 'react-router';
 
@@ -19,16 +19,16 @@ function DetailUser() {
   }, []);
   const routes = [
     {
-      path: '/',
+      path: CommonPath.DEFAULT_PATH,
       breadcrumbName: 'Home',
     },
     {
-      path: '/user',
-      breadcrumbName: 'User',
+      path: CommonPath.USERS_MANAGEMENT,
+      breadcrumbName: 'User management',
     },
     {
-      path: '/user/detail',
-      breadcrumbName: 'Detail User',
+      path: CommonPath.USERS_MANAGEMENT_DETAIL,
+      breadcrumbName: 'Detail User Management',
     },
   ];
   return (

@@ -2,7 +2,7 @@ import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import UserLayout from 'commons/components/layouts/User';
 import { setTitle } from 'helpers/dom';
-import { useListUser } from 'modules/User/hooks/useListUser';
+import { useListUser } from 'modules/UserManagement/hooks/useListUser';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import TableUser from './Table';
@@ -25,7 +25,7 @@ const UserPage = () => {
     },
     {
       path: CommonPath.USERS_MANAGEMENT,
-      breadcrumbName: 'User',
+      breadcrumbName: 'User Management',
     },
   ];
   return (

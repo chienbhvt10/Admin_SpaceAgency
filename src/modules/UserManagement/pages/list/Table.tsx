@@ -5,7 +5,7 @@ import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { Users } from 'graphql/generated/graphql';
-import { deleteUser } from 'modules/User/redux/actions';
+import { deleteUser } from 'modules/UserManagement/redux/actions';
 import moment from 'moment';
 import React from 'react';
 import { useDispatch } from 'react-redux';
