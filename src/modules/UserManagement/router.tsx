@@ -5,7 +5,7 @@ import NewUser from './pages/new';
 import DetailUser from './pages/details/index';
 
 export const userRouter: RouteObject = {
-  path: '/user-management',
+  path: '/user-management/',
   element: <UserPage />,
 };
 export const newUserRouter: RouteObject = {

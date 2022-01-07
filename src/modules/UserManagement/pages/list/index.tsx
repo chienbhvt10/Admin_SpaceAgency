@@ -11,7 +11,7 @@ const UserPage = () => {
   const { items, loading } = useListUser();
   const navigate = useNavigate();
   React.useEffect(() => {
-    setTitle('User');
+    setTitle('User Management');
   }, []);
   const rowKey = (item: any) => `${item._id}`;
   const handleAdd = () => {
