@@ -1,4 +1,7 @@
 import { contentRouter } from 'modules/Contents/router';
+import { materialCollectionRouter } from 'modules/MaterialsCollection/router';
+import { styleCollectionRouter } from 'modules/StylesCollection/router';
+import { themeCollectionRouter } from 'modules/ThemesCollection/router';
 import { detailUserRouter, newUserRouter, userRouter } from 'modules/UserManagement/router';
 import { RouteObject } from 'react-router-dom';
 import { authRouter } from './modules/Auth/router';
@@ -11,6 +14,9 @@ const routes: RouteObject[] = [
   { ...newUserRouter },
   { ...detailUserRouter },
   { ...contentRouter },
+  { ...themeCollectionRouter },
+  { ...styleCollectionRouter },
+  { ...materialCollectionRouter },
 ];
 
 export default routes;
