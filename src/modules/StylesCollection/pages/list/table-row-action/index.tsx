@@ -1,6 +1,6 @@
+import { DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Space } from 'antd';
 import React from 'react';
-import { DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 
 interface IProps {
   record: any;

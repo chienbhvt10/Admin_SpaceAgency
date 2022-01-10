@@ -12,7 +12,7 @@ export const newStyleCollectionRouter: RouteObject = {
   path: '/styles-collection/new',
   element: <NewStyleCollection />,
 };
-export const StyleCollectionDetailRouter: RouteObject = {
+export const styleCollectionDetailRouter: RouteObject = {
   path: '/styles-collection/detail/:id',
   element: <StyleCollectionDetail />,
 };

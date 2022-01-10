@@ -3,7 +3,7 @@ import { materialCollectionRouter } from 'modules/MaterialsCollection/router';
 import {
   styleCollectionRouter,
   newStyleCollectionRouter,
-  StyleCollectionDetailRouter,
+  styleCollectionDetailRouter,
 } from 'modules/StylesCollection/router';
 import { themeCollectionRouter } from 'modules/ThemesCollection/router';
 import { detailUserRouter, newUserRouter, userRouter } from 'modules/UserManagement/router';
@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
   { ...themeCollectionRouter },
   { ...styleCollectionRouter },
   { ...newStyleCollectionRouter },
-  { ...StyleCollectionDetailRouter },
+  { ...styleCollectionDetailRouter },
   { ...materialCollectionRouter },
 ];
 

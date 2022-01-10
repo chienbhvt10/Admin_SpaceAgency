@@ -1,12 +1,12 @@
+import { Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
+import CreateStyleForm from 'modules/StylesCollection/components/StyleForm';
 import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import React from 'react';
-import CreateStyleForm from '../../components/StyleForm';
-import { Typography } from 'antd';
 const { Title } = Typography;
 const NewStyleCollection = () => {
   const { loading } = useCreateUser();

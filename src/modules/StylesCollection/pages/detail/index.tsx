@@ -3,11 +3,11 @@ import PageHeader from 'commons/components/layouts/PageHeader';
 import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
+import StyleCollectionDetailForm from 'modules/StylesCollection/components/StyleForm';
 import { useStyleDetail } from 'modules/StylesCollection/hooks/useStyleDetail';
 import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
 import { useParams } from 'react-router';
-import StyleCollectionDetailForm from '../../components/StyleForm';
 interface Props {}
 
 const StyleCollectionDetail = (props: Props) => {
@@ -16,7 +16,7 @@ const StyleCollectionDetail = (props: Props) => {
   const { loading: loadingUpdate } = useUpdateUser();
 
   React.useEffect(() => {
-    setTitle('Create User');
+    setTitle('Style Collection Detail');
   }, []);
   const routes = [
     {

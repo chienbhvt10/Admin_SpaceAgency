@@ -1,6 +1,6 @@
 import { Button, Card } from 'antd';
+import 'modules/StylesCollection/styles/form-header.scss';
 import React from 'react';
-import '../../styles/form-header.scss';
 
 interface IProps {
   title: React.ReactElement;

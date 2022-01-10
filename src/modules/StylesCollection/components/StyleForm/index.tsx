@@ -1,11 +1,10 @@
-import { Form, FormProps, Row, Col, Select, Input, InputNumber, Typography, Upload } from 'antd';
-import { Button } from 'antd/lib/radio';
+import { PlusOutlined } from '@ant-design/icons';
+import { Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
 import { TypeForm } from 'commons/type';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import FormHeader from '../FormHeader';
 import '../../styles/style-form.scss';
-import { PlusOutlined } from '@ant-design/icons';
+import FormHeader from '../FormHeader';
 const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
