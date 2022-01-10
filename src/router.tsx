@@ -1,6 +1,10 @@
 import { contentRouter } from 'modules/Contents/router';
 import { materialCollectionRouter } from 'modules/MaterialsCollection/router';
-import { styleCollectionRouter } from 'modules/StylesCollection/router';
+import {
+  styleCollectionRouter,
+  newStyleCollectionRouter,
+  styleCollectionDetailRouter,
+} from 'modules/StylesCollection/router';
 import { themeCollectionRouter } from 'modules/ThemesCollection/router';
 import { detailUserRouter, newUserRouter, userRouter } from 'modules/UserManagement/router';
 import { RouteObject } from 'react-router-dom';
@@ -16,6 +20,8 @@ const routes: RouteObject[] = [
   { ...contentRouter },
   { ...themeCollectionRouter },
   { ...styleCollectionRouter },
+  { ...newStyleCollectionRouter },
+  { ...styleCollectionDetailRouter },
   { ...materialCollectionRouter },
 ];
 

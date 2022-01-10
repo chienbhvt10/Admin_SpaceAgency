@@ -1,0 +1,18 @@
+.form-header {
+  .form-header-style {
+    .button-group {
+      button {
+        border-radius: 5px 5px 5px 5px;
+        margin-left: 10px;
+      }
+      button:first-child {
+        background-color: gray;
+        color: white;
+      }
+      button:nth-child(2) {
+        background-color: rgb(61, 168, 240);
+        color: white;
+      }
+    }
+  }
+}
