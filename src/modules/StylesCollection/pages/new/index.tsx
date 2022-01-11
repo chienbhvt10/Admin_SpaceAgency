@@ -5,14 +5,19 @@ import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import CreateStyleForm from 'modules/StylesCollection/components/StyleForm';
-import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
+import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyles';
 import React from 'react';
+import { useNavigate } from 'react-router';
 const { Title } = Typography;
 const NewStyleCollection = () => {
-  const { loading } = useCreateUser();
+  const { loading } = useCreateStyle();
+  const navigate = useNavigate();
   React.useEffect(() => {
     setTitle('Create Style');
   });
+  const onCancel = () => {
+    navigate(CommonPath.STYLES_COLLECTION);
+  };
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -30,7 +35,7 @@ const NewStyleCollection = () => {
   return (
     <StyleCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <CreateStyleForm title="Create Style Collection" type={TypeForm.CREATE} loading={loading} />
+      <CreateStyleForm onCancel={onCancel} title="Create Style Collection" type={TypeForm.CREATE} loading={loading} />
     </StyleCollectionLayout>
   );
 };

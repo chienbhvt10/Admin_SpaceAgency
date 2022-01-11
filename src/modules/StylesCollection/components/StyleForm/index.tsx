@@ -14,14 +14,14 @@ interface Props {
   loading: boolean;
   item?: any;
   type: TypeForm;
-  onCancle?(): void;
+  onCancel?(): void;
   onChange?(): void;
 }
 
 const requireRule = { required: true, message: 'This is required information!' };
 
 const StyleCollectionForm = (props: Props) => {
-  const { loading, type, item, onCancle, onChange, title } = props;
+  const { loading, type, item, onCancel, onChange, title } = props;
   const [form] = Form.useForm<any>();
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ const StyleCollectionForm = (props: Props) => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading}>
+        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
           <Row justify="center" className="style-form-control">
             <Col span={22}>
               <Col span={17}>
