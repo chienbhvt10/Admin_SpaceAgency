@@ -1,14 +1,7 @@
-fragment IUsersFields on Users {
-  __typename
-  _id
+fragment IUsersFields on User {
+  id
   email
-  name
-  phone
   firstName
   lastName
-  createdAt
-  address
   role
-  updatedAt
-  confirmed
 }

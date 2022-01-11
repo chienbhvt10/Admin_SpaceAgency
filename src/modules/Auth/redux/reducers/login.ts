@@ -1,4 +1,4 @@
-import { LoginActionTypes, LoginState, LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from '../action-types/login';
+import { LoginActionTypes, LoginState, LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, ME_ACTION } from '../action-types/login';
 
 const initialState = {
   loading: false,
@@ -23,7 +23,11 @@ export default (state = initialState, action: LoginActionTypes): LoginState => {
         ...state,
         loading: false,
       };
-
+    case ME_ACTION:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined, QuestionCircleOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Space } from 'antd';
-import { Users } from 'graphql/generated/graphql';
+// import { Users } from 'graphql/generated/graphql';
 import React from 'react';
 
 interface IProps {

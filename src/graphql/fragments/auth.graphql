@@ -1,0 +1,4 @@
+fragment AuthFields on Auth {
+  refreshToken
+  accessToken
+}

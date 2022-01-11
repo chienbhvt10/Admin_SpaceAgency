@@ -13,553 +13,657 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
-  DateTime: any;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
 };
 
-export type Cats = {
-  __typename?: 'Cats';
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
+export type Auth = {
+  __typename?: 'Auth';
+  accessToken?: Maybe<Scalars['String']>;
+  refreshToken?: Maybe<Scalars['String']>;
 };
 
 export type ChangePasswordInput = {
-  confirmPassword: Scalars['String'];
-  oldPassword: Scalars['String'];
-  password: Scalars['String'];
+  newPass: Scalars['String'];
+  oldPass: Scalars['String'];
 };
 
-export type Content = {
-  __typename?: 'Content';
-  _id: Scalars['ID'];
-  code: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  groupName: Scalars['String'];
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  type: TypeName;
-  updatedAt: Scalars['DateTime'];
-};
-
-export type ContentImage = {
-  __typename?: 'ContentImage';
-  _id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  path: Scalars['String'];
-};
-
-export type ContentImageInput = {
-  contentId: Scalars['String'];
-  isDefault: Scalars['Boolean'];
-  name: Scalars['String'];
-  path: Scalars['String'];
-};
-
-export type ContentImageSearch = {
-  regex?: InputMaybe<Scalars['String']>;
-  value: Scalars['String'];
-};
-
-export type ContentImageTableParameter = {
-  length: Scalars['Int'];
-  search?: InputMaybe<ContentImageSearch>;
-  start: Scalars['Int'];
-};
-
-export type ContentImages = {
-  __typename?: 'ContentImages';
-  _id: Scalars['String'];
-  content?: Maybe<Content>;
-  name?: Maybe<Scalars['String']>;
-  path: Scalars['String'];
-};
-
-/** content input */
-export type ContentInput = {
-  code: Scalars['String'];
-  groupName: Scalars['String'];
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  type: TypeName;
-};
-
-export type ContentSearch = {
-  regex?: InputMaybe<Scalars['String']>;
-  typeNames: TypeNamesExtend;
-  value: Scalars['String'];
-};
-
-export type ContentTableParameter = {
-  length: Scalars['Int'];
-  search?: InputMaybe<ContentSearch>;
-  start: Scalars['Int'];
-};
-
-export type Contents = {
-  __typename?: 'Contents';
-  _id: Scalars['ID'];
-  code: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  groupName: Scalars['String'];
-  images?: Maybe<Array<ContentImage>>;
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  type: TypeName;
-  updatedAt: Scalars['DateTime'];
-};
-
-export type CreateUserByAdminInput = {
-  address?: InputMaybe<Scalars['String']>;
-  avatar?: InputMaybe<Scalars['String']>;
+export type CreateAuthInput = {
   email: Scalars['String'];
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
   password: Scalars['String'];
-  phone?: InputMaybe<Scalars['String']>;
+};
+
+export type CreateManagerInput = {
+  /** Example field (placeholder) */
+  name: Scalars['String'];
+  staffs?: InputMaybe<Array<RefInput>>;
+};
+
+export type CreateMaterialInput = {
+  /** list new material type */
+  materialTypes?: InputMaybe<Array<CreateMaterialTypeInput>>;
+  /** tile of material */
+  title: Scalars['String'];
+};
+
+export type CreateMaterialTypeInput = {
+  /** 3d code of material type */
+  code3d?: InputMaybe<Scalars['String']>;
+  /** material id of material type */
+  material?: InputMaybe<RefInput>;
+  /** title of material type */
+  title: Scalars['String'];
+};
+
+export type CreateQuotationInput = {
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type CreateRequestInput = {
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type CreateSimulationComponentInput = {
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type CreateSimulationInput = {
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type CreateStaffInput = {
+  manager: RefInput;
+  name: Scalars['String'];
+};
+
+export type CreateStyleInput = {
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type CreateThemeInput = {
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
 };
 
 export type CreateUserInput = {
-  address?: InputMaybe<Scalars['String']>;
-  avatar?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type FilterInput = {
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
+
+export type GetStaffsInput = {
+  manager?: InputMaybe<RefInput>;
+  paging?: InputMaybe<PaginationInput>;
+};
+
+export type Manager = {
+  __typename?: 'Manager';
+  id: Scalars['String'];
   name: Scalars['String'];
-  password: Scalars['String'];
-  phone?: InputMaybe<Scalars['String']>;
-  role: RolesName;
+  staffs: Array<Staff>;
 };
 
-export type Jwt = {
-  __typename?: 'JWT';
-  expiresAt: Scalars['Float'];
-  refreshToken: Scalars['String'];
-  token: Scalars['String'];
-  user: Users;
+
+export type ManagerStaffsArgs = {
+  where?: InputMaybe<GetStaffsInput>;
 };
 
-export type LoginAdminInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+export type Material = {
+  __typename?: 'Material';
+  id: Scalars['String'];
+  materialTypes: Array<MaterialType>;
+  title?: Maybe<Scalars['String']>;
 };
 
-export type LoginUserInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+
+export type MaterialMaterialTypesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+export type MaterialType = {
+  __typename?: 'MaterialType';
+  code3d?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  material?: Maybe<Material>;
+  title?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Change current user password */
   changePassword: Scalars['Boolean'];
-  confirmResetPasswordEmailToken: Scalars['Boolean'];
-  confirmVerifyEmailToken: Scalars['Boolean'];
-  createContent: Contents;
-  createContentImage: ContentImages;
-  createUser: Users;
-  deleteContent: Scalars['Float'];
-  deleteContentImage: Scalars['Float'];
-  deleteCurrentUser: Scalars['Boolean'];
-  deleteUser: Scalars['Boolean'];
-  deleteUserPermanently: Scalars['Boolean'];
-  login: Jwt;
-  loginAdmin: Jwt;
-  logout: Scalars['Boolean'];
-  register: Jwt;
-  resetPassword: Scalars['Boolean'];
-  restoreContent: Scalars['Float'];
-  restoreUser: Scalars['Boolean'];
-  sendResetPasswordEmailToken: Scalars['Boolean'];
-  sendUserVerifyEmailToken: Scalars['Boolean'];
-  updateContent: Scalars['Boolean'];
-  updateContentImage: Scalars['Boolean'];
-  updateUser: Scalars['Boolean'];
-  uploadSingleFile: Scalars['String'];
+  /** Create new Admin */
+  createAdmin: User;
+  /** Create new Customer */
+  createCustomer: User;
+  createManager: Manager;
+  /** Create new Material */
+  createMaterial: Material;
+  /** Create new Material Type */
+  createMaterialType: MaterialType;
+  createQuotation: Quotation;
+  createRequest: Request;
+  createSimulation: Simulation;
+  createSimulationComponent: SimulationComponent;
+  createStaff: Staff;
+  createStyle: Style;
+  createTheme: Theme;
+  loginAdmin: Auth;
+  loginCustomer: Auth;
+  removeManager: Manager;
+  removeMaterial: Material;
+  removeQuotation: Quotation;
+  removeRequest: Request;
+  removeSimulation: Simulation;
+  removeSimulationComponent: SimulationComponent;
+  removeStaff: Staff;
+  removeStyle: Style;
+  removeTheme: Theme;
+  /** Remove user by id */
+  removeUser: User;
+  updateManager: Manager;
+  updateMaterial: Material;
+  updateQuotation: Quotation;
+  updateRequest: Request;
+  updateSimulation: Simulation;
+  updateSimulationComponent: SimulationComponent;
+  updateStaff: Staff;
+  updateStyle: Style;
+  updateTheme: Theme;
+  /** Update user by id */
+  updateUser: User;
 };
 
 
 export type MutationChangePasswordArgs = {
-  id: Scalars['String'];
-  passwordInput: ChangePasswordInput;
+  changePasswordInput: ChangePasswordInput;
 };
 
 
-export type MutationConfirmResetPasswordEmailTokenArgs = {
-  token: Scalars['String'];
-};
-
-
-export type MutationConfirmVerifyEmailTokenArgs = {
-  token: Scalars['String'];
-};
-
-
-export type MutationCreateContentArgs = {
-  input: ContentInput;
-};
-
-
-export type MutationCreateContentImageArgs = {
-  input: ContentImageInput;
-};
-
-
-export type MutationCreateUserArgs = {
-  createUserInput: CreateUserByAdminInput;
-};
-
-
-export type MutationDeleteContentArgs = {
-  ids: Array<Scalars['String']>;
-};
-
-
-export type MutationDeleteContentImageArgs = {
-  ids: Array<Scalars['String']>;
-};
-
-
-export type MutationDeleteUserArgs = {
-  id: Scalars['String'];
-};
-
-
-export type MutationDeleteUserPermanentlyArgs = {
-  id: Scalars['String'];
-};
-
-
-export type MutationLoginArgs = {
-  loginUserInput: LoginUserInput;
-};
-
-
-export type MutationLoginAdminArgs = {
-  loginAdminInput: LoginAdminInput;
-};
-
-
-export type MutationRegisterArgs = {
+export type MutationCreateAdminArgs = {
   createUserInput: CreateUserInput;
 };
 
 
-export type MutationResetPasswordArgs = {
-  newPassword: Scalars['String'];
-  token: Scalars['String'];
+export type MutationCreateCustomerArgs = {
+  createUserInput: CreateUserInput;
 };
 
 
-export type MutationRestoreContentArgs = {
-  ids: Array<Scalars['String']>;
+export type MutationCreateManagerArgs = {
+  createManagerInput: CreateManagerInput;
 };
 
 
-export type MutationRestoreUserArgs = {
+export type MutationCreateMaterialArgs = {
+  createMaterialInput: CreateMaterialInput;
+};
+
+
+export type MutationCreateMaterialTypeArgs = {
+  createMaterialTypeInput: CreateMaterialTypeInput;
+};
+
+
+export type MutationCreateQuotationArgs = {
+  createQuotationInput: CreateQuotationInput;
+};
+
+
+export type MutationCreateRequestArgs = {
+  createRequestInput: CreateRequestInput;
+};
+
+
+export type MutationCreateSimulationArgs = {
+  createSimulationInput: CreateSimulationInput;
+};
+
+
+export type MutationCreateSimulationComponentArgs = {
+  createSimulationComponentInput: CreateSimulationComponentInput;
+};
+
+
+export type MutationCreateStaffArgs = {
+  createStaffInput: CreateStaffInput;
+};
+
+
+export type MutationCreateStyleArgs = {
+  createStyleInput: CreateStyleInput;
+};
+
+
+export type MutationCreateThemeArgs = {
+  createThemeInput: CreateThemeInput;
+};
+
+
+export type MutationLoginAdminArgs = {
+  loginInput: CreateAuthInput;
+};
+
+
+export type MutationLoginCustomerArgs = {
+  loginInput: CreateAuthInput;
+};
+
+
+export type MutationRemoveManagerArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveMaterialArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveQuotationArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveRequestArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveSimulationArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveSimulationComponentArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveStaffArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveStyleArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveThemeArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationRemoveUserArgs = {
   id: Scalars['String'];
 };
 
 
-export type MutationSendResetPasswordEmailTokenArgs = {
-  email: Scalars['String'];
+export type MutationUpdateManagerArgs = {
+  updateManagerInput: UpdateManagerInput;
 };
 
 
-export type MutationSendUserVerifyEmailTokenArgs = {
-  email: Scalars['String'];
+export type MutationUpdateMaterialArgs = {
+  updateMaterialInput: UpdateMaterialInput;
 };
 
 
-export type MutationUpdateContentArgs = {
-  id: Scalars['String'];
-  input: ContentInput;
+export type MutationUpdateQuotationArgs = {
+  updateQuotationInput: UpdateQuotationInput;
 };
 
 
-export type MutationUpdateContentImageArgs = {
-  id: Scalars['String'];
-  input: ContentImageInput;
+export type MutationUpdateRequestArgs = {
+  updateRequestInput: UpdateRequestInput;
+};
+
+
+export type MutationUpdateSimulationArgs = {
+  updateSimulationInput: UpdateSimulationInput;
+};
+
+
+export type MutationUpdateSimulationComponentArgs = {
+  updateSimulationComponentInput: UpdateSimulationComponentInput;
+};
+
+
+export type MutationUpdateStaffArgs = {
+  updateStaffInput: UpdateStaffInput;
+};
+
+
+export type MutationUpdateStyleArgs = {
+  updateStyleInput: UpdateStyleInput;
+};
+
+
+export type MutationUpdateThemeArgs = {
+  updateThemeInput: UpdateThemeInput;
 };
 
 
 export type MutationUpdateUserArgs = {
-  id: Scalars['String'];
-  userInfo: UpdateUserInput;
+  updateUserInput: UpdateUserInput;
 };
 
-
-export type MutationUploadSingleFileArgs = {
-  file: Scalars['Upload'];
-};
-
-export type PaginatedContentImageResponse = {
-  __typename?: 'PaginatedContentImageResponse';
-  items: Array<ContentImages>;
-  total: Scalars['Int'];
-  totalFilter: Scalars['Int'];
-};
-
-export type PaginatedContentResponse = {
-  __typename?: 'PaginatedContentResponse';
-  items: Array<Contents>;
-  total: Scalars['Int'];
-  totalFilter: Scalars['Int'];
-};
-
-export type PaginatedUserResponse = {
-  __typename?: 'PaginatedUserResponse';
-  items: Array<Users>;
-  total: Scalars['Int'];
-  totalFilter: Scalars['Int'];
+export type PaginationInput = {
+  limit?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  getAllCats: Array<Cats>;
-  getAllContentImages: Array<ContentImages>;
-  getAllContents: Array<Contents>;
-  getAllStaticFile: Array<Scalars['String']>;
-  getAllUser: Array<Users>;
-  getContent: Contents;
-  getContentImage: ContentImages;
-  getPaginationContent: PaginatedContentResponse;
-  getPaginationContentImage: PaginatedContentImageResponse;
-  getPaginationUser: PaginatedUserResponse;
-  getUser: Users;
-  me: Users;
+  manager: Manager;
+  managers: Array<Manager>;
+  /** find one material */
+  material: Material;
+  /** find one material type */
+  materialType: MaterialType;
+  /** find all material types */
+  materialTypes: Array<MaterialType>;
+  /** find all materials */
+  materials: Array<Material>;
+  /** Get current user profile */
+  me: User;
+  quotation: Quotation;
+  quotations: Array<Quotation>;
+  request: Request;
+  requests: Array<Request>;
+  simulation: Simulation;
+  simulationComponent: SimulationComponent;
+  simulationComponents: Array<SimulationComponent>;
+  simulations: Array<Simulation>;
+  staff: Staff;
+  staffs: Array<Staff>;
+  style: Style;
+  styles: Array<Style>;
+  theme: Theme;
+  themes: Array<Theme>;
+  /** Get user by id  */
+  user: User;
+  /** Get all user */
+  users: Array<User>;
 };
 
 
-export type QueryGetAllContentsArgs = {
-  deleted?: InputMaybe<Scalars['Boolean']>;
+export type QueryManagerArgs = {
+  id: Scalars['Int'];
 };
 
 
-export type QueryGetAllStaticFileArgs = {
-  dir?: InputMaybe<Scalars['String']>;
+export type QueryManagersArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 
-export type QueryGetAllUserArgs = {
-  deleted?: InputMaybe<Scalars['Boolean']>;
+export type QueryMaterialArgs = {
+  id: Scalars['Int'];
 };
 
 
-export type QueryGetContentArgs = {
+export type QueryMaterialTypeArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryGetContentImageArgs = {
+export type QueryMaterialTypesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+
+export type QueryMaterialsArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+
+export type QueryQuotationArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryRequestArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QuerySimulationArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QuerySimulationComponentArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryStaffArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryStaffsArgs = {
+  getStaffsInput: GetStaffsInput;
+};
+
+
+export type QueryStyleArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryThemeArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryUserArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryGetPaginationContentArgs = {
-  data: ContentTableParameter;
+export type QueryUsersArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
-
-export type QueryGetPaginationContentImageArgs = {
-  data: ContentImageTableParameter;
+export type Quotation = {
+  __typename?: 'Quotation';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
 };
 
-
-export type QueryGetPaginationUserArgs = {
-  data: UserTableParameter;
+export type RefInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-
-export type QueryGetUserArgs = {
-  id: Scalars['String'];
+export type Request = {
+  __typename?: 'Request';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
 };
 
-/** Roles name ! */
-export enum RolesName {
+export enum Role {
   Admin = 'ADMIN',
-  User = 'USER',
-  Req = 'req'
+  Customer = 'CUSTOMER',
+  Sysadmin = 'SYSADMIN'
 }
 
-/** Types name ! */
-export enum TypeName {
-  Custom = 'CUSTOM',
-  Design = 'DESIGN',
-  Type = 'TYPE'
+export type Simulation = {
+  __typename?: 'Simulation';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type SimulationComponent = {
+  __typename?: 'SimulationComponent';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type SortInput = {
+  key: Scalars['String'];
+  value?: InputMaybe<SortValue>;
+};
+
+export enum SortValue {
+  Asc = 'ASC',
+  Desc = 'DESC'
 }
 
-/** extend types name for searching */
-export enum TypeNamesExtend {
-  All = 'ALL',
-  Custom = 'CUSTOM',
-  Design = 'DESIGN',
-  Type = 'TYPE'
-}
+export type Staff = {
+  __typename?: 'Staff';
+  id: Scalars['String'];
+  manager?: Maybe<Manager>;
+  name: Scalars['String'];
+};
+
+export type Style = {
+  __typename?: 'Style';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type Theme = {
+  __typename?: 'Theme';
+  /** Example field (placeholder) */
+  exampleField: Scalars['Int'];
+};
+
+export type UpdateManagerInput = {
+  id: Scalars['String'];
+  /** Example field (placeholder) */
+  name?: InputMaybe<Scalars['String']>;
+  staffs?: InputMaybe<Array<RefInput>>;
+};
+
+export type UpdateMaterialInput = {
+  id: Scalars['Int'];
+  /** list new material type */
+  materialTypes?: InputMaybe<Array<CreateMaterialTypeInput>>;
+  /** tile of material */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateQuotationInput = {
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
+};
+
+export type UpdateRequestInput = {
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
+};
+
+export type UpdateSimulationComponentInput = {
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
+};
+
+export type UpdateSimulationInput = {
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
+};
+
+export type UpdateStaffInput = {
+  id: Scalars['Int'];
+  manager?: InputMaybe<RefInput>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateStyleInput = {
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
+};
+
+export type UpdateThemeInput = {
+  /** Example field (placeholder) */
+  exampleField?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
+};
 
 export type UpdateUserInput = {
-  address?: InputMaybe<Scalars['String']>;
-  avatar?: InputMaybe<Scalars['String']>;
-  email: Scalars['String'];
+  email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
   lastName?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
-  phone?: InputMaybe<Scalars['String']>;
 };
 
-export type UserSearch = {
-  regex?: InputMaybe<Scalars['String']>;
-  value: Scalars['String'];
-};
-
-export type UserTableParameter = {
-  length: Scalars['Int'];
-  search?: InputMaybe<UserSearch>;
-  start: Scalars['Int'];
-};
-
-export type Users = {
-  __typename?: 'Users';
-  _id: Scalars['String'];
-  address: Scalars['String'];
-  avatar?: Maybe<Scalars['String']>;
-  confirmed: Scalars['Boolean'];
-  createdAt: Scalars['DateTime'];
-  email: Scalars['String'];
+export type User = {
+  __typename?: 'User';
+  email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   lastName?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  phone?: Maybe<Scalars['String']>;
-  role: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  role?: Maybe<Role>;
 };
 
-export type JwtFields = { __typename: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } };
+export type WhereInput = {
+  filter?: InputMaybe<Array<FilterInput>>;
+  sort?: InputMaybe<Array<SortInput>>;
+};
 
-export type IUsersFields = { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean };
+export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
+
+export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined };
 
 export type LoginAdminVariables = Exact<{
-  loginAdminInput: LoginAdminInput;
+  loginInput: CreateAuthInput;
 }>;
 
 
-export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'JWT', expiresAt: number, refreshToken: string, token: string, user: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } } };
-
-export type CreateUserVariables = Exact<{
-  createUserInput: CreateUserByAdminInput;
-}>;
-
-
-export type CreateUser = { __typename?: 'Mutation', createUser: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } };
-
-export type DeleteUserVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type DeleteUser = { __typename?: 'Mutation', deleteUser: boolean };
-
-export type UpdateUserVariables = Exact<{
-  userInfo: UpdateUserInput;
-  id: Scalars['String'];
-}>;
-
-
-export type UpdateUser = { __typename?: 'Mutation', updateUser: boolean };
-
-export type GetAllUserVariables = Exact<{
-  deleted?: InputMaybe<Scalars['Boolean']>;
-}>;
-
-
-export type GetAllUser = { __typename?: 'Query', getAllUser: Array<{ __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean }> };
-
-export type GetUserVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type GetUser = { __typename?: 'Query', getUser: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } };
+export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined } };
 
 export type MeVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Me = { __typename?: 'Query', me: { __typename: 'Users', _id: string, email: string, name: string, phone?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, createdAt: any, address: string, role: string, updatedAt: any, confirmed: boolean } };
+export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined } };
 
+export const AuthFields = gql`
+    fragment AuthFields on Auth {
+  refreshToken
+  accessToken
+}
+    `;
 export const IUsersFields = gql`
-    fragment IUsersFields on Users {
-  __typename
-  _id
+    fragment IUsersFields on User {
+  id
   email
-  name
-  phone
   firstName
   lastName
-  createdAt
-  address
   role
-  updatedAt
-  confirmed
 }
     `;
-export const JwtFields = gql`
-    fragment JWTFields on JWT {
-  __typename
-  expiresAt
-  refreshToken
-  user {
-    ...IUsersFields
-  }
-  token
-}
-    ${IUsersFields}`;
 export const LoginAdminDocument = gql`
-    mutation loginAdmin($loginAdminInput: LoginAdminInput!) {
-  loginAdmin(loginAdminInput: $loginAdminInput) {
-    expiresAt
+    mutation LoginAdmin($loginInput: CreateAuthInput!) {
+  loginAdmin(loginInput: $loginInput) {
     refreshToken
-    user {
-      ...IUsersFields
-    }
-    token
+    accessToken
   }
-}
-    ${IUsersFields}`;
-export const CreateUserDocument = gql`
-    mutation createUser($createUserInput: CreateUserByAdminInput!) {
-  createUser(createUserInput: $createUserInput) {
-    ...IUsersFields
-  }
-}
-    ${IUsersFields}`;
-export const DeleteUserDocument = gql`
-    mutation deleteUser($id: String!) {
-  deleteUser(id: $id)
 }
     `;
-export const UpdateUserDocument = gql`
-    mutation updateUser($userInfo: UpdateUserInput!, $id: String!) {
-  updateUser(userInfo: $userInfo, id: $id)
-}
-    `;
-export const GetAllUserDocument = gql`
-    query getAllUser($deleted: Boolean) {
-  getAllUser(deleted: $deleted) {
-    ...IUsersFields
-  }
-}
-    ${IUsersFields}`;
-export const GetUserDocument = gql`
-    query getUser($id: String!) {
-  getUser(id: $id) {
-    ...IUsersFields
-  }
-}
-    ${IUsersFields}`;
 export const MeDocument = gql`
-    query me {
+    query Me {
   me {
     ...IUsersFields
   }
@@ -573,26 +677,11 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
-      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
+    LoginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LoginAdmin');
     },
-    createUser(variables: CreateUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateUser> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateUser>(CreateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createUser');
-    },
-    deleteUser(variables: DeleteUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteUser> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUser>(DeleteUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUser');
-    },
-    updateUser(variables: UpdateUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateUser> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUser>(UpdateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUser');
-    },
-    getAllUser(variables?: GetAllUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAllUser> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAllUser>(GetAllUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllUser');
-    },
-    getUser(variables: GetUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUser> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetUser>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser');
-    },
-    me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
+    Me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Me');
     }
   };
 }

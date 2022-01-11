@@ -1,24 +1,25 @@
 import { AppError } from 'commons/type';
-import { Jwt, LoginAdmin, LoginUserInput } from 'graphql/generated/graphql';
-
+import { Auth, LoginAdminVariables, User } from 'graphql/generated/graphql';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const ME_ACTION = 'ME_ACTION';
 export const AUTO_LOGIN_FLOW = 'AUTO_LOGIN_FLOW';
 
 export interface LoginState {
   loading: boolean;
-  jwt?: Jwt;
+  jwt?: Auth;
+  userInfo?: User;
 }
 
 export interface LoginAction {
   type: typeof LOGIN;
-  payload: LoginUserInput;
+  payload: LoginAdminVariables;
 }
 
 export interface LoginActionSuccess {
   type: typeof LOGIN_SUCCESS;
-  payload: Jwt;
+  payload: Auth;
 }
 
 export interface LoginActionError {
@@ -26,8 +27,13 @@ export interface LoginActionError {
   payload: AppError;
 }
 
+export interface MeAction {
+  type: typeof ME_ACTION;
+  payload: User;
+}
+
 export interface AutoLoginFlow {
   type: typeof AUTO_LOGIN_FLOW;
   payload?: any;
 }
-export type LoginActionTypes = LoginAction | LoginActionSuccess | LoginActionError | AutoLoginFlow;
+export type LoginActionTypes = LoginAction | LoginActionSuccess | LoginActionError | AutoLoginFlow | MeAction;
