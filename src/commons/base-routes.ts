@@ -4,11 +4,15 @@ const USERS_MANAGEMENT = '/user-management/';
 const USERS_MANAGEMENT_NEW = '/user-management/new/';
 const USERS_MANAGEMENT_DETAIL = '/user-management/detail/';
 const THEME_COLLECTION = '/themes-collection/';
+const THEME_COLLECTION_NEW = '/themes-collection/new/';
+const THEME_COLLECTION_UPDATE = '/themes-collection/update/';
 const STYLES_COLLECTION = '/styles-collection/';
 const STYLES_COLLECTION_NEW = '/styles-collection/new/';
 const STYLES_COLLECTION_DETAIL = '/styles-collection/detail/';
 
 const MATERIAL_COLLECTION = '/material-collection/';
+const MATERIAL_COLLECTION_NEW = '/material-collection/new/';
+const MATERIAL_COLLECTION_UPDATE = '/material-collection/update/';
 const USER_SIMULATE_COLLECTION = '/user-simulate-collection';
 const USER_SIMULATE_COLLECTION_NEW = '/user-simulate-collection/new/';
 const USER_SIMULATE_COLLECTION_DETAIL = '/user-simulate-collection/detail/';
@@ -24,10 +28,14 @@ export const CommonPath = {
   USERS_MANAGEMENT_DETAIL,
   ROLES_LIST,
   THEME_COLLECTION,
+  THEME_COLLECTION_NEW,
+  THEME_COLLECTION_UPDATE,
   STYLES_COLLECTION,
   STYLES_COLLECTION_NEW,
   STYLES_COLLECTION_DETAIL,
   MATERIAL_COLLECTION,
+  MATERIAL_COLLECTION_NEW,
+  MATERIAL_COLLECTION_UPDATE,
   USER_SIMULATE_COLLECTION,
   USER_SIMULATE_COLLECTION_NEW,
   USER_SIMULATE_COLLECTION_DETAIL,
