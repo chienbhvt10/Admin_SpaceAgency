@@ -18,11 +18,9 @@ function ElementConfig() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (pathname) {
-      dispatch(autoLoginFlow());
-    }
+    dispatch(autoLoginFlow());
     // eslint-disable-next-line
-  }, [pathname]);
+  }, []);
 
   React.useEffect(() => {
     setNavigate(navigate);

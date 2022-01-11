@@ -18,7 +18,7 @@ interface IProps {
 
 function NavBar(props: IProps) {
   const [collapsed, setCollapsed] = React.useState<boolean>(false);
-  const [keyNav, setKeyNav] = React.useState<string>('-1');
+  const [keyNav, setKeyNav] = React.useState<string>();
   const [openKeys, setOpenKeys] = React.useState<string[]>(['menu_1', 'menu_2', 'menu_3']);
   const { pathname } = useLocation();
 
@@ -27,15 +27,17 @@ function NavBar(props: IProps) {
       dataNav.map((i) => {
         i?.item?.map((ii) => {
           if (ii.router === pathname) {
-            setKeyNav(ii?.key || '-1');
+            setKeyNav(ii?.key);
           } else {
             const searchRouter = pathname.search(ii.router);
             if (searchRouter > -1) {
-              setKeyNav(ii?.key || '-1');
+              setKeyNav(ii?.key);
             }
           }
         });
       });
+    } else {
+      setKeyNav('-1');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
