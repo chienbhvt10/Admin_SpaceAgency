@@ -11,9 +11,7 @@ import TableRowAction from './table-row-action';
 
 const { Option } = Select;
 const themeOptions: any = [];
-for (let i = 0; i < 10; i++) {
-  themeOptions.push(<Option key={i.toString(36) + i}>Theme {i}</Option>);
-}
+
 const dataSource: Style[] = [];
 
 for (let i = 0; i < 1; i++) {
