@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 
-export const useCreateStyle = () => {
+export const useCreateCustomerSimulation = () => {
   const loading = false;
   return {
     loading,
