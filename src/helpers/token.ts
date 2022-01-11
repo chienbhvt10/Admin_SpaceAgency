@@ -1,14 +1,14 @@
 import { isJsonString } from './string';
 import moment from 'moment';
 import env from 'env';
-import { Jwt, LoginAdmin } from 'graphql/generated/graphql';
+import { Auth } from 'graphql/generated/graphql';
 
 let TOKEN: any = '';
 const TOKEN_KEY = env.tokenKey;
 
-export const setAuthData = (authData: Jwt) => {
+export const setAuthData = (authData: Auth) => {
   localStorage.setItem(TOKEN_KEY, JSON.stringify(authData || {}));
-  TOKEN = authData.token;
+  TOKEN = authData.accessToken;
 };
 
 export const getAuthLocalData = () => {
@@ -26,13 +26,13 @@ export const getToken = () => {
 
 export const parseTokenString = (str: string) => {
   if (isJsonString(str)) {
-    const authObject: Jwt = JSON.parse(str);
+    const authObject: Auth = JSON.parse(str);
     return authObject;
   }
   return null;
 };
 
-export const tokenChecker = (authData: Jwt | null) => {
-  if (!authData || !authData.token || authData.expiresAt > moment().unix()) return false;
+export const tokenChecker = (authData: Auth | null) => {
+  // if (!authData || !authData.token || authData.expiresAt > moment().unix()) return false;
   return true;
 };

@@ -1,11 +1,9 @@
-import React, { Children } from 'react';
-import { DeleteOutlined, EditOutlined, EllipsisOutlined, DownOutlined } from '@ant-design/icons';
+import { Table } from 'antd';
+import { CommonPath } from 'commons/base-routes';
+import UserRowActions from 'commons/components/layouts/ActionTable';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { CommonPath } from 'commons/base-routes';
-import { Table, Badge, Menu, Dropdown, Space } from 'antd';
-import UserRowActions from 'commons/components/layouts/ActionTable';
-import { Users } from 'graphql/generated/graphql';
 interface IProps {
   items: any;
   rowKey: any;
@@ -26,9 +24,11 @@ function TableMaterial(props: IProps) {
   };
   const expandedRowRender = () => {
     const columns = [
-        {
-            title: 'Type Name', dataIndex: 'typeName', key: '#',
-        },
+      {
+        title: 'Type Name',
+        dataIndex: 'typeName',
+        key: '#',
+      },
       { title: 'Code', dataIndex: 'code', key: '#' },
       {
         title: 'Price',
@@ -38,9 +38,9 @@ function TableMaterial(props: IProps) {
       { title: 'Order', dataIndex: 'order', key: '#' },
     ];
 
-      const data = [
-          { key: '1', typeName: 'Standard', code: '0347833454', price: '0 yen', order: '1' },
-          { key: '2', typeName: 'Premium', code: '3545346633', price: '200,000 yen', order:'2'  },
+    const data = [
+      { key: '1', typeName: 'Standard', code: '0347833454', price: '0 yen', order: '1' },
+      { key: '2', typeName: 'Premium', code: '3545346633', price: '200,000 yen', order: '2' },
     ];
     return <Table columns={columns} dataSource={data} pagination={false} />;
   };
@@ -97,10 +97,7 @@ function TableMaterial(props: IProps) {
       order: '1',
       design: 'Hotel Design',
       status: 'Active',
-      children: [
-        
-          ]
-      
+      children: [],
     },
     {
       key: '2',
@@ -122,7 +119,6 @@ function TableMaterial(props: IProps) {
   return (
     <div>
       <Table
-        
         columns={columns}
         dataSource={data}
         loading={loading}

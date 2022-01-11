@@ -1,18 +1,19 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
-import { LoginAdmin } from 'graphql/generated/graphql';
+import { LoginAdmin, Me } from 'graphql/generated/graphql';
 import { getNavigate, getRedirectUrl } from 'helpers/history';
-import { getAuthLocalData, setAuthData } from 'helpers/token';
+import { setAuthData } from 'helpers/token';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import * as apis from '../../services/apis';
-import { AutoLoginFlow, LoginAction, LoginActionSuccess } from '../action-types';
-import { loginError, loginSuccess } from '../actions';
+import { LoginAction, LoginActionSuccess } from '../action-types';
+import { autoLoginFlow, loginError, loginSuccess, me } from '../actions';
 
 export function* loginAsync(action: LoginAction) {
   try {
     const data: LoginAdmin = yield apis.loginApi(action.payload);
     yield put(loginSuccess(data.loginAdmin));
+    yield put(autoLoginFlow());
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(loginError(err));
@@ -29,13 +30,13 @@ export function loginSuccessAsync(action: LoginActionSuccess) {
   }
 }
 
-export function autoLoginFlow(action: AutoLoginFlow) {
-  const authData = getAuthLocalData();
-  const cookies = action.payload;
-  if (!authData) {
-    getNavigate(CommonPath.LOGIN_PATH);
-  } else {
-    getNavigate(cookies.NEXT_LOCALE || CommonPath.DEFAULT_PATH);
+export function* autoLoginFlowAsync() {
+  try {
+    const data: Me = yield apis.me();
+    yield put(me(data.me));
+    getNavigate(CommonPath.DEFAULT_PATH);
+  } catch (err: any) {
+    yield put(loginError(err));
   }
 }
 

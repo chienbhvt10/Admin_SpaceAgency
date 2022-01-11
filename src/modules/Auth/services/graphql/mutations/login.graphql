@@ -1,10 +1,6 @@
-mutation loginAdmin($loginAdminInput: LoginAdminInput!) {
-  loginAdmin(loginAdminInput: $loginAdminInput) {
-    expiresAt
+mutation LoginAdmin($loginInput: CreateAuthInput!) {
+  loginAdmin(loginInput: $loginInput) {
     refreshToken
-    user {
-      ...IUsersFields
-    }
-    token
+    accessToken
   }
 }

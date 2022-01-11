@@ -10,7 +10,7 @@ import { DownOutlined } from '@ant-design/icons';
 const { Header } = Layout;
 const HeaderLayout = () => {
   const [cookies] = useCookies([NEXT_LOCALE]);
-  const { data } = useGetUser();
+  const { userInfo } = useGetUser();
   const onLogout = () => {
     localStorage.removeItem(env.tokenKey);
     getNavigate(CommonPath.LOGIN_PATH);
@@ -36,7 +36,7 @@ const HeaderLayout = () => {
         <Header className="site-layout-background" style={{ padding: 0 }}>
           <Dropdown overlay={menu} trigger={['click']}>
             <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-              {data?.firstName} <DownOutlined />
+              {userInfo?.firstName} <DownOutlined />
             </a>
           </Dropdown>
         </Header>

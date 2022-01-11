@@ -3,25 +3,23 @@
  * các route khi được bọc bởi component này sẽ được kiểm tra đã đăng nhập chưa
  * nếu chưa đăng nhập sẽ đưa ra trang đăng nhập và lưu lại redirect url
  */
-import { NEXT_LOCALE } from 'commons/type';
 import { setNavigate } from 'helpers/history';
 import React from 'react';
-import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import { useNavigate, useRoutes } from 'react-router-dom';
 import routes from './router';
+import { autoLoginFlow } from './modules/Auth/redux/actions/login';
 
 function ElementConfig() {
   const element = useRoutes(routes);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const [cookies, setCookie] = useCookies([NEXT_LOCALE]);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (pathname) {
-      setCookie(NEXT_LOCALE, pathname, { path: '/' });
+      dispatch(autoLoginFlow());
     }
     // eslint-disable-next-line
   }, [pathname]);

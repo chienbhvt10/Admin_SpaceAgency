@@ -1,26 +1,16 @@
 import env from 'env';
 import { GraphQLClient } from 'graphql-request';
 import { getSdk } from 'graphql/generated/graphql';
+import { getAuthLocalData } from 'helpers/token';
 
 const endpoint = env.apiEndPoint;
 
-const getAuthToken = () => {
-  const data = localStorage.getItem(env.tokenKey);
-  if (data) {
-    try {
-      return JSON.parse(data).token;
-    } catch (error) {
-      return null;
-    }
-  }
-  return null;
-};
-
 export const getClient = (auth = true, signal?: AbortSignal) => {
+  const accessToken = getAuthLocalData()?.accessToken;
   const headers: any = {};
 
   if (auth) {
-    headers.authorization = auth ? `Bearer ${getAuthToken()}` : undefined;
+    headers.authorization = auth ? `Bearer ${accessToken}` : undefined;
   }
 
   const graphQLClient = new GraphQLClient(endpoint, {

@@ -1,5 +1,5 @@
 import { Button, Form, Input } from 'antd';
-import { LoginUserInput } from 'graphql/generated/graphql';
+import { CreateAuthInput, LoginAdminVariables } from 'graphql/generated/graphql';
 import { login } from 'modules/Auth/redux/actions/login';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,13 +11,16 @@ function FormLogin(props: any) {
   const dispatch = useDispatch();
   const stateLoading = useSelector((state: RootState) => state.loadingReducer.loading);
 
-  const onFinish = (values: LoginUserInput) => {
-    const loginInput: LoginUserInput = {
+  const onFinish = (values: CreateAuthInput) => {
+    const loginInput: CreateAuthInput = {
       email: values.email,
       password: values.password,
     };
+    const payload: LoginAdminVariables = {
+      loginInput,
+    };
     dispatch(actionLoading());
-    dispatch(login(loginInput));
+    dispatch(login(payload));
   };
 
   const onFinishFailed = (errorInfo: any) => {
