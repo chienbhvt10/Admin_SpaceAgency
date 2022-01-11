@@ -1,11 +1,7 @@
-.table-header-style {
-  margin: 12px 16px;
-  background-color: #fff;
-  .ant-card-head {
-    padding-left: 16px;
-    padding-right: 16px;
+
+  .ant-card-head-title{
+      font-family: Roboto;
+      font-size: 24px !important;
+      font-weight: 700;
+      margin-left: 50px !important;
   }
-  .ant-card-body {
-    padding: 0;
-  }
-}
