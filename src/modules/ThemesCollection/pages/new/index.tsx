@@ -4,11 +4,9 @@ import ThemeCollectionLayout from 'commons/components/layouts/ThemesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import ThemesForm from 'modules/ThemesCollection/components/UseForm';
-import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser'
-import React from 'react'
+import React from 'react';
 
 const ThemesCreateNew = () => {
-    const { loading } = useCreateUser();
   React.useEffect(() => {
     setTitle('Create Themes');
   }, []);
@@ -26,13 +24,13 @@ const ThemesCreateNew = () => {
       breadcrumbName: 'Create Themes Collection',
     },
   ];
-    return (
-        <div>
-            <ThemeCollectionLayout>
-                <ThemesForm title="Create Themes Collection" type={TypeForm.CREATE} loading={loading} />
-            </ThemeCollectionLayout>
-        </div>
-    )
-}
+  return (
+    <div>
+      <ThemeCollectionLayout>
+        <ThemesForm title="Create Themes Collection" type={TypeForm.CREATE} loading={false} />
+      </ThemeCollectionLayout>
+    </div>
+  );
+};
 
 export default ThemesCreateNew;

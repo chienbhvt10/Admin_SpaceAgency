@@ -4,11 +4,11 @@ import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollect
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import MaterialForm from 'modules/MaterialsCollection/components/UseForm';
-import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser'
-import React from 'react'
+// import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser'
+import React from 'react';
 
 const MaterialUpdate = () => {
-    const { loading } = useCreateUser();
+  // const { loading } = useCreateUser();
   React.useEffect(() => {
     setTitle('Update Material');
   }, []);
@@ -26,13 +26,13 @@ const MaterialUpdate = () => {
       breadcrumbName: 'Update Material Collection',
     },
   ];
-    return (
-        <div>
-            <MaterialCollectionLayout>
-                <MaterialForm title="Update Material Collection" type={TypeForm.CREATE} loading={loading} />
-            </MaterialCollectionLayout>
-        </div>
-    )
-}
+  return (
+    <div>
+      <MaterialCollectionLayout>
+        <MaterialForm title="Update Material Collection" type={TypeForm.CREATE} loading={false} />
+      </MaterialCollectionLayout>
+    </div>
+  );
+};
 
 export default MaterialUpdate;
