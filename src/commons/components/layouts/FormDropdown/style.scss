@@ -1,0 +1,22 @@
+.dropdown-select{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 60px;
+    .ant-form-item {
+        flex-basis: 45% !important;
+        .ant-select-selector{
+            border-radius: 4px !important;
+        }
+    }
+   
+    label{
+        font-weight: 400;
+        font-size: 16px;
+        padding-right: 22px;
+        font-family: Open Sans;
+        &::after{
+            display: none !important;
+        }
+        
+    }
+}
