@@ -10,6 +10,9 @@ const STYLES_COLLECTION_DETAIL = '/styles-collection/detail/';
 
 const MATERIAL_COLLECTION = '/material-collection/';
 const USER_SIMULATE_COLLECTION = '/user-simulate-collection';
+const USER_SIMULATE_COLLECTION_NEW = '/user-simulate-collection/new/';
+const USER_SIMULATE_COLLECTION_DETAIL = '/user-simulate-collection/detail/';
+
 const CONTACT_REQUEST = '/contact-request';
 const ROLES_LIST = '/roles-list/';
 
@@ -26,5 +29,7 @@ export const CommonPath = {
   STYLES_COLLECTION_DETAIL,
   MATERIAL_COLLECTION,
   USER_SIMULATE_COLLECTION,
+  USER_SIMULATE_COLLECTION_NEW,
+  USER_SIMULATE_COLLECTION_DETAIL,
   CONTACT_REQUEST,
 };
