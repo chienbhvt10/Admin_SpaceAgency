@@ -1,0 +1,5 @@
+query getDetailTheme($id: String!) {
+  theme(id: $id) {
+    ...ITheme
+  }
+}

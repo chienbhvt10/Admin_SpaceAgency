@@ -17,8 +17,8 @@ function TableThemes(props: IProps) {
   const { items, loading, onChange, handleAdd } = props;
   const rowKey = (item: ITheme) => `${item.id}`;
 
-  const onEdit = (record: any) => () => {
-    navigate(CommonPath.THEME_COLLECTION_UPDATE + record._id);
+  const onEdit = (record: ITheme) => () => {
+    navigate(CommonPath.THEME_COLLECTION_UPDATE + record.id);
   };
   const onDelete = (record: any) => () => {
     setVisible(true);
@@ -52,7 +52,7 @@ function TableThemes(props: IProps) {
       title: 'Tools',
       dataIndex: '',
       key: '#',
-      render: (_: any, record: any) => (
+      render: (_: any, record: ITheme) => (
         <UserRowActions
           title="Are you sure you want to delete this user?"
           record={record}
