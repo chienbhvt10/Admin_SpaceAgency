@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { PaginationInput, Themes, ThemesVariables } from 'graphql/generated/graphql';
+import { PaginationInput, ITheme, ThemesVariables } from 'graphql/generated/graphql';
 export const THEMES = 'THEMES';
 export const THEMES_SUCCESS = 'THEMES_SUCCESS';
 export const THEMES_ERROR = 'THEMES_ERROR';
@@ -7,6 +7,7 @@ export const THEMES_ERROR = 'THEMES_ERROR';
 export interface ThemesState {
   loading: boolean;
   pagination?: PaginationInput;
+  dataThemes: ITheme[];
 }
 
 export interface ThemesAction {
@@ -16,7 +17,7 @@ export interface ThemesAction {
 
 export interface ThemesActionSuccess {
   type: typeof THEMES_SUCCESS;
-  payload: Themes;
+  payload: ITheme[];
 }
 
 export interface ThemesActionError {

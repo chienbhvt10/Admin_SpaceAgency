@@ -3,5 +3,5 @@ import { getSDK } from 'services/graphql-caller';
 
 export const getThemes = async (variables?: ThemesVariables) => {
   const sdk = getSDK(true);
-  return sdk.Themes(variables);
+  return sdk.themes(variables);
 };

@@ -4,8 +4,9 @@ const initialState: ThemesState = {
   loading: false,
   pagination: {
     skip: 1,
-    limit: 10,
+    limit: 1000,
   },
+  dataThemes: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -21,6 +22,7 @@ export default (state = initialState, action: ThemesActionTypes): ThemesState =>
       return {
         ...state,
         loading: false,
+        dataThemes: action.payload,
       };
     case THEMES_ERROR:
       return {

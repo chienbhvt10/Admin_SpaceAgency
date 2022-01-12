@@ -4,7 +4,10 @@ fragment ITheme on Theme {
   description
   code3D
   createdAt
-  createdAt
+  updatedAt
+  themeImage {
+    ...IThemeImage
+  }
 }
 fragment IThemeImage on ThemeImage {
   id

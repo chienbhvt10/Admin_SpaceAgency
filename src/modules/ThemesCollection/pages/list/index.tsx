@@ -14,11 +14,10 @@ import TableHeader from 'commons/components/layouts/TableHeader';
 
 const ThemeCollectionPage = () => {
   const navigate = useNavigate();
-  const { items, loading } = useListThemes();
+  const { dataThemes, loading } = useListThemes();
   React.useEffect(() => {
     setTitle('Theme Collection');
   }, []);
-  const rowKey = (item: any) => `${item._id}`;
   const handleAdd = () => {
     navigate(CommonPath.THEME_COLLECTION_NEW);
   };
@@ -45,7 +44,7 @@ const ThemeCollectionPage = () => {
         }
       >
         <FormSearch />
-        <TableThemes items={items} rowKey={rowKey} loading={loading} onChange={onChange} handleAdd={handleAdd} />
+        <TableThemes items={dataThemes} loading={loading} onChange={onChange} handleAdd={handleAdd} />
       </TableHeader>
     </ThemeCollectionLayout>
   );
