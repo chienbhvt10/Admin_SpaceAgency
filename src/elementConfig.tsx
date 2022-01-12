@@ -26,12 +26,8 @@ function ElementConfig() {
   // },[pathname])
 
   React.useEffect(() => {
-    dispatch(autoLoginFlow());
-    // eslint-disable-next-line
-  }, []);
-
-  React.useEffect(() => {
     setNavigate(navigate);
+    dispatch(autoLoginFlow(pathname));
     // eslint-disable-next-line
   }, []);
   React.useEffect(() => {}, []);
