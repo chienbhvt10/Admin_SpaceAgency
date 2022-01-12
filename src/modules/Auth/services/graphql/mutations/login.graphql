@@ -1,4 +1,4 @@
-mutation LoginAdmin($loginInput: CreateAuthInput!) {
+mutation loginAdmin($loginInput: CreateAuthInput!) {
   loginAdmin(loginInput: $loginInput) {
     refreshToken
     accessToken

@@ -1,5 +1,0 @@
-query themes($pagination: PaginationInput, $where: WhereInput) {
-  themes(pagination: $pagination, where: $where) {
-    ...ITheme
-  }
-}

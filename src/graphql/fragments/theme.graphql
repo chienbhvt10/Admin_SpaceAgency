@@ -8,9 +8,16 @@ fragment ITheme on Theme {
   themeImage {
     ...IThemeImage
   }
+  themeCategories {
+    ...IThemeCategory
+  }
 }
 fragment IThemeImage on ThemeImage {
   id
   outsidePreviewUrl
   insidePreviewUrl
+}
+fragment IThemeCategory on ThemeCategory {
+  id
+  title
 }

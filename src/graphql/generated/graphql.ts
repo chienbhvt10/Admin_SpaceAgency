@@ -663,9 +663,11 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
-export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined };
+export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined };
 
 export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined };
+
+export type IThemeCategory = { __typename?: 'ThemeCategory', id: string, title: string };
 
 export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined };
 
@@ -681,13 +683,20 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined } };
 
-export type ThemesVariables = Exact<{
+export type GetDetailThemeVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetDetailTheme = { __typename?: 'Query', theme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined } };
+
+export type GetListThemesVariables = Exact<{
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 }>;
 
 
-export type Themes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined }> };
+export type GetListThemes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined }> };
 
 export const AuthFields = gql`
     fragment AuthFields on Auth {
@@ -702,6 +711,12 @@ export const IThemeImage = gql`
   insidePreviewUrl
 }
     `;
+export const IThemeCategory = gql`
+    fragment IThemeCategory on ThemeCategory {
+  id
+  title
+}
+    `;
 export const ITheme = gql`
     fragment ITheme on Theme {
   id
@@ -713,8 +728,12 @@ export const ITheme = gql`
   themeImage {
     ...IThemeImage
   }
+  themeCategories {
+    ...IThemeCategory
+  }
 }
-    ${IThemeImage}`;
+    ${IThemeImage}
+${IThemeCategory}`;
 export const IUsersFields = gql`
     fragment IUsersFields on User {
   id
@@ -725,7 +744,7 @@ export const IUsersFields = gql`
 }
     `;
 export const LoginAdminDocument = gql`
-    mutation LoginAdmin($loginInput: CreateAuthInput!) {
+    mutation loginAdmin($loginInput: CreateAuthInput!) {
   loginAdmin(loginInput: $loginInput) {
     refreshToken
     accessToken
@@ -733,14 +752,21 @@ export const LoginAdminDocument = gql`
 }
     `;
 export const MeDocument = gql`
-    query Me {
+    query me {
   me {
     ...IUsersFields
   }
 }
     ${IUsersFields}`;
-export const ThemesDocument = gql`
-    query themes($pagination: PaginationInput, $where: WhereInput) {
+export const GetDetailThemeDocument = gql`
+    query getDetailTheme($id: String!) {
+  theme(id: $id) {
+    ...ITheme
+  }
+}
+    ${ITheme}`;
+export const GetListThemesDocument = gql`
+    query getListThemes($pagination: PaginationInput, $where: WhereInput) {
   themes(pagination: $pagination, where: $where) {
     ...ITheme
   }
@@ -754,14 +780,17 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    LoginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
-      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LoginAdmin');
+    loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
     },
-    Me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Me');
+    me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
     },
-    themes(variables?: ThemesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Themes> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Themes>(ThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'themes');
+    getDetailTheme(variables: GetDetailThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailTheme> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailTheme');
+    },
+    getListThemes(variables?: GetListThemesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListThemes> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListThemes>(GetListThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListThemes');
     }
   };
 }
