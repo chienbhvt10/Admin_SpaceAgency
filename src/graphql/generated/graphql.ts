@@ -13,6 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
 };
 
 export type Auth = {
@@ -29,12 +31,6 @@ export type ChangePasswordInput = {
 export type CreateAuthInput = {
   email: Scalars['String'];
   password: Scalars['String'];
-};
-
-export type CreateManagerInput = {
-  /** Example field (placeholder) */
-  name: Scalars['String'];
-  staffs?: InputMaybe<Array<RefInput>>;
 };
 
 export type CreateMaterialInput = {
@@ -73,19 +69,23 @@ export type CreateSimulationInput = {
   exampleField: Scalars['Int'];
 };
 
-export type CreateStaffInput = {
-  manager: RefInput;
-  name: Scalars['String'];
-};
-
 export type CreateStyleInput = {
   /** Example field (placeholder) */
   exampleField: Scalars['Int'];
 };
 
+export type CreateThemeImageInput = {
+  insidePreviewUrl?: InputMaybe<Scalars['String']>;
+  outsidePreviewUrl?: InputMaybe<Scalars['String']>;
+  theme?: InputMaybe<RefInput>;
+};
+
 export type CreateThemeInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  code3D?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  themeCategories?: InputMaybe<Array<RefInput>>;
+  themeImage?: InputMaybe<RefInput>;
+  title: Scalars['String'];
 };
 
 export type CreateUserInput = {
@@ -98,23 +98,6 @@ export type CreateUserInput = {
 export type FilterInput = {
   key: Scalars['String'];
   value: Scalars['String'];
-};
-
-export type GetStaffsInput = {
-  manager?: InputMaybe<RefInput>;
-  paging?: InputMaybe<PaginationInput>;
-};
-
-export type Manager = {
-  __typename?: 'Manager';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  staffs: Array<Staff>;
-};
-
-
-export type ManagerStaffsArgs = {
-  where?: InputMaybe<GetStaffsInput>;
 };
 
 export type Material = {
@@ -146,7 +129,6 @@ export type Mutation = {
   createAdmin: User;
   /** Create new Customer */
   createCustomer: User;
-  createManager: Manager;
   /** Create new Material */
   createMaterial: Material;
   /** Create new Material Type */
@@ -155,31 +137,32 @@ export type Mutation = {
   createRequest: Request;
   createSimulation: Simulation;
   createSimulationComponent: SimulationComponent;
-  createStaff: Staff;
   createStyle: Style;
   createTheme: Theme;
+  createThemeImage: ThemeImage;
   loginAdmin: Auth;
   loginCustomer: Auth;
-  removeManager: Manager;
+  /** find one material and remove */
   removeMaterial: Material;
+  /** find one and remove material type */
+  removeMaterialType: MaterialType;
   removeQuotation: Quotation;
   removeRequest: Request;
   removeSimulation: Simulation;
   removeSimulationComponent: SimulationComponent;
-  removeStaff: Staff;
   removeStyle: Style;
   removeTheme: Theme;
+  removeThemeImage: ThemeImage;
   /** Remove user by id */
   removeUser: User;
-  updateManager: Manager;
   updateMaterial: Material;
   updateQuotation: Quotation;
   updateRequest: Request;
   updateSimulation: Simulation;
   updateSimulationComponent: SimulationComponent;
-  updateStaff: Staff;
   updateStyle: Style;
   updateTheme: Theme;
+  updateThemeImage: ThemeImage;
   /** Update user by id */
   updateUser: User;
 };
@@ -197,11 +180,6 @@ export type MutationCreateAdminArgs = {
 
 export type MutationCreateCustomerArgs = {
   createUserInput: CreateUserInput;
-};
-
-
-export type MutationCreateManagerArgs = {
-  createManagerInput: CreateManagerInput;
 };
 
 
@@ -235,11 +213,6 @@ export type MutationCreateSimulationComponentArgs = {
 };
 
 
-export type MutationCreateStaffArgs = {
-  createStaffInput: CreateStaffInput;
-};
-
-
 export type MutationCreateStyleArgs = {
   createStyleInput: CreateStyleInput;
 };
@@ -247,6 +220,11 @@ export type MutationCreateStyleArgs = {
 
 export type MutationCreateThemeArgs = {
   createThemeInput: CreateThemeInput;
+};
+
+
+export type MutationCreateThemeImageArgs = {
+  createThemeImageInput: CreateThemeImageInput;
 };
 
 
@@ -260,13 +238,13 @@ export type MutationLoginCustomerArgs = {
 };
 
 
-export type MutationRemoveManagerArgs = {
-  id: Scalars['Int'];
+export type MutationRemoveMaterialArgs = {
+  id: Scalars['String'];
 };
 
 
-export type MutationRemoveMaterialArgs = {
-  id: Scalars['Int'];
+export type MutationRemoveMaterialTypeArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -290,28 +268,23 @@ export type MutationRemoveSimulationComponentArgs = {
 };
 
 
-export type MutationRemoveStaffArgs = {
-  id: Scalars['Int'];
-};
-
-
 export type MutationRemoveStyleArgs = {
   id: Scalars['Int'];
 };
 
 
 export type MutationRemoveThemeArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type MutationRemoveThemeImageArgs = {
+  id: Scalars['String'];
 };
 
 
 export type MutationRemoveUserArgs = {
   id: Scalars['String'];
-};
-
-
-export type MutationUpdateManagerArgs = {
-  updateManagerInput: UpdateManagerInput;
 };
 
 
@@ -340,11 +313,6 @@ export type MutationUpdateSimulationComponentArgs = {
 };
 
 
-export type MutationUpdateStaffArgs = {
-  updateStaffInput: UpdateStaffInput;
-};
-
-
 export type MutationUpdateStyleArgs = {
   updateStyleInput: UpdateStyleInput;
 };
@@ -352,6 +320,11 @@ export type MutationUpdateStyleArgs = {
 
 export type MutationUpdateThemeArgs = {
   updateThemeInput: UpdateThemeInput;
+};
+
+
+export type MutationUpdateThemeImageArgs = {
+  updateThemeImageInput: UpdateThemeImageInput;
 };
 
 
@@ -366,8 +339,6 @@ export type PaginationInput = {
 
 export type Query = {
   __typename?: 'Query';
-  manager: Manager;
-  managers: Array<Manager>;
   /** find one material */
   material: Material;
   /** find one material type */
@@ -386,11 +357,11 @@ export type Query = {
   simulationComponent: SimulationComponent;
   simulationComponents: Array<SimulationComponent>;
   simulations: Array<Simulation>;
-  staff: Staff;
-  staffs: Array<Staff>;
   style: Style;
   styles: Array<Style>;
   theme: Theme;
+  themeImage: ThemeImage;
+  themeImages: Array<ThemeImage>;
   themes: Array<Theme>;
   /** Get user by id  */
   user: User;
@@ -399,19 +370,8 @@ export type Query = {
 };
 
 
-export type QueryManagerArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryManagersArgs = {
-  pagination?: InputMaybe<PaginationInput>;
-  where?: InputMaybe<WhereInput>;
-};
-
-
 export type QueryMaterialArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -452,23 +412,30 @@ export type QuerySimulationComponentArgs = {
 };
 
 
-export type QueryStaffArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryStaffsArgs = {
-  getStaffsInput: GetStaffsInput;
-};
-
-
 export type QueryStyleArgs = {
   id: Scalars['Int'];
 };
 
 
 export type QueryThemeArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type QueryThemeImageArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryThemeImagesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+
+export type QueryThemesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 
@@ -526,13 +493,6 @@ export enum SortValue {
   Desc = 'DESC'
 }
 
-export type Staff = {
-  __typename?: 'Staff';
-  id: Scalars['String'];
-  manager?: Maybe<Manager>;
-  name: Scalars['String'];
-};
-
 export type Style = {
   __typename?: 'Style';
   /** Example field (placeholder) */
@@ -541,15 +501,21 @@ export type Style = {
 
 export type Theme = {
   __typename?: 'Theme';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  code3D: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  themeImage?: Maybe<ThemeImage>;
+  title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
-export type UpdateManagerInput = {
+export type ThemeImage = {
+  __typename?: 'ThemeImage';
   id: Scalars['String'];
-  /** Example field (placeholder) */
-  name?: InputMaybe<Scalars['String']>;
-  staffs?: InputMaybe<Array<RefInput>>;
+  insidePreviewUrl?: Maybe<Scalars['String']>;
+  outsidePreviewUrl?: Maybe<Scalars['String']>;
+  theme?: Maybe<Theme>;
 };
 
 export type UpdateMaterialInput = {
@@ -584,22 +550,26 @@ export type UpdateSimulationInput = {
   id: Scalars['Int'];
 };
 
-export type UpdateStaffInput = {
-  id: Scalars['Int'];
-  manager?: InputMaybe<RefInput>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
 export type UpdateStyleInput = {
   /** Example field (placeholder) */
   exampleField?: InputMaybe<Scalars['Int']>;
   id: Scalars['Int'];
 };
 
+export type UpdateThemeImageInput = {
+  id: Scalars['String'];
+  insidePreviewUrl?: InputMaybe<Scalars['String']>;
+  outsidePreviewUrl?: InputMaybe<Scalars['String']>;
+  theme?: InputMaybe<RefInput>;
+};
+
 export type UpdateThemeInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
-  id: Scalars['Int'];
+  code3D?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
+  themeCategories?: InputMaybe<Array<RefInput>>;
+  themeImage?: InputMaybe<RefInput>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateUserInput = {
@@ -625,6 +595,10 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
+export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D: string, createdAt: any };
+
+export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined };
+
 export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined };
 
 export type LoginAdminVariables = Exact<{
@@ -639,10 +613,35 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined } };
 
+export type ThemesVariables = Exact<{
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+}>;
+
+
+export type Themes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D: string, createdAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined }> };
+
 export const AuthFields = gql`
     fragment AuthFields on Auth {
   refreshToken
   accessToken
+}
+    `;
+export const ITheme = gql`
+    fragment ITheme on Theme {
+  id
+  title
+  description
+  code3D
+  createdAt
+  createdAt
+}
+    `;
+export const IThemeImage = gql`
+    fragment IThemeImage on ThemeImage {
+  id
+  outsidePreviewUrl
+  insidePreviewUrl
 }
     `;
 export const IUsersFields = gql`
@@ -669,6 +668,17 @@ export const MeDocument = gql`
   }
 }
     ${IUsersFields}`;
+export const ThemesDocument = gql`
+    query Themes($pagination: PaginationInput, $where: WhereInput) {
+  themes(pagination: $pagination, where: $where) {
+    ...ITheme
+    themeImage {
+      ...IThemeImage
+    }
+  }
+}
+    ${ITheme}
+${IThemeImage}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
@@ -682,6 +692,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     Me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Me');
+    },
+    Themes(variables?: ThemesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Themes> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Themes>(ThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Themes');
     }
   };
 }

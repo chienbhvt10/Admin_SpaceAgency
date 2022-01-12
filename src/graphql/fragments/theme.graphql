@@ -1,0 +1,13 @@
+fragment ITheme on Theme {
+  id
+  title
+  description
+  code3D
+  createdAt
+  createdAt
+}
+fragment IThemeImage on ThemeImage {
+  id
+  outsidePreviewUrl
+  insidePreviewUrl
+}
