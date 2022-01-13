@@ -1,10 +1,5 @@
 #emptyLayout {
-  
-    .layout-nav{
-      .ant-menu-submenu-popup{
-      display: none !important;
-    }
-    }
-  
-  
+  .ant-layout-sider-trigger {
+    display: none !important;
+  }
 }
