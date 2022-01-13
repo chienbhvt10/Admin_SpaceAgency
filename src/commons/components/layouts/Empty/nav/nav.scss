@@ -1,5 +1,10 @@
 #emptyLayout {
-  .layout-nav {
-    // flex-direction: row !important;
-  }
+  
+    .layout-nav{
+      .ant-menu-submenu-popup{
+      display: none !important;
+    }
+    }
+  
+  
 }

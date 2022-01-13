@@ -39,7 +39,7 @@ const ThemeCollectionPage = () => {
         title="Theme Managenent"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            New Style
+            New Theme
           </Button>
         }
       >

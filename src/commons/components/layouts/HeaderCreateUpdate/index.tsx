@@ -5,8 +5,10 @@ import './style.scss';
 interface IProps {
   title: React.ReactElement;
   children: React.ReactElement;
+  onCancel?(): void;
 }
 const HeaderCreateUpdate = (props: IProps) => {
+  const { onCancel } = props
   return (
     <div>
       <Card
@@ -22,6 +24,7 @@ const HeaderCreateUpdate = (props: IProps) => {
               marginRight="5px"
               marginLeft="50px"
               backgroundColor="#6C757D"
+              onClick={onCancel}
             />
             <BaseButton
               text="Save"

@@ -4,7 +4,7 @@ import {
   customerSimulationRouter,
   newCustomerSimulationRouter,
 } from 'modules/CustomerSimulation/router';
-import { materialCollectionRouter } from 'modules/MaterialsCollection/router';
+import { materialCollectionRouter, newMaterialCollectionRouter, updateMaterialCollectionlRouter } from 'modules/MaterialsCollection/router';
 import {
   newStyleCollectionRouter,
   styleCollectionDetailRouter,
@@ -28,6 +28,8 @@ const routes: RouteObject[] = [
   { ...newStyleCollectionRouter },
   { ...styleCollectionDetailRouter },
   { ...materialCollectionRouter },
+  { ...newMaterialCollectionRouter },
+  { ...updateMaterialCollectionlRouter },
   { ...customerSimulationRouter },
   { ...customerSimulationDetailRouter },
   { ...newCustomerSimulationRouter },

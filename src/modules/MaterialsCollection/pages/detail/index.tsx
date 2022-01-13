@@ -29,7 +29,7 @@ const MaterialUpdate = () => {
   return (
     <div>
       <MaterialCollectionLayout>
-        <MaterialForm title="Update Material Collection" type={TypeForm.CREATE} loading={false} />
+        <MaterialForm title="Update Material Collection" type={TypeForm.UPDATE} loading={false} />
       </MaterialCollectionLayout>
     </div>
   );
