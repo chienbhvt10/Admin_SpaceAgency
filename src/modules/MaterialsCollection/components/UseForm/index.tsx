@@ -7,6 +7,7 @@ import FormDropdown from 'commons/components/layouts/FormDropdown';
 import './style.scss';
 import { CommonPath } from 'commons/base-routes';
 import { useNavigate } from 'react-router';
+import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -27,10 +28,10 @@ const MaterialForm = (props: Props) => {
   const onFinish = () => {
     console.log(form.getFieldsValue());
   };
-  const onFinishFailed = () => { };
+  const onFinishFailed = () => {};
   const onCancel = () => {
     navigate(CommonPath.MATERIAL_COLLECTION);
-  }
+  };
   return (
     <div>
       <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
@@ -52,7 +53,7 @@ const MaterialForm = (props: Props) => {
                     formItem={{
                       label: 'Theme',
                       name: 'theme',
-                      labelCol: { span: 3 },
+                      labelCol: { span: 4 },
                     }}
                     options={[]}
                   />
@@ -60,7 +61,7 @@ const MaterialForm = (props: Props) => {
                     formItem={{
                       label: 'Design',
                       name: 'design',
-                      labelCol: { span: 3 },
+                      labelCol: { span: 4 },
                     }}
                     options={[]}
                   />
@@ -148,22 +149,38 @@ const MaterialForm = (props: Props) => {
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 8 }} label="Image Preview" name="imagepreview">
                       <Col offset={2}>
-                        <Input style={{ width: 'calc(100% - 111px)', marginLeft: '10px' }} />
-                        <Upload
+                        <Row>
+                          <Col span={17}>
+                            <Input style={{ marginLeft: '10px', marginRight: '10px' }} />
+                          </Col>
+                          <Col span={6}>
+                            <UploadDragger />
+                          </Col>
+                        </Row>
+                        {/* <Upload
                           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                           listType="picture"
                           className="upload-list-inline"
                           name="image"
                         >
+                        style={{ width: 'calc(100% - 111px)', marginLeft: '10px' }}
                           <Button icon={<UploadOutlined />}>Upload</Button>
-                        </Upload>
+                        </Upload> */}
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 8 }} label="Image Preview" name="imagepreview2">
                       <Col offset={2}>
-                        <Input style={{ width: 'calc(100% - 111px)' }} />
+                        <Row>
+                          <Col span={17}>
+                            <Input  style={{ width: '103%' }}/>
+                          </Col>
+                          <Col span={6}>
+                            <UploadDragger />
+                          </Col>
+                        </Row>
+                        {/* <Input style={{ width: 'calc(100% - 111px)' }} />
                         <Upload
                           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                           listType="picture"
@@ -171,21 +188,21 @@ const MaterialForm = (props: Props) => {
                           name="image"
                         >
                           <Button icon={<UploadOutlined />}>Upload</Button>
-                        </Upload>
+                        </Upload> */}
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameimage1">
                       <Col offset={2}>
-                        <Input style={{ width: '96%', marginLeft: '10px' }} />
+                        <Input style={{ width: '97%', marginLeft: '10px' }} />
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameimage2">
                       <Col offset={2}>
-                        <Input style={{ width: '96%' }} />
+                        <Input style={{ width: '97%' }} />
                       </Col>
                     </Form.Item>
                   </Col>

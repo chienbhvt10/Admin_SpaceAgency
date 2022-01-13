@@ -5,6 +5,7 @@ import { TypeForm } from 'commons/type';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import { useNavigate } from 'react-router';
 import { CommonPath } from 'commons/base-routes';
+import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -99,15 +100,16 @@ const ThemesForm = (props: Props) => {
                 </Form.Item>
                 <Form.Item labelCol={{ span: 4 }} label="Inside Preview" name="preview">
                     <Col offset={1}>
-                    <Input style={{ width: 'calc(100% - 101px)' }} />
-                    <Upload
+                    <Row><Col span={20}><Input /></Col>
+                    <Col span={3}><UploadDragger /></Col></Row>
+                    {/* <Upload
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         listType="picture"
                         className="upload-list-inline"
                         name="image"
                       >
                         <Button icon={<UploadOutlined />}>Upload</Button>
-                      </Upload>
+                      </Upload> */}
                     </Col>  
                 </Form.Item>
               </Col>
@@ -118,16 +120,17 @@ const ThemesForm = (props: Props) => {
                   </Col>
                 </Form.Item>
                 <Form.Item labelCol={{ span: 4 }} label="Outside Preview" name="preview">
-                    <Col offset={1}>
-                    <Input style={{ width: 'calc(100% - 101px)' }} />
-                    <Upload
+                  <Col offset={1}>
+                    <Row><Col span={20}><Input /></Col>
+                    <Col span={3}><UploadDragger /></Col></Row>
+                    {/* <Upload
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         listType="picture"
                         className="upload-list-inline"
                         name="image"
                       >
                         <Button icon={<UploadOutlined />}>Upload</Button>
-                      </Upload>
+                      </Upload> */}
                     </Col>  
                 </Form.Item>
               </Col>
