@@ -17,7 +17,7 @@ function TableMaterial(props: IProps) {
   const [visible, setVisible] = React.useState(false);
   const { items, loading, onChange, rowKey, handleAdd } = props;
   const onEdit = (record: any) => () => {
-    navigate(CommonPath.THEME_COLLECTION_UPDATE + record._id);
+    navigate(CommonPath.MATERIAL_COLLECTION_UPDATE + record._id);
   };
   const onDelete = (record: any) => () => {
     setVisible(true);
@@ -119,12 +119,13 @@ function TableMaterial(props: IProps) {
   return (
     <div>
       <Table
+         expandable={{ expandedRowRender, expandRowByClick: true }}
         columns={columns}
         dataSource={data}
         loading={loading}
         rowKey={rowKey}
         onChange={onChange}
-        expandable={{ expandedRowRender }}
+        bordered
       />
     </div>
   );

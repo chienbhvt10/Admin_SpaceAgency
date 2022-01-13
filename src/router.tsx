@@ -11,7 +11,7 @@ import {
 } from 'modules/CustomerSimulation/router';
 import { createThemeCreateRouter, themeCollectionRouter, updateThemeRouter } from 'modules/ThemesCollection/router';
 import { styleCollectionRouter } from 'modules/StylesCollection/router';
-import { materialCollectionRouter } from 'modules/MaterialsCollection/router';
+import { materialCollectionRouter, newMaterialCollectionRouter, updateMaterialCollectionlRouter } from 'modules/MaterialsCollection/router';
 const routes: RouteObject[] = [
   { ...authRouter },
   { ...homeRouter },
@@ -26,6 +26,8 @@ const routes: RouteObject[] = [
   // { ...newStyleCollectionRouter },
   // { ...styleCollectionDetailRouter },
   { ...materialCollectionRouter },
+  { ...newMaterialCollectionRouter },
+  { ...updateMaterialCollectionlRouter },
   { ...customerSimulationRouter },
   { ...customerSimulationDetailRouter },
   { ...newCustomerSimulationRouter },

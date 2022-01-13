@@ -16,7 +16,7 @@ export const FormSearch = () => {
       <div className="wrapper-search">
         <BaseButton text="Reset" width={''} height={''} marginRight="5px" marginLeft="50px" backgroundColor="#6C757D" onClick={onReset} />
         <BaseButton
-          text="Create"
+          text="Search"
           width={''}
           height={''}
           border="1px solid #007BFF"

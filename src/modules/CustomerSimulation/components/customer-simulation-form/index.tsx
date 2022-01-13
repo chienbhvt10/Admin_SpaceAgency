@@ -39,6 +39,7 @@ const CustomerSimulationForm = (props: Props) => {
   const onFinishFailed = () => {};
 
   return (
+    <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel} type={type}>
     <div id="customer-simulation-form">
       <Form
         name="basic"
@@ -50,7 +51,7 @@ const CustomerSimulationForm = (props: Props) => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel} type={type}>
+      
           <Row justify="center" className="simulation-form-control">
             <Col className="simulation-contact" span={24}>
               <Title level={4}>Contact</Title>
@@ -182,9 +183,11 @@ const CustomerSimulationForm = (props: Props) => {
               </Form.Item>
             </Col>
           </Row>
+        
+        </Form>
+        </div>
         </FormHeader>
-      </Form>
-    </div>
+   
   );
 };
 
