@@ -13,6 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
 };
 
 export type Auth = {
@@ -29,12 +31,6 @@ export type ChangePasswordInput = {
 export type CreateAuthInput = {
   email: Scalars['String'];
   password: Scalars['String'];
-};
-
-export type CreateManagerInput = {
-  /** Example field (placeholder) */
-  name: Scalars['String'];
-  staffs?: InputMaybe<Array<RefInput>>;
 };
 
 export type CreateMaterialInput = {
@@ -73,19 +69,28 @@ export type CreateSimulationInput = {
   exampleField: Scalars['Int'];
 };
 
-export type CreateStaffInput = {
-  manager: RefInput;
-  name: Scalars['String'];
-};
-
 export type CreateStyleInput = {
   /** Example field (placeholder) */
   exampleField: Scalars['Int'];
 };
 
+export type CreateThemeCategoryInput = {
+  themes?: InputMaybe<Array<RefInput>>;
+  title: Scalars['String'];
+};
+
+export type CreateThemeImageInput = {
+  insidePreviewUrl?: InputMaybe<Scalars['String']>;
+  outsidePreviewUrl?: InputMaybe<Scalars['String']>;
+  theme?: InputMaybe<RefInput>;
+};
+
 export type CreateThemeInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  code3D?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  themeCategories?: InputMaybe<Array<RefInput>>;
+  themeImage?: InputMaybe<RefInput>;
+  title: Scalars['String'];
 };
 
 export type CreateUserInput = {
@@ -98,23 +103,6 @@ export type CreateUserInput = {
 export type FilterInput = {
   key: Scalars['String'];
   value: Scalars['String'];
-};
-
-export type GetStaffsInput = {
-  manager?: InputMaybe<RefInput>;
-  paging?: InputMaybe<PaginationInput>;
-};
-
-export type Manager = {
-  __typename?: 'Manager';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  staffs: Array<Staff>;
-};
-
-
-export type ManagerStaffsArgs = {
-  where?: InputMaybe<GetStaffsInput>;
 };
 
 export type Material = {
@@ -146,7 +134,6 @@ export type Mutation = {
   createAdmin: User;
   /** Create new Customer */
   createCustomer: User;
-  createManager: Manager;
   /** Create new Material */
   createMaterial: Material;
   /** Create new Material Type */
@@ -155,31 +142,38 @@ export type Mutation = {
   createRequest: Request;
   createSimulation: Simulation;
   createSimulationComponent: SimulationComponent;
-  createStaff: Staff;
   createStyle: Style;
   createTheme: Theme;
+  createThemeCategory: ThemeCategory;
+  createThemeImage: ThemeImage;
   loginAdmin: Auth;
   loginCustomer: Auth;
-  removeManager: Manager;
+  /** find one material and remove */
   removeMaterial: Material;
+  /** find one and remove material type */
+  removeMaterialType: MaterialType;
   removeQuotation: Quotation;
   removeRequest: Request;
   removeSimulation: Simulation;
   removeSimulationComponent: SimulationComponent;
-  removeStaff: Staff;
   removeStyle: Style;
   removeTheme: Theme;
+  removeThemeCategory: ThemeCategory;
+  removeThemeImage: ThemeImage;
   /** Remove user by id */
   removeUser: User;
-  updateManager: Manager;
+  /** find one material and update */
   updateMaterial: Material;
+  /** find one material type and update */
+  updateMaterialType: MaterialType;
   updateQuotation: Quotation;
   updateRequest: Request;
   updateSimulation: Simulation;
   updateSimulationComponent: SimulationComponent;
-  updateStaff: Staff;
   updateStyle: Style;
   updateTheme: Theme;
+  updateThemeCategory: ThemeCategory;
+  updateThemeImage: ThemeImage;
   /** Update user by id */
   updateUser: User;
 };
@@ -197,11 +191,6 @@ export type MutationCreateAdminArgs = {
 
 export type MutationCreateCustomerArgs = {
   createUserInput: CreateUserInput;
-};
-
-
-export type MutationCreateManagerArgs = {
-  createManagerInput: CreateManagerInput;
 };
 
 
@@ -235,11 +224,6 @@ export type MutationCreateSimulationComponentArgs = {
 };
 
 
-export type MutationCreateStaffArgs = {
-  createStaffInput: CreateStaffInput;
-};
-
-
 export type MutationCreateStyleArgs = {
   createStyleInput: CreateStyleInput;
 };
@@ -247,6 +231,16 @@ export type MutationCreateStyleArgs = {
 
 export type MutationCreateThemeArgs = {
   createThemeInput: CreateThemeInput;
+};
+
+
+export type MutationCreateThemeCategoryArgs = {
+  createThemeCategoryInput: CreateThemeCategoryInput;
+};
+
+
+export type MutationCreateThemeImageArgs = {
+  createThemeImageInput: CreateThemeImageInput;
 };
 
 
@@ -260,13 +254,13 @@ export type MutationLoginCustomerArgs = {
 };
 
 
-export type MutationRemoveManagerArgs = {
-  id: Scalars['Int'];
+export type MutationRemoveMaterialArgs = {
+  id: Scalars['String'];
 };
 
 
-export type MutationRemoveMaterialArgs = {
-  id: Scalars['Int'];
+export type MutationRemoveMaterialTypeArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -290,18 +284,23 @@ export type MutationRemoveSimulationComponentArgs = {
 };
 
 
-export type MutationRemoveStaffArgs = {
-  id: Scalars['Int'];
-};
-
-
 export type MutationRemoveStyleArgs = {
   id: Scalars['Int'];
 };
 
 
 export type MutationRemoveThemeArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type MutationRemoveThemeCategoryArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationRemoveThemeImageArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -310,13 +309,13 @@ export type MutationRemoveUserArgs = {
 };
 
 
-export type MutationUpdateManagerArgs = {
-  updateManagerInput: UpdateManagerInput;
+export type MutationUpdateMaterialArgs = {
+  updateMaterialInput: UpdateMaterialInput;
 };
 
 
-export type MutationUpdateMaterialArgs = {
-  updateMaterialInput: UpdateMaterialInput;
+export type MutationUpdateMaterialTypeArgs = {
+  updateMaterialType: UpdateMaterialTypeInput;
 };
 
 
@@ -340,11 +339,6 @@ export type MutationUpdateSimulationComponentArgs = {
 };
 
 
-export type MutationUpdateStaffArgs = {
-  updateStaffInput: UpdateStaffInput;
-};
-
-
 export type MutationUpdateStyleArgs = {
   updateStyleInput: UpdateStyleInput;
 };
@@ -352,6 +346,16 @@ export type MutationUpdateStyleArgs = {
 
 export type MutationUpdateThemeArgs = {
   updateThemeInput: UpdateThemeInput;
+};
+
+
+export type MutationUpdateThemeCategoryArgs = {
+  updateThemeCategoryInput: UpdateThemeCategoryInput;
+};
+
+
+export type MutationUpdateThemeImageArgs = {
+  updateThemeImageInput: UpdateThemeImageInput;
 };
 
 
@@ -366,8 +370,6 @@ export type PaginationInput = {
 
 export type Query = {
   __typename?: 'Query';
-  manager: Manager;
-  managers: Array<Manager>;
   /** find one material */
   material: Material;
   /** find one material type */
@@ -386,11 +388,13 @@ export type Query = {
   simulationComponent: SimulationComponent;
   simulationComponents: Array<SimulationComponent>;
   simulations: Array<Simulation>;
-  staff: Staff;
-  staffs: Array<Staff>;
   style: Style;
   styles: Array<Style>;
   theme: Theme;
+  themeCategories: Array<ThemeCategory>;
+  themeCategory: ThemeCategory;
+  themeImage: ThemeImage;
+  themeImages: Array<ThemeImage>;
   themes: Array<Theme>;
   /** Get user by id  */
   user: User;
@@ -399,19 +403,8 @@ export type Query = {
 };
 
 
-export type QueryManagerArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryManagersArgs = {
-  pagination?: InputMaybe<PaginationInput>;
-  where?: InputMaybe<WhereInput>;
-};
-
-
 export type QueryMaterialArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -452,23 +445,41 @@ export type QuerySimulationComponentArgs = {
 };
 
 
-export type QueryStaffArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type QueryStaffsArgs = {
-  getStaffsInput: GetStaffsInput;
-};
-
-
 export type QueryStyleArgs = {
   id: Scalars['Int'];
 };
 
 
 export type QueryThemeArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type QueryThemeCategoriesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+
+export type QueryThemeCategoryArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryThemeImageArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryThemeImagesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+
+export type QueryThemesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 
@@ -526,13 +537,6 @@ export enum SortValue {
   Desc = 'DESC'
 }
 
-export type Staff = {
-  __typename?: 'Staff';
-  id: Scalars['String'];
-  manager?: Maybe<Manager>;
-  name: Scalars['String'];
-};
-
 export type Style = {
   __typename?: 'Style';
   /** Example field (placeholder) */
@@ -541,22 +545,46 @@ export type Style = {
 
 export type Theme = {
   __typename?: 'Theme';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  code3D?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  themeCategories?: Maybe<Array<ThemeCategory>>;
+  themeImage?: Maybe<ThemeImage>;
+  title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
-export type UpdateManagerInput = {
+export type ThemeCategory = {
+  __typename?: 'ThemeCategory';
   id: Scalars['String'];
-  /** Example field (placeholder) */
-  name?: InputMaybe<Scalars['String']>;
-  staffs?: InputMaybe<Array<RefInput>>;
+  themes?: Maybe<Array<Theme>>;
+  title: Scalars['String'];
+};
+
+export type ThemeImage = {
+  __typename?: 'ThemeImage';
+  id: Scalars['String'];
+  insidePreviewUrl?: Maybe<Scalars['String']>;
+  outsidePreviewUrl?: Maybe<Scalars['String']>;
+  theme?: Maybe<Theme>;
 };
 
 export type UpdateMaterialInput = {
-  id: Scalars['Int'];
-  /** list new material type */
-  materialTypes?: InputMaybe<Array<CreateMaterialTypeInput>>;
+  id: Scalars['String'];
+  /** list material type */
+  materialTypes?: InputMaybe<Array<UpdateMaterialTypeInput>>;
   /** tile of material */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateMaterialTypeInput = {
+  /** 3d code of material type */
+  code3d?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
+  /** material id of material type */
+  material?: InputMaybe<RefInput>;
+  /** title of material type */
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -584,22 +612,32 @@ export type UpdateSimulationInput = {
   id: Scalars['Int'];
 };
 
-export type UpdateStaffInput = {
-  id: Scalars['Int'];
-  manager?: InputMaybe<RefInput>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
 export type UpdateStyleInput = {
   /** Example field (placeholder) */
   exampleField?: InputMaybe<Scalars['Int']>;
   id: Scalars['Int'];
 };
 
+export type UpdateThemeCategoryInput = {
+  id: Scalars['String'];
+  themes?: InputMaybe<Array<RefInput>>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateThemeImageInput = {
+  id: Scalars['String'];
+  insidePreviewUrl?: InputMaybe<Scalars['String']>;
+  outsidePreviewUrl?: InputMaybe<Scalars['String']>;
+  theme?: InputMaybe<RefInput>;
+};
+
 export type UpdateThemeInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
-  id: Scalars['Int'];
+  code3D?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
+  themeCategories?: InputMaybe<Array<RefInput>>;
+  themeImage?: InputMaybe<RefInput>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateUserInput = {
@@ -625,6 +663,12 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
+export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined };
+
+export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined };
+
+export type IThemeCategory = { __typename?: 'ThemeCategory', id: string, title: string };
+
 export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined };
 
 export type LoginAdminVariables = Exact<{
@@ -639,12 +683,57 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined } };
 
+export type GetDetailThemeVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetDetailTheme = { __typename?: 'Query', theme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined } };
+
+export type GetListThemesVariables = Exact<{
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+}>;
+
+
+export type GetListThemes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined }> };
+
 export const AuthFields = gql`
     fragment AuthFields on Auth {
   refreshToken
   accessToken
 }
     `;
+export const IThemeImage = gql`
+    fragment IThemeImage on ThemeImage {
+  id
+  outsidePreviewUrl
+  insidePreviewUrl
+}
+    `;
+export const IThemeCategory = gql`
+    fragment IThemeCategory on ThemeCategory {
+  id
+  title
+}
+    `;
+export const ITheme = gql`
+    fragment ITheme on Theme {
+  id
+  title
+  description
+  code3D
+  createdAt
+  updatedAt
+  themeImage {
+    ...IThemeImage
+  }
+  themeCategories {
+    ...IThemeCategory
+  }
+}
+    ${IThemeImage}
+${IThemeCategory}`;
 export const IUsersFields = gql`
     fragment IUsersFields on User {
   id
@@ -655,7 +744,7 @@ export const IUsersFields = gql`
 }
     `;
 export const LoginAdminDocument = gql`
-    mutation LoginAdmin($loginInput: CreateAuthInput!) {
+    mutation loginAdmin($loginInput: CreateAuthInput!) {
   loginAdmin(loginInput: $loginInput) {
     refreshToken
     accessToken
@@ -663,12 +752,26 @@ export const LoginAdminDocument = gql`
 }
     `;
 export const MeDocument = gql`
-    query Me {
+    query me {
   me {
     ...IUsersFields
   }
 }
     ${IUsersFields}`;
+export const GetDetailThemeDocument = gql`
+    query getDetailTheme($id: String!) {
+  theme(id: $id) {
+    ...ITheme
+  }
+}
+    ${ITheme}`;
+export const GetListThemesDocument = gql`
+    query getListThemes($pagination: PaginationInput, $where: WhereInput) {
+  themes(pagination: $pagination, where: $where) {
+    ...ITheme
+  }
+}
+    ${ITheme}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
@@ -677,11 +780,17 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    LoginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
-      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LoginAdmin');
+    loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
     },
-    Me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Me');
+    me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
+    },
+    getDetailTheme(variables: GetDetailThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailTheme> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailTheme');
+    },
+    getListThemes(variables?: GetListThemesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListThemes> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListThemes>(GetListThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListThemes');
     }
   };
 }

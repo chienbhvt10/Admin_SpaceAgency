@@ -1,43 +1,44 @@
 import { Table } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
 import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
+import { ITheme } from 'graphql/generated/graphql';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 interface IProps {
-  items: any;
-  rowKey: any;
+  items: ITheme[];
   loading: boolean;
   onChange: () => void;
   handleAdd: () => void;
 }
 function TableThemes(props: IProps) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visible, setVisible] = React.useState(false);
-  const { items, loading, onChange, rowKey, handleAdd } = props;
-  const onEdit = (record: any) => () => {
-    navigate(CommonPath.THEME_COLLECTION_UPDATE + record._id);
+  const { items, loading, onChange, handleAdd } = props;
+  const rowKey = (item: ITheme) => `${item.id}`;
+
+  const onEdit = (record: ITheme) => () => {
+    navigate(CommonPath.THEME_COLLECTION_UPDATE + record.id);
   };
   const onDelete = (record: any) => () => {
     setVisible(true);
   };
-  const columns = [
+  const columns: ColumnsType<ITheme> = [
     {
       title: 'Name',
-      dataIndex: 'name',
+      dataIndex: 'title',
       key: '#',
       sorter: true,
     },
     {
       title: 'Name English',
-      dataIndex: 'nameenglish',
+      dataIndex: 'description',
       key: '#',
       sorter: true,
     },
     {
       title: '3D Code',
-      dataIndex: 'dcode',
+      dataIndex: 'code3D',
       key: '#',
       sorter: true,
     },
@@ -51,7 +52,7 @@ function TableThemes(props: IProps) {
       title: 'Tools',
       dataIndex: '',
       key: '#',
-      render: (_: any, record: any) => (
+      render: (_: any, record: ITheme) => (
         <UserRowActions
           title="Are you sure you want to delete this user?"
           record={record}
@@ -61,25 +62,9 @@ function TableThemes(props: IProps) {
       ),
     },
   ];
-  const data = [
-    {
-      key: '1',
-      name: 'PACO-minimal',
-      nameenglish: 'Paco-minimal',
-      dcode: '03874233554',
-      price: '6,500,000 yen',
-    },
-    {
-      key: '2',
-      name: 'PACO-minimal',
-      nameenglish: 'Paco-minimal',
-      dcode: '03874233554',
-      price: '6,500,000 yen',
-    },
-  ];
   return (
     <div>
-      <Table columns={columns} dataSource={data} loading={loading} rowKey={rowKey} onChange={onChange} />
+      <Table columns={columns} dataSource={items} loading={loading} rowKey={rowKey} onChange={onChange} />
     </div>
   );
 }

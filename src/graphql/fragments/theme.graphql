@@ -1,0 +1,23 @@
+fragment ITheme on Theme {
+  id
+  title
+  description
+  code3D
+  createdAt
+  updatedAt
+  themeImage {
+    ...IThemeImage
+  }
+  themeCategories {
+    ...IThemeCategory
+  }
+}
+fragment IThemeImage on ThemeImage {
+  id
+  outsidePreviewUrl
+  insidePreviewUrl
+}
+fragment IThemeCategory on ThemeCategory {
+  id
+  title
+}

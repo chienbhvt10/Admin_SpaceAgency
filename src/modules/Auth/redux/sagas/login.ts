@@ -1,45 +1,51 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
 import { LoginAdmin, Me } from 'graphql/generated/graphql';
-import { getNavigate, getRedirectUrl } from 'helpers/history';
-import { setAuthData } from 'helpers/token';
-import { put } from 'redux-saga/effects';
+import { getNavigate } from 'helpers/history';
+import { getAuthLocalData, setAuthData } from 'helpers/token';
+import { delay, put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import * as apis from '../../services/apis';
 import { LoginAction, LoginActionSuccess } from '../action-types';
-import { autoLoginFlow, loginError, loginSuccess, me } from '../actions';
+import { loginError, loginSuccess } from '../actions';
+import { me, meSuccess } from '../actions/login';
 
 export function* loginAsync(action: LoginAction) {
   try {
     const data: LoginAdmin = yield apis.loginApi(action.payload);
     yield put(loginSuccess(data.loginAdmin));
-    yield put(autoLoginFlow());
+    NotificationSuccess('Thông báo', 'Đăng nhập thành công');
+    getNavigate(CommonPath.DEFAULT_PATH);
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(loginError(err));
   }
 }
 
-export function loginSuccessAsync(action: LoginActionSuccess) {
-  const user = action.payload;
-  const redirectUrl = getRedirectUrl();
-  if (user) {
-    getNavigate(redirectUrl || CommonPath.DEFAULT_PATH);
-    NotificationSuccess('Thông báo', 'Đăng nhập thành công');
-    setAuthData(user);
+export function* loginSuccessAsync(action: LoginActionSuccess) {
+  const jwtInfo = action.payload;
+  if (jwtInfo) {
+    setAuthData(jwtInfo);
+    yield put(me());
   }
 }
 
-export function* autoLoginFlowAsync() {
+export function* autoLoginFlowAsync(action: LoginActionSuccess) {
+  const jwtInfo = getAuthLocalData();
+  if (jwtInfo) {
+    if (action.payload === CommonPath.LOGIN_PATH) {
+      getNavigate(CommonPath.DEFAULT_PATH);
+    }
+    yield put(loginSuccess(jwtInfo));
+  } else {
+    getNavigate(CommonPath.LOGIN_PATH);
+  }
+}
+export function* getMeAsync() {
   try {
     const data: Me = yield apis.me();
-    yield put(me(data.me));
-    getNavigate(CommonPath.DEFAULT_PATH);
+    yield put(meSuccess(data.me));
   } catch (err: any) {
     yield put(loginError(err));
   }
 }
-
-// export function* logoutFlow() {
-//   localStorage.removeItem(TOKEN_KEY);
-// }

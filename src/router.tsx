@@ -1,17 +1,19 @@
 import { contentRouter } from 'modules/Contents/router';
-
-// import { detailUserRouter, newUserRouter, userRouter } from 'modules/UserManagement/router';
-import { RouteObject } from 'react-router-dom';
-import { authRouter } from './modules/Auth/router';
-import { homeRouter } from './modules/Home/router';
 import {
   customerSimulationDetailRouter,
   customerSimulationRouter,
   newCustomerSimulationRouter,
 } from 'modules/CustomerSimulation/router';
-import { createThemeCreateRouter, themeCollectionRouter, updateThemeRouter } from 'modules/ThemesCollection/router';
-import { styleCollectionRouter } from 'modules/StylesCollection/router';
 import { materialCollectionRouter, newMaterialCollectionRouter, updateMaterialCollectionlRouter } from 'modules/MaterialsCollection/router';
+import {
+  newStyleCollectionRouter,
+  styleCollectionDetailRouter,
+  styleCollectionRouter,
+} from 'modules/StylesCollection/router';
+import { createThemeCreateRouter, themeCollectionRouter, updateThemeRouter } from 'modules/ThemesCollection/router';
+import { RouteObject } from 'react-router-dom';
+import { authRouter } from './modules/Auth/router';
+import { homeRouter } from './modules/Home/router';
 const routes: RouteObject[] = [
   { ...authRouter },
   { ...homeRouter },
@@ -23,8 +25,8 @@ const routes: RouteObject[] = [
   { ...createThemeCreateRouter },
   { ...updateThemeRouter },
   { ...styleCollectionRouter },
-  // { ...newStyleCollectionRouter },
-  // { ...styleCollectionDetailRouter },
+  { ...newStyleCollectionRouter },
+  { ...styleCollectionDetailRouter },
   { ...materialCollectionRouter },
   { ...newMaterialCollectionRouter },
   { ...updateMaterialCollectionlRouter },

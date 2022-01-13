@@ -8,8 +8,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import { useNavigate, useRoutes } from 'react-router-dom';
-import routes from './router';
 import { autoLoginFlow } from './modules/Auth/redux/actions/login';
+import routes from './router';
 
 function ElementConfig() {
   const element = useRoutes(routes);
@@ -17,13 +17,17 @@ function ElementConfig() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(autoLoginFlow());
-    // eslint-disable-next-line
-  }, []);
+  // const [cookies, setCookie, removeCookie] = useCookies([]);
+
+  // React.useEffect(() => {
+  //   if (pathname) {
+  //     setCookie()
+  //   }
+  // },[pathname])
 
   React.useEffect(() => {
     setNavigate(navigate);
+    dispatch(autoLoginFlow(pathname));
     // eslint-disable-next-line
   }, []);
   React.useEffect(() => {}, []);
