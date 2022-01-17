@@ -1,5 +1,5 @@
 import { TypePagination } from 'commons/type';
-import { FilterInput, GetListUsersVariables } from 'graphql/generated/graphql';
+import { FilterInput, GetListUsersVariables, PaginationInput, SortInput, SortValue } from 'graphql/generated/graphql';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
@@ -16,15 +16,15 @@ export function useListUsers() {
     dispatch(actionUsers(variables));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const updatePaginationUser = (skip: number, limit: number) => {
+  const updatePaginationAndSorterUser = (pagination: PaginationInput, sort: SortInput[]) => {
     dispatch(
       actionUsers({
-        pagination: { skip, limit },
-        where: { ...where },
+        pagination,
+        where: { ...where, sort },
       }),
     );
   };
-  const filterPaginationUser = (filter: FilterInput[]) => {
+  const filterUser = (filter: FilterInput[]) => {
     dispatch(
       actionUsers({
         pagination: {
@@ -32,6 +32,7 @@ export function useListUsers() {
           skip: TypePagination.DEFAULT_SKIP,
         },
         where: {
+          ...where,
           filter,
         },
       }),
@@ -39,18 +40,18 @@ export function useListUsers() {
   };
   const skip = pagination.skip || 0;
   const limit = pagination.limit || 20;
-  const paginationUser = {
-    pageSize: pagination?.limit,
+  const paginationTable = {
+    pageSize: pagination.limit || TypePagination.DEFAULT_LIMIT,
     current: skip / limit + 1,
     total: 200,
   };
   return {
     dataUsers,
     loading,
-    paginationUser,
-    updatePaginationUser,
     pagination,
     where,
-    filterPaginationUser,
+    paginationTable,
+    updatePaginationAndSorterUser,
+    filterUser,
   };
 }

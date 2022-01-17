@@ -1,11 +1,13 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, PageHeader, TablePaginationConfig } from 'antd';
+import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import UserManagementLayout from 'commons/components/layouts/UserManagement';
-import { TypeKeyFilterUser, TypePagination } from 'commons/type';
+import { TypeKeyFilterUser, TypePagination, TypeSortUser } from 'commons/type';
 import { FilterInput, IUsersFields } from 'graphql/generated/graphql';
+import { isEmpty, OrderOfSorter } from 'helpers/string';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import React from 'react';
@@ -13,11 +15,12 @@ import { useNavigate } from 'react-router-dom';
 import CustomUserManagementTable from './Table';
 
 function ListUserManagement() {
-  const { dataUsers, loading, paginationUser, updatePaginationUser, pagination, filterPaginationUser, where } =
-    useListUsers();
+  const { dataUsers, loading, paginationTable, updatePaginationAndSorterUser, pagination, filterUser } = useListUsers();
   const navigate = useNavigate();
   const { removeUser } = useRemoveUser();
   const [value, setValue] = React.useState<string>('');
+  const [sortedInfo, setSortedInfo] = React.useState<SorterResult<any>>();
+
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
@@ -33,11 +36,26 @@ function ListUserManagement() {
       breadcrumbName: 'User Management',
     },
   ];
-  const onChange = (paginationTable: TablePaginationConfig) => {
+  const onChange = (paginationTable: TablePaginationConfig, _: any, sorter: SorterResult<any>) => {
+    const order = OrderOfSorter(sorter.order);
     const limit = pagination.limit || TypePagination.DEFAULT_LIMIT;
     const current = paginationTable.current || 1;
     const skip = (current - 1) * limit;
-    updatePaginationUser(skip, limit);
+    setSortedInfo(sorter);
+    updatePaginationAndSorterUser(
+      {
+        skip,
+        limit,
+      },
+      sorter.field === TypeSortUser.EMAIL && order
+        ? [
+            {
+              key: TypeSortUser.EMAIL,
+              value: order,
+            },
+          ]
+        : [],
+    );
   };
   const onDelete = (record: IUsersFields) => () => {
     removeUser({
@@ -55,11 +73,11 @@ function ListUserManagement() {
       ...i,
       value: i.key === TypeKeyFilterUser.EMAIL ? value : '',
     }));
-    filterPaginationUser(newFilter);
+    filterUser(newFilter);
   };
   const onReset = () => {
     setValue('');
-    filterPaginationUser([]);
+    filterUser([]);
   };
   return (
     <UserManagementLayout>
@@ -75,10 +93,11 @@ function ListUserManagement() {
         <FormSearch value={value} onChange={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
         <CustomUserManagementTable
           onDelete={onDelete}
+          sortedInfo={sortedInfo}
           onEdit={onEdit}
           items={dataUsers}
           loading={loading}
-          pagination={paginationUser}
+          pagination={paginationTable}
           onChange={onChange}
         />
       </TableHeader>

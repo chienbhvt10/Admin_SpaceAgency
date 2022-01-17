@@ -30,6 +30,7 @@
     "connected-react-router": "^6.9.1",
     "customize-cra": "^1.0.0",
     "history": "^5.1.0",
+    "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
     "node-sass": "^6.0.0",
@@ -77,6 +78,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/typescript": "^2.4.1",
+    "@types/lodash": "^4.14.178",
     "graphql-codegen-plugin-typescript-swr": "^0.7.2",
     "react-notifications": "^1.7.2"
   }
