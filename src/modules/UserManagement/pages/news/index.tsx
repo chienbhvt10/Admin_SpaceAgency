@@ -4,9 +4,11 @@ import UserManagementLayout from 'commons/components/layouts/UserManagement';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import DetailUserForm from 'modules/UserManagement/components/UserForm';
+import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import React from 'react';
 
 function NewUserManagement() {
+  const { loading } = useCreateUser();
   React.useEffect(() => {
     setTitle('Create User');
   }, []);
@@ -27,7 +29,7 @@ function NewUserManagement() {
   return (
     <UserManagementLayout>
       <PageHeader title="Detail User" breadcrumb={{ routes }} />
-      <DetailUserForm type={TypeForm.CREATE} loading={false} />
+      <DetailUserForm type={TypeForm.CREATE} loading={loading} />
     </UserManagementLayout>
   );
 }

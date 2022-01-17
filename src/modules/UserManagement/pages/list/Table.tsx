@@ -42,6 +42,18 @@ function CustomUserManagementTable(props: IProps) {
       sorter: true,
     },
     {
+      title: 'Address',
+      dataIndex: 'address',
+      key: '#',
+      sorter: true,
+    },
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: '#',
+      sorter: true,
+    },
+    {
       title: 'Role',
       dataIndex: 'role',
       key: '#',

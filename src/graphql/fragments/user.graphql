@@ -3,5 +3,9 @@ fragment IUsersFields on User {
   email
   firstName
   lastName
+  firstNameF
+  lastNameF
+  address
+  phone
   role
 }

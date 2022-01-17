@@ -1,4 +1,5 @@
 import { TypePagination } from 'commons/type';
+import { SortValue } from 'graphql/generated/graphql';
 import {
   LIST_USERS,
   LIST_USERS_ERROR,
@@ -14,8 +15,16 @@ import {
 const initialState: UsersState = {
   loading: false,
   pagination: {
-    skip: TypePagination.DEFAULT_LIMIT,
+    skip: TypePagination.DEFAULT_SKIP,
     limit: TypePagination.DEFAULT_LIMIT,
+  },
+  where: {
+    sort: [
+      {
+        key: 'user',
+        value: SortValue.Desc,
+      },
+    ],
   },
   dataUsers: [],
 };

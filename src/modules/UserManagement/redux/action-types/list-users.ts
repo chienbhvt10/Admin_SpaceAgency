@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { GetListUsersVariables, IUsersFields, PaginationInput } from 'graphql/generated/graphql';
+import { GetListUsersVariables, IUsersFields, PaginationInput, WhereInput } from 'graphql/generated/graphql';
 export const LIST_USERS = 'LIST_USERS';
 export const LIST_USERS_SUCCESS = 'LIST_USERS_SUCCESS';
 export const LIST_USERS_ERROR = 'LIST_USERS_ERROR';
@@ -7,10 +7,12 @@ export const LIST_USERS_ERROR = 'LIST_USERS_ERROR';
 export interface UsersData {
   dataUsers: IUsersFields[];
   pagination?: PaginationInput;
+  where?: WhereInput;
 }
 export interface UsersState {
   loading: boolean;
   pagination: PaginationInput;
+  where?: WhereInput;
   dataUsers: IUsersFields[];
 }
 

@@ -100,10 +100,16 @@ export type CreateThemeInput = {
 };
 
 export type CreateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   firstName: Scalars['String'];
+  /** First name in furigana */
+  firstNameF: Scalars['String'];
   lastName: Scalars['String'];
+  /** Last name in furigana */
+  lastNameF: Scalars['String'];
   password: Scalars['String'];
+  phone?: InputMaybe<Scalars['String']>;
 };
 
 export type FilterInput = {
@@ -118,6 +124,7 @@ export type Material = {
   style: Style;
   title?: Maybe<Scalars['String']>;
 };
+
 
 export type MaterialMaterialTypesArgs = {
   pagination?: InputMaybe<PaginationInput>;
@@ -185,149 +192,186 @@ export type Mutation = {
   updateUser: User;
 };
 
+
 export type MutationChangePasswordArgs = {
   changePasswordInput: ChangePasswordInput;
 };
+
 
 export type MutationCreateAdminArgs = {
   createUserInput: CreateUserInput;
 };
 
+
 export type MutationCreateCustomerArgs = {
   createUserInput: CreateUserInput;
 };
+
 
 export type MutationCreateMaterialArgs = {
   createMaterialInput: CreateMaterialInput;
 };
 
+
 export type MutationCreateMaterialTypeArgs = {
   createMaterialTypeInput: CreateMaterialTypeInput;
 };
+
 
 export type MutationCreateQuotationArgs = {
   createQuotationInput: CreateQuotationInput;
 };
 
+
 export type MutationCreateRequestArgs = {
   createRequestInput: CreateRequestInput;
 };
+
 
 export type MutationCreateSimulationArgs = {
   createSimulationInput: CreateSimulationInput;
 };
 
+
 export type MutationCreateSimulationComponentArgs = {
   createSimulationComponentInput: CreateSimulationComponentInput;
 };
+
 
 export type MutationCreateStyleArgs = {
   createStyleInput: CreateStyleInput;
 };
 
+
 export type MutationCreateThemeArgs = {
   createThemeInput: CreateThemeInput;
 };
+
 
 export type MutationCreateThemeCategoryArgs = {
   createThemeCategoryInput: CreateThemeCategoryInput;
 };
 
+
 export type MutationCreateThemeImageArgs = {
   createThemeImageInput: CreateThemeImageInput;
 };
+
 
 export type MutationLoginAdminArgs = {
   loginInput: CreateAuthInput;
 };
 
+
 export type MutationLoginCustomerArgs = {
   loginInput: CreateAuthInput;
 };
+
 
 export type MutationRemoveMaterialArgs = {
   id: Scalars['String'];
 };
 
+
 export type MutationRemoveMaterialTypeArgs = {
   id: Scalars['String'];
 };
+
 
 export type MutationRemoveQuotationArgs = {
   id: Scalars['Int'];
 };
 
+
 export type MutationRemoveRequestArgs = {
   id: Scalars['Int'];
 };
+
 
 export type MutationRemoveSimulationArgs = {
   id: Scalars['Int'];
 };
 
+
 export type MutationRemoveSimulationComponentArgs = {
   id: Scalars['Int'];
 };
+
 
 export type MutationRemoveStyleArgs = {
   id: Scalars['String'];
 };
 
+
 export type MutationRemoveThemeArgs = {
   id: Scalars['String'];
 };
+
 
 export type MutationRemoveThemeCategoryArgs = {
   id: Scalars['String'];
 };
 
+
 export type MutationRemoveThemeImageArgs = {
   id: Scalars['String'];
 };
+
 
 export type MutationRemoveUserArgs = {
   id: Scalars['String'];
 };
 
+
 export type MutationUpdateMaterialArgs = {
   updateMaterialInput: UpdateMaterialInput;
 };
+
 
 export type MutationUpdateMaterialTypeArgs = {
   updateMaterialType: UpdateMaterialTypeInput;
 };
 
+
 export type MutationUpdateQuotationArgs = {
   updateQuotationInput: UpdateQuotationInput;
 };
+
 
 export type MutationUpdateRequestArgs = {
   updateRequestInput: UpdateRequestInput;
 };
 
+
 export type MutationUpdateSimulationArgs = {
   updateSimulationInput: UpdateSimulationInput;
 };
+
 
 export type MutationUpdateSimulationComponentArgs = {
   updateSimulationComponentInput: UpdateSimulationComponentInput;
 };
 
+
 export type MutationUpdateStyleArgs = {
   updateStyleInput: UpdateStyleInput;
 };
+
 
 export type MutationUpdateThemeArgs = {
   updateThemeInput: UpdateThemeInput;
 };
 
+
 export type MutationUpdateThemeCategoryArgs = {
   updateThemeCategoryInput: UpdateThemeCategoryInput;
 };
 
+
 export type MutationUpdateThemeImageArgs = {
   updateThemeImageInput: UpdateThemeImageInput;
 };
+
 
 export type MutationUpdateUserArgs = {
   updateUserInput: UpdateUserInput;
@@ -374,79 +418,97 @@ export type Query = {
   users: Array<User>;
 };
 
+
 export type QueryMaterialArgs = {
   id: Scalars['String'];
 };
 
+
 export type QueryMaterialTypeArgs = {
   id: Scalars['String'];
 };
+
 
 export type QueryMaterialTypesArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
 
+
 export type QueryMaterialsArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
 
+
 export type QueryQuotationArgs = {
   id: Scalars['Int'];
 };
+
 
 export type QueryRequestArgs = {
   id: Scalars['Int'];
 };
 
+
 export type QuerySimulationArgs = {
   id: Scalars['Int'];
 };
+
 
 export type QuerySimulationComponentArgs = {
   id: Scalars['Int'];
 };
 
+
 export type QueryStyleArgs = {
   id: Scalars['String'];
 };
+
 
 export type QueryStylesArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
 
+
 export type QueryThemeArgs = {
   id: Scalars['String'];
 };
+
 
 export type QueryThemeCategoriesArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
 
+
 export type QueryThemeCategoryArgs = {
   id: Scalars['String'];
 };
 
+
 export type QueryThemeImageArgs = {
   id: Scalars['String'];
 };
+
 
 export type QueryThemeImagesArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
 
+
 export type QueryThemesArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
 
+
 export type QueryUserArgs = {
   id: Scalars['String'];
 };
+
 
 export type QueryUsersArgs = {
   pagination?: InputMaybe<PaginationInput>;
@@ -472,7 +534,7 @@ export type Request = {
 export enum Role {
   Admin = 'ADMIN',
   Customer = 'CUSTOMER',
-  Sysadmin = 'SYSADMIN',
+  Sysadmin = 'SYSADMIN'
 }
 
 export type Simulation = {
@@ -483,8 +545,7 @@ export type Simulation = {
 
 export type SimulationComponent = {
   __typename?: 'SimulationComponent';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 export type SortInput = {
@@ -494,7 +555,7 @@ export type SortInput = {
 
 export enum SortValue {
   Asc = 'ASC',
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 export type Style = {
@@ -505,6 +566,7 @@ export type Style = {
   materials: Array<Material>;
   title?: Maybe<Scalars['String']>;
 };
+
 
 export type StyleMaterialsArgs = {
   pagination?: InputMaybe<PaginationInput>;
@@ -615,18 +677,30 @@ export type UpdateThemeInput = {
 };
 
 export type UpdateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
+  /** First name in furigana */
+  firstNameF?: InputMaybe<Scalars['String']>;
   id: Scalars['String'];
   lastName?: InputMaybe<Scalars['String']>;
+  /** Last name in furigana */
+  lastNameF?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
+  address?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
+  /** First name in furigana */
+  firstNameF?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   lastName?: Maybe<Scalars['String']>;
+  /** Last name in furigana */
+  lastNameF?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
   role?: Maybe<Role>;
 };
 
@@ -635,428 +709,227 @@ export type WhereInput = {
   sort?: InputMaybe<Array<SortInput>>;
 };
 
-export type AuthFields = {
-  __typename?: 'Auth';
-  refreshToken?: string | null | undefined;
-  accessToken?: string | null | undefined;
-};
+export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
-export type ITheme = {
-  __typename?: 'Theme';
-  id: string;
-  title: string;
-  description?: string | null | undefined;
-  code3D?: string | null | undefined;
-  createdAt: any;
-  updatedAt: any;
-  themeImage?:
-    | {
-        __typename?: 'ThemeImage';
-        id: string;
-        outsidePreviewUrl?: string | null | undefined;
-        insidePreviewUrl?: string | null | undefined;
-      }
-    | null
-    | undefined;
-  themeCategories?: Array<{ __typename?: 'ThemeCategory'; id: string; title: string }> | null | undefined;
-};
+export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined };
 
-export type IThemeImage = {
-  __typename?: 'ThemeImage';
-  id: string;
-  outsidePreviewUrl?: string | null | undefined;
-  insidePreviewUrl?: string | null | undefined;
-};
+export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined };
 
-export type IThemeCategory = { __typename?: 'ThemeCategory'; id: string; title: string };
+export type IThemeCategory = { __typename?: 'ThemeCategory', id: string, title: string };
 
-export type IUsersFields = {
-  __typename?: 'User';
-  id: string;
-  email?: string | null | undefined;
-  firstName?: string | null | undefined;
-  lastName?: string | null | undefined;
-  role?: Role | null | undefined;
-};
+export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined };
 
 export type LoginAdminVariables = Exact<{
   loginInput: CreateAuthInput;
 }>;
 
-export type LoginAdmin = {
-  __typename?: 'Mutation';
-  loginAdmin: {
-    __typename?: 'Auth';
-    refreshToken?: string | null | undefined;
-    accessToken?: string | null | undefined;
-  };
-};
 
-export type MeVariables = Exact<{ [key: string]: never }>;
+export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined } };
 
-export type Me = {
-  __typename?: 'Query';
-  me: {
-    __typename?: 'User';
-    id: string;
-    email?: string | null | undefined;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    role?: Role | null | undefined;
-  };
-};
+export type MeVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
 export type GetDetailThemeVariables = Exact<{
   id: Scalars['String'];
 }>;
 
-export type GetDetailTheme = {
-  __typename?: 'Query';
-  theme: {
-    __typename?: 'Theme';
-    id: string;
-    title: string;
-    description?: string | null | undefined;
-    code3D?: string | null | undefined;
-    createdAt: any;
-    updatedAt: any;
-    themeImage?:
-      | {
-          __typename?: 'ThemeImage';
-          id: string;
-          outsidePreviewUrl?: string | null | undefined;
-          insidePreviewUrl?: string | null | undefined;
-        }
-      | null
-      | undefined;
-    themeCategories?: Array<{ __typename?: 'ThemeCategory'; id: string; title: string }> | null | undefined;
-  };
-};
+
+export type GetDetailTheme = { __typename?: 'Query', theme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined } };
 
 export type GetListThemesVariables = Exact<{
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 }>;
 
-export type GetListThemes = {
-  __typename?: 'Query';
-  themes: Array<{
-    __typename?: 'Theme';
-    id: string;
-    title: string;
-    description?: string | null | undefined;
-    code3D?: string | null | undefined;
-    createdAt: any;
-    updatedAt: any;
-    themeImage?:
-      | {
-          __typename?: 'ThemeImage';
-          id: string;
-          outsidePreviewUrl?: string | null | undefined;
-          insidePreviewUrl?: string | null | undefined;
-        }
-      | null
-      | undefined;
-    themeCategories?: Array<{ __typename?: 'ThemeCategory'; id: string; title: string }> | null | undefined;
-  }>;
-};
+
+export type GetListThemes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined }> };
 
 export type CreateCustomerVariables = Exact<{
   createUserInput: CreateUserInput;
 }>;
 
-export type CreateCustomer = {
-  __typename?: 'Mutation';
-  createCustomer: {
-    __typename?: 'User';
-    id: string;
-    email?: string | null | undefined;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    role?: Role | null | undefined;
-  };
-};
+
+export type CreateCustomer = { __typename?: 'Mutation', createCustomer: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
 export type RemoveUserVariables = Exact<{
   id: Scalars['String'];
 }>;
 
-export type RemoveUser = {
-  __typename?: 'Mutation';
-  removeUser: {
-    __typename?: 'User';
-    id: string;
-    email?: string | null | undefined;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    role?: Role | null | undefined;
-  };
-};
+
+export type RemoveUser = { __typename?: 'Mutation', removeUser: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
 export type UpdateUserVariables = Exact<{
   updateUserInput: UpdateUserInput;
 }>;
 
-export type UpdateUser = {
-  __typename?: 'Mutation';
-  updateUser: {
-    __typename?: 'User';
-    id: string;
-    email?: string | null | undefined;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    role?: Role | null | undefined;
-  };
-};
+
+export type UpdateUser = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
 export type GetUserVariables = Exact<{
   id: Scalars['String'];
 }>;
 
-export type GetUser = {
-  __typename?: 'Query';
-  user: {
-    __typename?: 'User';
-    id: string;
-    email?: string | null | undefined;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    role?: Role | null | undefined;
-  };
-};
+
+export type GetUser = { __typename?: 'Query', user: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
 export type GetListUsersVariables = Exact<{
   where?: InputMaybe<WhereInput>;
   pagination?: InputMaybe<PaginationInput>;
 }>;
 
-export type GetListUsers = {
-  __typename?: 'Query';
-  users: Array<{
-    __typename?: 'User';
-    id: string;
-    email?: string | null | undefined;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    role?: Role | null | undefined;
-  }>;
-};
+
+export type GetListUsers = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined }> };
 
 export const AuthFields = gql`
-  fragment AuthFields on Auth {
+    fragment AuthFields on Auth {
+  refreshToken
+  accessToken
+}
+    `;
+export const IThemeImage = gql`
+    fragment IThemeImage on ThemeImage {
+  id
+  outsidePreviewUrl
+  insidePreviewUrl
+}
+    `;
+export const IThemeCategory = gql`
+    fragment IThemeCategory on ThemeCategory {
+  id
+  title
+}
+    `;
+export const ITheme = gql`
+    fragment ITheme on Theme {
+  id
+  title
+  description
+  code3D
+  createdAt
+  updatedAt
+  themeImage {
+    ...IThemeImage
+  }
+  themeCategories {
+    ...IThemeCategory
+  }
+}
+    ${IThemeImage}
+${IThemeCategory}`;
+export const IUsersFields = gql`
+    fragment IUsersFields on User {
+  id
+  email
+  firstName
+  lastName
+  firstNameF
+  lastNameF
+  address
+  phone
+  role
+}
+    `;
+export const LoginAdminDocument = gql`
+    mutation loginAdmin($loginInput: CreateAuthInput!) {
+  loginAdmin(loginInput: $loginInput) {
     refreshToken
     accessToken
   }
-`;
-export const IThemeImage = gql`
-  fragment IThemeImage on ThemeImage {
-    id
-    outsidePreviewUrl
-    insidePreviewUrl
-  }
-`;
-export const IThemeCategory = gql`
-  fragment IThemeCategory on ThemeCategory {
-    id
-    title
-  }
-`;
-export const ITheme = gql`
-  fragment ITheme on Theme {
-    id
-    title
-    description
-    code3D
-    createdAt
-    updatedAt
-    themeImage {
-      ...IThemeImage
-    }
-    themeCategories {
-      ...IThemeCategory
-    }
-  }
-  ${IThemeImage}
-  ${IThemeCategory}
-`;
-export const IUsersFields = gql`
-  fragment IUsersFields on User {
-    id
-    email
-    firstName
-    lastName
-    role
-  }
-`;
-export const LoginAdminDocument = gql`
-  mutation loginAdmin($loginInput: CreateAuthInput!) {
-    loginAdmin(loginInput: $loginInput) {
-      refreshToken
-      accessToken
-    }
-  }
-`;
+}
+    `;
 export const MeDocument = gql`
-  query me {
-    me {
-      ...IUsersFields
-    }
+    query me {
+  me {
+    ...IUsersFields
   }
-  ${IUsersFields}
-`;
+}
+    ${IUsersFields}`;
 export const GetDetailThemeDocument = gql`
-  query getDetailTheme($id: String!) {
-    theme(id: $id) {
-      ...ITheme
-    }
+    query getDetailTheme($id: String!) {
+  theme(id: $id) {
+    ...ITheme
   }
-  ${ITheme}
-`;
+}
+    ${ITheme}`;
 export const GetListThemesDocument = gql`
-  query getListThemes($pagination: PaginationInput, $where: WhereInput) {
-    themes(pagination: $pagination, where: $where) {
-      ...ITheme
-    }
+    query getListThemes($pagination: PaginationInput, $where: WhereInput) {
+  themes(pagination: $pagination, where: $where) {
+    ...ITheme
   }
-  ${ITheme}
-`;
+}
+    ${ITheme}`;
 export const CreateCustomerDocument = gql`
-  mutation createCustomer($createUserInput: CreateUserInput!) {
-    createCustomer(createUserInput: $createUserInput) {
-      ...IUsersFields
-    }
+    mutation createCustomer($createUserInput: CreateUserInput!) {
+  createCustomer(createUserInput: $createUserInput) {
+    ...IUsersFields
   }
-  ${IUsersFields}
-`;
+}
+    ${IUsersFields}`;
 export const RemoveUserDocument = gql`
-  mutation removeUser($id: String!) {
-    removeUser(id: $id) {
-      ...IUsersFields
-    }
+    mutation removeUser($id: String!) {
+  removeUser(id: $id) {
+    ...IUsersFields
   }
-  ${IUsersFields}
-`;
+}
+    ${IUsersFields}`;
 export const UpdateUserDocument = gql`
-  mutation updateUser($updateUserInput: UpdateUserInput!) {
-    updateUser(updateUserInput: $updateUserInput) {
-      ...IUsersFields
-    }
+    mutation updateUser($updateUserInput: UpdateUserInput!) {
+  updateUser(updateUserInput: $updateUserInput) {
+    ...IUsersFields
   }
-  ${IUsersFields}
-`;
+}
+    ${IUsersFields}`;
 export const GetUserDocument = gql`
-  query getUser($id: String!) {
-    user(id: $id) {
-      ...IUsersFields
-    }
+    query getUser($id: String!) {
+  user(id: $id) {
+    ...IUsersFields
   }
-  ${IUsersFields}
-`;
+}
+    ${IUsersFields}`;
 export const GetListUsersDocument = gql`
-  query getListUsers($where: WhereInput, $pagination: PaginationInput) {
-    users(where: $where, pagination: $pagination) {
-      ...IUsersFields
-    }
+    query getListUsers($where: WhereInput, $pagination: PaginationInput) {
+  users(where: $where, pagination: $pagination) {
+    ...IUsersFields
   }
-  ${IUsersFields}
-`;
+}
+    ${IUsersFields}`;
 
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string,
-) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<LoginAdmin> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<LoginAdmin>(LoginAdminDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'loginAdmin',
-      );
+    loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
     },
-    me(variables?: MeVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<Me> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<Me>(MeDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'me',
-      );
+    me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
     },
-    getDetailTheme(
-      variables: GetDetailThemeVariables,
-      requestHeaders?: Dom.RequestInit['headers'],
-    ): Promise<GetDetailTheme> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'getDetailTheme',
-      );
+    getDetailTheme(variables: GetDetailThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailTheme> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailTheme');
     },
-    getListThemes(
-      variables?: GetListThemesVariables,
-      requestHeaders?: Dom.RequestInit['headers'],
-    ): Promise<GetListThemes> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetListThemes>(GetListThemesDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'getListThemes',
-      );
+    getListThemes(variables?: GetListThemesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListThemes> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListThemes>(GetListThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListThemes');
     },
-    createCustomer(
-      variables: CreateCustomerVariables,
-      requestHeaders?: Dom.RequestInit['headers'],
-    ): Promise<CreateCustomer> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<CreateCustomer>(CreateCustomerDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'createCustomer',
-      );
+    createCustomer(variables: CreateCustomerVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateCustomer> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateCustomer>(CreateCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createCustomer');
     },
-    removeUser(variables: RemoveUserVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<RemoveUser> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<RemoveUser>(RemoveUserDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'removeUser',
-      );
+    removeUser(variables: RemoveUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveUser>(RemoveUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeUser');
     },
-    updateUser(variables: UpdateUserVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<UpdateUser> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<UpdateUser>(UpdateUserDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'updateUser',
-      );
+    updateUser(variables: UpdateUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUser>(UpdateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUser');
     },
-    getUser(variables: GetUserVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<GetUser> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetUser>(GetUserDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'getUser',
-      );
+    getUser(variables: GetUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUser>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser');
     },
-    getListUsers(
-      variables?: GetListUsersVariables,
-      requestHeaders?: Dom.RequestInit['headers'],
-    ): Promise<GetListUsers> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetListUsers>(GetListUsersDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'getListUsers',
-      );
-    },
+    getListUsers(variables?: GetListUsersVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListUsers> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListUsers>(GetListUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListUsers');
+    }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

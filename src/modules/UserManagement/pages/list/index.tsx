@@ -8,6 +8,7 @@ import CustomUserManagementTable from './Table';
 import { IUsersFields } from 'graphql/generated/graphql';
 import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import { useNavigate } from 'react-router-dom';
+import { TypePagination } from 'commons/type';
 
 function ListUserManagement() {
   const { dataUsers, loading, paginationUser, updatePaginationUser, pagination } = useListUsers();
@@ -24,7 +25,7 @@ function ListUserManagement() {
     },
   ];
   const onChange = (paginationTable: TablePaginationConfig) => {
-    const limit = pagination.limit || 1;
+    const limit = pagination.limit || TypePagination.DEFAULT_LIMIT;
     const current = paginationTable.current || 1;
     const skip = (current - 1) * limit;
     updatePaginationUser(skip, limit);

@@ -1,4 +1,3 @@
-import { PaginationConfig } from 'antd/lib/pagination';
 import { GetListUsersVariables } from 'graphql/generated/graphql';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,9 +6,10 @@ import { actionUsers } from '../redux/actions';
 
 export function useListUsers() {
   const dispatch = useDispatch();
-  const { loading, dataUsers, pagination } = useSelector((state: RootState) => state.users.usersState);
+  const { loading, dataUsers, pagination, where } = useSelector((state: RootState) => state.users.usersState);
   const variables: GetListUsersVariables = {
     pagination,
+    where,
   };
   React.useEffect(() => {
     dispatch(actionUsers(variables));
@@ -27,7 +27,7 @@ export function useListUsers() {
   const paginationUser = {
     pageSize: pagination?.limit,
     current: skip / limit + 1,
-    total: 20,
+    total: 200,
   };
   return {
     dataUsers,
