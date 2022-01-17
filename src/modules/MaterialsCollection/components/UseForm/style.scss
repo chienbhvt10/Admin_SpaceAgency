@@ -1,10 +1,19 @@
-#material-form{
-    .dropdown-select{
-        margin-left: 160px !important;
-        .ant-select-selector{
-            margin-left: 24px !important;
-        width: 94% !important;
-        }
+#material-form {
+  .dropdown-select {
+    margin-left: 106px !important;
+    label{
+      padding-right: 10px !important;
     }
-   
+    .ant-select-selector {
+      margin-left: 24px !important;
+      width: 92% !important;
+    }
+  }
+  .ant-form-item-label{
+    label{
+      &::after{
+        display: none !important;
+      }
+    }
+  }
 }

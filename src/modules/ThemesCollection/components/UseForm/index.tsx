@@ -6,6 +6,7 @@ import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import { useNavigate } from 'react-router';
 import { CommonPath } from 'commons/base-routes';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
+import 'modules/ThemesCollection/style/style.scss';
 const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -54,7 +55,14 @@ const ThemesForm = (props: Props) => {
                 </Form.Item>
               </Col>
               <Col span={22}>
-                <Form.Item labelCol={{ span: 4 }} className="" label="Name English" name="mameenglish">
+                <Form.Item labelCol={{ span: 4 }} className="" label="Name English" name="nameenglish">
+                  <Col offset={1} span={24}>
+                    <Input />
+                  </Col>
+                </Form.Item>
+              </Col>
+              <Col span={22}>
+                <Form.Item labelCol={{ span: 4 }} className="" label="Description" name="description">
                   <Col offset={1}>
                     <TextArea rows={5} showCount maxLength={1000} />
                   </Col>

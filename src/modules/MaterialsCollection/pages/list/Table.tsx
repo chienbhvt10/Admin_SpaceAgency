@@ -50,6 +50,7 @@ function TableMaterial(props: IProps) {
       dataIndex: 'name',
       key: 'name',
       sorter: true,
+      
     },
     {
       title: 'Description',
@@ -78,7 +79,8 @@ function TableMaterial(props: IProps) {
     {
       title: 'Tools',
       dataIndex: '',
-      key: 'tools',
+      key: '#',
+      
       render: (_: any, record: any) => (
         <UserRowActions
           title="Are you sure you want to delete this user?"
@@ -119,7 +121,7 @@ function TableMaterial(props: IProps) {
   return (
     <div>
       <Table
-         expandable={{ expandedRowRender, expandRowByClick: true }}
+        expandable={{ expandedRowRender, expandRowByClick: true }}
         columns={columns}
         dataSource={data}
         loading={loading}

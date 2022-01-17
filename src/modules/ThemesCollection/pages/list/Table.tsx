@@ -52,6 +52,7 @@ function TableThemes(props: IProps) {
       title: 'Tools',
       dataIndex: '',
       key: '#',
+      align: 'center',
       render: (_: any, record: ITheme) => (
         <UserRowActions
           title="Are you sure you want to delete this user?"

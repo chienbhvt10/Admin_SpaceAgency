@@ -1,0 +1,10 @@
+#form-theme{
+    .ant-form-item-label{
+        label{
+            &::after{
+                display: none !important;
+            }
+        }
+    }
+}
+
