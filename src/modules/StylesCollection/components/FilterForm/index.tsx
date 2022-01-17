@@ -1,5 +1,7 @@
 import { Button, Col, Form, Input, Row, Select } from 'antd';
+import BaseButton from 'commons/components/layouts/BaseButton';
 import React from 'react';
+import FormSearch from './FormSearch';
 const { Option } = Select;
 interface Props {
   options?: any;
@@ -7,31 +9,24 @@ interface Props {
 
 const FilterForm = (props: Props) => {
   const { options } = props;
+  const onReset = () => {
+    console.log('ok');
+  };
+  const handleSearch = () => {
+    console.log('1');
+  };
+
   return (
     <Form className="filter-form">
-      <Row style={{ margin: '30px 0 0 30px' }}>
-        <Col span={16}>
+      <Row>
+        <Col span={18}>
           <Form.Item labelCol={{ span: 4 }} label="Theme" name="theme">
-            <Col span={16}>
+            <Col span={12} offset={1}>
               <Select placeholder="---All---">{options}</Select>
             </Col>
           </Form.Item>
         </Col>
-        <Col span={16}>
-          <Form.Item labelCol={{ span: 4 }} label="Keyword" name="keyword">
-            <Input placeholder="Typing to search..." />
-          </Form.Item>
-        </Col>
-        <Col span={3}>
-          <Button size="middle" style={{ width: '80%', marginLeft: '10px', backgroundColor: 'gray', color: 'white' }}>
-            Reset
-          </Button>
-        </Col>
-        <Col span={3}>
-          <Button style={{ width: '80%' }} type="primary">
-            Search
-          </Button>
-        </Col>
+        <FormSearch />
       </Row>
     </Form>
   );

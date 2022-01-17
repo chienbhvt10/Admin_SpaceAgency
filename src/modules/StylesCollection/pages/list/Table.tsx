@@ -64,10 +64,10 @@ const StyleCollectionTable = (props: IProps) => {
       }
     >
       <Row justify="center">
-        <Col span={22}>
+        <Col span={24}>
           <FilterForm />
         </Col>
-        <Col span={22}>
+        <Col span={24}>
           <Table columns={columns} dataSource={items} loading={loading} rowKey={rowKey} onChange={onChange} />
         </Col>
       </Row>

@@ -1,5 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
+import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
+import BaseButton from 'commons/components/layouts/BaseButton';
 import { TypeForm } from 'commons/type';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -29,6 +30,7 @@ const StyleCollectionForm = (props: Props) => {
     console.log(form.getFieldsValue());
   };
   const onFinishFailed = () => {};
+  const handlePreview = () => {};
   return (
     <div id="style-form">
       <Form
@@ -78,16 +80,18 @@ const StyleCollectionForm = (props: Props) => {
             </Col>
             <Col span={22}>
               <Form.Item labelCol={{ span: 4 }} className="code" label="Code" name="code" rules={[requireRule]}>
-                <Col offset={1}>
-                  <Row>
-                    <Col span={20}>
+                <Row>
+                  <Col span={20}>
+                    <Col offset={1}>
                       <Input />
                     </Col>
-                    <Col span={4}>
-                      <button>Preview</button>
-                    </Col>
-                  </Row>
-                </Col>
+                  </Col>
+                  <Col span={4}>
+                    <Button style={{ width: '100%' }} htmlType="button" type="primary" onClick={handlePreview}>
+                      Preview
+                    </Button>
+                  </Col>
+                </Row>
               </Form.Item>
             </Col>
             <Col span={22} className="price-order-box">
@@ -102,7 +106,9 @@ const StyleCollectionForm = (props: Props) => {
                 <Col span={12}>
                   <Col span={20} offset={4}>
                     <Form.Item labelCol={{ span: 8 }} label="Order" name="order" rules={[requireRule]}>
-                      <InputNumber style={{ width: '100%' }} />
+                      <Col offset={2}>
+                        <InputNumber style={{ width: '100%' }} />
+                      </Col>
                     </Form.Item>
                   </Col>
                 </Col>
@@ -115,37 +121,43 @@ const StyleCollectionForm = (props: Props) => {
             <Col span={22}>
               <Row>
                 <Col span={18}>
-                  <Form.Item labelCol={{ span: 4 }} label="Preview" name="preview" rules={[requireRule]}>
-                    <Row>
-                      <Col span={16}>
-                        <Input />
-                      </Col>
-                      <Col span={8}>
-                        <Upload name="image">
-                          <button style={{ marginLeft: '10px' }}>ChooseImage</button>
-                        </Upload>
-                      </Col>
-                    </Row>
+                  <Form.Item labelCol={{ span: 5 }} label="Preview" name="preview" rules={[requireRule]}>
+                    <Col offset={1}>
+                      <Row>
+                        <Col span={16}>
+                          <Input />
+                        </Col>
+                        <Col span={8}>
+                          <Upload name="image">
+                            <Button htmlType="button" type="primary">
+                              Choose Images
+                            </Button>
+                          </Upload>
+                        </Col>
+                      </Row>
+                    </Col>
                   </Form.Item>
                   <Form.Item
-                    labelCol={{ span: 4 }}
+                    labelCol={{ span: 5 }}
                     className="image-name"
                     label="Name"
                     name="imageName"
                     rules={[requireRule]}
                   >
-                    <Input />
+                    <Col offset={1}>
+                      <Input />
+                    </Col>
                   </Form.Item>
                 </Col>
                 <Col span={6}>
-                  <div style={{ marginLeft: '10px' }}>
+                  <Col offset={2}>
                     <Upload name="image" listType="picture-card">
                       <div>
                         <PlusOutlined />
                         <div style={{ marginTop: 8 }}>Upload</div>
                       </div>
                     </Upload>
-                  </div>
+                  </Col>
                 </Col>
               </Row>
             </Col>
