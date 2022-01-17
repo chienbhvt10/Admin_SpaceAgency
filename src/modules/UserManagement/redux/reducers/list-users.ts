@@ -1,17 +1,27 @@
-import { Role } from 'graphql/generated/graphql';
-import { UsersActionTypes, UsersState, LIST_USERS, LIST_USERS_SUCCESS, LIST_USERS_ERROR } from '../action-types';
+import { TypePagination } from 'commons/type';
+import {
+  LIST_USERS,
+  LIST_USERS_ERROR,
+  LIST_USERS_SUCCESS,
+  UpdateUserActionTypes,
+  UPDATE_USERS,
+  UPDATE_USERS_ERROR,
+  UPDATE_USERS_SUCCESS,
+  UsersActionTypes,
+  UsersState,
+} from '../action-types';
 
 const initialState: UsersState = {
   loading: false,
   pagination: {
-    skip: 0,
-    limit: 15,
+    skip: TypePagination.DEFAULT_LIMIT,
+    limit: TypePagination.DEFAULT_LIMIT,
   },
   dataUsers: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initialState, action: UsersActionTypes): UsersState => {
+export default (state = initialState, action: UsersActionTypes | UpdateUserActionTypes): UsersState => {
   switch (action.type) {
     case LIST_USERS:
       return {
@@ -30,6 +40,21 @@ export default (state = initialState, action: UsersActionTypes): UsersState => {
         },
       };
     case LIST_USERS_ERROR:
+      return {
+        ...state,
+        loading: false,
+      };
+    case UPDATE_USERS:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case UPDATE_USERS_ERROR:
       return {
         ...state,
         loading: false,

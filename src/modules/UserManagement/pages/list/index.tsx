@@ -2,11 +2,11 @@ import { Button, PageHeader, TablePaginationConfig } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import UserManagementLayout from 'commons/components/layouts/UserManagement';
-import { useListUsers } from 'modules/UserManagement/hooks/userListUsers';
+import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import { PlusOutlined } from '@ant-design/icons';
 import CustomUserManagementTable from './Table';
 import { IUsersFields } from 'graphql/generated/graphql';
-import { useRemoveUser } from 'modules/UserManagement/hooks/userRemoveUser';
+import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import { useNavigate } from 'react-router-dom';
 
 function ListUserManagement() {
@@ -35,7 +35,10 @@ function ListUserManagement() {
     });
   };
   const onEdit = (record: IUsersFields) => () => {
-    navigate(CommonPath.USERS_MANAGEMENT_DETAIL);
+    navigate('/user-management/detail/' + record.id);
+  };
+  const onNew = () => {
+    navigate(CommonPath.USERS_MANAGEMENT_NEW);
   };
   return (
     <UserManagementLayout>
@@ -43,7 +46,7 @@ function ListUserManagement() {
       <TableHeader
         title="User Management"
         extra={
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
             New User
           </Button>
         }

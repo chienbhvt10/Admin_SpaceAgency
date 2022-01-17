@@ -4,25 +4,11 @@ import UserManagementLayout from 'commons/components/layouts/UserManagement';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import DetailUserForm from 'modules/UserManagement/components/UserForm';
-import { useDetailUser } from 'modules/UserManagement/hooks/useDetailUser';
-import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
-import { useParams } from 'react-router';
 
-function DetailUserManagement() {
-  let { id } = useParams<'id'>();
-  const { getDetailUser, item } = useDetailUser();
-  const { loading: loadingUserUpdate } = useUpdateUser();
-
+function NewUserManagement() {
   React.useEffect(() => {
-    if (id) {
-      getDetailUser(id);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
-  React.useEffect(() => {
-    setTitle('Detail User');
+    setTitle('Create User');
   }, []);
   const routes = [
     {
@@ -35,15 +21,15 @@ function DetailUserManagement() {
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,
-      breadcrumbName: 'Detail User Management',
+      breadcrumbName: 'Create User Management',
     },
   ];
   return (
     <UserManagementLayout>
       <PageHeader title="Detail User" breadcrumb={{ routes }} />
-      <DetailUserForm type={TypeForm.UPDATE} item={item} loading={loadingUserUpdate} />
+      <DetailUserForm type={TypeForm.CREATE} loading={false} />
     </UserManagementLayout>
   );
 }
 
-export default DetailUserManagement;
+export default NewUserManagement;

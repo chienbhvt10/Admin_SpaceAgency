@@ -15,7 +15,11 @@ import {
   styleCollectionRouter,
 } from 'modules/StylesCollection/router';
 import { createThemeCreateRouter, themeCollectionRouter, updateThemeRouter } from 'modules/ThemesCollection/router';
-import { userManagementRouter } from 'modules/UserManagement/router';
+import {
+  createUserManagementRouter,
+  detailUserManagementRouter,
+  userManagementRouter,
+} from 'modules/UserManagement/router';
 import { RouteObject } from 'react-router-dom';
 import { authRouter } from './modules/Auth/router';
 import { homeRouter } from './modules/Home/router';
@@ -36,6 +40,8 @@ const routes: RouteObject[] = [
   { ...customerSimulationDetailRouter },
   { ...newCustomerSimulationRouter },
   { ...userManagementRouter },
+  { ...detailUserManagementRouter },
+  { ...createUserManagementRouter },
 ];
 
 export default routes;
