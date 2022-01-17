@@ -1,4 +1,5 @@
-import { GetListUsersVariables } from 'graphql/generated/graphql';
+import { TypePagination } from 'commons/type';
+import { FilterInput, GetListUsersVariables } from 'graphql/generated/graphql';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
@@ -19,6 +20,20 @@ export function useListUsers() {
     dispatch(
       actionUsers({
         pagination: { skip, limit },
+        where: { ...where },
+      }),
+    );
+  };
+  const filterPaginationUser = (filter: FilterInput[]) => {
+    dispatch(
+      actionUsers({
+        pagination: {
+          limit: TypePagination.DEFAULT_LIMIT,
+          skip: TypePagination.DEFAULT_SKIP,
+        },
+        where: {
+          filter,
+        },
       }),
     );
   };
@@ -35,5 +50,7 @@ export function useListUsers() {
     paginationUser,
     updatePaginationUser,
     pagination,
+    where,
+    filterPaginationUser,
   };
 }

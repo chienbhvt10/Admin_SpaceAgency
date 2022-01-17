@@ -14,6 +14,7 @@ import './style.scss';
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
   const { items, loading } = useListMaterial();
+  const [value, setValue] = React.useState<string>('');
   React.useEffect(() => {
     setTitle('Material Collection');
   }, []);
@@ -33,6 +34,8 @@ const MaterialCollectionPage = () => {
       breadcrumbName: 'Material Collection',
     },
   ];
+  const handleSearch = (value: string) => () => {};
+  const onChangeValue = (e: any) => () => {};
   return (
     <MaterialCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }}></PageHeader>
@@ -62,7 +65,7 @@ const MaterialCollectionPage = () => {
             options={[]}
           />
         </div>
-        <FormSearch />
+        <FormSearch value={value} onChange={onChangeValue} handleSearch={handleSearch} />
         <TableMaterial items={items} rowKey={rowKey} loading={loading} onChange={onChange} handleAdd={handleAdd} />
       </TableHeader>
     </MaterialCollectionLayout>

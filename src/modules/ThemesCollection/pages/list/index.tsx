@@ -15,6 +15,8 @@ import TableHeader from 'commons/components/layouts/TableHeader';
 const ThemeCollectionPage = () => {
   const navigate = useNavigate();
   const { dataThemes, loading } = useListThemes();
+  const [value, setValue] = React.useState<string>('');
+
   React.useEffect(() => {
     setTitle('Theme Collection');
   }, []);
@@ -32,6 +34,9 @@ const ThemeCollectionPage = () => {
       breadcrumbName: 'Themes Collection',
     },
   ];
+  const handleSearch = (value: string) => () => {};
+  const onChangeValue = (e: any) => () => {};
+
   return (
     <ThemeCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
@@ -43,7 +48,7 @@ const ThemeCollectionPage = () => {
           </Button>
         }
       >
-        <FormSearch />
+        <FormSearch onChange={onChangeValue} value={value} handleSearch={handleSearch} />
         <TableThemes items={dataThemes} loading={loading} onChange={onChange} handleAdd={handleAdd} />
       </TableHeader>
     </ThemeCollectionLayout>
