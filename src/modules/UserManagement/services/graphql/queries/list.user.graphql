@@ -1,0 +1,5 @@
+query getListUsers($where: WhereInput, $pagination: PaginationInput) {
+  users(where: $where, pagination: $pagination) {
+    ...IUsersFields
+  }
+}
