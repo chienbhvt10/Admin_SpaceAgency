@@ -4,22 +4,28 @@ import {
   customerSimulationRouter,
   newCustomerSimulationRouter,
 } from 'modules/CustomerSimulation/router';
-import { materialCollectionRouter, newMaterialCollectionRouter, updateMaterialCollectionlRouter } from 'modules/MaterialsCollection/router';
+import {
+  materialCollectionRouter,
+  newMaterialCollectionRouter,
+  updateMaterialCollectionlRouter,
+} from 'modules/MaterialsCollection/router';
 import {
   newStyleCollectionRouter,
   styleCollectionDetailRouter,
   styleCollectionRouter,
 } from 'modules/StylesCollection/router';
 import { createThemeCreateRouter, themeCollectionRouter, updateThemeRouter } from 'modules/ThemesCollection/router';
+import {
+  createUserManagementRouter,
+  detailUserManagementRouter,
+  userManagementRouter,
+} from 'modules/UserManagement/router';
 import { RouteObject } from 'react-router-dom';
 import { authRouter } from './modules/Auth/router';
 import { homeRouter } from './modules/Home/router';
 const routes: RouteObject[] = [
   { ...authRouter },
   { ...homeRouter },
-  // { ...userRouter },
-  // { ...newUserRouter },
-  // { ...detailUserRouter },
   { ...contentRouter },
   { ...themeCollectionRouter },
   { ...createThemeCreateRouter },
@@ -33,6 +39,9 @@ const routes: RouteObject[] = [
   { ...customerSimulationRouter },
   { ...customerSimulationDetailRouter },
   { ...newCustomerSimulationRouter },
+  { ...userManagementRouter },
+  { ...detailUserManagementRouter },
+  { ...createUserManagementRouter },
 ];
 
 export default routes;

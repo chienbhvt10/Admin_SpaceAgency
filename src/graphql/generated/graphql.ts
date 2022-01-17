@@ -36,6 +36,8 @@ export type CreateAuthInput = {
 export type CreateMaterialInput = {
   /** list new material type */
   materialTypes?: InputMaybe<Array<CreateMaterialTypeInput>>;
+  /** style id of material */
+  style?: InputMaybe<RefInput>;
   /** tile of material */
   title: Scalars['String'];
 };
@@ -70,8 +72,12 @@ export type CreateSimulationInput = {
 };
 
 export type CreateStyleInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  /** 3d code of style */
+  code3d?: InputMaybe<Scalars['String']>;
+  /** description of style */
+  description?: InputMaybe<Scalars['String']>;
+  /** title of style */
+  title: Scalars['String'];
 };
 
 export type CreateThemeCategoryInput = {
@@ -94,10 +100,16 @@ export type CreateThemeInput = {
 };
 
 export type CreateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   firstName: Scalars['String'];
+  /** First name in furigana */
+  firstNameF: Scalars['String'];
   lastName: Scalars['String'];
+  /** Last name in furigana */
+  lastNameF: Scalars['String'];
   password: Scalars['String'];
+  phone?: InputMaybe<Scalars['String']>;
 };
 
 export type FilterInput = {
@@ -109,6 +121,7 @@ export type Material = {
   __typename?: 'Material';
   id: Scalars['String'];
   materialTypes: Array<MaterialType>;
+  style: Style;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -142,6 +155,7 @@ export type Mutation = {
   createRequest: Request;
   createSimulation: Simulation;
   createSimulationComponent: SimulationComponent;
+  /** Create new style */
   createStyle: Style;
   createTheme: Theme;
   createThemeCategory: ThemeCategory;
@@ -285,7 +299,7 @@ export type MutationRemoveSimulationComponentArgs = {
 
 
 export type MutationRemoveStyleArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -388,7 +402,9 @@ export type Query = {
   simulationComponent: SimulationComponent;
   simulationComponents: Array<SimulationComponent>;
   simulations: Array<Simulation>;
+  /** find one style */
   style: Style;
+  /** find all styles */
   styles: Array<Style>;
   theme: Theme;
   themeCategories: Array<ThemeCategory>;
@@ -446,7 +462,13 @@ export type QuerySimulationComponentArgs = {
 
 
 export type QueryStyleArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type QueryStylesArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 
@@ -523,8 +545,7 @@ export type Simulation = {
 
 export type SimulationComponent = {
   __typename?: 'SimulationComponent';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 export type SortInput = {
@@ -539,8 +560,17 @@ export enum SortValue {
 
 export type Style = {
   __typename?: 'Style';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  code3d?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  materials: Array<Material>;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+export type StyleMaterialsArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 export type Theme = {
@@ -574,6 +604,8 @@ export type UpdateMaterialInput = {
   id: Scalars['String'];
   /** list material type */
   materialTypes?: InputMaybe<Array<UpdateMaterialTypeInput>>;
+  /** style id of material */
+  style?: InputMaybe<RefInput>;
   /** tile of material */
   title?: InputMaybe<Scalars['String']>;
 };
@@ -613,9 +645,13 @@ export type UpdateSimulationInput = {
 };
 
 export type UpdateStyleInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
-  id: Scalars['Int'];
+  /** 3d code of style */
+  code3d?: InputMaybe<Scalars['String']>;
+  /** description of style */
+  description?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
+  /** title of style */
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateThemeCategoryInput = {
@@ -641,18 +677,30 @@ export type UpdateThemeInput = {
 };
 
 export type UpdateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
+  /** First name in furigana */
+  firstNameF?: InputMaybe<Scalars['String']>;
   id: Scalars['String'];
   lastName?: InputMaybe<Scalars['String']>;
+  /** Last name in furigana */
+  lastNameF?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
+  address?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
+  /** First name in furigana */
+  firstNameF?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   lastName?: Maybe<Scalars['String']>;
+  /** Last name in furigana */
+  lastNameF?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
   role?: Maybe<Role>;
 };
 
@@ -669,7 +717,7 @@ export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePrevie
 
 export type IThemeCategory = { __typename?: 'ThemeCategory', id: string, title: string };
 
-export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined };
+export type IUsersFields = { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined };
 
 export type LoginAdminVariables = Exact<{
   loginInput: CreateAuthInput;
@@ -681,7 +729,7 @@ export type LoginAdmin = { __typename?: 'Mutation', loginAdmin: { __typename?: '
 export type MeVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, role?: Role | null | undefined } };
+export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
 export type GetDetailThemeVariables = Exact<{
   id: Scalars['String'];
@@ -697,6 +745,42 @@ export type GetListThemesVariables = Exact<{
 
 
 export type GetListThemes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined }> };
+
+export type CreateCustomerVariables = Exact<{
+  createUserInput: CreateUserInput;
+}>;
+
+
+export type CreateCustomer = { __typename?: 'Mutation', createCustomer: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
+
+export type RemoveUserVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveUser = { __typename?: 'Mutation', removeUser: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
+
+export type UpdateUserVariables = Exact<{
+  updateUserInput: UpdateUserInput;
+}>;
+
+
+export type UpdateUser = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
+
+export type GetUserVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetUser = { __typename?: 'Query', user: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
+
+export type GetListUsersVariables = Exact<{
+  where?: InputMaybe<WhereInput>;
+  pagination?: InputMaybe<PaginationInput>;
+}>;
+
+
+export type GetListUsers = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined }> };
 
 export const AuthFields = gql`
     fragment AuthFields on Auth {
@@ -740,6 +824,10 @@ export const IUsersFields = gql`
   email
   firstName
   lastName
+  firstNameF
+  lastNameF
+  address
+  phone
   role
 }
     `;
@@ -772,6 +860,41 @@ export const GetListThemesDocument = gql`
   }
 }
     ${ITheme}`;
+export const CreateCustomerDocument = gql`
+    mutation createCustomer($createUserInput: CreateUserInput!) {
+  createCustomer(createUserInput: $createUserInput) {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
+export const RemoveUserDocument = gql`
+    mutation removeUser($id: String!) {
+  removeUser(id: $id) {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
+export const UpdateUserDocument = gql`
+    mutation updateUser($updateUserInput: UpdateUserInput!) {
+  updateUser(updateUserInput: $updateUserInput) {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
+export const GetUserDocument = gql`
+    query getUser($id: String!) {
+  user(id: $id) {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
+export const GetListUsersDocument = gql`
+    query getListUsers($where: WhereInput, $pagination: PaginationInput) {
+  users(where: $where, pagination: $pagination) {
+    ...IUsersFields
+  }
+}
+    ${IUsersFields}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
@@ -791,6 +914,21 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getListThemes(variables?: GetListThemesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListThemes> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListThemes>(GetListThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListThemes');
+    },
+    createCustomer(variables: CreateCustomerVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateCustomer> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateCustomer>(CreateCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createCustomer');
+    },
+    removeUser(variables: RemoveUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveUser>(RemoveUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeUser');
+    },
+    updateUser(variables: UpdateUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUser>(UpdateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUser');
+    },
+    getUser(variables: GetUserVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetUser> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetUser>(GetUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUser');
+    },
+    getListUsers(variables?: GetListUsersVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListUsers> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListUsers>(GetListUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListUsers');
     }
   };
 }

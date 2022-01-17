@@ -104,3 +104,7 @@ export enum TypeForm {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE',
 }
+export enum TypePagination {
+  DEFAULT_SKIP = 0,
+  DEFAULT_LIMIT = 20,
+}
