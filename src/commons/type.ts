@@ -108,3 +108,7 @@ export enum TypePagination {
   DEFAULT_SKIP = 0,
   DEFAULT_LIMIT = 20,
 }
+
+export enum TypeKeyFilterUser {
+  EMAIL = 'email',
+}

@@ -15,6 +15,10 @@ export function* getListUsersAsync(action: UsersAction) {
           skip: action.payload.pagination?.skip,
           limit: action.payload.pagination?.limit,
         },
+        where: {
+          filter: action.payload.where?.filter,
+          sort: action.payload.where?.sort,
+        },
       }),
     );
     yield put(actionLoadingSuccess());
