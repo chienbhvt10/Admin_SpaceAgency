@@ -9,7 +9,7 @@ import TableRowAction from 'modules/CustomerSimulation/components/table-row-acti
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import FilterForm from '../../components/filter-form/FilterForm';
+import FilterForm from '../../components/filter-form';
 const { Option } = Select;
 
 interface Props {
@@ -68,10 +68,10 @@ const CustomerSimulationTable = (props: Props) => {
       }
     >
       <Row justify="center">
-        <Col span={22}>
+        <Col span={24}>
           <FilterForm options={themeOptions} />
         </Col>
-        <Col span={22}>
+        <Col span={24}>
           <Table
             expandable={{
               expandedRowRender,

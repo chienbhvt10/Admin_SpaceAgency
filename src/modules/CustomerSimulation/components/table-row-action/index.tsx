@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, QuestionCircleOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Space } from 'antd';
 import React from 'react';
 
@@ -22,8 +22,9 @@ const TableRowAction = (props: IProps) => {
         onConfirm={onDelete(record)}
         icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
       >
-        <Button type="ghost" shape="circle" icon={<DeleteOutlined />} size="middle" />
+        <Button type="ghost" shape="circle" style={{ color: 'red' }} icon={<DeleteOutlined />} size="middle" />
       </Popconfirm>
+      <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" />
     </Space>
   );
 };

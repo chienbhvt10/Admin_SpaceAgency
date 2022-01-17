@@ -40,25 +40,24 @@ const CustomerSimulationForm = (props: Props) => {
 
   return (
     <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel} type={type}>
-    <div id="customer-simulation-form">
-      <Form
-        name="basic"
-        initialValues={{
-          ...item,
-        }}
-        form={form}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-      
+      <div id="customer-simulation-form">
+        <Form
+          name="basic"
+          initialValues={{
+            ...item,
+          }}
+          form={form}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
           <Row justify="center" className="simulation-form-control">
             <Col className="simulation-contact" span={24}>
               <Title level={4}>Contact</Title>
             </Col>
             <Col span={22}>
               <Form.Item labelCol={{ span: 4 }} name="content" label="Content">
-                <Col offset={2}>
+                <Col offset={1}>
                   <Radio.Group>
                     <Radio value="1">Request detail material</Radio>
                     <Radio value="2">Need interview architecture</Radio>
@@ -138,56 +137,31 @@ const CustomerSimulationForm = (props: Props) => {
                 </Col>
               </Form.Item>
             </Col>
-            <Col className="simulation-component" span={24}>
-              <Title level={4}>Component</Title>
-            </Col>
             <Col span={22}>
-              <Row>
-                <Col span={12}>
-                  <SelectFormItem
-                    colOffSet={2}
-                    options={themeOptions}
-                    formItem={{
-                      label: 'Theme',
-                      name: 'theme',
-                      labelCol: { span: 8 },
-                    }}
-                  />
-                  <Form.Item labelCol={{ span: 8 }} label="Price" name="price" rules={[requireRule]}>
-                    <Col offset={2}>
-                      <InputNumber style={{ width: '100%' }} />
-                    </Col>
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <SelectFormItem
-                    colOffSet={2}
-                    options={designOptions}
-                    formItem={{
-                      label: 'Design',
-                      name: 'design',
-                      labelCol: { span: 8 },
-                    }}
-                  />
-                  <Form.Item labelCol={{ span: 8 }} label="Price" name="price" rules={[requireRule]}>
-                    <Col offset={2}>
-                      <InputNumber style={{ width: '100%' }} />
-                    </Col>
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Col>
-            <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} label="Style List" name="styleList">
+              <Form.Item labelCol={{ span: 4 }} label="Quotation List" name="quotationList">
                 <StyleListTable colOffSet={1} />
               </Form.Item>
             </Col>
+            <Col span={22}>
+              <Row>
+                <Col span={18}>
+                  <Row justify="end">
+                    <Title level={5}>Tax Rate</Title>
+                  </Row>
+                  <Row justify="end">
+                    <Title level={5}>Total Price</Title>
+                  </Row>
+                </Col>
+                <Col span={5} offset={1}>
+                  <Title level={5}>10 x 5,000,000</Title>
+                  <Title level={5}>5,500,000</Title>
+                </Col>
+              </Row>
+            </Col>
           </Row>
-        
         </Form>
-        </div>
-        </FormHeader>
-   
+      </div>
+    </FormHeader>
   );
 };
 
