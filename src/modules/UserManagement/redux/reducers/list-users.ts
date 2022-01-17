@@ -42,6 +42,7 @@ export default (state = initialState, action: UsersActionTypes | UpdateUserActio
           skip: action.payload.pagination?.skip,
           limit: action.payload.pagination?.limit,
         },
+        where: action.payload.where,
       };
     case LIST_USERS_ERROR:
       return {
