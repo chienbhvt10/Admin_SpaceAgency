@@ -5,8 +5,8 @@
     .ant-form-item {
         flex-basis: 45% !important;
         .ant-select-selector{
-            margin-left: -8px !important;
-            width: 101% !important;
+            margin-left: 17px !important;
+            width: 95% !important;
         }
     }
    
@@ -15,5 +15,8 @@
         font-size: 16px !important;
         padding-right: 22px;
         font-family: Open Sans;
+        &::after{
+            display: none !important;
+        }
     }
 }
