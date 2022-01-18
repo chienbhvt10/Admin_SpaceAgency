@@ -19,7 +19,6 @@ function ListUserManagement() {
   const navigate = useNavigate();
   const { removeUser } = useRemoveUser();
   const [value, setValue] = React.useState<string>('');
-  const [sortedInfo, setSortedInfo] = React.useState<SorterResult<any>>();
 
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
@@ -41,7 +40,6 @@ function ListUserManagement() {
     const limit = pagination.limit || TypePagination.DEFAULT_LIMIT;
     const current = paginationTable.current || 1;
     const skip = (current - 1) * limit;
-    setSortedInfo(sorter);
     updatePaginationAndSorterUser(
       {
         skip,
@@ -93,7 +91,6 @@ function ListUserManagement() {
         <FormSearch value={value} onChange={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
         <CustomUserManagementTable
           onDelete={onDelete}
-          sortedInfo={sortedInfo}
           onEdit={onEdit}
           items={dataUsers}
           loading={loading}

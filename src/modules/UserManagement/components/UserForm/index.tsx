@@ -42,8 +42,8 @@ function UserForm(props: IProps) {
     address: '',
     phone: '',
   };
-  const [createUserInput, setCreateUserInput] = React.useState<CreateUserInput>(inputCreate);
-  const [updateUserInput, setUpdateUserInput] = React.useState<UpdateUserInput>({
+  const [createInput, setCreateUserInput] = React.useState<CreateUserInput>(inputCreate);
+  const [updateInput, setUpdateUserInput] = React.useState<UpdateUserInput>({
     id: '',
     email: '',
     firstName: '',
@@ -73,118 +73,40 @@ function UserForm(props: IProps) {
       form.setFieldsValue(item);
     }
   }, [form, item]);
-  const onFinish = () => {
+  const onFinish = (values: IUsersFields) => {
     if (props.type === TypeForm.UPDATE) {
+      const updateUserInput: UpdateUserInput = {
+        ...updateInput,
+        email: values.email || '',
+        firstName: values.firstName || '',
+        lastName: values.lastName || '',
+        address: values.address || '',
+        firstNameF: values.firstNameF || '',
+        lastNameF: values.lastNameF || '',
+        phone: values.phone || '',
+      };
       updateUser({ updateUserInput });
     }
     if (props.type === TypeForm.CREATE) {
+      const createUserInput: CreateUserInput = {
+        ...createInput,
+        email: values.email || '',
+        firstName: values.firstName || '',
+        lastName: values.lastName || '',
+        address: values.address || '',
+        firstNameF: values.firstNameF || '',
+        lastNameF: values.lastNameF || '',
+        phone: values.phone || '',
+      };
       createUser({ createUserInput });
     }
   };
   const onFinishFailed = () => {};
-  const handleChangeEmail = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        email: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setUpdateUserInput({
-        ...updateUserInput,
-        email: e.target.value,
-      });
-    }
-  };
   const handleChangePassword = (e: any) => {
     if (props.type === TypeForm.CREATE) {
       setCreateUserInput({
-        ...createUserInput,
+        ...createInput,
         password: e.target.value,
-      });
-    }
-  };
-  const handleChangePhone = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        phone: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        phone: e.target.value,
-      });
-    }
-  };
-  const handleChangeAddress = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        address: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        address: e.target.value,
-      });
-    }
-  };
-  const handleChangeFirstNameF = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        firstNameF: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        firstNameF: e.target.value,
-      });
-    }
-  };
-  const handleChangeLastNameF = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        lastNameF: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        lastNameF: e.target.value,
-      });
-    }
-  };
-  const handleChangeFirstName = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        firstName: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setUpdateUserInput({
-        ...updateUserInput,
-        firstName: e.target.value,
-      });
-    }
-  };
-  const handleChangeLastName = (e: any) => {
-    if (props.type === TypeForm.CREATE) {
-      setCreateUserInput({
-        ...createUserInput,
-        lastName: e.target.value,
-      });
-    }
-    if (props.type === TypeForm.UPDATE) {
-      setUpdateUserInput({
-        ...updateUserInput,
-        lastName: e.target.value,
       });
     }
   };
@@ -208,7 +130,7 @@ function UserForm(props: IProps) {
             <Row>
               <Col span={12}>
                 <Form.Item label="Email" name="email" rules={[requireRule, requireEmail]} {...tailLayout}>
-                  <Input onChange={handleChangeEmail} />
+                  <Input />
                 </Form.Item>
               </Col>
               {props.type === TypeForm.CREATE && (
@@ -219,33 +141,33 @@ function UserForm(props: IProps) {
                 </Col>
               )}
               <Col span={12}>
-                <Form.Item label="First Name" name="firstName" {...tailLayout}>
-                  <Input onChange={handleChangeFirstName} />
+                <Form.Item label="First Name" name="firstName" rules={[requireRule]} {...tailLayout}>
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="First Name F" name="firstNameF" {...tailLayout}>
-                  <Input onChange={handleChangeFirstNameF} />
+                <Form.Item label="First Name F" name="firstNameF" rules={[requireRule]} {...tailLayout}>
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Last Name" name="lastName" {...tailLayout}>
-                  <Input onChange={handleChangeLastName} />
+                <Form.Item label="Last Name" name="lastName" rules={[requireRule]} {...tailLayout}>
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Last Name F" name="lastNameF" {...tailLayout}>
-                  <Input onChange={handleChangeLastNameF} />
+                <Form.Item label="Last Name F" name="lastNameF" rules={[requireRule]} {...tailLayout}>
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item label="Phone" name="phone" {...tailLayout}>
-                  <Input onChange={handleChangePhone} />
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item label="Address" name="address" rules={[requireRule]} {...tailLayout}>
-                  <Input onChange={handleChangeAddress} />
+                  <Input />
                 </Form.Item>
               </Col>
             </Row>
