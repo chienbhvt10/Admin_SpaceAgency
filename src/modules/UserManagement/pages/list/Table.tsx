@@ -13,14 +13,12 @@ interface IProps {
   pagination: any;
   onEdit: (record: IUsersFields) => () => void;
   onDelete: (record: IUsersFields) => () => void;
-  sortedInfo?: SorterResult<any>;
 }
 function CustomUserManagementTable(props: IProps) {
-  const { items, loading, onChange, pagination, sortedInfo } = props;
+  const { items, loading, onChange, pagination } = props;
   const { paginationTable } = useListUsers();
   const { current, pageSize } = paginationTable;
   const rowKey = (item: IUsersFields) => `${item.id}`;
-  console.log(sortedInfo);
 
   const columns: ColumnsType<IUsersFields> = [
     {
@@ -41,31 +39,31 @@ function CustomUserManagementTable(props: IProps) {
       title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Last Name',
       dataIndex: 'lastName',
       key: 'lastName',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Phone',
       dataIndex: 'phone',
       key: 'phone',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Role',
       dataIndex: 'role',
       key: 'role',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Tools',
