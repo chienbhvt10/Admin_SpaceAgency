@@ -1,57 +1,73 @@
 import { Table } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
+import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { ITheme } from 'graphql/generated/graphql';
-import React from 'react';
+import { NumberOfRow } from 'helpers/string';
+import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
 import { useNavigate } from 'react-router';
+import { useRemoveTheme } from '../../hooks/useRemoveTheme';
 interface IProps {
   items: ITheme[];
   loading: boolean;
-  onChange: () => void;
+  onChange: (pagination: TablePaginationConfig, __: any, sorter: any) => void;
   handleAdd: () => void;
+  pagination: any;
 }
 function TableThemes(props: IProps) {
   const navigate = useNavigate();
-  const [visible, setVisible] = React.useState(false);
-  const { items, loading, onChange, handleAdd } = props;
+  const { removeTheme } = useRemoveTheme();
+  const { items, loading, onChange, handleAdd, pagination } = props;
   const rowKey = (item: ITheme) => `${item.id}`;
-
+  const { current, pageSize } = pagination;
   const onEdit = (record: ITheme) => () => {
     navigate(CommonPath.THEME_COLLECTION_UPDATE + record.id);
   };
-  const onDelete = (record: any) => () => {
-    setVisible(true);
+  const onDelete = (record: ITheme) => () => {
+    removeTheme({ id: record.id });
   };
   const columns: ColumnsType<ITheme> = [
     {
+      title: 'STT',
+      dataIndex: '#',
+      key: '#',
+      width: 40,
+      render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
+    },
+    {
       title: 'Name',
       dataIndex: 'title',
-      key: '#',
+      key: 'title',
+      sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
       title: 'Name English',
-      dataIndex: 'description',
-      key: '#',
-      sorter: true,
+      key: 'nameEnglish',
+      sorter: false,
+      render: (_: any, record: ITheme) => (
+        <>{record && record.themeCategories && record.themeCategories.length && record.themeCategories[0].title}</>
+      ),
     },
     {
       title: '3D Code',
       dataIndex: 'code3D',
-      key: '#',
+      key: 'code3D',
+      sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
       title: 'Price',
       dataIndex: 'price',
-      key: '#',
+      key: 'price',
+      sortDirections: ['descend', 'ascend'],
       sorter: true,
+      render: (_: any, record: ITheme) => <>{record.price?.value}</>,
     },
     {
       title: 'Tools',
       dataIndex: '',
-      key: '#',
+      key: 'tools',
       align: 'center',
       render: (_: any, record: ITheme) => (
         <UserRowActions
@@ -65,7 +81,16 @@ function TableThemes(props: IProps) {
   ];
   return (
     <div>
-      <Table columns={columns} dataSource={items} loading={loading} rowKey={rowKey} onChange={onChange} />
+      <Table
+        pagination={{
+          ...pagination,
+        }}
+        columns={columns}
+        dataSource={items}
+        loading={loading}
+        rowKey={rowKey}
+        onChange={onChange}
+      />
     </div>
   );
 }

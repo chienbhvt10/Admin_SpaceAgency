@@ -8,7 +8,17 @@ import { loginError } from 'modules/Auth/redux/actions';
 export function* getThemesAsync(action: ThemesAction) {
   try {
     const data: GetListThemes = yield apis.getThemes(action.payload);
-    yield put(actionThemesSuccess(data.themes));
+    yield put(
+      actionThemesSuccess({
+        dataThemes: data.themes,
+        pagination: {
+          ...action.payload.pagination,
+        },
+        where: {
+          ...action.payload.where,
+        },
+      }),
+    );
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(loginError(err));

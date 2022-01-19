@@ -112,6 +112,9 @@ export enum TypePagination {
 export enum TypeKeyFilterUser {
   EMAIL = 'email',
 }
+export enum TypeKeyFilterTheme {
+  NAME = 'title',
+}
 export enum TypeSortUser {
   EMAIL = 'email',
 }

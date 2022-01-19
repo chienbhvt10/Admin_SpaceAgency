@@ -1,7 +1,7 @@
 import { AppError } from 'commons/type';
-import { ITheme, GetListThemesVariables } from 'graphql/generated/graphql';
+import { GetListThemesVariables } from 'graphql/generated/graphql';
 import { ThemesActionTypes } from '../action-types';
-import { THEMES, THEMES_ERROR, THEMES_SUCCESS } from '../action-types/themes';
+import { THEMES, ThemesData, THEMES_ERROR, THEMES_SUCCESS } from '../action-types/themes';
 
 export const actionThemes = (payload: GetListThemesVariables): ThemesActionTypes => ({
   type: THEMES,
@@ -13,7 +13,7 @@ export const actionThemesError = (payload: AppError): ThemesActionTypes => ({
   payload,
 });
 
-export const actionThemesSuccess = (payload: ITheme[]): ThemesActionTypes => ({
+export const actionThemesSuccess = (payload: ThemesData): ThemesActionTypes => ({
   type: THEMES_SUCCESS,
   payload,
 });

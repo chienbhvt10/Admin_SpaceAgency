@@ -1,4 +1,5 @@
 import { TypeKeyFilterUser, TypePagination } from 'commons/type';
+import { SortValue } from 'graphql/generated/graphql';
 import {
   LIST_USERS,
   LIST_USERS_ERROR,
@@ -18,7 +19,7 @@ const initialState: UsersState = {
     limit: TypePagination.DEFAULT_LIMIT,
   },
   where: {
-    sort: [],
+    sort: [{ key: 'email', value: SortValue.Asc }],
     filter: [],
   },
   dataUsers: [],

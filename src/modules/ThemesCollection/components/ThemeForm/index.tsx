@@ -1,12 +1,12 @@
-import React from 'react';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
-import { TypeForm } from 'commons/type';
-import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
-import { useNavigate } from 'react-router';
+import { Button, Col, Form, Input, InputNumber, Row, Select, Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
+import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
+import { TypeForm } from 'commons/type';
+import { ITheme } from 'graphql/generated/graphql';
 import 'modules/ThemesCollection/style/style.scss';
+import React from 'react';
+import { useNavigate } from 'react-router';
 const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -14,24 +14,34 @@ const { Title } = Typography;
 interface Props {
   title: string;
   loading: boolean;
-  item?: any;
+  items?: ITheme;
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;
 }
 const ThemesForm = (props: Props) => {
-  const { loading, type, item, onChange, title } = props;
-  const [form] = Form.useForm<any>();
+  const { loading, type, items, onChange, title } = props;
+  const [form] = Form.useForm<ITheme>();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (items) {
+      form.setFieldsValue({
+        title: items.title,
+        code3D: items.code3D,
+        description: items.code3D,
+      });
+    }
+  }, [items, form]);
 
   const onFinish = () => {
     console.log(form.getFieldsValue());
   };
-  const onFinishFailed = () => { };
-  
+  const onFinishFailed = () => {};
+
   const onCancel = () => {
     navigate(CommonPath.THEME_COLLECTION);
-  }
+  };
   return (
     <div>
       <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
@@ -39,7 +49,7 @@ const ThemesForm = (props: Props) => {
           <Form
             name="basic"
             initialValues={{
-              ...item,
+              ...items,
             }}
             form={form}
             onFinish={onFinish}
@@ -55,7 +65,7 @@ const ThemesForm = (props: Props) => {
                 </Form.Item>
               </Col>
               <Col span={22}>
-                <Form.Item labelCol={{ span: 4 }} className="" label="Name English" name="nameenglish">
+                <Form.Item labelCol={{ span: 4 }} className="" label="Name English" name="nameEnglish">
                   <Col offset={1} span={24}>
                     <Input />
                   </Col>
@@ -107,9 +117,15 @@ const ThemesForm = (props: Props) => {
                   </Col>
                 </Form.Item>
                 <Form.Item labelCol={{ span: 4 }} label="Inside Preview" name="preview">
-                    <Col offset={1}>
-                    <Row><Col span={20}><Input /></Col>
-                    <Col span={3}><UploadDragger /></Col></Row>
+                  <Col offset={1}>
+                    <Row>
+                      <Col span={20}>
+                        <Input />
+                      </Col>
+                      <Col span={3}>
+                        <UploadDragger />
+                      </Col>
+                    </Row>
                     {/* <Upload
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         listType="picture"
@@ -118,7 +134,7 @@ const ThemesForm = (props: Props) => {
                       >
                         <Button icon={<UploadOutlined />}>Upload</Button>
                       </Upload> */}
-                    </Col>  
+                  </Col>
                 </Form.Item>
               </Col>
               <Col span={22} style={{ marginBottom: '50px' }}>
@@ -129,8 +145,14 @@ const ThemesForm = (props: Props) => {
                 </Form.Item>
                 <Form.Item labelCol={{ span: 4 }} label="Outside Preview" name="preview">
                   <Col offset={1}>
-                    <Row><Col span={20}><Input /></Col>
-                    <Col span={3}><UploadDragger /></Col></Row>
+                    <Row>
+                      <Col span={20}>
+                        <Input />
+                      </Col>
+                      <Col span={3}>
+                        <UploadDragger />
+                      </Col>
+                    </Row>
                     {/* <Upload
                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                         listType="picture"
@@ -139,7 +161,7 @@ const ThemesForm = (props: Props) => {
                       >
                         <Button icon={<UploadOutlined />}>Upload</Button>
                       </Upload> */}
-                    </Col>  
+                  </Col>
                 </Form.Item>
               </Col>
             </Row>
