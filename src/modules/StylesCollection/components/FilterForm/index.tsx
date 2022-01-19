@@ -5,16 +5,14 @@ import FormSearch from './FormSearch';
 const { Option } = Select;
 interface Props {
   options?: any;
+  value: string;
+  onChangeValue: (e: any) => void;
+  handleSearch: () => void;
+  onReset: () => void;
 }
 
 const FilterForm = (props: Props) => {
-  const { options } = props;
-  const onReset = () => {
-    console.log('ok');
-  };
-  const handleSearch = () => {
-    console.log('1');
-  };
+  const { options, value, onChangeValue, handleSearch, onReset } = props;
 
   return (
     <Form className="filter-form">
@@ -26,7 +24,7 @@ const FilterForm = (props: Props) => {
             </Col>
           </Form.Item>
         </Col>
-        <FormSearch />
+        <FormSearch value={value} onChangeValue={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
       </Row>
     </Form>
   );

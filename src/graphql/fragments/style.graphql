@@ -3,4 +3,15 @@ fragment IStyle on Style {
   title
   code3d
   description
+  price {
+    ...IPrice
+  }
+  theme {
+    id
+    title
+    description
+    code3D
+    createdAt
+    updatedAt
+  }
 }
