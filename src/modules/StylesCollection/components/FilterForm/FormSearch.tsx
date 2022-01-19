@@ -2,22 +2,21 @@ import { Col, Form, Input, Row } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import React from 'react';
 
-interface Props {}
+interface Props {
+  value: string;
+  onChangeValue: (e: any) => void;
+  handleSearch: () => void;
+  onReset: () => void;
+}
 
 const FormSearch = (props: Props) => {
-  const onReset = () => {
-    console.log('ok');
-  };
-  const handleSearch = () => {
-    console.log('1');
-  };
   return (
     <Col span={24}>
       <Row>
         <Col span={18}>
           <Form.Item labelCol={{ span: 4 }} label="Keyword" name="keyword">
             <Col offset={1}>
-              <Input placeholder="Type to search..." />
+              <Input placeholder="Type to search..." value={props.value} onChange={props.onChangeValue} />
             </Col>
           </Form.Item>
         </Col>
@@ -32,7 +31,7 @@ const FormSearch = (props: Props) => {
                   marginRight=""
                   marginLeft=""
                   backgroundColor="#6C757D"
-                  onClick={onReset}
+                  onClick={props.onReset}
                 />
               </Row>
             </Col>
@@ -46,7 +45,7 @@ const FormSearch = (props: Props) => {
                   marginLeft={''}
                   marginRight={''}
                   backgroundColor="#007BFF"
-                  onClick={handleSearch}
+                  onClick={props.handleSearch}
                 />
               </Row>
             </Col>
