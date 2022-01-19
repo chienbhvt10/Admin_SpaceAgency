@@ -1,10 +1,20 @@
+import { TypePagination } from 'commons/type';
+import { SortValue } from 'graphql/generated/graphql';
 import { ThemesActionTypes, ThemesState, THEMES, THEMES_SUCCESS, THEMES_ERROR } from '../action-types';
 
 const initialState: ThemesState = {
   loading: false,
   pagination: {
-    skip: 1,
-    limit: 1000,
+    skip: TypePagination.DEFAULT_SKIP,
+    limit: TypePagination.DEFAULT_LIMIT,
+  },
+  where: {
+    filter: [],
+    sort: [
+      { key: 'title', value: SortValue.Asc },
+      { key: 'code3D', value: SortValue.Asc },
+      { key: 'price', value: SortValue.Asc },
+    ],
   },
   dataThemes: [],
 };
@@ -22,7 +32,9 @@ export default (state = initialState, action: ThemesActionTypes): ThemesState =>
       return {
         ...state,
         loading: false,
-        dataThemes: action.payload,
+        pagination: action.payload.pagination,
+        where: action.payload.where,
+        dataThemes: action.payload.dataThemes,
       };
     case THEMES_ERROR:
       return {

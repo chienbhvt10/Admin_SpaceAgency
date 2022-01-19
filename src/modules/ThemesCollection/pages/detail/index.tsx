@@ -3,11 +3,20 @@ import ThemeCollectionLayout from 'commons/components/layouts/ThemesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import React from 'react';
-// import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser'
-import ThemesForm from 'modules/ThemesCollection/components/UseForm';
+import ThemesForm from 'modules/ThemesCollection/components/ThemeForm';
+import { useDetailTheme } from 'modules/ThemesCollection/hooks/useDetailTheme';
+import { useParams } from 'react-router';
+import { PageHeader } from 'antd';
 
 function ThemesUpdate() {
-  // const { loading } = useCreateUser();
+  let { id } = useParams<'id'>();
+  const { getDetailTheme, loading, items } = useDetailTheme();
+  React.useEffect(() => {
+    if (id) {
+      getDetailTheme({ id });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
   React.useEffect(() => {
     setTitle('Update Themes');
   }, []);
@@ -28,7 +37,8 @@ function ThemesUpdate() {
   return (
     <div>
       <ThemeCollectionLayout>
-        <ThemesForm title="Update Themes Collection" type={TypeForm.CREATE} loading={false} />
+        <PageHeader title="Detail Theme" breadcrumb={{ routes }} />
+        <ThemesForm title="Update Themes Collection" type={TypeForm.UPDATE} items={items} loading={loading} />
       </ThemeCollectionLayout>
     </div>
   );

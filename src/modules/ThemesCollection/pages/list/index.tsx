@@ -6,16 +6,22 @@ import React from 'react';
 import './style.scss';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import TableThemes from './Table';
-import { Button } from 'antd';
+import { Button, TablePaginationConfig } from 'antd';
 import { useNavigate } from 'react-router';
 import { PlusOutlined } from '@ant-design/icons';
 import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
 import TableHeader from 'commons/components/layouts/TableHeader';
+import { OrderOfSorter } from 'helpers/string';
+import { SorterResult } from 'antd/lib/table/interface';
+import { TypeKeyFilterTheme, TypePagination } from 'commons/type';
+import { FilterInput } from 'graphql/generated/graphql';
 
 const ThemeCollectionPage = () => {
   const navigate = useNavigate();
-  const { dataThemes, loading } = useListThemes();
+  const { dataThemes, loading, paginationTable, pagination, updatePaginationAndSorterThemes, filterTheme } =
+    useListThemes();
   const [value, setValue] = React.useState<string>('');
+  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterTheme.NAME, value: '' }];
 
   React.useEffect(() => {
     setTitle('Theme Collection');
@@ -23,7 +29,22 @@ const ThemeCollectionPage = () => {
   const handleAdd = () => {
     navigate(CommonPath.THEME_COLLECTION_NEW);
   };
-  const onChange = () => {};
+  const onChange = (paginationTable: TablePaginationConfig, _: any, sorter: SorterResult<any>) => {
+    const order = OrderOfSorter(sorter.order);
+    const limit = pagination?.limit || TypePagination.DEFAULT_LIMIT;
+    const current = paginationTable.current || 1;
+    const skip = (current - 1) * limit;
+    updatePaginationAndSorterThemes(
+      {
+        skip,
+        limit,
+      },
+      {
+        key: sorter.columnKey?.toString() || '',
+        value: order,
+      },
+    );
+  };
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -34,8 +55,16 @@ const ThemeCollectionPage = () => {
       breadcrumbName: 'Themes Collection',
     },
   ];
-  const handleSearch = (value: string) => () => {};
-  const onChangeValue = (e: any) => () => {};
+  const handleSearch = (value: string) => () => {
+    const newFilter = arrFilter.map((i) => ({
+      ...i,
+      value: i.key === TypeKeyFilterTheme.NAME ? value : '',
+    }));
+    filterTheme(newFilter);
+  };
+  const onChangeValue = (e: any) => {
+    setValue(e.target.value);
+  };
 
   return (
     <ThemeCollectionLayout>
@@ -49,7 +78,13 @@ const ThemeCollectionPage = () => {
         }
       >
         <FormSearch onChange={onChangeValue} value={value} handleSearch={handleSearch} />
-        <TableThemes items={dataThemes} loading={loading} onChange={onChange} handleAdd={handleAdd} />
+        <TableThemes
+          pagination={paginationTable}
+          items={dataThemes}
+          loading={loading}
+          onChange={onChange}
+          handleAdd={handleAdd}
+        />
       </TableHeader>
     </ThemeCollectionLayout>
   );

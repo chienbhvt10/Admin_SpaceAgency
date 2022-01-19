@@ -16,13 +16,31 @@ export function useListUsers() {
     dispatch(actionUsers(variables));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const updatePaginationAndSorterUser = (pagination: PaginationInput, sort: SortInput[]) => {
-    dispatch(
-      actionUsers({
-        pagination,
-        where: { ...where, sort },
-      }),
-    );
+  const updatePaginationAndSorterUser = (pagination: PaginationInput, sortInput: SortInput) => {
+    const arrSort = [...(where?.sort || [])];
+    if (sortInput && sortInput.value) {
+      const sort = arrSort.map((i) => ({
+        ...i,
+        value: i.key === sortInput.key ? sortInput.value : i.value,
+      }));
+      dispatch(
+        actionUsers({
+          pagination,
+          where: { ...where, sort },
+        }),
+      );
+    } else {
+      const sort = arrSort.map((i) => ({
+        ...i,
+        value: i.key === sortInput?.key ? SortValue.Asc : i.value,
+      }));
+      dispatch(
+        actionUsers({
+          pagination,
+          where: { ...where, sort },
+        }),
+      );
+    }
   };
   const filterUser = (filter: FilterInput[]) => {
     dispatch(

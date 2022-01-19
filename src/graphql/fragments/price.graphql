@@ -1,0 +1,9 @@
+fragment IPrice on Price {
+  id
+  value
+  unit
+  createdAt
+  updatedAt
+  refId
+  refType
+}

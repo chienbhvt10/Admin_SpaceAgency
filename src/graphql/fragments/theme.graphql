@@ -5,11 +5,17 @@ fragment ITheme on Theme {
   code3D
   createdAt
   updatedAt
+  price {
+    ...IPrice
+  }
   themeImage {
     ...IThemeImage
   }
   themeCategories {
     ...IThemeCategory
+  }
+  styles {
+    ...IStyle
   }
 }
 fragment IThemeImage on ThemeImage {

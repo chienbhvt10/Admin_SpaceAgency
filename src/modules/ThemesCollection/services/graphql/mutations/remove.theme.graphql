@@ -1,0 +1,6 @@
+mutation removeTheme($id: String!) {
+  removeTheme(id: $id) {
+    id
+    title
+  }
+}

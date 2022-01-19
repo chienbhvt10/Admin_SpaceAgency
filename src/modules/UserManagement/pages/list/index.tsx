@@ -45,14 +45,10 @@ function ListUserManagement() {
         skip,
         limit,
       },
-      sorter.field === TypeSortUser.EMAIL && order
-        ? [
-            {
-              key: TypeSortUser.EMAIL,
-              value: order,
-            },
-          ]
-        : [],
+      {
+        key: sorter.columnKey?.toString() || '',
+        value: order,
+      },
     );
   };
   const onDelete = (record: IUsersFields) => () => {

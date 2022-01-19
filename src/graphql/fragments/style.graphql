@@ -1,0 +1,6 @@
+fragment IStyle on Style {
+  id
+  title
+  code3d
+  description
+}

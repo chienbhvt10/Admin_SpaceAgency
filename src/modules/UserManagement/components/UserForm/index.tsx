@@ -27,7 +27,7 @@ const requireEmail = {
   message: 'The input is not valid E-mail!',
 };
 
-function UserForm(props: IProps) {
+function ThemeForm(props: IProps) {
   const { loading, item, onCancel, onChange } = props;
   const { updateUser } = useUpdateUser();
   const { createUser } = useCreateUser();
@@ -117,7 +117,6 @@ function UserForm(props: IProps) {
         name="basic"
         initialValues={{
           ...props.item,
-          users: [{}],
         }}
         form={form}
         onValuesChange={onChange}
@@ -195,4 +194,4 @@ function UserForm(props: IProps) {
   );
 }
 
-export default UserForm;
+export default ThemeForm;

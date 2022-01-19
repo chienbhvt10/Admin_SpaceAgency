@@ -3,7 +3,7 @@ import { CommonPath } from 'commons/base-routes';
 import ThemeCollectionLayout from 'commons/components/layouts/ThemesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
-import ThemesForm from 'modules/ThemesCollection/components/UseForm';
+import ThemesForm from 'modules/ThemesCollection/components/ThemeForm';
 import React from 'react';
 
 const ThemesCreateNew = () => {

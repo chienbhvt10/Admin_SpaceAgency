@@ -57,13 +57,21 @@ export type CreateQuotationInput = {
 };
 
 export type CreateRequestInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  address: Scalars['String'];
+  content: Scalars['String'];
+  email: Scalars['String'];
+  furigana: Scalars['String'];
+  hasLand: Scalars['Boolean'];
+  phone: Scalars['String'];
+  postcode: Scalars['String'];
+  requesterFullName: Scalars['String'];
+  type?: InputMaybe<RequestType>;
 };
 
 export type CreateSimulationComponentInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  materialTypes: Array<RefInput>;
+  style: RefInput;
+  theme: RefInput;
 };
 
 export type CreateSimulationInput = {
@@ -76,19 +84,18 @@ export type CreateStyleInput = {
   code3d?: InputMaybe<Scalars['String']>;
   /** description of style */
   description?: InputMaybe<Scalars['String']>;
+  theme?: InputMaybe<RefInput>;
   /** title of style */
   title: Scalars['String'];
 };
 
 export type CreateThemeCategoryInput = {
-  themes?: InputMaybe<Array<RefInput>>;
   title: Scalars['String'];
 };
 
 export type CreateThemeImageInput = {
   insidePreviewUrl?: InputMaybe<Scalars['String']>;
   outsidePreviewUrl?: InputMaybe<Scalars['String']>;
-  theme?: InputMaybe<RefInput>;
 };
 
 export type CreateThemeInput = {
@@ -112,7 +119,20 @@ export type CreateUserInput = {
   phone?: InputMaybe<Scalars['String']>;
 };
 
+export enum CurrencyUnit {
+  /** European Union */
+  Ecu = 'ECU',
+  /** Japan */
+  Jpy = 'JPY',
+  /** American */
+  Usd = 'USD',
+  /** Vietnam */
+  Vnd = 'VND'
+}
+
 export type FilterInput = {
+  /** set it to true if this field is a reference to another type */
+  isRef?: InputMaybe<Scalars['Boolean']>;
   key: Scalars['String'];
   value: Scalars['String'];
 };
@@ -136,6 +156,7 @@ export type MaterialType = {
   code3d?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   material?: Maybe<Material>;
+  price?: Maybe<Price>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -294,7 +315,7 @@ export type MutationRemoveSimulationArgs = {
 
 
 export type MutationRemoveSimulationComponentArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -382,8 +403,20 @@ export type PaginationInput = {
   skip?: InputMaybe<Scalars['Int']>;
 };
 
+export type Price = {
+  __typename?: 'Price';
+  createdAt: Scalars['DateTime'];
+  id: Scalars['String'];
+  refId: Scalars['String'];
+  refType: RefType;
+  unit: CurrencyUnit;
+  updatedAt: Scalars['DateTime'];
+  value: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  count: Scalars['Int'];
   /** find one material */
   material: Material;
   /** find one material type */
@@ -399,7 +432,7 @@ export type Query = {
   request: Request;
   requests: Array<Request>;
   simulation: Simulation;
-  simulationComponent: SimulationComponent;
+  simulationComponent?: Maybe<SimulationComponent>;
   simulationComponents: Array<SimulationComponent>;
   simulations: Array<Simulation>;
   /** find one style */
@@ -416,6 +449,12 @@ export type Query = {
   user: User;
   /** Get all user */
   users: Array<User>;
+};
+
+
+export type QueryCountArgs = {
+  type: SchemaType;
+  where?: InputMaybe<WhereInput>;
 };
 
 
@@ -457,7 +496,13 @@ export type QuerySimulationArgs = {
 
 
 export type QuerySimulationComponentArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type QuerySimulationComponentsArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 
@@ -522,19 +567,54 @@ export type Quotation = {
 };
 
 export type RefInput = {
-  id?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
 };
+
+/** reference to scpecific schema type */
+export enum RefType {
+  MaterialType = 'MATERIAL_TYPE',
+  Style = 'STYLE',
+  Theme = 'THEME'
+}
 
 export type Request = {
   __typename?: 'Request';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  address: Scalars['String'];
+  content: Scalars['String'];
+  email: Scalars['String'];
+  furigana: Scalars['String'];
+  hasLand: Scalars['Boolean'];
+  id: Scalars['String'];
+  phone: Scalars['String'];
+  postcode: Scalars['String'];
+  requesterFullName: Scalars['String'];
+  type: RequestType;
+  user: User;
 };
+
+export enum RequestType {
+  Meeting = 'MEETING',
+  Other = 'OTHER',
+  SendDocument = 'SEND_DOCUMENT'
+}
 
 export enum Role {
   Admin = 'ADMIN',
   Customer = 'CUSTOMER',
   Sysadmin = 'SYSADMIN'
+}
+
+export enum SchemaType {
+  Material = 'Material',
+  MaterialType = 'MaterialType',
+  Price = 'Price',
+  Request = 'Request',
+  Simulation = 'Simulation',
+  SimulationComponent = 'SimulationComponent',
+  Style = 'Style',
+  Theme = 'Theme',
+  ThemeCategor = 'ThemeCategor',
+  User = 'User'
 }
 
 export type Simulation = {
@@ -546,6 +626,9 @@ export type Simulation = {
 export type SimulationComponent = {
   __typename?: 'SimulationComponent';
   id: Scalars['String'];
+  materialTypes?: Maybe<Array<MaterialType>>;
+  style?: Maybe<Style>;
+  theme?: Maybe<Theme>;
 };
 
 export type SortInput = {
@@ -564,6 +647,8 @@ export type Style = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   materials: Array<Material>;
+  price?: Maybe<Price>;
+  theme?: Maybe<Theme>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -579,6 +664,8 @@ export type Theme = {
   createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
+  price?: Maybe<Price>;
+  styles?: Maybe<Array<Style>>;
   themeCategories?: Maybe<Array<ThemeCategory>>;
   themeImage?: Maybe<ThemeImage>;
   title: Scalars['String'];
@@ -627,15 +714,23 @@ export type UpdateQuotationInput = {
 };
 
 export type UpdateRequestInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
+  address?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  furigana?: InputMaybe<Scalars['String']>;
+  hasLand?: InputMaybe<Scalars['Boolean']>;
   id: Scalars['Int'];
+  phone?: InputMaybe<Scalars['String']>;
+  postcode?: InputMaybe<Scalars['String']>;
+  requesterFullName?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<RequestType>;
 };
 
 export type UpdateSimulationComponentInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
-  id: Scalars['Int'];
+  id: Scalars['String'];
+  materialTypes?: InputMaybe<Array<RefInput>>;
+  style?: InputMaybe<RefInput>;
+  theme?: InputMaybe<RefInput>;
 };
 
 export type UpdateSimulationInput = {
@@ -650,13 +745,13 @@ export type UpdateStyleInput = {
   /** description of style */
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['String'];
+  theme?: InputMaybe<RefInput>;
   /** title of style */
   title?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateThemeCategoryInput = {
   id: Scalars['String'];
-  themes?: InputMaybe<Array<RefInput>>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -664,7 +759,6 @@ export type UpdateThemeImageInput = {
   id: Scalars['String'];
   insidePreviewUrl?: InputMaybe<Scalars['String']>;
   outsidePreviewUrl?: InputMaybe<Scalars['String']>;
-  theme?: InputMaybe<RefInput>;
 };
 
 export type UpdateThemeInput = {
@@ -711,7 +805,11 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
-export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined };
+export type IPrice = { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType };
+
+export type IStyle = { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined };
+
+export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined }> | null | undefined };
 
 export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined };
 
@@ -731,12 +829,19 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
+export type RemoveThemeVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveTheme = { __typename?: 'Mutation', removeTheme: { __typename?: 'Theme', id: string, title: string } };
+
 export type GetDetailThemeVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetDetailTheme = { __typename?: 'Query', theme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined } };
+export type GetDetailTheme = { __typename?: 'Query', theme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined }> | null | undefined } };
 
 export type GetListThemesVariables = Exact<{
   pagination?: InputMaybe<PaginationInput>;
@@ -744,7 +849,7 @@ export type GetListThemesVariables = Exact<{
 }>;
 
 
-export type GetListThemes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined }> };
+export type GetListThemes = { __typename?: 'Query', themes: Array<{ __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined }> | null | undefined }> };
 
 export type CreateCustomerVariables = Exact<{
   createUserInput: CreateUserInput;
@@ -788,6 +893,17 @@ export const AuthFields = gql`
   accessToken
 }
     `;
+export const IPrice = gql`
+    fragment IPrice on Price {
+  id
+  value
+  unit
+  createdAt
+  updatedAt
+  refId
+  refType
+}
+    `;
 export const IThemeImage = gql`
     fragment IThemeImage on ThemeImage {
   id
@@ -801,6 +917,14 @@ export const IThemeCategory = gql`
   title
 }
     `;
+export const IStyle = gql`
+    fragment IStyle on Style {
+  id
+  title
+  code3d
+  description
+}
+    `;
 export const ITheme = gql`
     fragment ITheme on Theme {
   id
@@ -809,15 +933,23 @@ export const ITheme = gql`
   code3D
   createdAt
   updatedAt
+  price {
+    ...IPrice
+  }
   themeImage {
     ...IThemeImage
   }
   themeCategories {
     ...IThemeCategory
   }
+  styles {
+    ...IStyle
+  }
 }
-    ${IThemeImage}
-${IThemeCategory}`;
+    ${IPrice}
+${IThemeImage}
+${IThemeCategory}
+${IStyle}`;
 export const IUsersFields = gql`
     fragment IUsersFields on User {
   id
@@ -846,6 +978,14 @@ export const MeDocument = gql`
   }
 }
     ${IUsersFields}`;
+export const RemoveThemeDocument = gql`
+    mutation removeTheme($id: String!) {
+  removeTheme(id: $id) {
+    id
+    title
+  }
+}
+    `;
 export const GetDetailThemeDocument = gql`
     query getDetailTheme($id: String!) {
   theme(id: $id) {
@@ -908,6 +1048,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
+    },
+    removeTheme(variables: RemoveThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveTheme> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveTheme>(RemoveThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeTheme');
     },
     getDetailTheme(variables: GetDetailThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailTheme');
