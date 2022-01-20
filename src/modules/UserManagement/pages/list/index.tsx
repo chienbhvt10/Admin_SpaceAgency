@@ -13,13 +13,17 @@ import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomUserManagementTable from './Table';
+import { setTitle } from 'helpers/dom';
+import FilterForm from 'modules/UserManagement/components/FilterForm';
 
 function ListUserManagement() {
   const { dataUsers, loading, paginationTable, updatePaginationAndSorterUser, pagination, filterUser } = useListUsers();
   const navigate = useNavigate();
   const { removeUser } = useRemoveUser();
   const [value, setValue] = React.useState<string>('');
-
+  React.useEffect(() => {
+    setTitle('User Manager');
+  }, []);
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
@@ -84,7 +88,7 @@ function ListUserManagement() {
           </Button>
         }
       >
-        <FormSearch value={value} onChange={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
+        <FilterForm value={value} onChange={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
         <CustomUserManagementTable
           onDelete={onDelete}
           onEdit={onEdit}

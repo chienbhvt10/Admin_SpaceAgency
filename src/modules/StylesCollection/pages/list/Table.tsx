@@ -1,77 +1,98 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Input, Row, Select, Table } from 'antd';
+import { Select, Table, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { CommonPath } from 'commons/base-routes';
-import TableHeader from 'commons/components/layouts/TableHeader';
-import FilterForm from 'modules/StylesCollection/components/FilterForm';
+import { IStyleFields } from 'graphql/generated/graphql';
+import { NumberOfRow } from 'helpers/string';
+import TableRowAction from 'modules/StylesCollection/components/table-row-action';
+import useListStyles from 'modules/StylesCollection/hooks/useListStyles';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Style } from 'helpers/temp-type';
-import TableRowAction from 'modules/StylesCollection/components/table-row-action';
-import { styleTableColumns } from 'helpers/table-columns';
 
-const { Option } = Select;
-const themeOptions: any = [];
-for (let i = 0; i < 10; i++) {
-  themeOptions.push(<Option key={i.toString(36) + i}>Theme {i}</Option>);
-}
 interface IProps {
-  items: any;
-  rowKey: any;
+  items: IStyleFields[];
   loading: boolean;
-  onChange: () => void;
-  handleAdd: () => void;
+  pagination: any;
+  onChange: (pagination: TablePaginationConfig, __: any, sorter: any) => void;
+  onEdit: (record: IStyleFields) => () => void;
+  onDelete: (record: IStyleFields) => () => void;
 }
-const requireRule = { required: true, message: 'This is required information!' };
 const StyleCollectionTable = (props: IProps) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { handleAdd, items, loading, onChange, rowKey } = props;
-  const onEdit = (record: any) => () => {
-    navigate(CommonPath.STYLES_COLLECTION_DETAIL + record._id);
-  };
-  const onDelete = (record: any) => () => {
-    // deleteAction
-  };
-
-  const columns: ColumnsType<Style> = [
-    ...styleTableColumns,
+  const { items, loading, onChange, onDelete, onEdit, pagination } = props;
+  const { paginationTable } = useListStyles();
+  const { current, pageSize } = paginationTable;
+  const rowKey = (item: IStyleFields) => `${item.id}`;
+  const columns: ColumnsType<IStyleFields> = [
+    {
+      title: 'STT',
+      dataIndex: '#',
+      key: '#',
+      width: 40,
+      render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: 40,
+      sortDirections: ['descend', 'ascend'],
+      sorter: true,
+    },
+    {
+      title: 'Theme',
+      dataIndex: 'theme',
+      key: 'theme',
+      width: 40,
+      sorter: false,
+    },
+    {
+      title: 'Order',
+      dataIndex: 'order',
+      key: 'order',
+      width: 40,
+      sorter: false,
+    },
+    {
+      title: '3D Code',
+      dataIndex: 'code3d',
+      key: 'code3d',
+      width: 40,
+      sorter: false,
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+      width: 40,
+      sorter: false,
+    },
     {
       title: 'Tool',
       dataIndex: '',
-      key: '#',
+      key: 'Action',
       width: 40,
-      sorter: true,
-      render: (_, record) => (
+      sorter: false,
+      render: (_: any, record: IStyleFields) => (
         <TableRowAction
           onDelete={onDelete}
           onEdit={onEdit}
           record={record}
-          title="Are you sure to delete this style?"
-          key={rowKey}
+          title="Are you sure you want to delete this style?"
         />
       ),
     },
   ];
   return (
-    <TableHeader
-      title="Style list"
-      extra={
-        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-          Style
-        </Button>
-      }
-    >
-      <Row justify="center">
-        <Col span={24}>
-          <FilterForm />
-        </Col>
-        <Col span={24}>
-          <Table columns={columns} dataSource={items} loading={loading} rowKey={rowKey} onChange={onChange} />
-        </Col>
-      </Row>
-    </TableHeader>
+    <Table
+      columns={columns}
+      dataSource={items}
+      loading={loading}
+      rowKey={rowKey}
+      onChange={onChange}
+      pagination={{
+        ...pagination,
+        showSizeChanger: false,
+      }}
+    />
   );
 };
 

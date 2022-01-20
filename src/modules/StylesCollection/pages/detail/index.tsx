@@ -12,12 +12,18 @@ interface Props {}
 
 const StyleCollectionDetail = (props: Props) => {
   let { id } = useParams<'id'>();
-  const { item } = useStyleDetail(id);
+  const { getStyleDetail, item } = useStyleDetail();
   const { loading: loadingUpdate } = useUpdateStyle();
   const navigate = useNavigate();
   React.useEffect(() => {
     setTitle('Style Collection Detail');
   }, []);
+
+  React.useEffect(() => {
+    if (id) {
+      getStyleDetail(id);
+    }
+  });
   const onCancel = () => {
     navigate(CommonPath.STYLES_COLLECTION);
   };

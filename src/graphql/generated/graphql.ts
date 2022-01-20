@@ -51,6 +51,13 @@ export type CreateMaterialTypeInput = {
   title: Scalars['String'];
 };
 
+export type CreatePriceInput = {
+  refId: Scalars['String'];
+  refType: RefType;
+  unit?: InputMaybe<CurrencyUnit>;
+  value?: InputMaybe<Scalars['Float']>;
+};
+
 export type CreateQuotationInput = {
   /** Example field (placeholder) */
   exampleField: Scalars['Int'];
@@ -172,6 +179,7 @@ export type Mutation = {
   createMaterial: Material;
   /** Create new Material Type */
   createMaterialType: MaterialType;
+  createPrice: Price;
   createQuotation: Quotation;
   createRequest: Request;
   createSimulation: Simulation;
@@ -236,6 +244,11 @@ export type MutationCreateMaterialArgs = {
 
 export type MutationCreateMaterialTypeArgs = {
   createMaterialTypeInput: CreateMaterialTypeInput;
+};
+
+
+export type MutationCreatePriceArgs = {
+  createPriceInput: CreatePriceInput;
 };
 
 
@@ -648,7 +661,10 @@ export type Style = {
   id: Scalars['String'];
   materials: Array<Material>;
   price?: Maybe<Price>;
+<<<<<<< HEAD
   theme?: Maybe<Theme>;
+=======
+>>>>>>> add2162 (fix user management)
   title?: Maybe<Scalars['String']>;
 };
 
@@ -665,7 +681,10 @@ export type Theme = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   price?: Maybe<Price>;
+<<<<<<< HEAD
   styles?: Maybe<Array<Style>>;
+=======
+>>>>>>> add2162 (fix user management)
   themeCategories?: Maybe<Array<ThemeCategory>>;
   themeImage?: Maybe<ThemeImage>;
   title: Scalars['String'];
@@ -805,11 +824,23 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
+<<<<<<< HEAD
 export type IPrice = { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType };
 
 export type IStyle = { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined };
 
 export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined }> | null | undefined };
+=======
+export type IMaterialTypeFields = { __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined };
+
+export type IMaterialFields = { __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> };
+
+export type IPriceFields = { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType };
+
+export type IStyleFields = { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, materials: Array<{ __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> }> };
+
+export type ITheme = { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined };
+>>>>>>> add2162 (fix user management)
 
 export type IThemeImage = { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined };
 
@@ -829,12 +860,49 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } };
 
+<<<<<<< HEAD
 export type RemoveThemeVariables = Exact<{
+=======
+export type CreateStyleVariables = Exact<{
+  createStyleInput: CreateStyleInput;
+}>;
+
+
+export type CreateStyle = { __typename?: 'Mutation', createStyle: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, materials: Array<{ __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> }> } };
+
+export type RemoveStyleVariables = Exact<{
+>>>>>>> add2162 (fix user management)
   id: Scalars['String'];
 }>;
 
 
+<<<<<<< HEAD
 export type RemoveTheme = { __typename?: 'Mutation', removeTheme: { __typename?: 'Theme', id: string, title: string } };
+=======
+export type RemoveStyle = { __typename?: 'Mutation', removeStyle: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, materials: Array<{ __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> }> } };
+
+export type UpdateStyleVariables = Exact<{
+  updateStyleInput: UpdateStyleInput;
+}>;
+
+
+export type UpdateStyle = { __typename?: 'Mutation', updateStyle: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, materials: Array<{ __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> }> } };
+
+export type GetStyleVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetStyle = { __typename?: 'Query', style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, materials: Array<{ __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> }> } };
+
+export type GetListStyleVariables = Exact<{
+  where?: InputMaybe<WhereInput>;
+  pagination?: InputMaybe<PaginationInput>;
+}>;
+
+
+export type GetListStyle = { __typename?: 'Query', styles: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, materials: Array<{ __typename?: 'Material', id: string, title?: string | null | undefined, style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined }, materialTypes: Array<{ __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt: any, updatedAt: any, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined }> }> }> };
+>>>>>>> add2162 (fix user management)
 
 export type GetDetailThemeVariables = Exact<{
   id: Scalars['String'];
@@ -893,8 +961,13 @@ export const AuthFields = gql`
   accessToken
 }
     `;
+<<<<<<< HEAD
 export const IPrice = gql`
     fragment IPrice on Price {
+=======
+export const IPriceFields = gql`
+    fragment IPriceFields on Price {
+>>>>>>> add2162 (fix user management)
   id
   value
   unit
@@ -904,6 +977,57 @@ export const IPrice = gql`
   refType
 }
     `;
+<<<<<<< HEAD
+=======
+export const IMaterialTypeFields = gql`
+    fragment IMaterialTypeFields on MaterialType {
+  id
+  title
+  code3d
+  price {
+    ...IPriceFields
+  }
+  material {
+    id
+    title
+  }
+}
+    ${IPriceFields}`;
+export const IMaterialFields = gql`
+    fragment IMaterialFields on Material {
+  id
+  title
+  style {
+    id
+    title
+    code3d
+    description
+    price {
+      ...IPriceFields
+    }
+  }
+  materialTypes {
+    ...IMaterialTypeFields
+  }
+}
+    ${IPriceFields}
+${IMaterialTypeFields}`;
+export const IStyleFields = gql`
+    fragment IStyleFields on Style {
+  id
+  title
+  code3d
+  description
+  price {
+    ...IPriceFields
+  }
+  materials {
+    ...IMaterialFields
+  }
+}
+    ${IPriceFields}
+${IMaterialFields}`;
+>>>>>>> add2162 (fix user management)
 export const IThemeImage = gql`
     fragment IThemeImage on ThemeImage {
   id
@@ -978,6 +1102,7 @@ export const MeDocument = gql`
   }
 }
     ${IUsersFields}`;
+<<<<<<< HEAD
 export const RemoveThemeDocument = gql`
     mutation removeTheme($id: String!) {
   removeTheme(id: $id) {
@@ -986,6 +1111,43 @@ export const RemoveThemeDocument = gql`
   }
 }
     `;
+=======
+export const CreateStyleDocument = gql`
+    mutation createStyle($createStyleInput: CreateStyleInput!) {
+  createStyle(createStyleInput: $createStyleInput) {
+    ...IStyleFields
+  }
+}
+    ${IStyleFields}`;
+export const RemoveStyleDocument = gql`
+    mutation removeStyle($id: String!) {
+  removeStyle(id: $id) {
+    ...IStyleFields
+  }
+}
+    ${IStyleFields}`;
+export const UpdateStyleDocument = gql`
+    mutation updateStyle($updateStyleInput: UpdateStyleInput!) {
+  updateStyle(updateStyleInput: $updateStyleInput) {
+    ...IStyleFields
+  }
+}
+    ${IStyleFields}`;
+export const GetStyleDocument = gql`
+    query getStyle($id: String!) {
+  style(id: $id) {
+    ...IStyleFields
+  }
+}
+    ${IStyleFields}`;
+export const GetListStyleDocument = gql`
+    query getListStyle($where: WhereInput, $pagination: PaginationInput) {
+  styles(where: $where, pagination: $pagination) {
+    ...IStyleFields
+  }
+}
+    ${IStyleFields}`;
+>>>>>>> add2162 (fix user management)
 export const GetDetailThemeDocument = gql`
     query getDetailTheme($id: String!) {
   theme(id: $id) {
@@ -1049,8 +1211,25 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
     },
+<<<<<<< HEAD
     removeTheme(variables: RemoveThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<RemoveTheme>(RemoveThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeTheme');
+=======
+    createStyle(variables: CreateStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateStyle>(CreateStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createStyle');
+    },
+    removeStyle(variables: RemoveStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveStyle>(RemoveStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeStyle');
+    },
+    updateStyle(variables: UpdateStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateStyle>(UpdateStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateStyle');
+    },
+    getStyle(variables: GetStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetStyle>(GetStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getStyle');
+    },
+    getListStyle(variables?: GetListStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListStyle>(GetListStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListStyle');
+>>>>>>> add2162 (fix user management)
     },
     getDetailTheme(variables: GetDetailThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailTheme');

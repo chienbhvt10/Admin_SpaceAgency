@@ -6,12 +6,17 @@ import { setTitle } from 'helpers/dom';
 import DetailUserForm from 'modules/UserManagement/components/UserForm';
 import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 function NewUserManagement() {
   const { loading } = useCreateUser();
+  const navigate = useNavigate();
   React.useEffect(() => {
     setTitle('Create User');
   }, []);
+  const onCancel = () => {
+    navigate(CommonPath.USERS_MANAGEMENT);
+  };
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -28,8 +33,8 @@ function NewUserManagement() {
   ];
   return (
     <UserManagementLayout>
-      <PageHeader title="Detail User" breadcrumb={{ routes }} />
-      <DetailUserForm type={TypeForm.CREATE} loading={loading} />
+      <PageHeader title="" breadcrumb={{ routes }} />
+      <DetailUserForm onCancel={onCancel} title="Create User" type={TypeForm.CREATE} loading={loading} />
     </UserManagementLayout>
   );
 }

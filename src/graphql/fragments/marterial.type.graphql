@@ -1,0 +1,12 @@
+fragment IMaterialTypeFields on MaterialType {
+  id
+  title
+  code3d
+  price {
+    ...IPriceFields
+  }
+  material {
+    id
+    title
+  }
+}

@@ -11,13 +11,12 @@ interface IProps {
 }
 
 const ButtonGroup = ({ onCancel, loading, type }: IProps) => {
-  const isUpdate = type === TypeForm.UPDATE;
   return (
     <div className="button-group">
       <Button size="large" onClick={onCancel}>
         Cancel
       </Button>
-      {isUpdate ? (
+      {type === TypeForm.UPDATE ? (
         <>
           <Button style={{ backgroundColor: '#a83242' }} size="large" htmlType="submit" loading={loading}>
             Reject

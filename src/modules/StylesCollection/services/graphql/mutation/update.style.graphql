@@ -1,0 +1,5 @@
+mutation updateStyle($updateStyleInput: UpdateStyleInput!) {
+  updateStyle(updateStyleInput: $updateStyleInput) {
+    ...IStyleFields
+  }
+}

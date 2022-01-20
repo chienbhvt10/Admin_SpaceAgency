@@ -3,8 +3,6 @@ import { Button, Col, Row, Select, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { CommonPath } from 'commons/base-routes';
 import TableHeader from 'commons/components/layouts/TableHeader';
-import { nestedSimulationTableColumns, simulationTableColumns } from 'helpers/table-columns';
-import { UserSimulation } from 'helpers/temp-type';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -35,12 +33,59 @@ const CustomerSimulationTable = (props: Props) => {
     navigate(CommonPath.USER_SIMULATE_COLLECTION_DETAIL + record._id);
   };
 
-  const expandedRowRender = (record: UserSimulation): React.ReactNode => {
-    const columns = nestedSimulationTableColumns;
+  const expandedRowRender = (record: any): React.ReactNode => {
+    const columns: ColumnsType<any> = [
+      {
+        title: 'Material',
+        dataIndex: 'material',
+        key: '#',
+        sorter: true,
+      },
+      {
+        title: 'Price',
+        dataIndex: 'price',
+        key: '#',
+        sorter: true,
+      },
+    ];
     return <Table bordered dataSource={record.detail} columns={columns} pagination={false}></Table>;
   };
-  const tableColumns: ColumnsType<UserSimulation> = [
-    ...simulationTableColumns,
+  const tableColumns: ColumnsType<any> = [
+    {
+      title: 'Type',
+      dataIndex: 'type',
+      key: '#',
+      width: 40,
+      sorter: true,
+    },
+    {
+      title: 'Design',
+      dataIndex: 'design',
+      key: '#',
+      width: 40,
+      sorter: true,
+    },
+    {
+      title: 'Customer Name',
+      dataIndex: 'customerName',
+      key: '#',
+      width: 40,
+      sorter: true,
+    },
+    {
+      title: 'Total Price',
+      dataIndex: 'totalPrice',
+      key: '#',
+      width: 40,
+      sorter: true,
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: '#',
+      width: 40,
+      sorter: true,
+    },
     {
       title: 'Tool',
       dataIndex: '',

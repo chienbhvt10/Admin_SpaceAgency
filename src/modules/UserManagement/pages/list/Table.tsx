@@ -1,9 +1,9 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
-import { SorterResult } from 'antd/lib/table/interface';
-import UserRowActions from 'commons/components/layouts/ActionTable';
+import Text from 'antd/lib/typography/Text';
 import { IUsersFields } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
+import TableRowAction from 'modules/UserManagement/components/table-row-action';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import React from 'react';
 interface IProps {
@@ -29,35 +29,18 @@ function CustomUserManagementTable(props: IProps) {
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
+      title: 'Full Name',
+      dataIndex: '',
+      key: 'fullName',
+      sorter: false,
+      render: (_: any, record: IUsersFields, __: number) => <Text>{record.firstName + ' ' + record.lastName}</Text>,
+    },
+    {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-    },
-    {
-      title: 'First Name',
-      dataIndex: 'firstName',
-      key: 'firstName',
-      sorter: false,
-    },
-    {
-      title: 'Last Name',
-      dataIndex: 'lastName',
-      key: 'lastName',
-      sorter: false,
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-      sorter: false,
-    },
-    {
-      title: 'Phone',
-      dataIndex: 'phone',
-      key: 'phone',
-      sorter: false,
     },
     {
       title: 'Role',
@@ -66,11 +49,17 @@ function CustomUserManagementTable(props: IProps) {
       sorter: false,
     },
     {
+      title: 'Active',
+      dataIndex: 'active',
+      key: 'active',
+      sorter: false,
+    },
+    {
       title: 'Tools',
       dataIndex: '',
       key: 'Action',
       render: (_: any, record: IUsersFields) => (
-        <UserRowActions
+        <TableRowAction
           title="Are you sure you want to delete this user?"
           record={record}
           onDelete={props.onDelete}
@@ -87,6 +76,7 @@ function CustomUserManagementTable(props: IProps) {
         loading={loading}
         rowKey={rowKey}
         onChange={onChange}
+        bordered
         pagination={{
           ...pagination,
           showSizeChanger: false,

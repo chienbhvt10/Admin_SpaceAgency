@@ -99,7 +99,19 @@ export class AppError extends Error {
     this.code = code;
   }
 }
-
+export enum TypeGender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
+export enum TypeRole {
+  SYSADMIN = 'SYSADMIN',
+  ADMIN = 'ADMIN',
+  CUSTOMER = 'CUSTOMER',
+}
+export enum TypeActiveAccount {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
 export enum TypeForm {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE',
@@ -117,4 +129,10 @@ export enum TypeKeyFilterTheme {
 }
 export enum TypeSortUser {
   EMAIL = 'email',
+}
+export enum TypeKeyFilterStyle {
+  NAME = 'name',
+}
+export enum TypeSortStyle {
+  NAME = 'name',
 }

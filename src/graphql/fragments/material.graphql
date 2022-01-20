@@ -1,0 +1,16 @@
+fragment IMaterialFields on Material {
+  id
+  title
+  style {
+    id
+    title
+    code3d
+    description
+    price {
+      ...IPriceFields
+    }
+  }
+  materialTypes {
+    ...IMaterialTypeFields
+  }
+}

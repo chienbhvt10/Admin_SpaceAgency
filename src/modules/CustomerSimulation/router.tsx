@@ -1,17 +1,18 @@
+import { CommonPath } from 'commons/base-routes';
 import { RouteObject } from 'react-router';
 import CustomerSimulationDetail from './pages/detail';
 import CustomerSimulationPage from './pages/list';
 import NewCustomerSimulation from './pages/new';
 
 export const customerSimulationRouter: RouteObject = {
-  path: '/user-simulate-collection',
+  path: CommonPath.USER_SIMULATE_COLLECTION,
   element: <CustomerSimulationPage></CustomerSimulationPage>,
 };
 export const newCustomerSimulationRouter: RouteObject = {
-  path: '/user-simulate-collection/new',
+  path: CommonPath.USER_SIMULATE_COLLECTION_NEW,
   element: <NewCustomerSimulation></NewCustomerSimulation>,
 };
 export const customerSimulationDetailRouter: RouteObject = {
-  path: '/user-simulate-collection/detail/:id',
+  path: CommonPath.USER_SIMULATE_COLLECTION_DETAIL,
   element: <CustomerSimulationDetail></CustomerSimulationDetail>,
 };
