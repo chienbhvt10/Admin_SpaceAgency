@@ -1,0 +1,5 @@
+mutation removeMaterial($id: String!) {
+  removeMaterial(id: $id) {
+    ...IMaterial
+  }
+}

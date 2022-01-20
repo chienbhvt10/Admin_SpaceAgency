@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { GetListUsersVariables, IUsersFields, PaginationInput, RemoveUserVariables } from 'graphql/generated/graphql';
+import { IUsersFields, RemoveUserVariables } from 'graphql/generated/graphql';
 export const REMOVE_USER = 'REMOVE_USER';
 export const REMOVE_USER_SUCCESS = 'REMOVE_USER_SUCCESS';
 export const REMOVE_USER_ERROR = 'REMOVE_USER_ERROR';

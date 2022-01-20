@@ -1,11 +1,10 @@
 import { Table, TablePaginationConfig } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
 import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
+import { IMaterial, MaterialType } from 'graphql/generated/graphql';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { IMaterial } from 'graphql/generated/graphql';
-import { ColumnsType } from 'antd/lib/table';
 interface IProps {
   items: IMaterial[];
   loading: boolean;
@@ -15,40 +14,29 @@ interface IProps {
   onDelete: (record: IMaterial) => () => void;
 }
 function TableMaterial(props: IProps) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [visible, setVisible] = React.useState(false);
   const { items, loading, onChange } = props;
   const rowKey = (item: IMaterial) => `${item.id}`;
 
-  const onEdit = (record: any) => () => {
-    navigate(CommonPath.MATERIAL_COLLECTION_UPDATE + record._id);
-  };
-  const onDelete = (record: any) => () => {
-    setVisible(true);
-  };
-  const expandedRowRender = () => {
-    const columns = [
+  const expandedRowRender = (data: IMaterial) => {
+    const columns: ColumnsType<MaterialType> = [
       {
         title: 'Type Name',
-        dataIndex: 'typeName',
+        dataIndex: 'title',
         key: '#',
       },
-      { title: 'Code', dataIndex: 'code', key: '#' },
+      { title: 'Code', dataIndex: 'code3d', key: '#' },
       {
         title: 'Price',
         key: '#',
         dataIndex: 'price',
+        render: (_: any, record) => <>{record.price}</>,
       },
       { title: 'Order', dataIndex: 'order', key: '#' },
     ];
-
-    const data = [
-      { key: '1', typeName: 'Standard', code: '0347833454', price: '0 yen', order: '1' },
-      { key: '2', typeName: 'Premium', code: '3545346633', price: '200,000 yen', order: '2' },
-    ];
-    return <Table columns={columns} dataSource={data} pagination={false} />;
+    return <Table columns={columns} dataSource={data.materialTypes} pagination={false} />;
   };
+
   const columns: ColumnsType<IMaterial> = [
     {
       title: 'Name',
@@ -91,12 +79,13 @@ function TableMaterial(props: IProps) {
         <UserRowActions
           title="Are you sure you want to delete this user?"
           record={record}
-          onDelete={onDelete}
-          onEdit={onEdit}
+          onDelete={props.onDelete}
+          onEdit={props.onEdit}
         />
       ),
     },
   ];
+
   return (
     <div>
       <Table

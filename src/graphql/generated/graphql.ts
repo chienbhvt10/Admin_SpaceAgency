@@ -828,6 +828,8 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
+export type IMaterialTypeFields = { __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined };
+
 export type IMaterial = { __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined };
 
 export type IMaterialType = { __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined };
@@ -862,6 +864,20 @@ export type CreateMaterialVariables = Exact<{
 
 
 export type CreateMaterial = { __typename?: 'Mutation', createMaterial: { __typename?: 'Material', id: string, title?: string | null | undefined } };
+
+export type RemoveMaterialVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveMaterial = { __typename?: 'Mutation', removeMaterial: { __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined } };
+
+export type GetDetailMaterialVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetDetailMaterial = { __typename?: 'Query', material: { __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined } };
 
 export type GetListMaterialsVariables = Exact<{
   where?: InputMaybe<WhereInput>;
@@ -954,6 +970,20 @@ export const IPrice = gql`
   refType
 }
     `;
+export const IMaterialTypeFields = gql`
+    fragment IMaterialTypeFields on MaterialType {
+  id
+  title
+  code3d
+  price {
+    ...IPrice
+  }
+  material {
+    id
+    title
+  }
+}
+    ${IPrice}`;
 export const IMaterialType = gql`
     fragment IMaterialType on MaterialType {
   createdAt
@@ -1074,6 +1104,20 @@ export const CreateMaterialDocument = gql`
   }
 }
     `;
+export const RemoveMaterialDocument = gql`
+    mutation removeMaterial($id: String!) {
+  removeMaterial(id: $id) {
+    ...IMaterial
+  }
+}
+    ${IMaterial}`;
+export const GetDetailMaterialDocument = gql`
+    query getDetailMaterial($id: String!) {
+  material(id: $id) {
+    ...IMaterial
+  }
+}
+    ${IMaterial}`;
 export const GetListMaterialsDocument = gql`
     query getListMaterials($where: WhereInput, $pagination: PaginationInput) {
   materials(where: $where, pagination: $pagination) {
@@ -1161,6 +1205,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     createMaterial(variables: CreateMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateMaterial> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateMaterial>(CreateMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMaterial');
+    },
+    removeMaterial(variables: RemoveMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveMaterial> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveMaterial>(RemoveMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeMaterial');
+    },
+    getDetailMaterial(variables: GetDetailMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailMaterial> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDetailMaterial>(GetDetailMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailMaterial');
     },
     getListMaterials(variables?: GetListMaterialsVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListMaterials> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListMaterials>(GetListMaterialsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListMaterials');
