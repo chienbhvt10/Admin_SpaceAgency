@@ -13,6 +13,7 @@ import { actionMaterials } from '../redux/actions';
 
 export const useListMaterial = () => {
   const dispatch = useDispatch();
+  const arrSortDefault: SortInput[] = [{ key: 'title', value: SortValue.Asc }];
   const { loading, pagination, where, dataMaterials } = useSelector(
     (state: RootState) => state.materials.materialsState,
   );
@@ -26,7 +27,7 @@ export const useListMaterial = () => {
   }, []);
 
   const updatePaginationAndSorterMaterials = (pagination: PaginationInput, sortInput?: SortInput) => {
-    const arrSort = [...(where?.sort || [])];
+    const arrSort = [...(where?.sort?.length ? where?.sort : arrSortDefault)];
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
@@ -39,20 +40,16 @@ export const useListMaterial = () => {
         }),
       );
     } else {
-      const sort = arrSort.map((i) => ({
-        ...i,
-        value: i.key === sortInput?.key ? SortValue.Asc : i.value,
-      }));
       dispatch(
         actionMaterials({
           pagination,
-          where: { ...where, sort },
+          where: { ...where, sort: [] },
         }),
       );
     }
   };
 
-  const filterStyles = (filter: FilterInput[]) => {
+  const filterMaterials = (filter: FilterInput[]) => {
     dispatch(
       actionMaterials({
         pagination: {
@@ -80,7 +77,7 @@ export const useListMaterial = () => {
     paginationTable,
     pagination,
     where,
-    filterStyles,
+    filterMaterials,
     updatePaginationAndSorterMaterials,
   };
 };

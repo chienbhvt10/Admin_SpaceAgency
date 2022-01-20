@@ -19,7 +19,7 @@ const initialState: UsersState = {
     limit: TypePagination.DEFAULT_LIMIT,
   },
   where: {
-    sort: [{ key: 'email', value: SortValue.Asc }],
+    sort: [],
     filter: [],
   },
   dataUsers: [],

@@ -1,6 +1,5 @@
 import { TypePagination } from 'commons/type';
-import { SortValue } from 'graphql/generated/graphql';
-import { StylesActionTypes, StylesState, STYLES, STYLES_SUCCESS, STYLES_ERROR } from '../action-types';
+import { STYLES, StylesActionTypes, StylesState, STYLES_ERROR, STYLES_SUCCESS } from '../action-types';
 
 const initialState: StylesState = {
   loading: false,
@@ -10,13 +9,7 @@ const initialState: StylesState = {
   },
   where: {
     filter: [],
-    sort: [
-      { key: 'title', value: SortValue.Asc },
-      { key: 'theme', value: SortValue.Asc },
-      { key: 'order', value: SortValue.Asc },
-      { key: 'code3d', value: SortValue.Asc },
-      { key: 'price', value: SortValue.Asc },
-    ],
+    sort: [],
   },
   dataStyles: undefined,
 };

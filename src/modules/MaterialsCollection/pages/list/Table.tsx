@@ -97,33 +97,6 @@ function TableMaterial(props: IProps) {
       ),
     },
   ];
-  const data = [
-    {
-      key: '1',
-      name: 'Living Room',
-      description: 'Room meeting',
-      order: '1',
-      design: 'Hotel Design',
-      status: 'Active',
-      children: [],
-    },
-    {
-      key: '2',
-      name: 'Kitchen Room',
-      description: 'Room cooking',
-      order: '1',
-      design: 'Cafe Design',
-      status: 'Active',
-    },
-    {
-      key: '3',
-      name: 'Bed Room',
-      description: 'Room sleeping',
-      order: '1',
-      design: 'Free Design',
-      status: 'Active',
-    },
-  ];
   return (
     <div>
       <Table

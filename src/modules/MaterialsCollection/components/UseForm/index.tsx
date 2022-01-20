@@ -1,13 +1,17 @@
 import React from 'react';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
-import { TypeForm } from 'commons/type';
+import { CreateMaterialsTypeInput, TypeForm } from 'commons/type';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
 import './style.scss';
 import { CommonPath } from 'commons/base-routes';
 import { useNavigate } from 'react-router';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
+import { useListStyles } from '../../../StylesCollection/hooks/useListStyle';
+import { useListThemes } from '../../../ThemesCollection/hooks/useListThemes';
+import { useCreateMaterials } from 'modules/MaterialsCollection/hooks/useCreateMaterials';
+import { CurrencyUnit } from 'graphql/generated/graphql';
 const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -20,50 +24,52 @@ interface Props {
   type: TypeForm;
   onCancle?(): void;
   onChange?(): void;
+  onFinish?: (values: CreateMaterialsTypeInput) => void;
 }
 const MaterialForm = (props: Props) => {
-  const { loading, type, item, onCancle, onChange, title } = props;
-  const [form] = Form.useForm<any>();
+  const { loading, type, item, onCancle, onChange, title, onFinish } = props;
+  const { dataStyles } = useListStyles();
+  const { dataThemes } = useListThemes();
+  const [form] = Form.useForm<CreateMaterialsTypeInput>();
   const navigate = useNavigate();
-  const onFinish = () => {
-    console.log(form.getFieldsValue());
-  };
+
   const onFinishFailed = () => {};
   const onCancel = () => {
     navigate(CommonPath.MATERIAL_COLLECTION);
   };
   return (
     <div>
-    
-        <div id="material-form">
-          <Form
-            name="basic"
-            initialValues={{
-              ...item,
-            }}
-            form={form}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+      <div id="material-form">
+        <Form
+          name="basic"
+          initialValues={{
+            ...item,
+          }}
+          form={form}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
         >
-            <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
+          <HeaderCreateUpdate loading={loading} onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
             <Row justify="center">
               <Col span={22}>
                 <div className="dropdown-select">
                   <FormDropdown
                     formItem={{
                       label: 'Theme',
-                      name: 'theme',
+                      name: 'themeId',
                       labelCol: { span: 4 },
                     }}
+                    items={dataThemes}
                     options={[]}
                   />
                   <FormDropdown
                     formItem={{
                       label: 'Design',
-                      name: 'design',
+                      name: 'styleId',
                       labelCol: { span: 4 },
                     }}
+                    items={dataStyles}
                     options={[]}
                   />
                 </div>
@@ -100,35 +106,35 @@ const MaterialForm = (props: Props) => {
               <Col span={22} style={{ marginBottom: '50px' }}>
                 <Row>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="name">
+                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameStandard">
                       <Col offset={2}>
                         <Input style={{ width: '96%', marginLeft: '10px' }} />
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="name">
+                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="namePremium">
                       <Col offset={2}>
                         <Input style={{ width: '96%' }} />
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} label="Price" name="price1">
+                    <Form.Item labelCol={{ span: 8 }} label="Price" name="priceStandard">
                       <Col offset={2}>
                         <InputNumber style={{ width: '96%', marginLeft: '10px' }} />
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} label="Price" name="price2">
+                    <Form.Item labelCol={{ span: 8 }} label="Price" name="pricePremium">
                       <Col offset={2}>
                         <InputNumber style={{ width: '96%' }} />
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} className="code" label="Code" name="code">
+                    <Form.Item labelCol={{ span: 8 }} className="code" label="Code" name="codeStandard">
                       <Col offset={2}>
                         <Input.Group compact>
                           <Input style={{ width: 'calc(100% - 94px)', marginLeft: '10px' }} />
@@ -138,7 +144,7 @@ const MaterialForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} className="code" label="Code" name="code">
+                    <Form.Item labelCol={{ span: 8 }} className="code" label="Code" name="codePremium">
                       <Col offset={2}>
                         <Input.Group compact>
                           <Input style={{ width: 'calc(100% - 93px)' }} />
@@ -148,7 +154,7 @@ const MaterialForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} label="Image Preview" name="imagepreview">
+                    <Form.Item labelCol={{ span: 8 }} label="Image Preview" name="imagePreview">
                       <Col offset={2}>
                         <Row>
                           <Col span={17}>
@@ -171,11 +177,11 @@ const MaterialForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} label="Image Preview" name="imagepreview2">
+                    <Form.Item labelCol={{ span: 8 }} label="Image Preview" name="imagePreview2">
                       <Col offset={2}>
                         <Row>
                           <Col span={17}>
-                            <Input  style={{ width: '103%' }}/>
+                            <Input style={{ width: '103%' }} />
                           </Col>
                           <Col span={6}>
                             <UploadDragger />
@@ -194,14 +200,14 @@ const MaterialForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameimage1">
+                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameImage1">
                       <Col offset={2}>
                         <Input style={{ width: '97%', marginLeft: '10px' }} />
                       </Col>
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameimage2">
+                    <Form.Item labelCol={{ span: 8 }} className="name" label="Name" name="nameImage2">
                       <Col offset={2}>
                         <Input style={{ width: '97%' }} />
                       </Col>
@@ -210,10 +216,9 @@ const MaterialForm = (props: Props) => {
                 </Row>
               </Col>
             </Row>
-            </HeaderCreateUpdate>
-          </Form>
-        </div>
-     
+          </HeaderCreateUpdate>
+        </Form>
+      </div>
     </div>
   );
 };

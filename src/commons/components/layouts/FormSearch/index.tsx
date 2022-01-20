@@ -3,7 +3,7 @@ import BaseButton from 'commons/components/layouts/BaseButton';
 import InputGroup from 'commons/components/layouts/InputGroup/index';
 import './style.scss';
 interface IProps {
-  handleSearch: (value: string) => () => void;
+  handleSearch: () => void;
   onChange: (e: any) => void;
   onReset?: () => void;
   value: string;
@@ -29,7 +29,7 @@ export const FormSearch = (props: IProps) => {
           border="1px solid #007BFF"
           marginRight={''}
           backgroundColor="#007BFF"
-          onClick={props.handleSearch(props.value)}
+          onClick={props.handleSearch}
           marginLeft={''}
         />
       </div>

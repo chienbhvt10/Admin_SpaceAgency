@@ -23,6 +23,24 @@ export interface DataNav {
   item?: ItemNav[];
 }
 
+export interface CreateMaterialsTypeInput {
+  codeStandard: string;
+  codePremium: string;
+  name: string;
+  description: string;
+  styleId: string;
+  imagePreview: string;
+  imagePreview2: string;
+  nameStandard: string;
+  namePremium: string;
+  nameImage1: string;
+  nameImage2: string;
+  order: string;
+  priceStandard: string;
+  pricePremium: string;
+  themeId: string;
+}
+
 export const dataNav: DataNav[] = [
   {
     id: 0,
@@ -121,6 +139,11 @@ export enum TypeKeyFilterUser {
   EMAIL = 'email',
   STATUS = 'status',
   ROLE = 'role',
+}
+export enum TypeKeyFilterMaterials {
+  NAME = 'name',
+  THEME = 'theme',
+  STYLE = 'style',
 }
 export enum TypeKeyFilterTheme {
   NAME = 'title',

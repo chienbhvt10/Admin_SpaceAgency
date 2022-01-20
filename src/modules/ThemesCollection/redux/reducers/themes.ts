@@ -10,11 +10,7 @@ const initialState: ThemesState = {
   },
   where: {
     filter: [],
-    sort: [
-      { key: 'title', value: SortValue.Asc },
-      { key: 'code3D', value: SortValue.Asc },
-      { key: 'price', value: SortValue.Asc },
-    ],
+    sort: [],
   },
   dataThemes: [],
 };

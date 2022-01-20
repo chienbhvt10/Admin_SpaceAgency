@@ -1,0 +1,6 @@
+mutation createMaterial($createMaterialInput: CreateMaterialInput!) {
+  createMaterial(createMaterialInput: $createMaterialInput) {
+    id
+    title
+  }
+}

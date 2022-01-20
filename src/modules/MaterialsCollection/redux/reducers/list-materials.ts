@@ -1,6 +1,5 @@
 import { TypePagination } from 'commons/type';
-import { SortValue } from 'graphql/generated/graphql';
-import { MaterialsActionTypes, MaterialsState, MATERIALS, MATERIALS_SUCCESS, MATERIALS_ERROR } from '../action-types';
+import { MATERIALS, MaterialsActionTypes, MaterialsState, MATERIALS_ERROR, MATERIALS_SUCCESS } from '../action-types';
 
 const initialState: MaterialsState = {
   loading: false,
@@ -10,7 +9,7 @@ const initialState: MaterialsState = {
   },
   where: {
     filter: [],
-    sort: [{ key: 'title', value: SortValue.Asc }],
+    sort: [],
   },
   dataMaterials: [],
 };

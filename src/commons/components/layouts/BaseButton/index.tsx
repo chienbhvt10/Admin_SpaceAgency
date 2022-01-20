@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import React from 'react';
 interface IProps {
   width: string;
@@ -8,11 +9,18 @@ interface IProps {
   border?: string;
   backgroundColor?: string;
   onClick?(): void;
+  type?: any;
+  htmlType?: any;
+  loading?: boolean;
 }
 function BaseButton(props: IProps) {
-  const { width, height, border, marginRight, marginLeft, backgroundColor, onClick } = props;
+  const { width, height, border, marginRight, marginLeft, backgroundColor, onClick, type, htmlType, loading } = props;
   return (
-    <button
+    <Button
+      type={type}
+      htmlType={htmlType}
+      loading={loading}
+      onClick={onClick}
       style={{
         width,
         height,
@@ -29,10 +37,9 @@ function BaseButton(props: IProps) {
         padding: '6px 12px',
         cursor: 'pointer',
       }}
-      onClick={onClick}
     >
       {props.text}
-    </button>
+    </Button>
   );
 }
 export default BaseButton;
