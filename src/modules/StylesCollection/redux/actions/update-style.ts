@@ -5,13 +5,13 @@ import {
   UPDATE_STYLE_ERROR,
 } from './../action-types/update-style';
 import { AppError } from 'commons/type';
-import { IStyleFields, UpdateStyleVariables } from 'graphql/generated/graphql';
+import { IStyle, UpdateStyleVariables } from 'graphql/generated/graphql';
 
 export const updateStyle = (payload: UpdateStyleVariables): UpdateStyleActionTypes => ({
   type: UPDATE_STYLE,
   payload,
 });
-export const updateStyleSuccess = (payload: IStyleFields): UpdateStyleActionTypes => ({
+export const updateStyleSuccess = (payload: IStyle): UpdateStyleActionTypes => ({
   type: UPDATE_STYLE_SUCCESS,
   payload,
 });

@@ -5,13 +5,13 @@ import {
   REMOVE_STYLE_ERROR,
 } from '../action-types/remove-style';
 import { AppError } from 'commons/type';
-import { IStyleFields, RemoveStyleVariables } from 'graphql/generated/graphql';
+import { IStyle, RemoveStyleVariables } from 'graphql/generated/graphql';
 
 export const RemoveStyle = (payload: RemoveStyleVariables): RemoveStyleActionTypes => ({
   type: REMOVE_STYLE,
   payload,
 });
-export const RemoveStyleSuccess = (payload: IStyleFields): RemoveStyleActionTypes => ({
+export const RemoveStyleSuccess = (payload: IStyle): RemoveStyleActionTypes => ({
   type: REMOVE_STYLE_SUCCESS,
   payload,
 });

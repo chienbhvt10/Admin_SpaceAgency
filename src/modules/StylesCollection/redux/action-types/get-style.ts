@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { GetStyleVariables, IStyleFields, IUsersFields } from 'graphql/generated/graphql';
+import { GetStyleVariables, IStyle, IUsersFields } from 'graphql/generated/graphql';
 
 export const GET_STYLE = 'GET_STYLE';
 export const GET_STYLE_SUCCESS = 'GET_STYLE_SUCCESS';
@@ -7,7 +7,7 @@ export const GET_STYLE_ERROR = 'GET_STYLE_ERROR';
 
 export interface GetStyleState {
   loading: boolean;
-  dataStyle?: IStyleFields;
+  dataStyle?: IStyle;
 }
 
 export interface GetStyleAction {
@@ -17,7 +17,7 @@ export interface GetStyleAction {
 
 export interface GetStyleActionSuccess {
   type: typeof GET_STYLE_SUCCESS;
-  payload: IStyleFields;
+  payload: IStyle;
 }
 
 export interface GetStyleActionError {

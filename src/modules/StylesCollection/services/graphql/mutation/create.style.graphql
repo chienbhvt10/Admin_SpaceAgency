@@ -1,5 +1,5 @@
 mutation createStyle($createStyleInput: CreateStyleInput!) {
   createStyle(createStyleInput: $createStyleInput) {
-    ...IStyleFields
+    ...IStyle
   }
 }

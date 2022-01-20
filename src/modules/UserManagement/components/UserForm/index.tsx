@@ -58,7 +58,7 @@ function UserForm(props: IProps) {
       setUpdateUserInput({
         id: item.id,
         email: item.email,
-        firstName: item.firstName,
+        firstName: 'item.firstName',
         lastName: item.lastName,
         address: item.address,
         firstNameF: item.firstNameF,
@@ -66,12 +66,14 @@ function UserForm(props: IProps) {
         phone: item.phone,
       });
     }
+    console.log('update input ', updateInput);
   }, [item]);
   React.useEffect(() => {
     if (item) {
-      form.setFieldsValue(item);
+      form.setFieldsValue(updateInput);
+      console.log('value form ', form.getFieldsValue());
     }
-  }, [form, item]);
+  }, [form, item, updateInput]);
   const onFinish = (values: IUsersFields) => {
     if (props.type === TypeForm.UPDATE) {
       const updateUserInput: UpdateUserInput = {
@@ -224,7 +226,7 @@ function UserForm(props: IProps) {
             <Col span={10}>
               <Row justify="end">
                 <Col span={24}>
-                  <Form.Item labelCol={{ span: 4 }} label="Avatar" name="preview" rules={[requireRule]}>
+                  <Form.Item labelCol={{ span: 4 }} label="Avatar" name="preview">
                     <Col offset={1}>
                       <Row>
                         <Col span={16}>

@@ -1,12 +1,12 @@
 import { AppError } from 'commons/type';
-import { IStyleFields, RemoveStyleVariables } from 'graphql/generated/graphql';
+import { IStyle, RemoveStyleVariables } from 'graphql/generated/graphql';
 
 export const REMOVE_STYLE = 'REMOVE_STYLE';
 export const REMOVE_STYLE_SUCCESS = 'REMOVE_STYLE_SUCCESS';
 export const REMOVE_STYLE_ERROR = 'REMOVE_STYLE_ERROR';
 export interface RemoveStyleState {
   loading: boolean;
-  dataStyles?: IStyleFields;
+  dataStyles?: IStyle;
 }
 export interface RemoveStyleAction {
   type: typeof REMOVE_STYLE;
@@ -14,7 +14,7 @@ export interface RemoveStyleAction {
 }
 export interface RemoveStyleActionSuccess {
   type: typeof REMOVE_STYLE_SUCCESS;
-  payload: IStyleFields;
+  payload: IStyle;
 }
 export interface RemoveStyleActionError {
   type: typeof REMOVE_STYLE_ERROR;

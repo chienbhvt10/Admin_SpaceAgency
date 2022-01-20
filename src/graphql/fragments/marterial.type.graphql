@@ -3,7 +3,7 @@ fragment IMaterialTypeFields on MaterialType {
   title
   code3d
   price {
-    ...IPriceFields
+    ...IPrice
   }
   material {
     id

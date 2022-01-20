@@ -123,6 +123,8 @@ export enum TypePagination {
 
 export enum TypeKeyFilterUser {
   EMAIL = 'email',
+  ROLE = 'role',
+  STATUS = 'status',
 }
 export enum TypeKeyFilterTheme {
   NAME = 'title',

@@ -1,18 +1,23 @@
-import { Col, Form, Input, Row, Select } from 'antd';
+import { Button, Col, Form, Input, Row, Select } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import { TypeActiveAccount, TypeRole } from 'commons/type';
-import React from 'react';
+import React, { useState } from 'react';
 
 const { Option } = Select;
 interface Props {
-  handleSearch: (value: string) => () => void;
+  handleSearch: (value: string, role: string, status: string) => () => void;
   onChange: (e: any) => void;
   onReset?: () => void;
+  onStatusChange?: (value: any) => void;
+  onRoleChange?: (value: any) => void;
+  role: string;
+  status: string;
   value: string;
 }
 
 const FilterForm = (props: Props) => {
-  const { handleSearch, onChange, value, onReset } = props;
+  const { role, status, handleSearch, onChange, value, onReset, onRoleChange, onStatusChange } = props;
+
   return (
     <Form className="filter-form">
       <Row>
@@ -21,7 +26,7 @@ const FilterForm = (props: Props) => {
             <Col span={12}>
               <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Role" name="role">
                 <Col offset={2}>
-                  <Select placeholder="---All---">
+                  <Select placeholder="---All---" onChange={onRoleChange}>
                     <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
                     <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
                     <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
@@ -32,7 +37,7 @@ const FilterForm = (props: Props) => {
             <Col span={12}>
               <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Status" name="status">
                 <Col offset={2}>
-                  <Select placeholder="---All---">
+                  <Select placeholder="---All---" onChange={onStatusChange}>
                     <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
                     <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
                   </Select>
@@ -75,7 +80,7 @@ const FilterForm = (props: Props) => {
                       marginLeft={''}
                       marginRight={''}
                       backgroundColor="#007BFF"
-                      onClick={handleSearch(value)}
+                      onClick={handleSearch(value, role, status)}
                     />
                   </Row>
                 </Col>

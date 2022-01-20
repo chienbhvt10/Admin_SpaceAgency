@@ -1,6 +1,6 @@
 import { Select, Table, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { IStyleFields } from 'graphql/generated/graphql';
+import { IStyle } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
 import TableRowAction from 'modules/StylesCollection/components/table-row-action';
 import useListStyles from 'modules/StylesCollection/hooks/useListStyles';
@@ -9,19 +9,19 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 interface IProps {
-  items: IStyleFields[];
+  items: IStyle[];
   loading: boolean;
   pagination: any;
   onChange: (pagination: TablePaginationConfig, __: any, sorter: any) => void;
-  onEdit: (record: IStyleFields) => () => void;
-  onDelete: (record: IStyleFields) => () => void;
+  onEdit: (record: IStyle) => () => void;
+  onDelete: (record: IStyle) => () => void;
 }
 const StyleCollectionTable = (props: IProps) => {
   const { items, loading, onChange, onDelete, onEdit, pagination } = props;
   const { paginationTable } = useListStyles();
   const { current, pageSize } = paginationTable;
-  const rowKey = (item: IStyleFields) => `${item.id}`;
-  const columns: ColumnsType<IStyleFields> = [
+  const rowKey = (item: IStyle) => `${item.id}`;
+  const columns: ColumnsType<IStyle> = [
     {
       title: 'STT',
       dataIndex: '#',
@@ -71,7 +71,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'Action',
       width: 40,
       sorter: false,
-      render: (_: any, record: IStyleFields) => (
+      render: (_: any, record: IStyle) => (
         <TableRowAction
           onDelete={onDelete}
           onEdit={onEdit}

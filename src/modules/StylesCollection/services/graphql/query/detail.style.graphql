@@ -1,5 +1,5 @@
 query getStyle($id: String!) {
   style(id: $id) {
-    ...IStyleFields
+    ...IStyle
   }
 }

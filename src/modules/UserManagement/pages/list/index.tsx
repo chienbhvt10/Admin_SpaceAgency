@@ -2,32 +2,43 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, PageHeader, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
-import { FormSearch } from 'commons/components/layouts/FormSearch';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import UserManagementLayout from 'commons/components/layouts/UserManagement';
-import { TypeKeyFilterUser, TypePagination, TypeSortUser } from 'commons/type';
+import { TypeKeyFilterUser, TypePagination } from 'commons/type';
 import { FilterInput, IUsersFields } from 'graphql/generated/graphql';
-import { isEmpty, OrderOfSorter } from 'helpers/string';
+import { setTitle } from 'helpers/dom';
+import { OrderOfSorter } from 'helpers/string';
+import FilterForm from 'modules/UserManagement/components/FilterForm';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomUserManagementTable from './Table';
-import { setTitle } from 'helpers/dom';
-import FilterForm from 'modules/UserManagement/components/FilterForm';
 
 function ListUserManagement() {
   const { dataUsers, loading, paginationTable, updatePaginationAndSorterUser, pagination, filterUser } = useListUsers();
   const navigate = useNavigate();
   const { removeUser } = useRemoveUser();
   const [value, setValue] = React.useState<string>('');
-  React.useEffect(() => {
-    setTitle('User Manager');
-  }, []);
+  const [role, setRole] = React.useState<string>('');
+  const [status, setStatus] = React.useState<string>('');
+  const onRoleChange = (value: any) => {
+    setRole(value);
+  };
+  const onStatusChange = (value: any) => {
+    setStatus(value);
+  };
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
-  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterUser.EMAIL, value: '' }];
+  React.useEffect(() => {
+    setTitle('User Manager');
+  }, []);
+  const arrFilter: FilterInput[] = [
+    { key: TypeKeyFilterUser.EMAIL, value: '' },
+    { key: TypeKeyFilterUser.ROLE, value: '' },
+    { key: TypeKeyFilterUser.STATUS, value: '' },
+  ];
 
   const routes = [
     {
@@ -66,11 +77,30 @@ function ListUserManagement() {
   const onNew = () => {
     navigate(CommonPath.USERS_MANAGEMENT_NEW);
   };
-  const handleSearch = (value: string) => () => {
-    const newFilter = arrFilter.map((i) => ({
-      ...i,
-      value: i.key === TypeKeyFilterUser.EMAIL ? value : '',
-    }));
+  const handleSearch = (value: string, role: string, status: string) => () => {
+    const newFilter = arrFilter.map((filterInput) => {
+      switch (filterInput.key) {
+        case TypeKeyFilterUser.EMAIL:
+          return {
+            ...filterInput,
+            value: value,
+          };
+        case TypeKeyFilterUser.ROLE:
+          return {
+            ...filterInput,
+            value: role,
+          };
+        case TypeKeyFilterUser.STATUS:
+          return {
+            ...filterInput,
+            value: status,
+          };
+        default:
+          return filterInput;
+      }
+    });
+    console.log(newFilter);
+
     filterUser(newFilter);
   };
   const onReset = () => {
@@ -88,7 +118,16 @@ function ListUserManagement() {
           </Button>
         }
       >
-        <FilterForm value={value} onChange={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
+        <FilterForm
+          value={value}
+          role={role}
+          status={status}
+          onRoleChange={onRoleChange}
+          onStatusChange={onStatusChange}
+          onChange={onChangeValue}
+          handleSearch={handleSearch}
+          onReset={onReset}
+        />
         <CustomUserManagementTable
           onDelete={onDelete}
           onEdit={onEdit}

@@ -1,5 +1,5 @@
 mutation removeStyle($id: String!) {
   removeStyle(id: $id) {
-    ...IStyleFields
+    ...IStyle
   }
 }
