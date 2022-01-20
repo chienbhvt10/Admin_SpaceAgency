@@ -1,21 +1,26 @@
-import { Table } from 'antd';
+import { Table, TablePaginationConfig } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { IMaterial } from 'graphql/generated/graphql';
+import { ColumnsType } from 'antd/lib/table';
 interface IProps {
-  items: any;
-  rowKey: any;
+  items: IMaterial[];
   loading: boolean;
-  onChange: () => void;
-  handleAdd: () => void;
+  onChange: (pagination: TablePaginationConfig, __: any, sorter: any) => void;
+  pagination: any;
+  onEdit: (record: IMaterial) => () => void;
+  onDelete: (record: IMaterial) => () => void;
 }
 function TableMaterial(props: IProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visible, setVisible] = React.useState(false);
-  const { items, loading, onChange, rowKey, handleAdd } = props;
+  const { items, loading, onChange } = props;
+  const rowKey = (item: IMaterial) => `${item.id}`;
+
   const onEdit = (record: any) => () => {
     navigate(CommonPath.MATERIAL_COLLECTION_UPDATE + record._id);
   };
@@ -44,19 +49,19 @@ function TableMaterial(props: IProps) {
     ];
     return <Table columns={columns} dataSource={data} pagination={false} />;
   };
-  const columns = [
+  const columns: ColumnsType<IMaterial> = [
     {
       title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'title',
+      key: 'title',
       sorter: true,
-      
     },
     {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
       sorter: true,
+      render: (_: any, record) => <>{record.title}</>,
     },
     {
       title: 'Order',
@@ -69,6 +74,7 @@ function TableMaterial(props: IProps) {
       dataIndex: 'design',
       key: 'design',
       sorter: true,
+      render: (_: any, record) => <>{record.title}</>,
     },
     {
       title: 'Status',
@@ -80,7 +86,7 @@ function TableMaterial(props: IProps) {
       title: 'Tools',
       dataIndex: '',
       key: '#',
-      
+
       render: (_: any, record: any) => (
         <UserRowActions
           title="Are you sure you want to delete this user?"
@@ -91,39 +97,15 @@ function TableMaterial(props: IProps) {
       ),
     },
   ];
-  const data = [
-    {
-      key: '1',
-      name: 'Living Room',
-      description: 'Room meeting',
-      order: '1',
-      design: 'Hotel Design',
-      status: 'Active',
-      children: [],
-    },
-    {
-      key: '2',
-      name: 'Kitchen Room',
-      description: 'Room cooking',
-      order: '1',
-      design: 'Cafe Design',
-      status: 'Active',
-    },
-    {
-      key: '3',
-      name: 'Bed Room',
-      description: 'Room sleeping',
-      order: '1',
-      design: 'Free Design',
-      status: 'Active',
-    },
-  ];
   return (
     <div>
       <Table
         expandable={{ expandedRowRender, expandRowByClick: true }}
         columns={columns}
-        dataSource={data}
+        pagination={{
+          ...props.pagination,
+        }}
+        dataSource={items}
         loading={loading}
         rowKey={rowKey}
         onChange={onChange}

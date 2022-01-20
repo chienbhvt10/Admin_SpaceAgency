@@ -3,6 +3,7 @@ import auth, { AuthModuleState } from 'modules/Auth/redux/reducers';
 import themes, { ThemesModuleState } from 'modules/ThemesCollection/redux/reducers';
 import users, { UsersModuleState } from 'modules/UserManagement/redux/reducers';
 import styles, { StylesModuleState } from 'modules/StylesCollection/redux/reducers';
+import materials, { MaterialsModuleState } from 'modules/MaterialsCollection/redux/reducers';
 import loadingReducer from '../utils/loading/redux/loadingReducer';
 import { LoadingState } from './action-types';
 
@@ -12,6 +13,7 @@ export interface RootState {
   users: UsersModuleState;
   loadingReducer: LoadingState;
   styles: StylesModuleState;
+  materials: MaterialsModuleState;
 }
 
 export default combineReducers<RootState>({
@@ -20,4 +22,5 @@ export default combineReducers<RootState>({
   themes,
   users,
   styles,
+  materials,
 });

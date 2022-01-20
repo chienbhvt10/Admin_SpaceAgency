@@ -6,9 +6,10 @@ interface IProps {
   title: React.ReactElement;
   children: React.ReactElement;
   onCancel?(): void;
+  loading?: boolean;
 }
 const HeaderCreateUpdate = (props: IProps) => {
-  const { onCancel } = props
+  const { onCancel } = props;
   return (
     <div>
       <Card
@@ -28,6 +29,9 @@ const HeaderCreateUpdate = (props: IProps) => {
             />
             <BaseButton
               text="Save"
+              type="premium"
+              htmlType="submit"
+              loading={props.loading}
               width={''}
               height={''}
               border="1px solid #007BFF"

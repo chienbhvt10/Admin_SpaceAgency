@@ -7,6 +7,11 @@ import { actionThemes } from '../redux/actions';
 
 export const useListThemes = () => {
   const dispatch = useDispatch();
+  const arrSortDefault: SortInput[] = [
+    { key: 'title', value: SortValue.Asc },
+    { key: 'code3D', value: SortValue.Asc },
+    { key: 'price', value: SortValue.Asc },
+  ];
   const { loading, pagination, where, dataThemes } = useSelector((state: RootState) => state.themes.themesState);
   const variables: GetListThemesVariables = {
     pagination,
@@ -18,7 +23,7 @@ export const useListThemes = () => {
   }, []);
 
   const updatePaginationAndSorterThemes = (pagination: PaginationInput, sortInput?: SortInput) => {
-    const arrSort = [...(where?.sort || [])];
+    const arrSort = [...(where?.sort?.length ? where?.sort : arrSortDefault)];
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
@@ -31,14 +36,10 @@ export const useListThemes = () => {
         }),
       );
     } else {
-      const sort = arrSort.map((i) => ({
-        ...i,
-        value: i.key === sortInput?.key ? SortValue.Asc : i.value,
-      }));
       dispatch(
         actionThemes({
           pagination,
-          where: { ...where, sort },
+          where: { ...where, sort: [] },
         }),
       );
     }

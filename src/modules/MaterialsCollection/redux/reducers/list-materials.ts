@@ -1,8 +1,7 @@
 import { TypePagination } from 'commons/type';
-import { SortValue } from 'graphql/generated/graphql';
-import { ThemesActionTypes, ThemesState, THEMES, THEMES_SUCCESS, THEMES_ERROR } from '../action-types';
+import { MATERIALS, MaterialsActionTypes, MaterialsState, MATERIALS_ERROR, MATERIALS_SUCCESS } from '../action-types';
 
-const initialState: ThemesState = {
+const initialState: MaterialsState = {
   loading: false,
   pagination: {
     skip: TypePagination.DEFAULT_SKIP,
@@ -12,27 +11,27 @@ const initialState: ThemesState = {
     filter: [],
     sort: [],
   },
-  dataThemes: [],
+  dataMaterials: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initialState, action: ThemesActionTypes): ThemesState => {
+export default (state = initialState, action: MaterialsActionTypes): MaterialsState => {
   switch (action.type) {
-    case THEMES:
+    case MATERIALS:
       return {
         ...state,
         loading: true,
       };
 
-    case THEMES_SUCCESS:
+    case MATERIALS_SUCCESS:
       return {
         ...state,
         loading: false,
         pagination: action.payload.pagination,
         where: action.payload.where,
-        dataThemes: action.payload.dataThemes,
+        dataMaterials: action.payload.dataMaterials,
       };
-    case THEMES_ERROR:
+    case MATERIALS_ERROR:
       return {
         ...state,
         loading: false,

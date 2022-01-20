@@ -55,7 +55,7 @@ const ThemeCollectionPage = () => {
       breadcrumbName: 'Themes Collection',
     },
   ];
-  const handleSearch = (value: string) => () => {
+  const handleSearch = () => {
     const newFilter = arrFilter.map((i) => ({
       ...i,
       value: i.key === TypeKeyFilterTheme.NAME ? value : '',

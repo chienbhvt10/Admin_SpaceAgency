@@ -7,6 +7,13 @@ import { actionStyles } from '../redux/actions';
 
 export const useListStyles = () => {
   const dispatch = useDispatch();
+  const arrSortDefault: SortInput[] = [
+    { key: 'title', value: SortValue.Asc },
+    { key: 'theme', value: SortValue.Asc },
+    { key: 'order', value: SortValue.Asc },
+    { key: 'code3d', value: SortValue.Asc },
+    { key: 'price', value: SortValue.Asc },
+  ];
   const { loading, pagination, where, dataStyles } = useSelector((state: RootState) => state.styles.stylesState);
   const variables: GetListStylesVariables = {
     pagination,
@@ -18,7 +25,7 @@ export const useListStyles = () => {
   }, []);
 
   const updatePaginationAndSorterStyles = (pagination: PaginationInput, sortInput?: SortInput) => {
-    const arrSort = [...(where?.sort || [])];
+    const arrSort = [...(where?.sort?.length ? where?.sort : arrSortDefault)];
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
@@ -31,14 +38,10 @@ export const useListStyles = () => {
         }),
       );
     } else {
-      const sort = arrSort.map((i) => ({
-        ...i,
-        value: i.key === sortInput?.key ? SortValue.Asc : i.value,
-      }));
       dispatch(
         actionStyles({
           pagination,
-          where: { ...where, sort },
+          where: { ...where, sort: [] },
         }),
       );
     }

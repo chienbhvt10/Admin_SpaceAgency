@@ -7,6 +7,7 @@ import { actionUsers } from '../redux/actions';
 
 export function useListUsers() {
   const dispatch = useDispatch();
+  const arrSortDefault: SortInput[] = [{ key: 'email', value: SortValue.Asc }];
   const { loading, dataUsers, pagination, where } = useSelector((state: RootState) => state.users.usersState);
   const variables: GetListUsersVariables = {
     pagination,
@@ -17,7 +18,7 @@ export function useListUsers() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const updatePaginationAndSorterUser = (pagination: PaginationInput, sortInput: SortInput) => {
-    const arrSort = [...(where?.sort || [])];
+    const arrSort = [...(where?.sort?.length ? where?.sort : arrSortDefault)];
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
@@ -30,14 +31,10 @@ export function useListUsers() {
         }),
       );
     } else {
-      const sort = arrSort.map((i) => ({
-        ...i,
-        value: i.key === sortInput?.key ? SortValue.Asc : i.value,
-      }));
       dispatch(
         actionUsers({
           pagination,
-          where: { ...where, sort },
+          where: { ...where, sort: [] },
         }),
       );
     }

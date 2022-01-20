@@ -4,7 +4,8 @@ import * as commonSaga from './common-saga';
 import themeSaga from 'modules/ThemesCollection/redux/sagas';
 import userSaga from 'modules/UserManagement/redux/sagas';
 import styleSaga from 'modules/StylesCollection/redux/sagas';
+import materialsSaga from 'modules/MaterialsCollection/redux/sagas';
 
 export default function* rootSaga() {
-  yield all([authSaga(), themeSaga(), userSaga(), styleSaga(), commonSaga.checkErrorAsync()]);
+  yield all([authSaga(), themeSaga(), userSaga(), styleSaga(), materialsSaga(), commonSaga.checkErrorAsync()]);
 }

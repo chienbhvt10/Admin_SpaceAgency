@@ -1,19 +1,24 @@
 import { Form, FormItemProps, Select } from 'antd';
 import React from 'react';
 import './style.scss';
-interface Iprops {
+interface IProps {
   options: React.ReactNode[];
   formItem?: FormItemProps;
   colOffSet?: number | string;
+  items?: any[];
 }
-const FormDropdown = (props: Iprops) => {
-  const { options, formItem, colOffSet } = props;
+const { Option } = Select;
+const FormDropdown = (props: IProps) => {
+  const { options, formItem, colOffSet, items } = props;
   return (
-    
-      <Form.Item {...formItem}>
-        <Select placeholder="---All---">{options}</Select>
-      </Form.Item>
-    
+    <Form.Item {...formItem}>
+      <Select placeholder="---All---">
+        <Option>---All---</Option>
+        {items?.map((i) => {
+          return <Option key={i?.id}>{i?.title}</Option>;
+        })}
+      </Select>
+    </Form.Item>
   );
 };
 
