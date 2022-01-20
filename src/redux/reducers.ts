@@ -4,13 +4,13 @@ import themes, { ThemesModuleState } from 'modules/ThemesCollection/redux/reduce
 import users, { UsersModuleState } from 'modules/UserManagement/redux/reducers';
 import loadingReducer from '../utils/loading/redux/loadingReducer';
 import { LoadingState } from './action-types';
-import styles, { StyleModuleState } from 'modules/StylesCollection/redux/reducers';
+import styles, { StylesModuleState } from 'modules/StylesCollection/redux/reducers';
 export interface RootState {
   auth: AuthModuleState;
   themes: ThemesModuleState;
   users: UsersModuleState;
   loadingReducer: LoadingState;
-  styles: StyleModuleState;
+  styles: StylesModuleState;
 }
 
 export default combineReducers<RootState>({

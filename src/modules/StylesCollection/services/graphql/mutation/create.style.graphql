@@ -1,5 +1,0 @@
-mutation createStyle($createStyleInput: CreateStyleInput!) {
-  createStyle(createStyleInput: $createStyleInput) {
-    ...IStyle
-  }
-}

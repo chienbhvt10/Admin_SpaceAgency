@@ -1,17 +1,9 @@
-import { getStyle } from './../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
-import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
-export const useStyleDetail = () => {
-  const dispatch = useDispatch();
-  const { dataStyle: item, loading } = useSelector((state: RootState) => state.styles.getStyleState);
-  const getStyleDetail = useCallback((id: string) => {
-    dispatch(getStyle({ id }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export const useStyleDetail = (id?: string) => {
+  const item = null;
+  const loading = false;
   return {
-    getStyleDetail,
     item,
     loading,
   };

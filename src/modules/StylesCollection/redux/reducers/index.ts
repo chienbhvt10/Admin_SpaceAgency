@@ -1,19 +1,11 @@
-import removeStyleState from './remove-style';
-import createStyleState from './create-style';
-import getListStyleState from './list-style';
-import getStyleState from './get-style';
 import { combineReducers } from 'redux';
-import { CreateStyleState, StyleState, GetStyleState, RemoveStyleState, UpdateStyleState } from '../action-types';
-export interface StyleModuleState {
-  getStyleState: GetStyleState;
-  getListStyleState: StyleState;
-  createStyleState: CreateStyleState;
-  removeStyleState: RemoveStyleState;
+import { StylesState } from '../action-types';
+import listStyles from './list-styles';
+
+export interface StylesModuleState {
+  stylesState: StylesState;
 }
 
-export default combineReducers<StyleModuleState>({
-  getStyleState,
-  createStyleState,
-  removeStyleState,
-  getListStyleState,
+export default combineReducers<StylesModuleState>({
+  stylesState: listStyles,
 });

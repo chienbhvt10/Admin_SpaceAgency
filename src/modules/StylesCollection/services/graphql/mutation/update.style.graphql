@@ -1,5 +1,0 @@
-mutation updateStyle($updateStyleInput: UpdateStyleInput!) {
-  updateStyle(updateStyleInput: $updateStyleInput) {
-    ...IStyle
-  }
-}

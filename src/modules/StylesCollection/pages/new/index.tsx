@@ -5,7 +5,7 @@ import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import CreateStyleForm from 'modules/StylesCollection/components/StyleForm';
-import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyle';
+import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyles';
 import React from 'react';
 import { useNavigate } from 'react-router';
 const { Title } = Typography;

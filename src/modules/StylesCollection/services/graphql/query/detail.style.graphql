@@ -1,5 +1,0 @@
-query getStyle($id: String!) {
-  style(id: $id) {
-    ...IStyle
-  }
-}

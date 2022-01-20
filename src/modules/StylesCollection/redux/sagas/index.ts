@@ -1,14 +1,9 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from '../action-types';
-import { createStyleAsync } from './create-style';
-import { removeStyleAsync } from './remove-style';
-import { getStyleAsync } from './get-style';
-import { getAllStyleAsync } from './list-style';
-import { updateStyleAsync } from './update-style';
-export default function* styleSagas() {
-  yield all([takeLatest([actionTypes.GET_STYLE], getStyleAsync)]);
-  yield all([takeLatest([actionTypes.GET_LIST_STYLE], getAllStyleAsync)]);
-  yield all([takeLatest([actionTypes.CREATE_STYLE], createStyleAsync)]);
-  yield all([takeLatest([actionTypes.UPDATE_STYLE], updateStyleAsync)]);
-  yield all([takeLatest([actionTypes.REMOVE_STYLE], removeStyleAsync)]);
+import { getStylesAsync } from './list-styles';
+
+export default function* root() {
+  //   yield all([takeLatest(actionTypes.REMOVE_THEME, removeThemeAsync)]);
+  yield all([takeLatest(actionTypes.STYLES, getStylesAsync)]);
+  //   yield all([takeLatest(actionTypes.DETAIL_THEME, detailThemeAsync)]);
 }

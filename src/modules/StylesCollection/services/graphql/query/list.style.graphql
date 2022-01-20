@@ -1,5 +1,0 @@
-query getListStyle($where: WhereInput, $pagination: PaginationInput) {
-  styles(where: $where, pagination: $pagination) {
-    ...IStyle
-  }
-}

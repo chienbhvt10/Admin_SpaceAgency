@@ -1,5 +1,0 @@
-mutation removeStyle($id: String!) {
-  removeStyle(id: $id) {
-    ...IStyle
-  }
-}

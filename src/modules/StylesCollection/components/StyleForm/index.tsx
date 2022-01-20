@@ -2,7 +2,6 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import { TypeForm } from 'commons/type';
-import { IStyle } from 'graphql/generated/graphql';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import '../../styles/style-form.scss';
@@ -14,7 +13,7 @@ const { Title } = Typography;
 interface Props {
   title: string;
   loading: boolean;
-  item?: IStyle;
+  item?: any;
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;

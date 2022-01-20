@@ -129,11 +129,11 @@ export enum TypeKeyFilterUser {
 export enum TypeKeyFilterTheme {
   NAME = 'title',
 }
+export enum TypeKeyFilterStyle {
+  NAME = 'title',
+}
 export enum TypeSortUser {
   EMAIL = 'email',
-}
-export enum TypeKeyFilterStyle {
-  NAME = 'name',
 }
 export enum TypeSortStyle {
   NAME = 'name',
