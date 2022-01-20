@@ -1,16 +1,22 @@
-fragment IMaterialFields on Material {
+fragment IMaterial on Material {
+  createdAt
+  updatedAt
   id
   title
-  style {
-    id
-    title
-    code3d
-    description
-    price {
-      ...IPrice
-    }
-  }
   materialTypes {
-    ...IMaterialTypeFields
+    ...IMaterialType
+  }
+  style {
+    ...IStyle
+  }
+}
+fragment IMaterialType on MaterialType {
+  createdAt
+  createdAt
+  id
+  title
+  code3d
+  price {
+    ...IPrice
   }
 }

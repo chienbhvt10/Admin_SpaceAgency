@@ -1,0 +1,43 @@
+import { TypePagination } from 'commons/type';
+import { SortValue } from 'graphql/generated/graphql';
+import { MaterialsActionTypes, MaterialsState, MATERIALS, MATERIALS_SUCCESS, MATERIALS_ERROR } from '../action-types';
+
+const initialState: MaterialsState = {
+  loading: false,
+  pagination: {
+    skip: TypePagination.DEFAULT_SKIP,
+    limit: TypePagination.DEFAULT_LIMIT,
+  },
+  where: {
+    filter: [],
+    sort: [{ key: 'title', value: SortValue.Asc }],
+  },
+  dataMaterials: [],
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (state = initialState, action: MaterialsActionTypes): MaterialsState => {
+  switch (action.type) {
+    case MATERIALS:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case MATERIALS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        pagination: action.payload.pagination,
+        where: action.payload.where,
+        dataMaterials: action.payload.dataMaterials,
+      };
+    case MATERIALS_ERROR:
+      return {
+        ...state,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};

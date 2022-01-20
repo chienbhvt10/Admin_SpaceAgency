@@ -11,9 +11,10 @@ import { useNavigate } from 'react-router';
 import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
 import './style.scss';
+import { IMaterial } from 'graphql/generated/graphql';
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
-  const { items, loading } = useListMaterial();
+  const { dataMaterials, pagination, where, paginationTable, loading } = useListMaterial();
   const [value, setValue] = React.useState<string>('');
   React.useEffect(() => {
     setTitle('Material Collection');
@@ -36,6 +37,8 @@ const MaterialCollectionPage = () => {
   ];
   const handleSearch = (value: string) => () => {};
   const onChangeValue = (e: any) => () => {};
+  const onEdit = (record: IMaterial) => () => {};
+  const onDelete = (record: IMaterial) => () => {};
   return (
     <MaterialCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }}></PageHeader>
@@ -66,7 +69,14 @@ const MaterialCollectionPage = () => {
           />
         </div>
         <FormSearch value={value} onChange={onChangeValue} handleSearch={handleSearch} />
-        <TableMaterial items={items} rowKey={rowKey} loading={loading} onChange={onChange} handleAdd={handleAdd} />
+        <TableMaterial
+          items={dataMaterials || []}
+          loading={loading}
+          onChange={onChange}
+          pagination={paginationTable}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
       </TableHeader>
     </MaterialCollectionLayout>
   );

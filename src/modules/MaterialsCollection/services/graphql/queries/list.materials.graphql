@@ -1,0 +1,5 @@
+query getListMaterials($where: WhereInput, $pagination: PaginationInput) {
+  materials(where: $where, pagination: $pagination) {
+    ...IMaterial
+  }
+}
