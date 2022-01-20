@@ -108,9 +108,19 @@ export enum TypePagination {
   DEFAULT_SKIP = 0,
   DEFAULT_LIMIT = 20,
 }
-
+export enum TypeActiveAccount {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
+export enum TypeRole {
+  ADMIN = 'ADMIN',
+  SYSADMIN = 'SYSADMIN',
+  CUSTOMER = 'CUSTOMER',
+}
 export enum TypeKeyFilterUser {
   EMAIL = 'email',
+  STATUS = 'status',
+  ROLE = 'role',
 }
 export enum TypeKeyFilterTheme {
   NAME = 'title',

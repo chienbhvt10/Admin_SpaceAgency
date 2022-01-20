@@ -8,6 +8,7 @@ import UserManagementLayout from 'commons/components/layouts/UserManagement';
 import { TypeKeyFilterUser, TypePagination, TypeSortUser } from 'commons/type';
 import { FilterInput, IUsersFields } from 'graphql/generated/graphql';
 import { isEmpty, OrderOfSorter } from 'helpers/string';
+import FilterForm from 'modules/UserManagement/components/FilterForm';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import React from 'react';
@@ -19,11 +20,23 @@ function ListUserManagement() {
   const navigate = useNavigate();
   const { removeUser } = useRemoveUser();
   const [value, setValue] = React.useState<string>('');
+  const [role, setRole] = React.useState<string>('');
+  const [status, setStatus] = React.useState<string>('');
 
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
-  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterUser.EMAIL, value: '' }];
+  const onRoleChange = (value: any) => {
+    setRole(value);
+  };
+  const onStatusChange = (value: any) => {
+    setStatus(value);
+  };
+  const arrFilter: FilterInput[] = [
+    { key: TypeKeyFilterUser.EMAIL, value: '' },
+    { key: TypeKeyFilterUser.ROLE, value: '' },
+    { key: TypeKeyFilterUser.STATUS, value: '' },
+  ];
 
   const routes = [
     {
@@ -63,10 +76,27 @@ function ListUserManagement() {
     navigate(CommonPath.USERS_MANAGEMENT_NEW);
   };
   const handleSearch = (value: string) => () => {
-    const newFilter = arrFilter.map((i) => ({
-      ...i,
-      value: i.key === TypeKeyFilterUser.EMAIL ? value : '',
-    }));
+    const newFilter = arrFilter.map((filter) => {
+      switch (filter.key) {
+        case TypeKeyFilterUser.EMAIL:
+          return {
+            ...filter,
+            value: value,
+          };
+        case TypeKeyFilterUser.ROLE:
+          return {
+            ...filter,
+            value: role,
+          };
+        case TypeKeyFilterUser.STATUS:
+          return {
+            ...filter,
+            value: status,
+          };
+        default:
+          return { ...filter };
+      }
+    });
     filterUser(newFilter);
   };
   const onReset = () => {
@@ -84,7 +114,16 @@ function ListUserManagement() {
           </Button>
         }
       >
-        <FormSearch value={value} onChange={onChangeValue} handleSearch={handleSearch} onReset={onReset} />
+        <FilterForm
+          role={role}
+          status={status}
+          value={value}
+          onRoleChange={onRoleChange}
+          onStatusChange={onStatusChange}
+          onChange={onChangeValue}
+          handleSearch={handleSearch}
+          onReset={onReset}
+        />
         <CustomUserManagementTable
           onDelete={onDelete}
           onEdit={onEdit}

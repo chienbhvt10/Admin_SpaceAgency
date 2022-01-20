@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { SorterResult } from 'antd/lib/table/interface';
+import Text from 'antd/lib/typography/Text';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { IUsersFields } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
@@ -29,6 +30,13 @@ function CustomUserManagementTable(props: IProps) {
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
+      title: 'Full Name',
+      dataIndex: 'fullName',
+      key: 'fullName',
+      sorter: false,
+      render: (_, record: IUsersFields, __) => <Text>{record.firstName + ' ' + record.lastName}</Text>,
+    },
+    {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
@@ -36,33 +44,15 @@ function CustomUserManagementTable(props: IProps) {
       sorter: true,
     },
     {
-      title: 'First Name',
-      dataIndex: 'firstName',
-      key: 'firstName',
-      sorter: false,
-    },
-    {
-      title: 'Last Name',
-      dataIndex: 'lastName',
-      key: 'lastName',
-      sorter: false,
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-      sorter: false,
-    },
-    {
-      title: 'Phone',
-      dataIndex: 'phone',
-      key: 'phone',
-      sorter: false,
-    },
-    {
       title: 'Role',
       dataIndex: 'role',
       key: 'role',
+      sorter: false,
+    },
+    {
+      title: 'Is Active',
+      dataIndex: 'isActive',
+      key: 'isActive',
       sorter: false,
     },
     {
@@ -87,6 +77,7 @@ function CustomUserManagementTable(props: IProps) {
         loading={loading}
         rowKey={rowKey}
         onChange={onChange}
+        bordered
         pagination={{
           ...pagination,
           showSizeChanger: false,
