@@ -34,7 +34,7 @@ const MaterialForm = (props: Props) => {
   };
   return (
     <div>
-      <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
+    
         <div id="material-form">
           <Form
             name="basic"
@@ -45,7 +45,8 @@ const MaterialForm = (props: Props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-          >
+        >
+            <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
             <Row justify="center">
               <Col span={22}>
                 <div className="dropdown-select">
@@ -209,9 +210,10 @@ const MaterialForm = (props: Props) => {
                 </Row>
               </Col>
             </Row>
+            </HeaderCreateUpdate>
           </Form>
         </div>
-      </HeaderCreateUpdate>
+     
     </div>
   );
 };

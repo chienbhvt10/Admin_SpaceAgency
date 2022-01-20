@@ -44,7 +44,7 @@ const ThemesForm = (props: Props) => {
   };
   return (
     <div>
-      <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
+     
         <div id="form-theme">
           <Form
             name="basic"
@@ -55,7 +55,8 @@ const ThemesForm = (props: Props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-          >
+        >
+           <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
             <Row justify="center">
               <Col span={22}>
                 <Form.Item labelCol={{ span: 4 }} className="name" label="Name" name="name">
@@ -165,9 +166,10 @@ const ThemesForm = (props: Props) => {
                 </Form.Item>
               </Col>
             </Row>
+            </HeaderCreateUpdate>
           </Form>
         </div>
-      </HeaderCreateUpdate>
+     
     </div>
   );
 };
