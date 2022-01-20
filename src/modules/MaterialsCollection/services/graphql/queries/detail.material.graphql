@@ -1,0 +1,5 @@
+query getDetailMaterial($id: String!) {
+  material(id: $id) {
+    ...IMaterial
+  }
+}

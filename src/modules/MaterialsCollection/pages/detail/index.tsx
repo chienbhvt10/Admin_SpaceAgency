@@ -4,14 +4,22 @@ import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollect
 import { TypeForm } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import MaterialForm from 'modules/MaterialsCollection/components/UseForm';
-// import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser'
+import { useDetailMaterial } from 'modules/MaterialsCollection/hooks/useDetailMaterial';
 import React from 'react';
+import { useParams } from 'react-router';
 
 const MaterialUpdate = () => {
-  // const { loading } = useCreateUser();
+  let { id } = useParams<'id'>();
+  const { getDetailMaterial } = useDetailMaterial();
   React.useEffect(() => {
     setTitle('Update Material');
   }, []);
+  React.useEffect(() => {
+    if (id) {
+      getDetailMaterial(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -22,13 +30,14 @@ const MaterialUpdate = () => {
       breadcrumbName: 'Material Collection',
     },
     {
-      path: CommonPath.MATERIAL_COLLECTION_UPDATE,
-      breadcrumbName: 'Update Material Collection',
+      path: CommonPath.MATERIAL_COLLECTION_DETAIL,
+      breadcrumbName: 'Detail Material Collection',
     },
   ];
   return (
     <div>
       <MaterialCollectionLayout>
+        <PageHeader title="Update User" breadcrumb={{ routes }} />
         <MaterialForm title="Update Material Collection" type={TypeForm.UPDATE} loading={false} />
       </MaterialCollectionLayout>
     </div>

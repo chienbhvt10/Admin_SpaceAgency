@@ -7,7 +7,7 @@ import {
 import {
   materialCollectionRouter,
   newMaterialCollectionRouter,
-  updateMaterialCollectionlRouter,
+  updateMaterialCollectionRouter,
 } from 'modules/MaterialsCollection/router';
 import {
   newStyleCollectionRouter,
@@ -35,7 +35,7 @@ const routes: RouteObject[] = [
   { ...styleCollectionDetailRouter },
   { ...materialCollectionRouter },
   { ...newMaterialCollectionRouter },
-  { ...updateMaterialCollectionlRouter },
+  { ...updateMaterialCollectionRouter },
   { ...customerSimulationRouter },
   { ...customerSimulationDetailRouter },
   { ...newCustomerSimulationRouter },

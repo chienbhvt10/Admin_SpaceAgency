@@ -2,17 +2,18 @@ import { RouteObject } from 'react-router-dom';
 import MaterialCreateNew from './pages/new';
 import MaterialUpdate from './pages/detail';
 import MaterialCollectionPage from './pages/list';
+import { CommonPath } from 'commons/base-routes';
 
 export const materialCollectionRouter: RouteObject = {
-  path: '/material-collection/',
+  path: CommonPath.MATERIAL_COLLECTION,
   element: <MaterialCollectionPage />,
 };
 
 export const newMaterialCollectionRouter: RouteObject = {
-  path: '/material-collection/new',
+  path: CommonPath.MATERIAL_COLLECTION_NEW,
   element: <MaterialCreateNew />,
 };
-export const updateMaterialCollectionlRouter: RouteObject = {
-  path: '/material-collection/update/:id',
+export const updateMaterialCollectionRouter: RouteObject = {
+  path: CommonPath.MATERIAL_COLLECTION_DETAIL,
   element: <MaterialUpdate />,
 };

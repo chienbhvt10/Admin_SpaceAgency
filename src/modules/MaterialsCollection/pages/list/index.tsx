@@ -1,16 +1,17 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, PageHeader, TablePaginationConfig, Form } from 'antd';
+import { Button, Form, PageHeader, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollection';
 import TableHeader from 'commons/components/layouts/TableHeader';
-import { TypeKeyFilterMaterials, TypeKeyFilterUser, TypePagination } from 'commons/type';
+import { TypeKeyFilterMaterials, TypePagination } from 'commons/type';
 import { FilterInput, IMaterial } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
+import { useRemoveMaterial } from 'modules/MaterialsCollection/hooks/useRemoveMaterial';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
 import React from 'react';
@@ -21,6 +22,7 @@ const MaterialCollectionPage = () => {
   const navigate = useNavigate();
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
+  const { removeMaterial } = useRemoveMaterial();
   const { dataStyles } = useListStyles();
   const { dataThemes } = useListThemes();
   const [value, setValue] = React.useState<string>('');
@@ -59,17 +61,6 @@ const MaterialCollectionPage = () => {
     );
   };
 
-  const routes = [
-    {
-      path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
-    },
-    {
-      path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'Material Collection',
-    },
-  ];
-
   const handleSearch = () => {
     const newFilter = arrFilter.map((i) => ({
       ...i,
@@ -101,15 +92,28 @@ const MaterialCollectionPage = () => {
     });
   };
 
-  const onEdit = (record: IMaterial) => () => {};
+  const onEdit = (record: IMaterial) => () => {
+    navigate('/material-collection/detail/' + record.id);
+  };
 
-  const onDelete = (record: IMaterial) => () => {};
-
+  const onDelete = (record: IMaterial) => () => {
+    removeMaterial({ id: record.id });
+  };
+  const routes = [
+    {
+      path: CommonPath.DEFAULT_PATH,
+      breadcrumbName: 'Home',
+    },
+    {
+      path: CommonPath.MATERIAL_COLLECTION,
+      breadcrumbName: 'Material Collection',
+    },
+  ];
   return (
     <MaterialCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }}></PageHeader>
       <TableHeader
-        title="Material Managenent"
+        title="Material Collection"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             New Material
