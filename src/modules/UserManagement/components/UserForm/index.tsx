@@ -193,6 +193,39 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
+                  label={<Title level={5}>Last NameF</Title>}
+                  name="firstNameF"
+                  rules={[requireRule]}
+                  {...tailLayout}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  label={<Title level={5}>Last NameF</Title>}
+                  name="lastNameF"
+                  rules={[requireRule]}
+                  {...tailLayout}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  label={<Title level={5}>Phone</Title>}
+                  name="phone"
+                  rules={[requireRule]}
+                  {...tailLayout}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
                   label={<Title level={5}>Address</Title>}
                   name="address"
                   rules={[requireRule]}
