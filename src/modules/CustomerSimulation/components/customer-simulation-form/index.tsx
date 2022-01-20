@@ -1,10 +1,11 @@
-import { Col, Form, Input, Radio, Row, Select } from 'antd';
+import { Col, Form, Input, InputNumber, Radio, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
 import { TypeForm } from 'commons/type';
 import FormHeader from 'modules/CustomerSimulation/components/form-header';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import SelectFormItem from '../select-form-item';
 import StyleListTable from '../style-list-table';
 const { Option } = Select;
 interface Props {

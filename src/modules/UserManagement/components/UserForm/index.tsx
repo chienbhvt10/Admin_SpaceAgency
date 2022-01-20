@@ -1,18 +1,19 @@
-import { Button, Col, Form, FormItemProps, FormProps, Input, Radio, Row, Select, Space, Upload } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
-import Title from 'antd/lib/typography/Title';
+import { Button, Col, Form, FormItemProps, FormProps, Input, Row, Space } from 'antd';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
-import { TypeActiveAccount, TypeForm, TypeRole } from 'commons/type';
+import { TypeForm } from 'commons/type';
 import { CreateUserInput, IUsersFields, UpdateUserInput } from 'graphql/generated/graphql';
 import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import FormHeader from '../FormHeader';
+const layout: FormProps = {
+  layout: 'vertical',
+  labelCol: { span: 20 },
+  wrapperCol: { span: 20 },
+};
 const tailLayout: FormItemProps = {};
-const { Option } = Select;
+
 interface IProps {
-  title: string;
   loading: boolean;
   item?: IUsersFields;
   type: TypeForm;
@@ -26,8 +27,8 @@ const requireEmail = {
   message: 'The input is not valid E-mail!',
 };
 
-function UserForm(props: IProps) {
-  const { loading, item, onCancel, onChange, title } = props;
+function ThemeForm(props: IProps) {
+  const { loading, item, onCancel, onChange } = props;
   const { updateUser } = useUpdateUser();
   const { createUser } = useCreateUser();
   const [form] = Form.useForm<IUsersFields>();
@@ -58,7 +59,7 @@ function UserForm(props: IProps) {
       setUpdateUserInput({
         id: item.id,
         email: item.email,
-        firstName: 'item.firstName',
+        firstName: item.firstName,
         lastName: item.lastName,
         address: item.address,
         firstNameF: item.firstNameF,
@@ -66,14 +67,12 @@ function UserForm(props: IProps) {
         phone: item.phone,
       });
     }
-    console.log('update input ', updateInput);
   }, [item]);
   React.useEffect(() => {
     if (item) {
-      form.setFieldsValue(updateInput);
-      console.log('value form ', form.getFieldsValue());
+      form.setFieldsValue(item);
     }
-  }, [form, item, updateInput]);
+  }, [form, item]);
   const onFinish = (values: IUsersFields) => {
     if (props.type === TypeForm.UPDATE) {
       const updateUserInput: UpdateUserInput = {
@@ -114,6 +113,7 @@ function UserForm(props: IProps) {
   return (
     <>
       <Form
+        {...layout}
         name="basic"
         initialValues={{
           ...props.item,
@@ -124,135 +124,74 @@ function UserForm(props: IProps) {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
-          <Row>
-            <Col span={14}>
-              <Row justify="center">
-                <Col span={18}>
-                  <Form.Item
-                    labelCol={{ span: 4 }}
-                    label="First Name"
-                    name="firstName"
-                    rules={[requireRule]}
-                    {...tailLayout}
-                  >
-                    <Col offset={1}>
-                      <Input />
-                    </Col>
+        <Row>
+          <Col span={16}>
+            <Row>
+              <Col span={12}>
+                <Form.Item label="Email" name="email" rules={[requireRule, requireEmail]} {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              {props.type === TypeForm.CREATE && (
+                <Col span={12}>
+                  <Form.Item label="Password" name="password" rules={[requireRule]} {...tailLayout}>
+                    <Input onChange={handleChangePassword} />
                   </Form.Item>
                 </Col>
-                <Col span={18}>
-                  <Form.Item
-                    labelCol={{ span: 4 }}
-                    label="Last Name"
-                    name="lastName"
-                    rules={[requireRule]}
-                    {...tailLayout}
-                  >
-                    <Col offset={1}>
-                      <Input />
-                    </Col>
-                  </Form.Item>
-                </Col>
-                <Col span={18}>
-                  <Form.Item
-                    labelCol={{ span: 4 }}
-                    label="Email"
-                    name="email"
-                    rules={[requireRule, requireEmail]}
-                    {...tailLayout}
-                  >
-                    <Col offset={1}>
-                      <Input />
-                    </Col>
-                  </Form.Item>
-                </Col>
-                {props.type === TypeForm.CREATE && (
-                  <Col span={18}>
-                    <Form.Item
-                      labelCol={{ span: 4 }}
-                      label="Password"
-                      name="password"
-                      rules={[requireRule]}
-                      {...tailLayout}
-                    >
-                      <Col offset={1}>
-                        <Input type={'password'} onChange={handleChangePassword} />
-                      </Col>
-                    </Form.Item>
-                  </Col>
-                )}
-                <Col span={18}>
-                  <Form.Item labelCol={{ span: 4 }} name="gender" label="Gender">
-                    <Col offset={1}>
-                      <Radio.Group>
-                        <Radio value="1">Yes</Radio>
-                        <Radio value="2">Not Yet</Radio>
-                      </Radio.Group>
-                    </Col>
-                  </Form.Item>
-                </Col>
-
-                <Col span={18}>
-                  <Form.Item labelCol={{ span: 4 }} label="Address" name="address" rules={[requireRule]}>
-                    <Col offset={1}>
-                      <TextArea rows={3} showCount maxLength={1000} />
-                    </Col>
-                  </Form.Item>
-                </Col>
-                <Col span={18}>
-                  <Form.Item labelCol={{ span: 4 }} label="Role" name="role">
-                    <Col offset={1}>
-                      <Select placeholder="---All---">
-                        <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
-                        <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
-                        <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
-                      </Select>
-                    </Col>
-                  </Form.Item>
-                </Col>
-                <Col span={18}>
-                  <Form.Item labelCol={{ span: 4 }} label="Status" name="status">
-                    <Col offset={1}>
-                      <Select placeholder="---All---">
-                        <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
-                        <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
-                      </Select>
-                    </Col>
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Col>
-            <Col span={10}>
-              <Row justify="end">
-                <Col span={24}>
-                  <Form.Item labelCol={{ span: 4 }} label="Avatar" name="preview">
-                    <Col offset={1}>
-                      <Row>
-                        <Col span={16}>
-                          <Input />
-                        </Col>
-                        <Col span={8}>
-                          <Upload name="image">
-                            <Button htmlType="button" type="primary">
-                              Choose Images
-                            </Button>
-                          </Upload>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Form.Item>
-                </Col>
-                <Col span={20} style={{ height: '350px', marginRight: '20px' }}>
-                  <UploadDragger />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </FormHeader>
+              )}
+              <Col span={12}>
+                <Form.Item label="First Name" name="firstName" rules={[requireRule]} {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="First Name F" name="firstNameF" rules={[requireRule]} {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="Last Name" name="lastName" rules={[requireRule]} {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="Last Name F" name="lastNameF" rules={[requireRule]} {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="Phone" name="phone" {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="Address" name="address" rules={[requireRule]} {...tailLayout}>
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={8}>
+            <UploadDragger />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Form.Item {...tailLayout}>
+              <Space>
+                <Button type="primary" htmlType="submit" loading={loading}>
+                  Save
+                </Button>
+                <Button type="ghost" disabled={loading} onClick={onCancel}>
+                  Close
+                </Button>
+              </Space>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </>
   );
 }
 
-export default UserForm;
+export default ThemeForm;

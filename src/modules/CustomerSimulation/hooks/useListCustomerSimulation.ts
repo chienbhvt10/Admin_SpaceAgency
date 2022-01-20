@@ -1,6 +1,7 @@
 import React from 'react';
+import { UserSimulation } from 'helpers/temp-type';
 
-const dataSource: any[] = [
+const dataSource: UserSimulation[] = [
   {
     type: 'type',
     design: 'design',

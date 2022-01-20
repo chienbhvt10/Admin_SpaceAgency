@@ -99,19 +99,7 @@ export class AppError extends Error {
     this.code = code;
   }
 }
-export enum TypeGender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-}
-export enum TypeRole {
-  SYSADMIN = 'SYSADMIN',
-  ADMIN = 'ADMIN',
-  CUSTOMER = 'CUSTOMER',
-}
-export enum TypeActiveAccount {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-}
+
 export enum TypeForm {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE',
@@ -123,8 +111,6 @@ export enum TypePagination {
 
 export enum TypeKeyFilterUser {
   EMAIL = 'email',
-  ROLE = 'role',
-  STATUS = 'status',
 }
 export enum TypeKeyFilterTheme {
   NAME = 'title',
@@ -134,7 +120,4 @@ export enum TypeKeyFilterStyle {
 }
 export enum TypeSortUser {
   EMAIL = 'email',
-}
-export enum TypeSortStyle {
-  NAME = 'name',
 }

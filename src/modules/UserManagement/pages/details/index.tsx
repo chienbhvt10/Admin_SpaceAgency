@@ -7,13 +7,13 @@ import DetailUserForm from 'modules/UserManagement/components/UserForm';
 import { useDetailUser } from 'modules/UserManagement/hooks/useDetailUser';
 import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 
 function DetailUserManagement() {
   let { id } = useParams<'id'>();
   const { getDetailUser, item } = useDetailUser();
   const { loading: loadingUserUpdate } = useUpdateUser();
-  const navigate = useNavigate();
+
   React.useEffect(() => {
     if (id) {
       getDetailUser(id);
@@ -38,19 +38,10 @@ function DetailUserManagement() {
       breadcrumbName: 'Detail User Management',
     },
   ];
-  const onCancel = () => {
-    navigate(CommonPath.USERS_MANAGEMENT);
-  };
   return (
     <UserManagementLayout>
-      <PageHeader title="" breadcrumb={{ routes }} />
-      <DetailUserForm
-        onCancel={onCancel}
-        title="Update User"
-        type={TypeForm.UPDATE}
-        item={item}
-        loading={loadingUserUpdate}
-      />
+      <PageHeader title="Detail User" breadcrumb={{ routes }} />
+      <DetailUserForm type={TypeForm.UPDATE} item={item} loading={loadingUserUpdate} />
     </UserManagementLayout>
   );
 }
