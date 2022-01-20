@@ -1,19 +1,36 @@
-import { Button, Col, Form, FormItemProps, FormProps, Input, Row, Space } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  FormItemProps,
+  FormProps,
+  Input,
+  Radio,
+  Row,
+  Select,
+  Space,
+  Typography,
+  Upload,
+} from 'antd';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
-import { TypeForm } from 'commons/type';
+import { TypeActiveAccount, TypeForm, TypeRole } from 'commons/type';
 import { CreateUserInput, IUsersFields, UpdateUserInput } from 'graphql/generated/graphql';
 import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
+import FormHeader from '../FormHeader';
+
 import { useDispatch } from 'react-redux';
+import Title from 'antd/lib/typography/Title';
+import TextArea from 'antd/lib/input/TextArea';
 const layout: FormProps = {
-  layout: 'vertical',
-  labelCol: { span: 20 },
-  wrapperCol: { span: 20 },
+  layout: 'horizontal',
 };
+const { Option } = Select;
 const tailLayout: FormItemProps = {};
 
 interface IProps {
+  title: string;
   loading: boolean;
   item?: IUsersFields;
   type: TypeForm;
@@ -28,7 +45,7 @@ const requireEmail = {
 };
 
 function ThemeForm(props: IProps) {
-  const { loading, item, onCancel, onChange } = props;
+  const { loading, item, onCancel, onChange, title } = props;
   const { updateUser } = useUpdateUser();
   const { createUser } = useCreateUser();
   const [form] = Form.useForm<IUsersFields>();
@@ -124,71 +141,113 @@ function ThemeForm(props: IProps) {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Row>
-          <Col span={16}>
-            <Row>
-              <Col span={12}>
-                <Form.Item label="Email" name="email" rules={[requireRule, requireEmail]} {...tailLayout}>
+        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
+          <Row>
+            <Col span={16}>
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  label={<Title level={5}>Email</Title>}
+                  name="email"
+                  rules={[requireRule, requireEmail]}
+                  {...tailLayout}
+                >
                   <Input />
                 </Form.Item>
               </Col>
               {props.type === TypeForm.CREATE && (
-                <Col span={12}>
-                  <Form.Item label="Password" name="password" rules={[requireRule]} {...tailLayout}>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>Password</Title>}
+                    name="password"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
                     <Input onChange={handleChangePassword} />
                   </Form.Item>
                 </Col>
               )}
-              <Col span={12}>
-                <Form.Item label="First Name" name="firstName" rules={[requireRule]} {...tailLayout}>
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  label={<Title level={5}>First Name</Title>}
+                  name="firstName"
+                  rules={[requireRule]}
+                  {...tailLayout}
+                >
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item label="First Name F" name="firstNameF" rules={[requireRule]} {...tailLayout}>
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  label={<Title level={5}>Last Name</Title>}
+                  name="lastName"
+                  rules={[requireRule]}
+                  {...tailLayout}
+                >
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item label="Last Name" name="lastName" rules={[requireRule]} {...tailLayout}>
-                  <Input />
+              <Col span={20}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  label={<Title level={5}>Address</Title>}
+                  name="address"
+                  rules={[requireRule]}
+                  {...tailLayout}
+                >
+                  <TextArea />
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item label="Last Name F" name="lastNameF" rules={[requireRule]} {...tailLayout}>
-                  <Input />
+              <Col span={20}>
+                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Content</Title>} name="content">
+                  <Radio.Group>
+                    <Radio value="male">Male</Radio>
+                    <Radio value="female">Female</Radio>
+                  </Radio.Group>
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item label="Phone" name="phone" {...tailLayout}>
-                  <Input />
+              <Col span={20}>
+                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Role</Title>} name="role">
+                  <Select placeholder="---All---">
+                    <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
+                    <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
+                    <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
+                  </Select>
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item label="Address" name="address" rules={[requireRule]} {...tailLayout}>
-                  <Input />
+              <Col span={20}>
+                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Status</Title>} name="status">
+                  <Select placeholder="---All---">
+                    <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
+                    <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
+                  </Select>
                 </Form.Item>
               </Col>
-            </Row>
-          </Col>
-          <Col span={8}>
-            <UploadDragger />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={24}>
-            <Form.Item {...tailLayout}>
-              <Space>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                  Save
-                </Button>
-                <Button type="ghost" disabled={loading} onClick={onCancel}>
-                  Close
-                </Button>
-              </Space>
-            </Form.Item>
-          </Col>
-        </Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <Col span={16}>
+                  <Form.Item labelCol={{ span: 8 }} label="Avatar" name="avatar" rules={[requireRule]}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Upload name="image">
+                    <Button htmlType="button" type="primary">
+                      Choose Images
+                    </Button>
+                  </Upload>
+                </Col>
+              </Row>
+              <Col span={23} style={{ height: '350px' }}>
+                <UploadDragger />
+              </Col>
+            </Col>
+          </Row>
+        </FormHeader>
       </Form>
     </>
   );

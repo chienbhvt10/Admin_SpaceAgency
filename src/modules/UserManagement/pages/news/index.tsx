@@ -28,8 +28,8 @@ function NewUserManagement() {
   ];
   return (
     <UserManagementLayout>
-      <PageHeader title="Detail User" breadcrumb={{ routes }} />
-      <DetailUserForm type={TypeForm.CREATE} loading={loading} />
+      <PageHeader title="" breadcrumb={{ routes }} />
+      <DetailUserForm title="Create User" type={TypeForm.CREATE} loading={loading} />
     </UserManagementLayout>
   );
 }

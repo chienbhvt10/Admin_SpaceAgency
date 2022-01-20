@@ -40,8 +40,8 @@ function DetailUserManagement() {
   ];
   return (
     <UserManagementLayout>
-      <PageHeader title="Detail User" breadcrumb={{ routes }} />
-      <DetailUserForm type={TypeForm.UPDATE} item={item} loading={loadingUserUpdate} />
+      <PageHeader title="" breadcrumb={{ routes }} />
+      <DetailUserForm title="Update User" type={TypeForm.UPDATE} item={item} loading={loadingUserUpdate} />
     </UserManagementLayout>
   );
 }
