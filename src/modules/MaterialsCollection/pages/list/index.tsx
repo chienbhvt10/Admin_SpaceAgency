@@ -18,13 +18,15 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import './style.scss';
 import TableMaterial from './Table';
+import { useGetAllStyles } from '../../../StylesCollection/hooks/useGetAllStyles';
+import { useGetAllThemes } from '../../../ThemesCollection/hooks/useGetAllThemes';
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
   const { removeMaterial } = useRemoveMaterial();
-  const { dataStyles } = useListStyles();
-  const { dataThemes } = useListThemes();
+  const { getAllStyles, dataAllStyles, loading: loadingAllThemes } = useGetAllStyles();
+  const { getAllThemes, dataAllThemes, loading: loadingAllStyles } = useGetAllThemes();
   const [value, setValue] = React.useState<string>('');
   const [selectId, setSelectId] = React.useState<{ themeId: string; styleId: string }>({
     themeId: '',
@@ -99,6 +101,19 @@ const MaterialCollectionPage = () => {
   const onDelete = (record: IMaterial) => () => {
     removeMaterial({ id: record.id });
   };
+
+  const onDropdownVisibleChangeThemes = (open: boolean) => {
+    if (open) {
+      getAllThemes();
+    }
+  };
+
+  const onDropdownVisibleChangeStyles = (open: boolean) => {
+    if (open) {
+      getAllStyles();
+    }
+  };
+
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -127,8 +142,10 @@ const MaterialCollectionPage = () => {
               name: 'themeId',
               labelCol: { span: 3 },
             }}
+            loading={loadingAllThemes}
             options={[]}
-            items={dataThemes}
+            onDropdownVisibleChange={onDropdownVisibleChangeThemes}
+            items={dataAllThemes}
           />
           <FormDropdown
             formItem={{
@@ -136,7 +153,9 @@ const MaterialCollectionPage = () => {
               name: 'styleId',
               labelCol: { span: 3 },
             }}
-            items={dataStyles}
+            loading={loadingAllStyles}
+            onDropdownVisibleChange={onDropdownVisibleChangeStyles}
+            items={dataAllStyles}
             options={[]}
           />
         </Form>

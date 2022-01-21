@@ -1,6 +1,6 @@
 import { TypePagination } from 'commons/type';
 import { SortValue } from 'graphql/generated/graphql';
-import { ThemesActionTypes, ThemesState, THEMES, THEMES_SUCCESS, THEMES_ERROR } from '../action-types';
+import { ThemesActionTypes, ThemesState, THEMES, THEMES_SUCCESS, THEMES_ERROR, DEFAULT_THEMES } from '../action-types';
 
 const initialState: ThemesState = {
   loading: false,
@@ -36,6 +36,16 @@ export default (state = initialState, action: ThemesActionTypes): ThemesState =>
       return {
         ...state,
         loading: false,
+      };
+    case DEFAULT_THEMES:
+      console.log('nsdlvsandkvnk');
+      return {
+        ...state,
+        loading: false,
+        pagination: {
+          skip: TypePagination.DEFAULT_SKIP,
+          limit: TypePagination.DEFAULT_LIMIT,
+        },
       };
     default:
       return state;

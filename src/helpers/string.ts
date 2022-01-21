@@ -1,7 +1,7 @@
 // export const formatString = (str: string) => {
 import { SortOrder } from 'antd/lib/table/interface';
 import { dataNav } from 'commons/type';
-import { SortValue } from 'graphql/generated/graphql';
+import { MaterialType, SortValue } from 'graphql/generated/graphql';
 //   if (str) return str.replace(/[&\/\\#,+()$~%.'":*?<>{}\[\]^|]/g, '');
 //   return str;
 // };
@@ -39,4 +39,7 @@ export function isEmpty(obj: Object) {
     }
   }
   return JSON.stringify(obj) === JSON.stringify({});
+}
+export function findMaterialTypes(arr: MaterialType[], type: string) {
+  // const findType=arr.find((i)=>i.)
 }

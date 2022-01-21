@@ -5,7 +5,7 @@ import { actionDetailMaterials } from '../redux/actions';
 
 export function useDetailMaterial() {
   const dispatch = useDispatch();
-  const { dataUser: item, loading } = useSelector((state: RootState) => state.materials.detailMaterialState);
+  const { dataMaterial: item, loading } = useSelector((state: RootState) => state.materials.detailMaterialState);
   const getDetailMaterial = useCallback((id: string) => {
     dispatch(actionDetailMaterials({ id }));
     // eslint-disable-next-line react-hooks/exhaustive-deps

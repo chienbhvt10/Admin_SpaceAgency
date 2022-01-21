@@ -6,7 +6,6 @@ import { CurrencyUnit } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import MaterialForm from 'modules/MaterialsCollection/components/UseForm';
 import { useCreateMaterials } from 'modules/MaterialsCollection/hooks/useCreateMaterials';
-// import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser'
 import React from 'react';
 
 const MaterialCreateNew = () => {
@@ -26,7 +25,7 @@ const MaterialCreateNew = () => {
             code3d: values.codeStandard,
             price: {
               unit: CurrencyUnit.Jpy,
-              value: parseFloat(values.priceStandard),
+              value: values.priceStandard,
             },
             material: {
               id: values.themeId,
@@ -37,7 +36,7 @@ const MaterialCreateNew = () => {
             code3d: values.codePremium,
             price: {
               unit: CurrencyUnit.Jpy,
-              value: parseFloat(values.pricePremium),
+              value: values.pricePremium,
             },
             material: {
               id: values.themeId,

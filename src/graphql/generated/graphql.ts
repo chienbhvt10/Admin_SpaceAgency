@@ -828,8 +828,6 @@ export type WhereInput = {
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null | undefined, accessToken?: string | null | undefined };
 
-export type IMaterialTypeFields = { __typename?: 'MaterialType', id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, material?: { __typename?: 'Material', id: string, title?: string | null | undefined } | null | undefined };
-
 export type IMaterial = { __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined };
 
 export type IMaterialType = { __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined };
@@ -871,6 +869,13 @@ export type RemoveMaterialVariables = Exact<{
 
 
 export type RemoveMaterial = { __typename?: 'Mutation', removeMaterial: { __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined } };
+
+export type UpdateMaterialVariables = Exact<{
+  updateMaterialInput: UpdateMaterialInput;
+}>;
+
+
+export type UpdateMaterial = { __typename?: 'Mutation', updateMaterial: { __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined } };
 
 export type GetDetailMaterialVariables = Exact<{
   id: Scalars['String'];
@@ -970,20 +975,6 @@ export const IPrice = gql`
   refType
 }
     `;
-export const IMaterialTypeFields = gql`
-    fragment IMaterialTypeFields on MaterialType {
-  id
-  title
-  code3d
-  price {
-    ...IPrice
-  }
-  material {
-    id
-    title
-  }
-}
-    ${IPrice}`;
 export const IMaterialType = gql`
     fragment IMaterialType on MaterialType {
   createdAt
@@ -1111,6 +1102,13 @@ export const RemoveMaterialDocument = gql`
   }
 }
     ${IMaterial}`;
+export const UpdateMaterialDocument = gql`
+    mutation updateMaterial($updateMaterialInput: UpdateMaterialInput!) {
+  updateMaterial(updateMaterialInput: $updateMaterialInput) {
+    ...IMaterial
+  }
+}
+    ${IMaterial}`;
 export const GetDetailMaterialDocument = gql`
     query getDetailMaterial($id: String!) {
   material(id: $id) {
@@ -1208,6 +1206,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     removeMaterial(variables: RemoveMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveMaterial> {
       return withWrapper((wrappedRequestHeaders) => client.request<RemoveMaterial>(RemoveMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeMaterial');
+    },
+    updateMaterial(variables: UpdateMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateMaterial> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMaterial>(UpdateMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateMaterial');
     },
     getDetailMaterial(variables: GetDetailMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailMaterial> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDetailMaterial>(GetDetailMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailMaterial');

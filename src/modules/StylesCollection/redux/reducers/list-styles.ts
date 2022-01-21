@@ -1,5 +1,5 @@
 import { TypePagination } from 'commons/type';
-import { STYLES, StylesActionTypes, StylesState, STYLES_ERROR, STYLES_SUCCESS } from '../action-types';
+import { DEFAULT_STYLES, STYLES, StylesActionTypes, StylesState, STYLES_ERROR, STYLES_SUCCESS } from '../action-types';
 
 const initialState: StylesState = {
   loading: false,
@@ -35,6 +35,15 @@ export default (state = initialState, action: StylesActionTypes): StylesState =>
       return {
         ...state,
         loading: false,
+      };
+    case DEFAULT_STYLES:
+      return {
+        ...state,
+        loading: false,
+        pagination: {
+          skip: TypePagination.DEFAULT_SKIP,
+          limit: TypePagination.DEFAULT_LIMIT,
+        },
       };
     default:
       return state;

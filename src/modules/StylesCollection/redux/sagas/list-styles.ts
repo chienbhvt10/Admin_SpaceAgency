@@ -1,8 +1,8 @@
-import { GetListStyles, GetListThemes } from 'graphql/generated/graphql';
+import { GetListStyles } from 'graphql/generated/graphql';
+import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/StylesCollection/services/apis';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
-import { loginError } from 'modules/Auth/redux/actions';
 import { StylesAction } from '../action-types';
 import { actionStylesSuccess } from '../actions';
 export function* getStylesAsync(action: StylesAction) {
