@@ -1,10 +1,11 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form, PageHeader, TablePaginationConfig } from 'antd';
+import { Button, Form, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollection';
+import PageHeader from 'commons/components/layouts/PageHeader';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { TypeKeyFilterMaterials, TypePagination } from 'commons/type';
 import { FilterInput, IMaterial } from 'graphql/generated/graphql';
@@ -125,7 +126,7 @@ const MaterialCollectionPage = () => {
   ];
   return (
     <MaterialCollectionLayout>
-      <PageHeader title="" breadcrumb={{ routes }}></PageHeader>
+      <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
         title="Material Collection"
         extra={

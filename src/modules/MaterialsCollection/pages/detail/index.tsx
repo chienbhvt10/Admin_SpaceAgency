@@ -1,6 +1,6 @@
-import { PageHeader } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollection';
+import PageHeader from 'commons/components/layouts/PageHeader';
 import { CreateMaterialsTypeInput, TypeForm } from 'commons/type';
 import { CurrencyUnit, UpdateMaterialInput } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
@@ -77,7 +77,7 @@ const MaterialUpdate = () => {
   return (
     <div>
       <MaterialCollectionLayout>
-        <PageHeader title="Update User" breadcrumb={{ routes }} />
+        <PageHeader title="Update Material Collection" breadcrumb={{ routes }} />
         <MaterialForm
           onFinish={onFinish}
           item={item}
