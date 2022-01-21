@@ -1,4 +1,4 @@
-import { TypePagination, TypeSortUser } from 'commons/type';
+import { TypePagination } from 'commons/type';
 import { FilterInput, GetListStylesVariables, PaginationInput, SortInput, SortValue } from 'graphql/generated/graphql';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';

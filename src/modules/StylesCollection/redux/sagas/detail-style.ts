@@ -1,4 +1,4 @@
-import { GetStyle, GetUser } from 'graphql/generated/graphql';
+import { GetStyle } from 'graphql/generated/graphql';
 import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/StylesCollection/services/apis';
 import { put } from 'redux-saga/effects';

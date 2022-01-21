@@ -1,7 +1,7 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
 import { TypePagination } from 'commons/type';
-import { CreateCustomer, CreateStyle } from 'graphql/generated/graphql';
+import { CreateStyle } from 'graphql/generated/graphql';
 import { getNavigate } from 'helpers/history';
 import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/StylesCollection/services/apis';

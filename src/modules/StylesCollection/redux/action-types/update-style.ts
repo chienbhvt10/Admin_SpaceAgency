@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { CreateStyleVariables, IStyle, IUsersFields } from 'graphql/generated/graphql';
+import { CreateStyleVariables, IStyle } from 'graphql/generated/graphql';
 export const CREATE_STYLE = 'CREATE_STYLE';
 export const CREATE_STYLE_SUCCESS = 'CREATE_STYLE_SUCCESS';
 export const CREATE_STYLE_ERROR = 'CREATE_STYLE_ERROR';

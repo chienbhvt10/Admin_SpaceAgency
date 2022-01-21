@@ -1,4 +1,3 @@
-import { Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
@@ -8,7 +7,6 @@ import CreateStyleForm from 'modules/StylesCollection/components/StyleForm';
 import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyle';
 import React from 'react';
 import { useNavigate } from 'react-router';
-const { Title } = Typography;
 const NewStyleCollection = () => {
   const { loading } = useCreateStyle();
   const navigate = useNavigate();

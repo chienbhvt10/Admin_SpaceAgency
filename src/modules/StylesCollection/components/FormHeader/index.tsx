@@ -1,5 +1,4 @@
 import { Button, Card } from 'antd';
-import { TypeForm } from 'commons/type';
 import 'modules/StylesCollection/styles/form-header.scss';
 import React from 'react';
 

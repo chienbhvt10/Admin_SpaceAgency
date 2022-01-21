@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, QuestionCircleOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, EllipsisOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Space } from 'antd';
 import { IStyle } from 'graphql/generated/graphql';
 import React from 'react';

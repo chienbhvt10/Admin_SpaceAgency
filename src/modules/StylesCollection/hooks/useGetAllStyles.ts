@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionDefaultStyles, actionStyles } from '../redux/actions';
 import { RootState } from 'redux/reducers';
+import { actionDefaultStyles, actionStyles } from '../redux/actions';
 
 export function useGetAllStyles() {
   const dispatch = useDispatch();

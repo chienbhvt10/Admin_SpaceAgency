@@ -1,20 +1,20 @@
+import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Row, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
 import TableHeader from 'commons/components/layouts/TableHeader';
-import { TypeKeyFilterStyle, TypeKeyFilterUser, TypePagination } from 'commons/type';
+import { TypeKeyFilterStyle, TypePagination } from 'commons/type';
+import { FilterInput, IStyle } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import FilterForm from 'modules/StylesCollection/components/FilterForm';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
+import { useRemoveStyle } from 'modules/StylesCollection/hooks/useRemoveStyle';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import StyleCollectionTable from './Table';
-import { PlusOutlined } from '@ant-design/icons';
-import { FilterInput, IStyle } from 'graphql/generated/graphql';
-import { useRemoveStyle } from 'modules/StylesCollection/hooks/useRemoveStyle';
 
 const StyleCollectionPage = () => {
   const { dataStyles, loading, paginationTable, updatePaginationAndSorterStyles, pagination, filterStyles } =
@@ -31,7 +31,6 @@ const StyleCollectionPage = () => {
     setSearchValue(e.target.value);
   };
   const onChangeTheme = (value: string) => {
-    console.log(value);
     setTheme(value);
   };
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterStyle.NAME, value: '' }];

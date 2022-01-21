@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { RemoveStyleState, StylesState, DetailStyleState, CreateStyleState, UpdateStyleState } from '../action-types';
-import listStyles from './list-styles';
-import detailStyle from './detail-style';
-import updateStyle from './update-style';
+import { CreateStyleState, DetailStyleState, RemoveStyleState, StylesState, UpdateStyleState } from '../action-types';
 import createStyle from './create-style';
+import detailStyle from './detail-style';
+import listStyles from './list-styles';
 import removeStyle from './remove-style';
+import updateStyle from './update-style';
 
 export interface StylesModuleState {
   stylesState: StylesState;

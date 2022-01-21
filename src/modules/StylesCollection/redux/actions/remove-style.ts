@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { IStyle, IUsersFields, RemoveStyleVariables } from 'graphql/generated/graphql';
+import { IStyle, RemoveStyleVariables } from 'graphql/generated/graphql';
 import { RemoveStyleActionTypes, REMOVE_STYLE, REMOVE_STYLE_ERROR, REMOVE_STYLE_SUCCESS } from '../action-types';
 
 export const actionRemoveStyle = (payload: RemoveStyleVariables): RemoveStyleActionTypes => ({

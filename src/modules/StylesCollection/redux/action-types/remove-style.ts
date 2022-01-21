@@ -1,11 +1,5 @@
 import { AppError } from 'commons/type';
-import {
-  GetListUsersVariables,
-  IStyle,
-  IUsersFields,
-  PaginationInput,
-  RemoveStyleVariables,
-} from 'graphql/generated/graphql';
+import { IStyle, IUsersFields, RemoveStyleVariables } from 'graphql/generated/graphql';
 export const REMOVE_STYLE = 'REMOVE_STYLE';
 export const REMOVE_STYLE_SUCCESS = 'REMOVE_STYLE_SUCCESS';
 export const REMOVE_STYLE_ERROR = 'REMOVE_STYLE_ERROR';

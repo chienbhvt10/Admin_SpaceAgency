@@ -1,16 +1,10 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Row, Select, Table } from 'antd';
+import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
-import { CommonPath } from 'commons/base-routes';
-import TableHeader from 'commons/components/layouts/TableHeader';
-import { TypeKeyFilterStyle } from 'commons/type';
-import { FilterInput, IStyle } from 'graphql/generated/graphql';
+import { IStyle } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
-import FilterForm from 'modules/StylesCollection/components/FilterForm';
 import TableRowAction from 'modules/StylesCollection/components/table-row-action';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import React from 'react';
-import { useNavigate } from 'react-router';
 interface IProps {
   items: IStyle[];
   loading: boolean;

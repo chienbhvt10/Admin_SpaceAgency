@@ -1,7 +1,6 @@
 import { AppError } from 'commons/type';
 import { GetListThemesVariables } from 'graphql/generated/graphql';
-import { DEFAULT_STYLES, StylesActionTypes } from '../action-types';
-import { STYLES, StylesData, STYLES_ERROR, STYLES_SUCCESS } from '../action-types';
+import { DEFAULT_STYLES, STYLES, StylesActionTypes, StylesData, STYLES_ERROR, STYLES_SUCCESS } from '../action-types';
 
 export const actionStyles = (payload: GetListThemesVariables): StylesActionTypes => ({
   type: STYLES,
