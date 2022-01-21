@@ -1,6 +1,5 @@
 import { Table, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { IMaterial, MaterialType } from 'graphql/generated/graphql';
 import React from 'react';
@@ -30,7 +29,7 @@ function TableMaterial(props: IProps) {
         title: 'Price',
         key: '#',
         dataIndex: 'price',
-        render: (_: any, record) => <>{record.price}</>,
+        render: (_: any, record) => <>{record.price?.value}</>,
       },
       { title: 'Order', dataIndex: 'order', key: '#' },
     ];

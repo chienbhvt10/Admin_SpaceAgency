@@ -9,8 +9,9 @@ import { useLocation } from 'react-router-dom';
 import HeaderLayout from '../header';
 import RenderIcon from './component/renderIcon';
 import { PieChartOutlined } from '@ant-design/icons';
-
 import './nav.scss';
+import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
+import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
 const { Sider } = Layout;
 interface IProps {
   children: React.ReactNode;
@@ -20,6 +21,9 @@ function NavBar(props: IProps) {
   const [collapsed, setCollapsed] = React.useState<boolean>(false);
   const [keyNav, setKeyNav] = React.useState<string>();
   const [openKeys, setOpenKeys] = React.useState<string[]>(['menu_1', 'menu_2', 'menu_3']);
+  const { defaultThemes } = useGetAllThemes();
+  const { defaultStyles } = useGetAllStyles();
+
   const { pathname } = useLocation();
 
   React.useEffect(() => {
@@ -54,6 +58,10 @@ function NavBar(props: IProps) {
     arr.push(i.key);
     setOpenKeys(['menu_1', 'menu_2', 'menu_3']);
   };
+  const onClickSubMenu = () => {
+    defaultThemes();
+    defaultStyles();
+  };
   return (
     <Layout className="layout-nav">
       <Sider
@@ -78,7 +86,11 @@ function NavBar(props: IProps) {
             return (
               <SubMenu onTitleClick={onTitleClick(i)} key={i.key} icon={<RenderIcon item={i} />} title={i.name}>
                 {i?.item?.map((ii) => {
-                  return <Menu.Item key={ii.key}>{ii.nameSub}</Menu.Item>;
+                  return (
+                    <Menu.Item onClick={onClickSubMenu} key={ii.key}>
+                      {ii.nameSub}
+                    </Menu.Item>
+                  );
                 })}
               </SubMenu>
             );

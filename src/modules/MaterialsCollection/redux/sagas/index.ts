@@ -4,11 +4,13 @@ import { getListMaterialsAsync } from './list-materials';
 import { createMaterialsAsync } from './create-materials';
 import { removeMaterialAsync } from './remove-material';
 import { detailMaterialAsync } from './detail-material';
+import { updateMaterialAsync } from './update-material';
 export default function* root() {
   yield all([
     takeLatest(actionTypes.MATERIALS, getListMaterialsAsync),
     takeLatest(actionTypes.CREATE_MATERIALS, createMaterialsAsync),
     takeLatest(actionTypes.REMOVE_MATERIAL, removeMaterialAsync),
     takeLatest(actionTypes.DETAIL_MATERIAL, detailMaterialAsync),
+    takeLatest(actionTypes.UPDATE_MATERIAL, updateMaterialAsync),
   ]);
 }

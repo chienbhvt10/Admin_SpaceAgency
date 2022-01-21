@@ -12,12 +12,12 @@ export const actionDetailMaterials = (payload: GetDetailMaterialVariables): Deta
   payload,
 });
 
-export const actionDetailMaterialsUserError = (payload: AppError): DetailMaterialActionTypes => ({
+export const actionDetailMaterialsError = (payload: AppError): DetailMaterialActionTypes => ({
   type: DETAIL_MATERIAL_ERROR,
   payload,
 });
 
-export const actionDetailMaterialsUserSuccess = (payload: IMaterial): DetailMaterialActionTypes => ({
+export const actionDetailMaterialsSuccess = (payload: IMaterial): DetailMaterialActionTypes => ({
   type: DETAIL_MATERIAL_SUCCESS,
   payload,
 });

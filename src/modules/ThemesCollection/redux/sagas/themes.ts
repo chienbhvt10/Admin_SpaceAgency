@@ -1,10 +1,10 @@
 import { GetListThemes } from 'graphql/generated/graphql';
-import { ThemesAction } from '../action-types/themes';
+import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/ThemesCollection/services/apis';
-import { actionThemesSuccess } from '../actions';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
-import { loginError } from 'modules/Auth/redux/actions';
+import { ThemesAction } from '../action-types/themes';
+import { actionThemesSuccess } from '../actions';
 export function* getThemesAsync(action: ThemesAction) {
   try {
     const data: GetListThemes = yield apis.getThemes(action.payload);

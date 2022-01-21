@@ -27,17 +27,17 @@ export interface CreateMaterialsTypeInput {
   codeStandard: string;
   codePremium: string;
   name: string;
-  description: string;
+  description?: string;
   styleId: string;
-  imagePreview: string;
-  imagePreview2: string;
+  imagePreview?: string;
+  imagePreview2?: string;
   nameStandard: string;
   namePremium: string;
-  nameImage1: string;
-  nameImage2: string;
-  order: string;
-  priceStandard: string;
-  pricePremium: string;
+  nameImage1?: string;
+  nameImage2?: string;
+  order?: string;
+  priceStandard: number;
+  pricePremium: number;
   themeId: string;
 }
 
