@@ -7,6 +7,7 @@ import TableHeader from 'commons/components/layouts/TableHeader';
 import UserManagementLayout from 'commons/components/layouts/UserManagement';
 import { TypeKeyFilterUser, TypePagination, TypeSortUser } from 'commons/type';
 import { FilterInput, IUsersFields } from 'graphql/generated/graphql';
+import { setTitle } from 'helpers/dom';
 import { isEmpty, OrderOfSorter } from 'helpers/string';
 import FilterForm from 'modules/UserManagement/components/FilterForm';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
@@ -22,6 +23,9 @@ function ListUserManagement() {
   const [value, setValue] = React.useState<string>('');
   const [role, setRole] = React.useState<string>('');
   const [status, setStatus] = React.useState<string>('');
+  React.useEffect(() => {
+    setTitle('User Management');
+  }, []);
 
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
@@ -105,7 +109,7 @@ function ListUserManagement() {
   };
   return (
     <UserManagementLayout>
-      <PageHeader title="" breadcrumb={{ routes }}></PageHeader>
+      <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
         title="User Management"
         extra={

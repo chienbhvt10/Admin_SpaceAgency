@@ -1,7 +1,12 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
+import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import { TypeForm } from 'commons/type';
+import { CreateStyleInput, IStyle, UpdateStyleInput } from 'graphql/generated/graphql';
+import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyle';
+import { useOptionTheme } from 'modules/StylesCollection/hooks/useOptionTheme';
+import { useUpdateStyle } from 'modules/StylesCollection/hooks/useUpdateStyle';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import '../../styles/style-form.scss';
@@ -13,7 +18,7 @@ const { Title } = Typography;
 interface Props {
   title: string;
   loading: boolean;
-  item?: any;
+  item?: IStyle;
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;
@@ -23,11 +28,68 @@ const requireRule = { required: true, message: 'This is required information!' }
 
 const StyleCollectionForm = (props: Props) => {
   const { loading, type, item, onCancel, onChange, title } = props;
+  const { updateStyle } = useUpdateStyle();
+  const { createStyle } = useCreateStyle();
   const [form] = Form.useForm<any>();
-  const dispatch = useDispatch();
+  const { dataThemes } = useOptionTheme();
+  const themeOptions = dataThemes.map((theme) => <Option value={theme.id}>{theme.title}</Option>);
+  const inputCreate: CreateStyleInput = {
+    title: '',
+    code3d: '',
+    description: '',
+    price: null,
+    theme: null,
+  };
+  const [createInput, setCreateStyleInput] = React.useState<CreateStyleInput>(inputCreate);
+  const [updateInput, setUpdateStyleInput] = React.useState<UpdateStyleInput>({
+    id: '',
+    title: '',
+    code3d: '',
+    description: '',
+    price: null,
+    theme: null,
+  });
+  React.useEffect(() => {
+    if (item) {
+      setUpdateStyleInput({
+        id: item.id,
+        code3d: item.code3d,
+        description: item.description,
+        price: item.price,
+        theme: item.theme,
+        title: item.title,
+      });
+    }
+  }, [item]);
+  React.useEffect(() => {
+    if (item) {
+      form.setFieldsValue(item);
+    }
+  }, [form, item]);
 
-  const onFinish = () => {
-    console.log(form.getFieldsValue());
+  const onFinish = (values: IStyle) => {
+    if (type === TypeForm.UPDATE) {
+      const updateStyleInput: UpdateStyleInput = {
+        ...updateInput,
+        code3d: values.code3d || '',
+        description: values.description || '',
+        price: values.price || undefined,
+        title: values.title || '',
+        theme: values.theme || undefined,
+      };
+      updateStyle({ updateStyleInput });
+    }
+    if (type === TypeForm.CREATE) {
+      const createStyleInput: CreateStyleInput = {
+        ...createInput,
+        code3d: values.code3d || '',
+        description: values.description || '',
+        price: values.price || undefined,
+        title: values.title || '',
+        theme: values.theme || undefined,
+      };
+      createStyle({ createStyleInput });
+    }
   };
   const onFinishFailed = () => {};
   const handlePreview = () => {};
@@ -44,71 +106,49 @@ const StyleCollectionForm = (props: Props) => {
         autoComplete="off"
       >
         <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
-          <Row justify="center" className="style-form-control">
+          <Row className="style-form-control">
             <Col span={22}>
-              <Col span={17}>
-                <Form.Item labelCol={{ span: 6 }} className="theme" label="Theme" name="theme">
-                  <Col offset={1}>
-                    <Select placeholder="---All---">
-                      <Option value="red">Red</Option>
-                      <Option value="green">Green</Option>
-                      <Option value="blue">Blue</Option>
-                    </Select>
-                  </Col>
+              <Col span={16}>
+                <Form.Item labelCol={{ span: 6 }} label="Theme" name="themeid">
+                  <Select placeholder="---All---">{themeOptions}</Select>
                 </Form.Item>
               </Col>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} className="name" label="Name" name="name" rules={[requireRule]}>
-                <Col offset={1}>
-                  <Input />
-                </Col>
+              <Form.Item labelCol={{ span: 4 }} label="Title" name="title" rules={[requireRule]}>
+                <Input />
               </Form.Item>
             </Col>
             <Col span={22}>
-              <Form.Item
-                labelCol={{ span: 4 }}
-                className="description"
-                label="Description"
-                name="description"
-                rules={[requireRule]}
-              >
-                <Col offset={1}>
-                  <TextArea rows={5} showCount maxLength={1000} />
-                </Col>
+              <Form.Item labelCol={{ span: 4 }} label="Description" name="description" rules={[requireRule]}>
+                <TextArea rows={5} showCount maxLength={1000} />
               </Form.Item>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} className="code" label="Code" name="code" rules={[requireRule]}>
-                <Row>
-                  <Col span={20}>
-                    <Col offset={1}>
-                      <Input />
-                    </Col>
-                  </Col>
-                  <Col span={4}>
-                    <Button style={{ width: '100%' }} htmlType="button" type="primary" onClick={handlePreview}>
-                      Preview
-                    </Button>
-                  </Col>
-                </Row>
-              </Form.Item>
+              <Row>
+                <Col span={16}>
+                  <Form.Item labelCol={{ span: 6 }} label="Code3D" name="code3d" rules={[requireRule]}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Button style={{ width: '100%' }} htmlType="button" type="primary" onClick={handlePreview}>
+                    Preview
+                  </Button>
+                </Col>
+              </Row>
             </Col>
             <Col span={22} className="price-order-box">
               <Row>
                 <Col span={12}>
-                  <Form.Item labelCol={{ span: 8 }} label="Price" name="price" rules={[requireRule]}>
-                    <Col offset={2}>
-                      <InputNumber style={{ width: '100%' }} />
-                    </Col>
+                  <Form.Item labelCol={{ span: 8 }} label="Price" name="price">
+                    <InputNumber style={{ width: '100%' }} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Col span={20} offset={4}>
-                    <Form.Item labelCol={{ span: 8 }} label="Order" name="order" rules={[requireRule]}>
-                      <Col offset={2}>
-                        <InputNumber style={{ width: '100%' }} />
-                      </Col>
+                    <Form.Item labelCol={{ span: 8 }} label="Order" name="order">
+                      <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
                 </Col>
@@ -120,44 +160,27 @@ const StyleCollectionForm = (props: Props) => {
             </Col>
             <Col span={22}>
               <Row>
-                <Col span={18}>
-                  <Form.Item labelCol={{ span: 5 }} label="Preview" name="preview" rules={[requireRule]}>
-                    <Col offset={1}>
-                      <Row>
-                        <Col span={16}>
-                          <Input />
-                        </Col>
-                        <Col span={8}>
-                          <Upload name="image">
-                            <Button htmlType="button" type="primary">
-                              Choose Images
-                            </Button>
-                          </Upload>
-                        </Col>
-                      </Row>
+                <Col span={16}>
+                  <Row>
+                    <Col span={18}>
+                      <Form.Item labelCol={{ span: 8 }} label="Preview" name="preview">
+                        <Input />
+                      </Form.Item>
                     </Col>
-                  </Form.Item>
-                  <Form.Item
-                    labelCol={{ span: 5 }}
-                    className="image-name"
-                    label="Name"
-                    name="imageName"
-                    rules={[requireRule]}
-                  >
-                    <Col offset={1}>
-                      <Input />
+                    <Col span={6}>
+                      <Upload name="image">
+                        <Button htmlType="button" type="primary">
+                          Choose Images
+                        </Button>
+                      </Upload>
                     </Col>
+                  </Row>
+                  <Form.Item labelCol={{ span: 6 }} label="Name" name="imageName">
+                    <Input />
                   </Form.Item>
                 </Col>
-                <Col span={6}>
-                  <Col offset={2}>
-                    <Upload name="image" listType="picture-card">
-                      <div>
-                        <PlusOutlined />
-                        <div style={{ marginTop: 8 }}>Upload</div>
-                      </div>
-                    </Upload>
-                  </Col>
+                <Col span={8}>
+                  <UploadDragger />
                 </Col>
               </Row>
             </Col>
