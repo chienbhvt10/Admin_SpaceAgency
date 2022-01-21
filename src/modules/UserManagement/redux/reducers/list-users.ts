@@ -1,5 +1,4 @@
-import { TypeKeyFilterUser, TypePagination } from 'commons/type';
-import { SortValue } from 'graphql/generated/graphql';
+import { TypePagination } from 'commons/type';
 import {
   LIST_USERS,
   LIST_USERS_ERROR,
@@ -22,6 +21,7 @@ const initialState: UsersState = {
     sort: [],
     filter: [],
   },
+  total: undefined,
   dataUsers: [],
 };
 
@@ -39,6 +39,7 @@ export default (state = initialState, action: UsersActionTypes | UpdateUserActio
         ...state,
         loading: false,
         dataUsers: action.payload.dataUsers,
+        total: action.payload.total,
         pagination: {
           skip: action.payload.pagination?.skip,
           limit: action.payload.pagination?.limit,

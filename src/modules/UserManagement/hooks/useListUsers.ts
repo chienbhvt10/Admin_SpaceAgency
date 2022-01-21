@@ -8,7 +8,7 @@ import { actionUsers } from '../redux/actions';
 export function useListUsers() {
   const dispatch = useDispatch();
   const arrSortDefault: SortInput[] = [{ key: 'email', value: SortValue.Asc }];
-  const { loading, dataUsers, pagination, where } = useSelector((state: RootState) => state.users.usersState);
+  const { loading, dataUsers, pagination, where, total } = useSelector((state: RootState) => state.users.usersState);
   const variables: GetListUsersVariables = {
     pagination,
     where,
@@ -58,7 +58,7 @@ export function useListUsers() {
   const paginationTable = {
     pageSize: pagination.limit || TypePagination.DEFAULT_LIMIT,
     current: skip / limit + 1,
-    total: 200,
+    total: total || 0,
   };
   return {
     dataUsers,

@@ -142,7 +142,7 @@ export enum TypeKeyFilterUser {
   ROLE = 'role',
 }
 export enum TypeKeyFilterMaterials {
-  NAME = 'name',
+  NAME = 'title',
   THEME = 'theme',
   STYLE = 'style',
 }

@@ -1,6 +1,7 @@
 import {
   GetDetailThemeVariables,
   GetListThemesVariables,
+  GetTotalCountVariables,
   RemoveThemeVariables,
   SchemaType,
 } from 'graphql/generated/graphql';
@@ -18,7 +19,7 @@ export const removeTheme = async (variables: RemoveThemeVariables) => {
   const sdk = getSDK(true);
   return sdk.removeTheme(variables);
 };
-export const getTotalThemes = async () => {
+export const getTotalThemes = async (variables: GetTotalCountVariables) => {
   const sdk = getSDK(true);
-  return sdk.getTotalCount({ type: SchemaType.Theme });
+  return sdk.getTotalCount(variables);
 };

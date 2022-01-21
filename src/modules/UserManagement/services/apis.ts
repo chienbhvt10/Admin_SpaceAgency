@@ -1,6 +1,7 @@
 import {
   CreateCustomerVariables,
   GetListUsersVariables,
+  GetTotalCountVariables,
   GetUserVariables,
   RemoveUserVariables,
   UpdateUserVariables,
@@ -26,4 +27,8 @@ export const updateUser = async (variables: UpdateUserVariables) => {
 export const createUser = async (variables: CreateCustomerVariables) => {
   const sdk = getSDK(true);
   return sdk.createCustomer(variables);
+};
+export const getTotalUsers = async (variables: GetTotalCountVariables) => {
+  const sdk = getSDK(true);
+  return sdk.getTotalCount(variables);
 };

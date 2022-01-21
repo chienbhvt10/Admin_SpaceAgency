@@ -67,7 +67,7 @@ export const useListStyles = () => {
   const paginationTable = {
     pageSize: limit,
     current: skip / limit + 1,
-    total: total || 100,
+    total: total || 0,
   };
   return {
     dataStyles,

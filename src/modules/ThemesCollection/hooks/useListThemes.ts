@@ -65,7 +65,7 @@ export const useListThemes = () => {
   const paginationTable = {
     pageSize: limit,
     current: skip / limit + 1,
-    total: total || 200,
+    total: total || 0,
   };
   return {
     dataThemes,
