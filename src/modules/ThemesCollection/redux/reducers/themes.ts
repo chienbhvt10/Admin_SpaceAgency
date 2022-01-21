@@ -30,6 +30,7 @@ export default (state = initialState, action: ThemesActionTypes): ThemesState =>
         loading: false,
         pagination: action.payload.pagination,
         where: action.payload.where,
+        total: action.payload.total,
         dataThemes: action.payload.dataThemes,
       };
     case THEMES_ERROR:

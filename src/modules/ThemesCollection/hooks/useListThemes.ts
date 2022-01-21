@@ -12,7 +12,7 @@ export const useListThemes = () => {
     { key: 'code3D', value: SortValue.Asc },
     { key: 'price', value: SortValue.Asc },
   ];
-  const { loading, pagination, where, dataThemes } = useSelector((state: RootState) => state.themes.themesState);
+  const { loading, pagination, where, dataThemes, total } = useSelector((state: RootState) => state.themes.themesState);
   const variables: GetListThemesVariables = {
     pagination,
     where,
@@ -65,7 +65,7 @@ export const useListThemes = () => {
   const paginationTable = {
     pageSize: limit,
     current: skip / limit + 1,
-    total: 200,
+    total: total || 200,
   };
   return {
     dataThemes,

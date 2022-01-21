@@ -7,12 +7,14 @@ export const THEMES_ERROR = 'THEMES_ERROR';
 export interface ThemesData {
   pagination?: PaginationInput;
   where?: WhereInput;
+  total?: number;
   dataThemes: ITheme[];
 }
 export interface ThemesState {
   loading: boolean;
   pagination?: PaginationInput;
   where?: WhereInput;
+  total?: number;
   dataThemes: ITheme[];
 }
 

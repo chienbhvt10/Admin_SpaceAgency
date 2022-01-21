@@ -34,8 +34,8 @@ const MaterialCollectionPage = () => {
   });
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterMaterials.NAME, value: '' },
-    { key: TypeKeyFilterMaterials.STYLE, value: '' },
-    { key: TypeKeyFilterMaterials.THEME, value: '' },
+    // { key: TypeKeyFilterMaterials.STYLE, value: '' },
+    // { key: TypeKeyFilterMaterials.THEME, value: '' },
   ];
 
   React.useEffect(() => {

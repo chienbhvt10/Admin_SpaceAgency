@@ -14,7 +14,7 @@ export const useListStyles = () => {
     { key: 'code3d', value: SortValue.Asc },
     { key: 'price', value: SortValue.Asc },
   ];
-  const { loading, pagination, where, dataStyles } = useSelector((state: RootState) => state.styles.stylesState);
+  const { loading, pagination, where, dataStyles, total } = useSelector((state: RootState) => state.styles.stylesState);
   const variables: GetListStylesVariables = {
     pagination,
     where,
@@ -67,7 +67,7 @@ export const useListStyles = () => {
   const paginationTable = {
     pageSize: limit,
     current: skip / limit + 1,
-    total: 200,
+    total: total || 100,
   };
   return {
     dataStyles,

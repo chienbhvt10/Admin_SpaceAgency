@@ -5,12 +5,14 @@ export const MATERIALS_SUCCESS = 'MATERIALS_SUCCESS';
 export const MATERIALS_ERROR = 'MATERIALS_ERROR';
 export interface MaterialsData {
   pagination?: PaginationInput;
+  total?: number;
   where?: WhereInput;
   dataMaterials: IMaterial[];
 }
 export interface MaterialsState {
   loading: boolean;
   pagination?: PaginationInput;
+  total?: number;
   where?: WhereInput;
   dataMaterials?: IMaterial[];
 }

@@ -7,12 +7,14 @@ export const STYLES_ERROR = 'STYLES_ERROR';
 export interface StylesData {
   pagination?: PaginationInput;
   where?: WhereInput;
+  total?: number;
   dataStyles: IStyle[];
 }
 export interface StylesState {
   loading: boolean;
   pagination?: PaginationInput;
   where?: WhereInput;
+  total?: number;
   dataStyles?: IStyle[];
 }
 

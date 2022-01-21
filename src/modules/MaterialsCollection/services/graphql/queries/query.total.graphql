@@ -1,0 +1,3 @@
+query getTotalCount($type: SchemaType!) {
+  count(type: $type)
+}

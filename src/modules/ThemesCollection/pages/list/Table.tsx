@@ -84,6 +84,7 @@ function TableThemes(props: IProps) {
       <Table
         pagination={{
           ...pagination,
+          showSizeChanger: false,
         }}
         columns={columns}
         dataSource={items}

@@ -71,7 +71,9 @@ export type CreateRequestInput = {
   phone: Scalars['String'];
   postcode: Scalars['String'];
   requesterFullName: Scalars['String'];
+  simulation?: InputMaybe<RefInput>;
   type?: InputMaybe<RequestType>;
+  user?: InputMaybe<RefInput>;
 };
 
 export type CreateSimulationComponentInput = {
@@ -81,8 +83,9 @@ export type CreateSimulationComponentInput = {
 };
 
 export type CreateSimulationInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  quotation?: InputMaybe<RefInput>;
+  request?: InputMaybe<RefInput>;
+  simulationComponent: RefInput;
 };
 
 export type CreateStyleInput = {
@@ -317,7 +320,7 @@ export type MutationRemoveQuotationArgs = {
 
 
 export type MutationRemoveRequestArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -441,7 +444,7 @@ export type Query = {
   me: User;
   quotation: Quotation;
   quotations: Array<Quotation>;
-  request: Request;
+  request?: Maybe<Request>;
   requests: Array<Request>;
   simulation: Simulation;
   simulationComponent?: Maybe<SimulationComponent>;
@@ -498,7 +501,13 @@ export type QueryQuotationArgs = {
 
 
 export type QueryRequestArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
+};
+
+
+export type QueryRequestsArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
 };
 
 
@@ -633,8 +642,14 @@ export enum SchemaType {
 
 export type Simulation = {
   __typename?: 'Simulation';
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
+  quotation?: Maybe<Quotation>;
+  request?: Maybe<Request>;
+  simulationComponent?: Maybe<SimulationComponent>;
+  status: Status;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
 };
 
 export type SimulationComponent = {
@@ -655,6 +670,11 @@ export type SortInput = {
 export enum SortValue {
   Asc = 'ASC',
   Desc = 'DESC'
+}
+
+export enum Status {
+  Active = 'ACTIVE',
+  InActive = 'IN_ACTIVE'
 }
 
 export type Style = {
@@ -742,7 +762,9 @@ export type UpdateRequestInput = {
   phone?: InputMaybe<Scalars['String']>;
   postcode?: InputMaybe<Scalars['String']>;
   requesterFullName?: InputMaybe<Scalars['String']>;
+  simulation?: InputMaybe<RefInput>;
   type?: InputMaybe<RequestType>;
+  user?: InputMaybe<RefInput>;
 };
 
 export type UpdateSimulationComponentInput = {
@@ -753,9 +775,10 @@ export type UpdateSimulationComponentInput = {
 };
 
 export type UpdateSimulationInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
   id: Scalars['Int'];
+  quotation?: InputMaybe<RefInput>;
+  request?: InputMaybe<RefInput>;
+  simulationComponent?: InputMaybe<RefInput>;
 };
 
 export type UpdateStyleInput = {
@@ -891,6 +914,13 @@ export type GetListMaterialsVariables = Exact<{
 
 
 export type GetListMaterials = { __typename?: 'Query', materials: Array<{ __typename?: 'Material', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, title?: string | null | undefined, materialTypes: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }>, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined }> };
+
+export type GetTotalCountVariables = Exact<{
+  type: SchemaType;
+}>;
+
+
+export type GetTotalCount = { __typename?: 'Query', count: number };
 
 export type GetListStylesVariables = Exact<{
   where?: InputMaybe<WhereInput>;
@@ -1123,6 +1153,11 @@ export const GetListMaterialsDocument = gql`
   }
 }
     ${IMaterial}`;
+export const GetTotalCountDocument = gql`
+    query getTotalCount($type: SchemaType!) {
+  count(type: $type)
+}
+    `;
 export const GetListStylesDocument = gql`
     query getListStyles($where: WhereInput, $pagination: PaginationInput) {
   styles(where: $where, pagination: $pagination) {
@@ -1215,6 +1250,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getListMaterials(variables?: GetListMaterialsVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListMaterials> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListMaterials>(GetListMaterialsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListMaterials');
+    },
+    getTotalCount(variables: GetTotalCountVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTotalCount> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTotalCount>(GetTotalCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTotalCount');
     },
     getListStyles(variables?: GetListStylesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListStyles> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListStyles>(GetListStylesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListStyles');

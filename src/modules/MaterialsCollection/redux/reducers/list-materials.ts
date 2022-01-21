@@ -11,6 +11,7 @@ const initialState: MaterialsState = {
     filter: [],
     sort: [],
   },
+  total: 100,
   dataMaterials: [],
 };
 
@@ -29,6 +30,7 @@ export default (state = initialState, action: MaterialsActionTypes): MaterialsSt
         loading: false,
         pagination: action.payload.pagination,
         where: action.payload.where,
+        total: action.payload.total,
         dataMaterials: action.payload.dataMaterials,
       };
     case MATERIALS_ERROR:
