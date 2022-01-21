@@ -12,7 +12,6 @@ interface IProps {
 
 const FormHeader = (props: IProps) => {
   const { title, loading, children, onCancel } = props;
-  console.log(loading);
   return (
     <div className="form-header">
       <Card

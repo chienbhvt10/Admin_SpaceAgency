@@ -1,14 +1,11 @@
-import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
-import BaseButton from 'commons/components/layouts/BaseButton';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import { TypeForm } from 'commons/type';
 import { CreateStyleInput, IStyle, UpdateStyleInput } from 'graphql/generated/graphql';
 import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyle';
-import { useOptionTheme } from 'modules/StylesCollection/hooks/useOptionTheme';
 import { useUpdateStyle } from 'modules/StylesCollection/hooks/useUpdateStyle';
+import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import '../../styles/style-form.scss';
 import FormHeader from '../FormHeader';
 const { Option } = Select;
@@ -31,8 +28,16 @@ const StyleCollectionForm = (props: Props) => {
   const { updateStyle } = useUpdateStyle();
   const { createStyle } = useCreateStyle();
   const [form] = Form.useForm<any>();
-  const { dataThemes } = useOptionTheme();
-  const themeOptions = dataThemes.map((theme) => <Option value={theme.id}>{theme.title}</Option>);
+  const { dataAllThemes, getAllThemes } = useGetAllThemes();
+  React.useEffect(() => {
+    getAllThemes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const themeOptions = dataAllThemes.map((theme, index) => (
+    <Option key={index} value={theme.id}>
+      {theme.title}
+    </Option>
+  ));
   const inputCreate: CreateStyleInput = {
     title: '',
     code3d: '',

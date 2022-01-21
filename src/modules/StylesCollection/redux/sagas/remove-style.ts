@@ -10,9 +10,7 @@ import { actionStyles } from '../actions';
 import { actionRemoveStyleSuccess } from '../actions/remove-style';
 export function* removeStyleAsync(action: RemoveStyleAction) {
   try {
-    // xóa được nhưng bị nhảy đến catch
     const data: RemoveStyle = yield apis.removeStyle(action.payload);
-    console.log(data);
     const { pagination } = yield select((state: RootState) => state.styles.stylesState);
     yield put(actionStyles({ pagination }));
     yield put(actionRemoveStyleSuccess(data.removeStyle));

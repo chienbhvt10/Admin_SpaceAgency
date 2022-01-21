@@ -1,9 +1,7 @@
-import { Button, Col, Form, Input, Row, Select } from 'antd';
+import { Col, Form, Input, Row, Select } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
-import { ITheme } from 'graphql/generated/graphql';
-import React from 'react';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
-import { useOptionTheme } from 'modules/StylesCollection/hooks/useOptionTheme';
+import React from 'react';
 const { Option } = Select;
 interface Props {
   value: string;
@@ -15,8 +13,12 @@ interface Props {
 }
 const FilterForm = (props: Props) => {
   const { value, onChangeValue, handleSearch, onReset, onChangeTheme, theme } = props;
-  const { dataThemes } = useOptionTheme();
-  const themeOptions = dataThemes.map((theme, index) => (
+  const { getAllThemes, dataAllThemes } = useGetAllThemes();
+  React.useEffect(() => {
+    getAllThemes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const themeOptions = dataAllThemes.map((theme, index) => (
     <Option key={index} value={theme.id}>
       {theme.title}
     </Option>

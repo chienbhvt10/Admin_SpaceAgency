@@ -12,7 +12,6 @@ import { actionCreateStyleSuccess } from '../actions';
 import { actionStyles } from '../actions/list-styles';
 export function* createStyleAsync(action: CreateStyleAction) {
   try {
-    console.log('Create data ', action.payload);
     const data: CreateStyle = yield apis.createStyle(action.payload);
     yield put(
       actionStyles({
