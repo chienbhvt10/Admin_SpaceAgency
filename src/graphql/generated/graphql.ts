@@ -942,7 +942,7 @@ export type RemoveStyleVariables = Exact<{
 }>;
 
 
-export type RemoveStyle = { __typename?: 'Mutation', removeStyle: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } };
+export type RemoveStyle = { __typename?: 'Mutation', removeStyle: { __typename?: 'Style', id: string } };
 
 export type UpdateStyleVariables = Exact<{
   updateStyleInput: UpdateStyleInput;
@@ -1204,10 +1204,10 @@ export const CreateStyleDocument = gql`
 export const RemoveStyleDocument = gql`
     mutation removeStyle($id: String!) {
   removeStyle(id: $id) {
-    ...IStyle
+    id
   }
 }
-    ${IStyle}`;
+    `;
 export const UpdateStyleDocument = gql`
     mutation updateStyle($updateStyleInput: UpdateStyleInput!) {
   updateStyle(updateStyleInput: $updateStyleInput) {
