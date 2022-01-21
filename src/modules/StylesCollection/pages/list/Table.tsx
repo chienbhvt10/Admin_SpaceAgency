@@ -131,6 +131,7 @@ const StyleCollectionTable = (props: IProps) => {
             onChange={onChange}
             pagination={{
               ...pagination,
+              showSizeChanger: false,
             }}
           />
         </Col>

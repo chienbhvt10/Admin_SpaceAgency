@@ -92,6 +92,7 @@ function TableMaterial(props: IProps) {
         columns={columns}
         pagination={{
           ...props.pagination,
+          showSizeChanger: false,
         }}
         dataSource={items}
         loading={loading}

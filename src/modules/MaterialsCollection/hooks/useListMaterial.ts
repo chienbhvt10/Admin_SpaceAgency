@@ -14,7 +14,7 @@ import { actionMaterials } from '../redux/actions';
 export const useListMaterial = () => {
   const dispatch = useDispatch();
   const arrSortDefault: SortInput[] = [{ key: 'title', value: SortValue.Asc }];
-  const { loading, pagination, where, dataMaterials } = useSelector(
+  const { loading, pagination, where, dataMaterials, total } = useSelector(
     (state: RootState) => state.materials.materialsState,
   );
   const variables: GetListMaterialsVariables = {
@@ -69,7 +69,7 @@ export const useListMaterial = () => {
   const paginationTable = {
     pageSize: limit,
     current: skip / limit + 1,
-    total: 200,
+    total: total || 200,
   };
   return {
     dataMaterials,

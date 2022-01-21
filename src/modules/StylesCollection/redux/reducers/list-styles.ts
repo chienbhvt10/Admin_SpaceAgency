@@ -29,6 +29,7 @@ export default (state = initialState, action: StylesActionTypes): StylesState =>
         loading: false,
         pagination: action.payload.pagination,
         where: action.payload.where,
+        total: action.payload.total,
         dataStyles: action.payload.dataStyles,
       };
     case STYLES_ERROR:
