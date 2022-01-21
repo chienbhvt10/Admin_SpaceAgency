@@ -135,6 +135,7 @@ export enum TypeRole {
   SYSADMIN = 'SYSADMIN',
   CUSTOMER = 'CUSTOMER',
 }
+
 export enum TypeKeyFilterUser {
   EMAIL = 'email',
   STATUS = 'status',
@@ -150,6 +151,7 @@ export enum TypeKeyFilterTheme {
 }
 export enum TypeKeyFilterStyle {
   NAME = 'title',
+  THEME = 'id',
 }
 export enum TypeSortUser {
   EMAIL = 'email',

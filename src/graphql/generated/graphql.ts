@@ -449,6 +449,7 @@ export type Query = {
   simulation: Simulation;
   simulationComponent?: Maybe<SimulationComponent>;
   simulationComponents: Array<SimulationComponent>;
+  /** get all simulation */
   simulations: Array<Simulation>;
   /** find one style */
   style: Style;
@@ -512,7 +513,7 @@ export type QueryRequestsArgs = {
 
 
 export type QuerySimulationArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -522,6 +523,12 @@ export type QuerySimulationComponentArgs = {
 
 
 export type QuerySimulationComponentsArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+};
+
+
+export type QuerySimulationsArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
 };
@@ -775,10 +782,11 @@ export type UpdateSimulationComponentInput = {
 };
 
 export type UpdateSimulationInput = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
   quotation?: InputMaybe<RefInput>;
   request?: InputMaybe<RefInput>;
   simulationComponent?: InputMaybe<RefInput>;
+  status?: InputMaybe<Status>;
 };
 
 export type UpdateStyleInput = {
@@ -921,6 +929,34 @@ export type GetTotalCountVariables = Exact<{
 
 
 export type GetTotalCount = { __typename?: 'Query', count: number };
+
+export type CreateStyleVariables = Exact<{
+  createStyleInput: CreateStyleInput;
+}>;
+
+
+export type CreateStyle = { __typename?: 'Mutation', createStyle: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } };
+
+export type RemoveStyleVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveStyle = { __typename?: 'Mutation', removeStyle: { __typename?: 'Style', id: string } };
+
+export type UpdateStyleVariables = Exact<{
+  updateStyleInput: UpdateStyleInput;
+}>;
+
+
+export type UpdateStyle = { __typename?: 'Mutation', updateStyle: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } };
+
+export type GetStyleVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetStyle = { __typename?: 'Query', style: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } };
 
 export type GetListStylesVariables = Exact<{
   where?: InputMaybe<WhereInput>;
@@ -1158,6 +1194,34 @@ export const GetTotalCountDocument = gql`
   count(type: $type)
 }
     `;
+export const CreateStyleDocument = gql`
+    mutation createStyle($createStyleInput: CreateStyleInput!) {
+  createStyle(createStyleInput: $createStyleInput) {
+    ...IStyle
+  }
+}
+    ${IStyle}`;
+export const RemoveStyleDocument = gql`
+    mutation removeStyle($id: String!) {
+  removeStyle(id: $id) {
+    id
+  }
+}
+    `;
+export const UpdateStyleDocument = gql`
+    mutation updateStyle($updateStyleInput: UpdateStyleInput!) {
+  updateStyle(updateStyleInput: $updateStyleInput) {
+    ...IStyle
+  }
+}
+    ${IStyle}`;
+export const GetStyleDocument = gql`
+    query getStyle($id: String!) {
+  style(id: $id) {
+    ...IStyle
+  }
+}
+    ${IStyle}`;
 export const GetListStylesDocument = gql`
     query getListStyles($where: WhereInput, $pagination: PaginationInput) {
   styles(where: $where, pagination: $pagination) {
@@ -1253,6 +1317,18 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getTotalCount(variables: GetTotalCountVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTotalCount> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTotalCount>(GetTotalCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTotalCount');
+    },
+    createStyle(variables: CreateStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateStyle>(CreateStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createStyle');
+    },
+    removeStyle(variables: RemoveStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveStyle>(RemoveStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeStyle');
+    },
+    updateStyle(variables: UpdateStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateStyle>(UpdateStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateStyle');
+    },
+    getStyle(variables: GetStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetStyle> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetStyle>(GetStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getStyle');
     },
     getListStyles(variables?: GetListStylesVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListStyles> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListStyles>(GetListStylesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListStyles');

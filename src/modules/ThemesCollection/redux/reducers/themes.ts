@@ -39,7 +39,6 @@ export default (state = initialState, action: ThemesActionTypes): ThemesState =>
         loading: false,
       };
     case DEFAULT_THEMES:
-      console.log('nsdlvsandkvnk');
       return {
         ...state,
         loading: false,

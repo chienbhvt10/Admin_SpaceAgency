@@ -1,12 +1,13 @@
-import { DeleteOutlined, EditOutlined, QuestionCircleOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, EllipsisOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Space } from 'antd';
+import { IStyle } from 'graphql/generated/graphql';
 import React from 'react';
 
 interface IProps {
   record: any;
   title: string;
-  onDelete: (record: any) => () => void;
-  onEdit: (record: any) => () => void;
+  onDelete: (record: IStyle) => () => void;
+  onEdit: (record: IStyle) => () => void;
 }
 
 const TableRowAction = (props: IProps) => {

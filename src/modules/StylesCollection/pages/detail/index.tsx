@@ -8,13 +8,19 @@ import { useStyleDetail } from 'modules/StylesCollection/hooks/useStyleDetail';
 import { useUpdateStyle } from 'modules/StylesCollection/hooks/useUpdateStyle';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router';
-interface Props {}
 
-const StyleCollectionDetail = (props: Props) => {
+const StyleCollectionDetail = () => {
   let { id } = useParams<'id'>();
-  const { item } = useStyleDetail(id);
+
+  const { item, getDetailStyle } = useStyleDetail();
   const { loading: loadingUpdate } = useUpdateStyle();
   const navigate = useNavigate();
+  React.useEffect(() => {
+    if (id) {
+      getDetailStyle(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   React.useEffect(() => {
     setTitle('Style Collection Detail');
   }, []);
@@ -37,7 +43,7 @@ const StyleCollectionDetail = (props: Props) => {
   ];
   return (
     <StyleCollectionLayout>
-      <PageHeader title="Style Collection Detail" breadcrumb={{ routes }} />
+      <PageHeader title="" breadcrumb={{ routes }} />
       <StyleCollectionDetailForm
         title="Update Style Collection"
         type={TypeForm.UPDATE}
