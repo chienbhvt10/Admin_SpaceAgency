@@ -2,8 +2,8 @@ import {
   CreateMaterialVariables,
   GetDetailMaterialVariables,
   GetListMaterialsVariables,
+  GetTotalCountVariables,
   RemoveMaterialVariables,
-  SchemaType,
   UpdateMaterialVariables,
 } from 'graphql/generated/graphql';
 import { getSDK } from 'services/graphql-caller';
@@ -28,7 +28,7 @@ export const createMaterials = async (variables: CreateMaterialVariables) => {
   const sdk = getSDK(true);
   return sdk.createMaterial(variables);
 };
-export const getTotalMaterial = async () => {
+export const getTotalMaterial = async (variables: GetTotalCountVariables) => {
   const sdk = getSDK(true);
-  return sdk.getTotalCount({ type: SchemaType.Material });
+  return sdk.getTotalCount(variables);
 };

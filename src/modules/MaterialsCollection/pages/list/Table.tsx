@@ -47,7 +47,7 @@ function TableMaterial(props: IProps) {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
-      sorter: true,
+      sorter: false,
       render: (_: any, record) => <>{record.title}</>,
     },
     {
@@ -60,14 +60,14 @@ function TableMaterial(props: IProps) {
       title: 'Design',
       dataIndex: 'design',
       key: 'design',
-      sorter: true,
+      sorter: false,
       render: (_: any, record) => <>{record.title}</>,
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Tools',

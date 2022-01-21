@@ -11,7 +11,7 @@ const initialState: MaterialsState = {
     filter: [],
     sort: [],
   },
-  total: 100,
+  total: 0,
   dataMaterials: [],
 };
 

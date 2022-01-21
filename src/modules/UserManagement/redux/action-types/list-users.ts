@@ -7,12 +7,14 @@ export const LIST_USERS_ERROR = 'LIST_USERS_ERROR';
 export interface UsersData {
   dataUsers: IUsersFields[];
   pagination?: PaginationInput;
+  total?: number;
   where?: WhereInput;
 }
 export interface UsersState {
   loading: boolean;
   pagination: PaginationInput;
   where?: WhereInput;
+  total?: number;
   dataUsers: IUsersFields[];
 }
 

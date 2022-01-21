@@ -5,6 +5,7 @@ import {
   RemoveStyleVariables,
   UpdateStyleVariables,
   SchemaType,
+  GetTotalCountVariables,
 } from 'graphql/generated/graphql';
 import { getSDK } from 'services/graphql-caller';
 
@@ -28,7 +29,7 @@ export const createStyle = async (variables: CreateStyleVariables) => {
   const sdk = getSDK(true);
   return sdk.createStyle(variables);
 };
-export const getTotalStyles = async () => {
+export const getTotalStyles = async (variables: GetTotalCountVariables) => {
   const sdk = getSDK(true);
-  return sdk.getTotalCount({ type: SchemaType.Style });
+  return sdk.getTotalCount(variables);
 };

@@ -12,14 +12,12 @@ import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
 import { useRemoveMaterial } from 'modules/MaterialsCollection/hooks/useRemoveMaterial';
-import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
-import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
 import React from 'react';
 import { useNavigate } from 'react-router';
-import './style.scss';
-import TableMaterial from './Table';
 import { useGetAllStyles } from '../../../StylesCollection/hooks/useGetAllStyles';
 import { useGetAllThemes } from '../../../ThemesCollection/hooks/useGetAllThemes';
+import './style.scss';
+import TableMaterial from './Table';
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
@@ -79,6 +77,7 @@ const MaterialCollectionPage = () => {
   };
 
   const onReset = () => {
+    setValue('');
     filterMaterials([]);
   };
 

@@ -925,6 +925,7 @@ export type GetListMaterials = { __typename?: 'Query', materials: Array<{ __type
 
 export type GetTotalCountVariables = Exact<{
   type: SchemaType;
+  where?: InputMaybe<WhereInput>;
 }>;
 
 
@@ -1190,8 +1191,8 @@ export const GetListMaterialsDocument = gql`
 }
     ${IMaterial}`;
 export const GetTotalCountDocument = gql`
-    query getTotalCount($type: SchemaType!) {
-  count(type: $type)
+    query getTotalCount($type: SchemaType!, $where: WhereInput) {
+  count(type: $type, where: $where)
 }
     `;
 export const CreateStyleDocument = gql`
