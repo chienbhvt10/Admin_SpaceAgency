@@ -1,6 +1,6 @@
-import { PageHeader } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollection';
+import PageHeader from 'commons/components/layouts/PageHeader';
 import { CreateMaterialsTypeInput, TypeForm } from 'commons/type';
 import { CurrencyUnit } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
@@ -66,7 +66,7 @@ const MaterialCreateNew = () => {
   return (
     <div>
       <MaterialCollectionLayout>
-        <PageHeader title="Create User" breadcrumb={{ routes }} />
+        <PageHeader title="Create Material Collection" breadcrumb={{ routes }} />
         <MaterialForm title="Create Material Collection" type={TypeForm.CREATE} loading={loading} onFinish={onFinish} />
       </MaterialCollectionLayout>
     </div>
