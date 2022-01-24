@@ -1,0 +1,32 @@
+fragment ISimulation on Simulation {
+  createdAt
+  updatedAt
+  id
+  status
+  request {
+    ...IRequest
+  }
+  simulationComponent {
+    ...ISimulationComponent
+  }
+  user {
+    ...IUsersFields
+  }
+  quotation {
+    exampleField
+  }
+}
+fragment ISimulationComponent on SimulationComponent {
+  createdAt
+  updatedAt
+  id
+  theme {
+    ...ITheme
+  }
+  style {
+    ...IStyle
+  }
+  materialTypes {
+    ...IMaterialType
+  }
+}

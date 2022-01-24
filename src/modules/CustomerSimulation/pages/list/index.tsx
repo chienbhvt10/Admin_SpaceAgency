@@ -1,19 +1,20 @@
+import { TablePaginationConfig } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import CustomerSimulationLayout from 'commons/components/layouts/CustomerSimulation';
 import PageHeader from 'commons/components/layouts/PageHeader';
+import { ISimulation } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
-import useListCustomerSimulation from 'modules/CustomerSimulation/hooks/useListCustomerSimulation';
+import { useListSimulations } from 'modules/CustomerSimulation/hooks/useListCustomerSimulation';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import CustomerSimulationTable from './Table';
 
 const CustomerSimulationPage = () => {
-  const { items, loading } = useListCustomerSimulation();
+  const { dataSimulations, loading, paginationTable } = useListSimulations();
   const navigate = useNavigate();
   React.useEffect(() => {
     setTitle('Customer Simulation Collections');
   });
-  const rowKey = (item: any) => `${item._id}`;
   const handleAdd = () => {
     navigate(CommonPath.USER_SIMULATE_COLLECTION_NEW);
   };
@@ -27,15 +28,18 @@ const CustomerSimulationPage = () => {
       breadcrumbName: 'User Simulation Collections',
     },
   ];
-  const onChange = () => {};
+  const onDelete = (record: ISimulation) => () => {};
+  const onEdit = (record: ISimulation) => () => {};
+  const onChange = (pagination: TablePaginationConfig, __: any, sorter: any) => {};
   return (
     <CustomerSimulationLayout>
       <PageHeader title="" breadcrumb={{ routes }}></PageHeader>
       <CustomerSimulationTable
-        rowKey={rowKey}
-        handleAdd={handleAdd}
-        items={items}
+        onDelete={onDelete}
+        onEdit={onEdit}
+        items={dataSimulations}
         loading={loading}
+        pagination={paginationTable}
         onChange={onChange}
       />
     </CustomerSimulationLayout>

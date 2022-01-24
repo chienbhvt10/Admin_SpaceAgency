@@ -1,0 +1,5 @@
+query getListSimulations($where: WhereInput, $pagination: PaginationInput) {
+  simulations(where: $where, pagination: $pagination) {
+    ...ISimulation
+  }
+}

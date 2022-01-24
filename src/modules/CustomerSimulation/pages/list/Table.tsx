@@ -1,46 +1,109 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Row, Select, Table } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
-import { CommonPath } from 'commons/base-routes';
+import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import TableHeader from 'commons/components/layouts/TableHeader';
-import { nestedSimulationTableColumns, simulationTableColumns } from 'helpers/table-columns';
-import { UserSimulation } from 'helpers/temp-type';
+import { ISimulation, MaterialType } from 'graphql/generated/graphql';
+import { NumberOfRow, totalPrice } from 'helpers/string';
+import { nestedSimulationTableColumns } from 'helpers/table-columns';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
-import FilterForm from '../../components/filter-form';
 const { Option } = Select;
 
 interface Props {
-  items: any;
+  items: ISimulation[];
   loading: boolean;
-  rowKey: any;
-  onChange: () => void;
-  handleAdd: () => void;
+  onChange: (pagination: TablePaginationConfig, __: any, sorter: any) => void;
+  pagination: any;
+  onEdit: (record: ISimulation) => () => void;
+  onDelete: (record: ISimulation) => () => void;
 }
 
-const themeOptions: any = [];
-for (let i = 0; i < 10; i++) {
-  themeOptions.push(<Option key={i.toString(36) + i}>Theme {i}</Option>);
-}
 const CustomerSimulationTable = (props: Props) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { handleAdd, items, loading, onChange, rowKey } = props;
-  const onDelete = (record: any) => () => {
-    // dispatch delete action
-  };
-  const onEdit = (record: any) => () => {
-    navigate(CommonPath.USER_SIMULATE_COLLECTION_DETAIL + record._id);
+  const { items, loading, onChange, onEdit, onDelete, pagination } = props;
+  const { current, pageSize } = pagination;
+  const rowKey = (item: ISimulation) => `${item.id}`;
+
+  const expandedRowRender = (record: ISimulation): React.ReactNode => {
+    const columns: ColumnsType<MaterialType> = [
+      {
+        title: 'Material',
+        dataIndex: 'material',
+        key: 'material',
+        sorter: true,
+        render: (_: any, record) => <>{record.material?.title}</>,
+      },
+      {
+        title: 'Price',
+        dataIndex: 'price',
+        key: 'price',
+        sorter: true,
+        render: (_any, record) => <>{record.price?.value}</>,
+      },
+    ];
+    return (
+      <Table
+        bordered
+        dataSource={record.simulationComponent?.materialTypes || []}
+        columns={columns}
+        pagination={false}
+      ></Table>
+    );
   };
 
-  const expandedRowRender = (record: UserSimulation): React.ReactNode => {
-    const columns = nestedSimulationTableColumns;
-    return <Table bordered dataSource={record.detail} columns={columns} pagination={false}></Table>;
-  };
-  const tableColumns: ColumnsType<UserSimulation> = [
-    ...simulationTableColumns,
+  const onNew = () => {};
+
+  const tableColumns: ColumnsType<ISimulation> = [
+    {
+      title: 'STT',
+      dataIndex: '#',
+      key: '#',
+      width: 40,
+      render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
+    },
+    {
+      title: 'Customer Name',
+      dataIndex: 'customerName',
+      key: '#',
+      width: 40,
+      sorter: true,
+      render: (_: any, record) => (
+        <>
+          {record.user?.firstName}
+          {record.user?.lastName}
+        </>
+      ),
+    },
+    {
+      title: 'Type',
+      dataIndex: 'type',
+      key: '#',
+      width: 40,
+      sorter: false,
+      render: (_: any, record) => <>{record.request?.type}</>,
+    },
+    {
+      title: 'Design',
+      dataIndex: 'design',
+      key: '#',
+      width: 40,
+      sorter: false,
+      render: (_: any, record) => <>{record.simulationComponent?.style?.title}</>,
+    },
+    {
+      title: 'Total Price',
+      dataIndex: 'totalPrice',
+      key: '#',
+      width: 40,
+      sorter: true,
+      render: (_: any, record) => <>{totalPrice(record.simulationComponent?.materialTypes || [])}</>,
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: '#',
+      width: 40,
+      sorter: true,
+    },
     {
       title: 'Tool',
       dataIndex: '',
@@ -53,34 +116,36 @@ const CustomerSimulationTable = (props: Props) => {
           onEdit={onEdit}
           record={record}
           title="Are you sure to delete this Simulation?"
-          key={rowKey}
+          key={rowKey.toString()}
         />
       ),
     },
   ];
+
   return (
     <TableHeader
       title="Customer Simulation Collections"
       extra={
-        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
           Simulation
         </Button>
       }
     >
       <Row justify="center">
-        <Col span={24}>
-          <FilterForm options={themeOptions} />
-        </Col>
+        <Col span={24}>{/* <FilterForm options={themeOptions} /> */}</Col>
         <Col span={24}>
           <Table
             expandable={{
               expandedRowRender,
-              expandRowByClick: true,
+              expandRowByClick: false,
+            }}
+            pagination={{
+              ...pagination,
             }}
             columns={tableColumns}
             dataSource={items}
             loading={loading}
-            rowKey={rowKey}
+            rowKey={rowKey.toString()}
             onChange={onChange}
             bordered
           />
