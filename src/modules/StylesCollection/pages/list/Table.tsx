@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { IStyle } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
-import TableRowAction from 'modules/StylesCollection/components/Table-row-action';
+import TableRowAction from 'modules/StylesCollection/components/Table-action';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import React from 'react';
 interface IProps {
