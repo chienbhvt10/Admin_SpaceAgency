@@ -7,7 +7,7 @@ import { actionLoadingSuccess } from 'redux/actions';
 import { RootState } from 'redux/reducers';
 import { RemoveUserAction } from '../action-types/remove-user';
 import { actionUsers } from '../actions';
-import { actionRemoveUserSuccess } from '../actions/remove-user';
+import { actionRemoveUserError, actionRemoveUserSuccess } from '../actions/remove-user';
 export function* removeUserAsync(action: RemoveUserAction) {
   try {
     const data: RemoveUser = yield apis.removeUser(action.payload);
@@ -17,6 +17,6 @@ export function* removeUserAsync(action: RemoveUserAction) {
     NotificationSuccess('Thông báo!', 'Delete user success');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionRemoveUserError(err));
   }
 }

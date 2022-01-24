@@ -7,6 +7,7 @@ interface IProps {
   onChange: (e: any) => void;
   onReset?: () => void;
   value: string;
+  disabled?: boolean;
 }
 export const FormSearch = (props: IProps) => {
   return (
@@ -19,6 +20,7 @@ export const FormSearch = (props: IProps) => {
           height={''}
           marginRight="5px"
           marginLeft="50px"
+          disabled={props.disabled}
           backgroundColor="#6C757D"
           onClick={props.onReset}
         />
@@ -26,6 +28,7 @@ export const FormSearch = (props: IProps) => {
           text="Search"
           width={''}
           height={''}
+          disabled={props.disabled}
           border="1px solid #007BFF"
           marginRight={''}
           backgroundColor="#007BFF"

@@ -40,6 +40,14 @@ export interface CreateMaterialsTypeInput {
   pricePremium: number;
   themeId: string;
 }
+export interface CreateThemeTypeInput {
+  code: string;
+  description?: string;
+  name: string;
+  nameEnglish: string;
+  order?: string;
+  price: number;
+}
 
 export const dataNav: DataNav[] = [
   {

@@ -3,12 +3,11 @@ import { NotificationSuccess } from 'commons/components/Notification';
 import { TypePagination } from 'commons/type';
 import { CreateCustomer } from 'graphql/generated/graphql';
 import { getNavigate } from 'helpers/history';
-import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/UserManagement/services/apis';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import { CreateUserAction } from '../action-types';
-import { actionCreateUserSuccess } from '../actions';
+import { actionCreateUserError, actionCreateUserSuccess } from '../actions';
 import { actionUsers } from '../actions/list-users';
 export function* createUserAsync(action: CreateUserAction) {
   try {
@@ -26,6 +25,6 @@ export function* createUserAsync(action: CreateUserAction) {
     NotificationSuccess('Thông báo!', 'Create user success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionCreateUserError(err));
   }
 }

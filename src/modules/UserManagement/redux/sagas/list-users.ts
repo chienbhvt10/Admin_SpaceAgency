@@ -1,10 +1,9 @@
 import { GetListUsers, GetTotalCount, SchemaType } from 'graphql/generated/graphql';
-import { UsersAction } from '../action-types';
 import * as apis from 'modules/UserManagement/services/apis';
-import { actionUsersSuccess } from '../actions';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
-import { loginError } from 'modules/Auth/redux/actions';
+import { UsersAction } from '../action-types';
+import { actionUsersError, actionUsersSuccess } from '../actions';
 export function* getListUsersAsync(action: UsersAction) {
   try {
     const data: GetListUsers = yield apis.getListUsers(action.payload);
@@ -28,6 +27,6 @@ export function* getListUsersAsync(action: UsersAction) {
     );
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionUsersError(err));
   }
 }

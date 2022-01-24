@@ -2,12 +2,11 @@ import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
 import { UpdateStyle } from 'graphql/generated/graphql';
 import { getNavigate } from 'helpers/history';
-import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/StylesCollection/services/apis';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import { UpdateStyleAction } from '../action-types';
-import { actionUpdateStyleSuccess } from '../actions';
+import { actionUpdateStyleError, actionUpdateStyleSuccess } from '../actions';
 export function* updateStyleAsync(action: UpdateStyleAction) {
   try {
     const data: UpdateStyle = yield apis.updateStyle(action.payload);
@@ -16,6 +15,6 @@ export function* updateStyleAsync(action: UpdateStyleAction) {
     NotificationSuccess('Thông báo!', 'Update Style Success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionUpdateStyleError(err));
   }
 }

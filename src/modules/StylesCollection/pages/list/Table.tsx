@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { IStyle } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
-import TableRowAction from 'modules/StylesCollection/components/table-row-action';
+import TableRowAction from 'modules/StylesCollection/components/Table-action';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import React from 'react';
 interface IProps {
@@ -39,16 +39,16 @@ const StyleCollectionTable = (props: IProps) => {
       dataIndex: 'theme',
       key: 'theme',
       sortDirections: ['descend', 'ascend'],
-      sorter: true,
+      sorter: false,
       render: (_, record) => <>{record.theme?.title}</>,
     },
-    {
-      title: 'Order',
-      dataIndex: 'order',
-      key: 'order',
-      sortDirections: ['descend', 'ascend'],
-      sorter: true,
-    },
+    // {
+    //   title: 'Order',
+    //   dataIndex: 'order',
+    //   key: 'order',
+    //   sortDirections: ['descend', 'ascend'],
+    //   sorter: true,
+    // },
     {
       title: '3D Code',
       dataIndex: 'code3d',
@@ -61,7 +61,7 @@ const StyleCollectionTable = (props: IProps) => {
       dataIndex: 'price',
       sortDirections: ['descend', 'ascend'],
       key: 'price',
-      sorter: true,
+      sorter: false,
       render: (_, record) => <>{record.price?.value}</>,
     },
     {
