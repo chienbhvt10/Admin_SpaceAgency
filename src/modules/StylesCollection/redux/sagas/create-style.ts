@@ -3,12 +3,11 @@ import { NotificationSuccess } from 'commons/components/Notification';
 import { TypePagination } from 'commons/type';
 import { CreateStyle } from 'graphql/generated/graphql';
 import { getNavigate } from 'helpers/history';
-import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/StylesCollection/services/apis';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import { CreateStyleAction } from '../action-types';
-import { actionCreateStyleSuccess } from '../actions';
+import { actionCreateStyleError, actionCreateStyleSuccess } from '../actions';
 import { actionStyles } from '../actions/list-styles';
 export function* createStyleAsync(action: CreateStyleAction) {
   try {
@@ -26,8 +25,6 @@ export function* createStyleAsync(action: CreateStyleAction) {
     NotificationSuccess('Thông báo!', 'Create style success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    console.log('Create data error', action.payload);
-    yield put(actionLoadingSuccess());
-    yield put(loginError(err));
+    yield put(actionCreateStyleError(err));
   }
 }

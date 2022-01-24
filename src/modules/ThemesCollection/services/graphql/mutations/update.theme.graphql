@@ -1,0 +1,6 @@
+mutation updateTheme($updateThemeInput: UpdateThemeInput!) {
+  updateTheme(updateThemeInput: $updateThemeInput) {
+    id
+    title
+  }
+}

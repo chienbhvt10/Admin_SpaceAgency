@@ -54,12 +54,12 @@ const MaterialForm = (props: Props) => {
         name: item.title || '',
         themeId: item.style?.theme?.id || '',
         styleId: item.style?.id || '',
-        codePremium: item?.materialTypes[1]?.code3d || '',
-        codeStandard: item?.materialTypes[0]?.code3d || '',
-        priceStandard: item?.materialTypes[0]?.price?.value || 0,
-        pricePremium: item?.materialTypes[1]?.price?.value || 0,
-        nameStandard: item?.materialTypes[0]?.title || '',
-        namePremium: item?.materialTypes[1]?.title || '',
+        codePremium: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
+        codeStandard: (item && item.materialTypes && item.materialTypes[0]?.code3d) || '',
+        priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
+        pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
+        nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
+        namePremium: (item && item.materialTypes && item?.materialTypes[1]?.title) || '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

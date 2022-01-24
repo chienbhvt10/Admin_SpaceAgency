@@ -30,7 +30,7 @@ const MaterialUpdate = () => {
       title: values.name || '',
       materialTypes: [
         {
-          id: item?.materialTypes[0]?.id || '',
+          id: (item && item.materialTypes && item?.materialTypes[0]?.id) || '',
           code3d: values.codeStandard || '',
           price: {
             unit: CurrencyUnit.Jpy,
@@ -42,7 +42,7 @@ const MaterialUpdate = () => {
           },
         },
         {
-          id: item?.materialTypes[1]?.id || '',
+          id: (item && item.materialTypes && item?.materialTypes[1]?.id) || '',
           code3d: values.codePremium || '',
           price: {
             unit: CurrencyUnit.Jpy,

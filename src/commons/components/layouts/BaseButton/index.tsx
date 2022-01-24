@@ -12,15 +12,29 @@ interface IProps {
   type?: any;
   htmlType?: any;
   loading?: boolean;
+  disabled?: boolean;
 }
 function BaseButton(props: IProps) {
-  const { width, height, border, marginRight, marginLeft, backgroundColor, onClick, type, htmlType, loading } = props;
+  const {
+    width,
+    height,
+    border,
+    marginRight,
+    marginLeft,
+    backgroundColor,
+    onClick,
+    type,
+    htmlType,
+    disabled,
+    loading,
+  } = props;
   return (
     <Button
       type={type}
       htmlType={htmlType}
       loading={loading}
       onClick={onClick}
+      disabled={disabled}
       style={{
         width,
         height,
@@ -35,7 +49,7 @@ function BaseButton(props: IProps) {
         borderStyle: 'none',
         color: '#fff',
         padding: '6px 12px',
-        cursor: 'pointer',
+        cursor: disabled ? 'not-allowed' : 'pointer',
       }}
     >
       {props.text}

@@ -1,10 +1,9 @@
 import { GetListStyles, GetTotalCount, SchemaType } from 'graphql/generated/graphql';
-import { loginError } from 'modules/Auth/redux/actions';
 import * as apis from 'modules/StylesCollection/services/apis';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import { StylesAction } from '../action-types';
-import { actionStylesSuccess } from '../actions';
+import { actionStylesError, actionStylesSuccess } from '../actions';
 export function* getStylesAsync(action: StylesAction) {
   try {
     const data: GetListStyles = yield apis.getListStyle(action.payload);
@@ -14,7 +13,7 @@ export function* getStylesAsync(action: StylesAction) {
     });
     yield put(
       actionStylesSuccess({
-        dataStyles: data.styles,
+        dataStyles: data.styles || [],
         pagination: {
           ...action.payload.pagination,
         },
@@ -26,6 +25,6 @@ export function* getStylesAsync(action: StylesAction) {
     );
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionStylesError(err));
   }
 }

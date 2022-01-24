@@ -1,24 +1,31 @@
 import { AppError } from 'commons/type';
-export const UPDATE_THEMES = 'UPDATE_THEMES';
-export const UPDATE_THEMES_SUCCESS = 'UPDATE_THEMES_SUCCESS';
-export const UPDATE_THEMES_ERROR = 'UPDATE_THEMES_ERROR';
+import { UpdateThemeVariables } from 'graphql/generated/graphql';
+import { CreateTypeInput } from './create-theme';
+export const UPDATE_THEME = 'UPDATE_THEME';
+export const UPDATE_THEME_SUCCESS = 'UPDATE_THEME_SUCCESS';
+export const UPDATE_THEME_ERROR = 'UPDATE_THEME_ERROR';
 
-export interface UpdateThemesState {
+export interface UpdateThemeState {
   loading: boolean;
 }
 
-export interface UpdateThemesAction {
-  type: typeof UPDATE_THEMES;
-  payload: string;
+export interface UpdateTypeInput extends UpdateThemeVariables {
+  idCategory: string;
+  titleCategory: string;
 }
 
-export interface UpdateThemesActionSuccess {
-  type: typeof UPDATE_THEMES_SUCCESS;
+export interface UpdateThemeAction {
+  type: typeof UPDATE_THEME;
+  payload: UpdateTypeInput;
+}
+
+export interface UpdateThemeActionSuccess {
+  type: typeof UPDATE_THEME_SUCCESS;
   payload: any;
 }
 
-export interface UpdateThemesActionError {
-  type: typeof UPDATE_THEMES_ERROR;
+export interface UpdateThemeActionError {
+  type: typeof UPDATE_THEME_ERROR;
   payload: AppError;
 }
-export type UpdateThemesActionTypes = UpdateThemesAction | UpdateThemesActionSuccess | UpdateThemesActionError;
+export type UpdateThemeActionTypes = UpdateThemeAction | UpdateThemeActionSuccess | UpdateThemeActionError;

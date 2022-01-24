@@ -1,0 +1,6 @@
+mutation createThemeCategory($createThemeCategoryInput: CreateThemeCategoryInput!) {
+  createThemeCategory(createThemeCategoryInput: $createThemeCategoryInput) {
+    id
+    title
+  }
+}

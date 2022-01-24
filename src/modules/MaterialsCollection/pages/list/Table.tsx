@@ -18,7 +18,7 @@ function TableMaterial(props: IProps) {
   const rowKey = (item: IMaterial) => `${item.id}`;
 
   const expandedRowRender = (data: IMaterial) => {
-    const columns: ColumnsType<MaterialType> = [
+    const columnsType: ColumnsType<MaterialType> = [
       {
         title: 'Type Name',
         dataIndex: 'title',
@@ -29,11 +29,11 @@ function TableMaterial(props: IProps) {
         title: 'Price',
         key: '#',
         dataIndex: 'price',
-        render: (_: any, record) => <>{record.price?.value}</>,
+        // render: (_: any, record) => <>{record.price?.value}</>,
       },
       { title: 'Order', dataIndex: 'order', key: '#' },
     ];
-    return <Table columns={columns} dataSource={data.materialTypes} pagination={false} />;
+    return <Table columns={columnsType} dataSource={data.materialTypes || []} pagination={false} />;
   };
 
   const columns: ColumnsType<IMaterial> = [
@@ -54,14 +54,14 @@ function TableMaterial(props: IProps) {
       title: 'Order',
       dataIndex: 'order',
       key: 'order',
-      sorter: true,
+      sorter: false,
     },
     {
       title: 'Design',
       dataIndex: 'design',
       key: 'design',
       sorter: false,
-      render: (_: any, record) => <>{record.title}</>,
+      render: (_: any, record) => <>{record.style?.title}</>,
     },
     {
       title: 'Status',

@@ -1,0 +1,6 @@
+mutation updateThemeCategory($updateThemeCategoryInput: UpdateThemeCategoryInput!) {
+  updateThemeCategory(updateThemeCategoryInput: $updateThemeCategoryInput) {
+    id
+    title
+  }
+}

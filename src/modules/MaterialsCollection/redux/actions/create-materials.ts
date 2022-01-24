@@ -12,12 +12,12 @@ export const actionCreateMaterials = (payload: CreateMaterialVariables): CreateM
   payload,
 });
 
-export const actionCreateMaterialsUserError = (payload: AppError): CreateMaterialsActionTypes => ({
+export const actionCreateMaterialsError = (payload: AppError): CreateMaterialsActionTypes => ({
   type: CREATE_MATERIALS_ERROR,
   payload,
 });
 
-export const actionCreateMaterialsUserSuccess = (payload: CreateMaterial): CreateMaterialsActionTypes => ({
+export const actionCreateMaterialsSuccess = (payload: CreateMaterial): CreateMaterialsActionTypes => ({
   type: CREATE_MATERIALS_SUCCESS,
   payload,
 });

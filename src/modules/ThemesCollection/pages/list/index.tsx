@@ -21,11 +21,21 @@ const ThemeCollectionPage = () => {
   const { dataThemes, loading, paginationTable, pagination, updatePaginationAndSorterThemes, filterTheme } =
     useListThemes();
   const [value, setValue] = React.useState<string>('');
+  const [disabled, setDisabled] = React.useState<boolean>(true);
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterTheme.NAME, value: '' }];
 
   React.useEffect(() => {
     setTitle('Theme Collection');
   }, []);
+
+  React.useEffect(() => {
+    if (value) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [value]);
+
   const handleAdd = () => {
     navigate(CommonPath.THEME_COLLECTION_NEW);
   };
@@ -66,18 +76,29 @@ const ThemeCollectionPage = () => {
     setValue(e.target.value);
   };
 
+  const onReset = () => {
+    setValue('');
+    filterTheme([]);
+  };
+
   return (
     <ThemeCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="Theme Managenent"
+        title="Theme Collection"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             New Theme
           </Button>
         }
       >
-        <FormSearch onChange={onChangeValue} value={value} handleSearch={handleSearch} />
+        <FormSearch
+          disabled={disabled}
+          onReset={onReset}
+          onChange={onChangeValue}
+          value={value}
+          handleSearch={handleSearch}
+        />
         <TableThemes
           pagination={paginationTable}
           items={dataThemes}

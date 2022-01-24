@@ -8,7 +8,7 @@ import * as apis from 'modules/MaterialsCollection/services/apis';
 import { put } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import { CreateMaterialsAction } from '../action-types';
-import { actionCreateMaterialsUserSuccess, actionMaterials } from '../actions';
+import { actionCreateMaterialsError, actionCreateMaterialsSuccess, actionMaterials } from '../actions';
 export function* createMaterialsAsync(action: CreateMaterialsAction) {
   try {
     const data: CreateMaterial = yield apis.createMaterials(action.payload);
@@ -21,10 +21,10 @@ export function* createMaterialsAsync(action: CreateMaterialsAction) {
       }),
     );
     getNavigate(CommonPath.MATERIAL_COLLECTION);
-    yield put(actionCreateMaterialsUserSuccess(data));
+    yield put(actionCreateMaterialsSuccess(data));
     NotificationSuccess('Thông báo!', 'Create materials success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionCreateMaterialsError(err));
   }
 }

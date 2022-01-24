@@ -1,13 +1,11 @@
-import { Button, Col, Form, Input, InputNumber, Row, Select, Typography } from 'antd';
+import { Col, Form, Input, InputNumber, Row, Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
-import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
-import { TypeForm } from 'commons/type';
+import { CreateThemeTypeInput, TypeForm } from 'commons/type';
 import { ITheme } from 'graphql/generated/graphql';
 import 'modules/ThemesCollection/style/style.scss';
 import React from 'react';
 import { useNavigate } from 'react-router';
-const { Option } = Select;
 const { TextArea } = Input;
 const { Title } = Typography;
 
@@ -18,25 +16,28 @@ interface Props {
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;
+  onFinish?: (values: CreateThemeTypeInput) => void;
 }
+const requireRule = { required: true, message: 'This is required information!' };
+
 const ThemesForm = (props: Props) => {
-  const { loading, type, items, onChange, title } = props;
-  const [form] = Form.useForm<ITheme>();
+  const { loading, type, items, onFinish, title } = props;
+  const [form] = Form.useForm<CreateThemeTypeInput>();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (items) {
+    if (items && type === TypeForm.UPDATE) {
       form.setFieldsValue({
-        title: items.title,
-        code3D: items.code3D,
-        description: items.code3D,
+        code: items.code3D || '',
+        description: items.description || '',
+        name: items?.title || '',
+        nameEnglish: (items && items.themeCategories && items?.themeCategories[0]?.title) || '',
+        order: '',
+        price: items.price?.value || 0,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, form]);
-
-  const onFinish = () => {
-    console.log(form.getFieldsValue());
-  };
   const onFinishFailed = () => {};
 
   const onCancel = () => {
@@ -44,132 +45,74 @@ const ThemesForm = (props: Props) => {
   };
   return (
     <div>
-     
-        <div id="form-theme">
-          <Form
-            name="basic"
-            initialValues={{
-              ...items,
-            }}
-            form={form}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+      <div id="form-theme">
+        <Form
+          name="basic"
+          initialValues={{
+            ...items,
+          }}
+          form={form}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
         >
-           <HeaderCreateUpdate onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
+          <HeaderCreateUpdate loading={loading} onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
             <Row justify="center">
               <Col span={22}>
-                <Form.Item labelCol={{ span: 4 }} className="name" label="Name" name="name">
-                  <Col offset={1} span={24}>
-                    <Input />
-                  </Col>
+                <Form.Item
+                  rules={[requireRule]}
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  className="name"
+                  label="Name"
+                  name="name"
+                >
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={22}>
-                <Form.Item labelCol={{ span: 4 }} className="" label="Name English" name="nameEnglish">
-                  <Col offset={1} span={24}>
-                    <Input />
-                  </Col>
+                <Form.Item
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  className=""
+                  label="Name English"
+                  rules={[requireRule]}
+                  name="nameEnglish"
+                >
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={22}>
-                <Form.Item labelCol={{ span: 4 }} className="" label="Description" name="description">
-                  <Col offset={1}>
-                    <TextArea rows={5} showCount maxLength={1000} />
-                  </Col>
+                <Form.Item
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  className=""
+                  label="Description"
+                  name="description"
+                >
+                  <TextArea rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
               <Col span={22}>
-                <Form.Item labelCol={{ span: 4 }} className="code" label="Code" name="code">
-                  <Col offset={1}>
-                    <Input.Group compact>
-                      <Input style={{ width: 'calc(100% - 83px)' }} />
-                      <Button type="primary">Preview</Button>
-                    </Input.Group>
-                  </Col>
+                <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} className="code" label="Code" name="code">
+                  <Input style={{ width: 'calc(100% - 83px)' }} />
                 </Form.Item>
               </Col>
               <Col span={22} className="price-order-box">
                 <Row>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} label="Price" name="price">
-                      <Col offset={2}>
-                        <InputNumber style={{ width: '100%', marginLeft: '10PX' }} />
-                      </Col>
+                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Price" name="price">
+                      <InputNumber style={{ width: '100%', marginLeft: '10PX' }} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8 }} label="Order" name="order">
-                      <Col offset={2}>
-                        <InputNumber style={{ width: '100%' }} />
-                      </Col>
+                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Order" name="order">
+                      <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
                 </Row>
               </Col>
-
-              <Col className="image-upload-title" span={24} style={{ marginBottom: '50px' }}>
-                <Title level={3}>Image Upload</Title>
-              </Col>
-              <Col span={22} style={{ marginBottom: '50px' }}>
-                <Form.Item labelCol={{ span: 4 }} className="image-name" label="Name" name="imageName">
-                  <Col offset={1}>
-                    <Input />
-                  </Col>
-                </Form.Item>
-                <Form.Item labelCol={{ span: 4 }} label="Inside Preview" name="preview">
-                  <Col offset={1}>
-                    <Row>
-                      <Col span={20}>
-                        <Input />
-                      </Col>
-                      <Col span={3}>
-                        <UploadDragger />
-                      </Col>
-                    </Row>
-                    {/* <Upload
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                        listType="picture"
-                        className="upload-list-inline"
-                        name="image"
-                      >
-                        <Button icon={<UploadOutlined />}>Upload</Button>
-                      </Upload> */}
-                  </Col>
-                </Form.Item>
-              </Col>
-              <Col span={22} style={{ marginBottom: '50px' }}>
-                <Form.Item labelCol={{ span: 4 }} className="image-name" label="Name" name="imageName">
-                  <Col offset={1}>
-                    <Input />
-                  </Col>
-                </Form.Item>
-                <Form.Item labelCol={{ span: 4 }} label="Outside Preview" name="preview">
-                  <Col offset={1}>
-                    <Row>
-                      <Col span={20}>
-                        <Input />
-                      </Col>
-                      <Col span={3}>
-                        <UploadDragger />
-                      </Col>
-                    </Row>
-                    {/* <Upload
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                        listType="picture"
-                        className="upload-list-inline"
-                        name="image"
-                      >
-                        <Button icon={<UploadOutlined />}>Upload</Button>
-                      </Upload> */}
-                  </Col>
-                </Form.Item>
-              </Col>
             </Row>
-            </HeaderCreateUpdate>
-          </Form>
-        </div>
-     
+          </HeaderCreateUpdate>
+        </Form>
+      </div>
     </div>
   );
 };

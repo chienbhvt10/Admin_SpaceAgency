@@ -6,7 +6,7 @@ import { put, select } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
 import { RootState } from 'redux/reducers';
 import { RemoveThemeAction } from '../action-types';
-import { actionRemoveThemeSuccess, actionThemes } from '../actions';
+import { actionRemoveThemeError, actionRemoveThemeSuccess, actionThemes } from '../actions';
 export function* removeThemeAsync(action: RemoveThemeAction) {
   try {
     const data: RemoveTheme = yield apis.removeTheme(action.payload);
@@ -16,6 +16,6 @@ export function* removeThemeAsync(action: RemoveThemeAction) {
     NotificationSuccess('Thông báo!', 'Delete theme success');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    yield put(loginError(err));
+    yield put(actionRemoveThemeError(err));
   }
 }

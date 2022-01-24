@@ -1,0 +1,5 @@
+mutation createTheme($createThemeInput: CreateThemeInput!) {
+  createTheme(createThemeInput: $createThemeInput) {
+    ...ITheme
+  }
+}

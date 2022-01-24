@@ -14,21 +14,24 @@ interface Props {
 const FilterForm = (props: Props) => {
   const { value, onChangeValue, handleSearch, onReset, onChangeTheme, theme } = props;
   const { getAllThemes, dataAllThemes } = useGetAllThemes();
-  React.useEffect(() => {
-    getAllThemes();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   const themeOptions = dataAllThemes.map((theme, index) => (
     <Option key={index} value={theme.id}>
       {theme.title}
     </Option>
   ));
+
+  const onDropdownVisibleChange = (open: boolean) => {
+    if (open) {
+      getAllThemes();
+    }
+  };
   return (
     <Form className="filter-form">
       <Row>
         <Col span={18}>
           <Form.Item labelCol={{ span: 6 }} label="Theme" name="theme">
-            <Select placeholder="---All---" onChange={onChangeTheme}>
+            <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---All---" onChange={onChangeTheme}>
               {themeOptions}
             </Select>
           </Form.Item>
