@@ -5,7 +5,16 @@ import themeSaga from 'modules/ThemesCollection/redux/sagas';
 import userSaga from 'modules/UserManagement/redux/sagas';
 import styleSaga from 'modules/StylesCollection/redux/sagas';
 import materialsSaga from 'modules/MaterialsCollection/redux/sagas';
+import simulationsSaga from 'modules/CustomerSimulation/redux/sagas';
 
 export default function* rootSaga() {
-  yield all([authSaga(), themeSaga(), userSaga(), styleSaga(), materialsSaga(), commonSaga.checkErrorAsync()]);
+  yield all([
+    authSaga(),
+    themeSaga(),
+    userSaga(),
+    styleSaga(),
+    materialsSaga(),
+    simulationsSaga(),
+    commonSaga.checkErrorAsync(),
+  ]);
 }

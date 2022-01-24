@@ -1,0 +1,14 @@
+fragment IRequest on Request {
+  createdAt
+  createdAt
+  id
+  requesterFullName
+  furigana
+  address
+  phone
+  email
+  hasLand
+  content
+  postcode
+  type
+}

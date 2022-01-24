@@ -2,6 +2,7 @@ import { Table, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { IMaterial, MaterialType } from 'graphql/generated/graphql';
+import { NumberOfRow } from 'helpers/string';
 import React from 'react';
 import { useNavigate } from 'react-router';
 interface IProps {
@@ -14,8 +15,9 @@ interface IProps {
 }
 function TableMaterial(props: IProps) {
   const navigate = useNavigate();
-  const { items, loading, onChange } = props;
+  const { items, loading, onChange, pagination } = props;
   const rowKey = (item: IMaterial) => `${item.id}`;
+  const { current, pageSize } = pagination;
 
   const expandedRowRender = (data: IMaterial) => {
     const columnsType: ColumnsType<MaterialType> = [
@@ -37,6 +39,13 @@ function TableMaterial(props: IProps) {
   };
 
   const columns: ColumnsType<IMaterial> = [
+    {
+      title: 'STT',
+      dataIndex: '#',
+      key: '#',
+      width: 40,
+      render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
+    },
     {
       title: 'Name',
       dataIndex: 'title',

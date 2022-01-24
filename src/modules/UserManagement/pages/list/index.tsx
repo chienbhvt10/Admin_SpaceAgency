@@ -2,13 +2,12 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, PageHeader, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
-import { FormSearch } from 'commons/components/layouts/FormSearch';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import UserManagementLayout from 'commons/components/layouts/UserManagement';
-import { TypeKeyFilterUser, TypePagination, TypeSortUser } from 'commons/type';
+import { TypeKeyFilterUser, TypePagination } from 'commons/type';
 import { FilterInput, IUsersFields } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
-import { isEmpty, OrderOfSorter } from 'helpers/string';
+import { OrderOfSorter } from 'helpers/string';
 import FilterForm from 'modules/UserManagement/components/FilterForm';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
@@ -22,10 +21,20 @@ function ListUserManagement() {
   const { removeUser } = useRemoveUser();
   const [value, setValue] = React.useState<string>('');
   const [role, setRole] = React.useState<string>('');
+  const [disabled, setDisabled] = React.useState<boolean>(false);
   const [status, setStatus] = React.useState<string>('');
+
   React.useEffect(() => {
     setTitle('User Management');
   }, []);
+
+  React.useEffect(() => {
+    if (role || status || value) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [role, status, value]);
 
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
@@ -79,28 +88,18 @@ function ListUserManagement() {
   const onNew = () => {
     navigate(CommonPath.USERS_MANAGEMENT_NEW);
   };
-  const handleSearch = (value: string) => () => {
-    const newFilter = arrFilter.map((filter) => {
-      switch (filter.key) {
-        case TypeKeyFilterUser.EMAIL:
-          return {
-            ...filter,
-            value: value,
-          };
-        case TypeKeyFilterUser.ROLE:
-          return {
-            ...filter,
-            value: role,
-          };
-        case TypeKeyFilterUser.STATUS:
-          return {
-            ...filter,
-            value: status,
-          };
-        default:
-          return { ...filter };
-      }
-    });
+  const handleSearch = () => {
+    const newFilter = arrFilter.map((i) => ({
+      ...i,
+      value:
+        i.key === TypeKeyFilterUser.EMAIL
+          ? value
+          : i.key === TypeKeyFilterUser.ROLE
+          ? role
+          : i.key === TypeKeyFilterUser.STATUS
+          ? status
+          : '',
+    }));
     filterUser(newFilter);
   };
   const onReset = () => {
@@ -120,6 +119,7 @@ function ListUserManagement() {
       >
         <FilterForm
           role={role}
+          disabled={disabled}
           status={status}
           value={value}
           onRoleChange={onRoleChange}

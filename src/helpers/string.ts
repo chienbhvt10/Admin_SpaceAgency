@@ -43,3 +43,10 @@ export function isEmpty(obj: Object) {
 export function findMaterialTypes(arr: MaterialType[], type: string) {
   // const findType=arr.find((i)=>i.)
 }
+export function totalPrice(arr: MaterialType[]) {
+  let totalPrice = 0;
+  arr.map((i) => {
+    totalPrice += i.price?.value || 0;
+  });
+  return totalPrice;
+}
