@@ -49,6 +49,15 @@ export interface CreateThemeTypeInput {
   price: number;
 }
 
+export interface CreateStyleTypeInput {
+  code3d: string;
+  description: string;
+  imageName: string;
+  price: number;
+  themeId: string;
+  title: string;
+}
+
 export const dataNav: DataNav[] = [
   {
     id: 0,

@@ -13,10 +13,10 @@ import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
 import { useRemoveMaterial } from 'modules/MaterialsCollection/hooks/useRemoveMaterial';
+import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
+import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { useGetAllStyles } from '../../../StylesCollection/hooks/useGetAllStyles';
-import { useGetAllThemes } from '../../../ThemesCollection/hooks/useGetAllThemes';
 import './style.scss';
 import TableMaterial from './Table';
 const MaterialCollectionPage = () => {
@@ -26,6 +26,7 @@ const MaterialCollectionPage = () => {
   const { removeMaterial } = useRemoveMaterial();
   const { getAllStyles, dataAllStyles, loading: loadingAllThemes } = useGetAllStyles();
   const { getAllThemes, dataAllThemes, loading: loadingAllStyles } = useGetAllThemes();
+  const [disabled, setDisabled] = React.useState<boolean>(true);
   const [value, setValue] = React.useState<string>('');
   const [selectId, setSelectId] = React.useState<{ themeId: string; styleId: string }>({
     themeId: '',
@@ -40,6 +41,14 @@ const MaterialCollectionPage = () => {
   React.useEffect(() => {
     setTitle('Material Collection');
   }, []);
+
+  React.useEffect(() => {
+    if (value) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [value]);
 
   const handleAdd = () => {
     navigate(CommonPath.MATERIAL_COLLECTION_NEW);
@@ -114,16 +123,6 @@ const MaterialCollectionPage = () => {
     }
   };
 
-  const routes = [
-    {
-      path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
-    },
-    {
-      path: CommonPath.MATERIAL_COLLECTION,
-      breadcrumbName: 'Material Collection',
-    },
-  ];
   return (
     <MaterialCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
@@ -159,7 +158,13 @@ const MaterialCollectionPage = () => {
             options={[]}
           />
         </Form>
-        <FormSearch onReset={onReset} value={value} onChange={onChangeValue} handleSearch={handleSearch} />
+        <FormSearch
+          disabled={disabled}
+          onReset={onReset}
+          value={value}
+          onChange={onChangeValue}
+          handleSearch={handleSearch}
+        />
         <TableMaterial
           items={dataMaterials || []}
           loading={loading}
@@ -174,3 +179,13 @@ const MaterialCollectionPage = () => {
 };
 
 export default MaterialCollectionPage;
+const routes = [
+  {
+    path: CommonPath.DEFAULT_PATH,
+    breadcrumbName: 'Home',
+  },
+  {
+    path: CommonPath.MATERIAL_COLLECTION,
+    breadcrumbName: 'Material Collection',
+  },
+];

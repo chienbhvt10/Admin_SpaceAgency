@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, EllipsisOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Space } from 'antd';
 import { IStyle } from 'graphql/generated/graphql';
 import React from 'react';
@@ -25,7 +25,7 @@ const TableRowAction = (props: IProps) => {
       >
         <Button style={{ color: 'red' }} type="ghost" shape="circle" icon={<DeleteOutlined />} size="middle" />
       </Popconfirm>
-      <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" />
+      {/* <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" /> */}
     </Space>
   );
 };

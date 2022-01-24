@@ -1,9 +1,6 @@
-import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
-import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
-import { TypeForm } from 'commons/type';
-import { CreateStyleInput, IStyle, UpdateStyleInput } from 'graphql/generated/graphql';
-import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyle';
-import { useUpdateStyle } from 'modules/StylesCollection/hooks/useUpdateStyle';
+import { Col, Form, Input, InputNumber, Row, Select, Typography } from 'antd';
+import { CreateStyleTypeInput, TypeForm } from 'commons/type';
+import { IStyle } from 'graphql/generated/graphql';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
 import '../../styles/style-form.scss';
@@ -19,102 +16,48 @@ interface Props {
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;
+  onFinish?: (values: CreateStyleTypeInput) => void;
 }
 
 const requireRule = { required: true, message: 'This is required information!' };
 
 const StyleCollectionForm = (props: Props) => {
-  const { loading, type, item, onCancel, onChange, title } = props;
-  const { updateStyle } = useUpdateStyle();
-  const { createStyle } = useCreateStyle();
-  const [form] = Form.useForm<any>();
+  const { loading, type, item, onCancel, title, onFinish } = props;
+  const [form] = Form.useForm<CreateStyleTypeInput>();
   const { dataAllThemes, getAllThemes } = useGetAllThemes();
+
   React.useEffect(() => {
     getAllThemes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    if (item && type === TypeForm.UPDATE) {
+      form.setFieldsValue({
+        code3d: item.code3d || '',
+        themeId: item.theme?.id,
+        description: item.description || '',
+        price: item.price?.value || 0,
+        title: item.title || '',
+      });
+    }
+  }, [type, form, item]);
+
+  const onFinishFailed = () => {};
+
   const themeOptions = dataAllThemes.map((theme, index) => (
     <Option key={index} value={theme.id}>
       {theme.title}
     </Option>
   ));
-  const inputCreate: CreateStyleInput = {
-    title: '',
-    code3d: '',
-    description: '',
-    price: null,
-    theme: null,
-  };
-  const [createInput, setCreateStyleInput] = React.useState<CreateStyleInput>(inputCreate);
-  const [updateInput, setUpdateStyleInput] = React.useState<UpdateStyleInput>({
-    id: '',
-    title: '',
-    code3d: '',
-    description: '',
-    price: null,
-    theme: null,
-  });
-  React.useEffect(() => {
-    if (item) {
-      setUpdateStyleInput({
-        id: item.id,
-        code3d: item.code3d,
-        description: item.description,
-        price: item.price,
-        theme: item.theme,
-        title: item.title,
-      });
-    }
-  }, [item]);
-  React.useEffect(() => {
-    if (item) {
-      form.setFieldsValue(item);
-    }
-  }, [form, item]);
-
-  const onFinish = (values: IStyle) => {
-    if (type === TypeForm.UPDATE) {
-      const updateStyleInput: UpdateStyleInput = {
-        ...updateInput,
-        code3d: values.code3d || '',
-        description: values.description || '',
-        price: values.price || undefined,
-        title: values.title || '',
-        theme: values.theme || undefined,
-      };
-      updateStyle({ updateStyleInput });
-    }
-    if (type === TypeForm.CREATE) {
-      const createStyleInput: CreateStyleInput = {
-        ...createInput,
-        code3d: values.code3d || '',
-        description: values.description || '',
-        price: values.price || undefined,
-        title: values.title || '',
-        theme: values.theme || undefined,
-      };
-      createStyle({ createStyleInput });
-    }
-  };
-  const onFinishFailed = () => {};
-  const handlePreview = () => {};
   return (
     <div id="style-form">
-      <Form
-        name="basic"
-        initialValues={{
-          ...item,
-        }}
-        form={form}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
+      <Form name="basic" form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
         <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
           <Row className="style-form-control">
             <Col span={22}>
               <Col span={16}>
-                <Form.Item labelCol={{ span: 6 }} label="Theme" name="themeid">
+                <Form.Item labelCol={{ span: 6 }} label="Theme" name="themeId" rules={[requireRule]}>
                   <Select placeholder="---All---">{themeOptions}</Select>
                 </Form.Item>
               </Col>
@@ -125,22 +68,22 @@ const StyleCollectionForm = (props: Props) => {
               </Form.Item>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} label="Description" name="description" rules={[requireRule]}>
+              <Form.Item labelCol={{ span: 4 }} label="Description" name="description">
                 <TextArea rows={5} showCount maxLength={1000} />
               </Form.Item>
             </Col>
             <Col span={22}>
               <Row>
                 <Col span={16}>
-                  <Form.Item labelCol={{ span: 6 }} label="Code3D" name="code3d" rules={[requireRule]}>
+                  <Form.Item labelCol={{ span: 6 }} label="Code3D" name="code3d">
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col span={4}>
+                {/* <Col span={4}>
                   <Button style={{ width: '100%' }} htmlType="button" type="primary" onClick={handlePreview}>
                     Preview
                   </Button>
-                </Col>
+                </Col> */}
               </Row>
             </Col>
             <Col span={22} className="price-order-box">
@@ -151,16 +94,16 @@ const StyleCollectionForm = (props: Props) => {
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Col span={20} offset={4}>
+                  {/* <Col span={20} offset={4}>
                     <Form.Item labelCol={{ span: 8 }} label="Order" name="order">
                       <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-                  </Col>
+                  </Col> */}
                 </Col>
               </Row>
             </Col>
 
-            <Col className="image-upload-title" span={24}>
+            {/* <Col className="image-upload-title" span={24}>
               <Title level={3}>Image Upload</Title>
             </Col>
             <Col span={22}>
@@ -188,7 +131,7 @@ const StyleCollectionForm = (props: Props) => {
                   <UploadDragger />
                 </Col>
               </Row>
-            </Col>
+            </Col> */}
           </Row>
         </FormHeader>
       </Form>

@@ -1,7 +1,8 @@
 import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
-import { TypeForm } from 'commons/type';
+import { CreateStyleTypeInput, TypeForm } from 'commons/type';
+import { CurrencyUnit } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import CreateStyleForm from 'modules/StylesCollection/components/StyleForm';
 import { useCreateStyle } from 'modules/StylesCollection/hooks/useCreateStyle';
@@ -10,32 +11,59 @@ import { useNavigate } from 'react-router';
 const NewStyleCollection = () => {
   const { loading } = useCreateStyle();
   const navigate = useNavigate();
+  const { createStyle } = useCreateStyle();
+
   React.useEffect(() => {
     setTitle('Create Style');
   });
+
   const onCancel = () => {
     navigate(CommonPath.STYLES_COLLECTION);
   };
-  const routes = [
-    {
-      path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
-    },
-    {
-      path: CommonPath.STYLES_COLLECTION,
-      breadcrumbName: 'Style Collection',
-    },
-    {
-      path: CommonPath.STYLES_COLLECTION_NEW,
-      breadcrumbName: 'Create Style Collection',
-    },
-  ];
+
+  const onFinishCreateStyle = (values: CreateStyleTypeInput) => {
+    createStyle({
+      createStyleInput: {
+        title: values.title || '',
+        code3d: values.code3d || '',
+        description: values.description || '',
+        price: {
+          unit: CurrencyUnit.Jpy,
+          value: values.price,
+        },
+        theme: {
+          id: values.themeId,
+        },
+      },
+    });
+  };
+
   return (
     <StyleCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <CreateStyleForm onCancel={onCancel} title="Create Style Collection" type={TypeForm.CREATE} loading={loading} />
+      <CreateStyleForm
+        onFinish={onFinishCreateStyle}
+        onCancel={onCancel}
+        title="Create Style Collection"
+        type={TypeForm.CREATE}
+        loading={loading}
+      />
     </StyleCollectionLayout>
   );
 };
 
 export default NewStyleCollection;
+const routes = [
+  {
+    path: CommonPath.DEFAULT_PATH,
+    breadcrumbName: 'Home',
+  },
+  {
+    path: CommonPath.STYLES_COLLECTION,
+    breadcrumbName: 'Style Collection',
+  },
+  {
+    path: CommonPath.STYLES_COLLECTION_NEW,
+    breadcrumbName: 'Create Style Collection',
+  },
+];

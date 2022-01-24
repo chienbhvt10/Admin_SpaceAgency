@@ -29,9 +29,9 @@ function TableMaterial(props: IProps) {
         title: 'Price',
         key: '#',
         dataIndex: 'price',
-        // render: (_: any, record) => <>{record.price?.value}</>,
+        render: (_: any, record) => <>{record.price?.value}</>,
       },
-      { title: 'Order', dataIndex: 'order', key: '#' },
+      { title: 'Code', dataIndex: 'code3d', key: '#' },
     ];
     return <Table columns={columnsType} dataSource={data.materialTypes || []} pagination={false} />;
   };

@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseButton from 'commons/components/layouts/BaseButton';
-import InputGroup from 'commons/components/layouts/InputGroup/index';
 import './style.scss';
+import { Input, Form, Col } from 'antd';
 interface IProps {
   handleSearch: () => void;
   onChange: (e: any) => void;
@@ -10,9 +10,25 @@ interface IProps {
   disabled?: boolean;
 }
 export const FormSearch = (props: IProps) => {
+  const [form] = Form.useForm<any>();
+  React.useEffect(() => {
+    if (!props.value) {
+      form.setFieldsValue({
+        search: '',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.value]);
   return (
     <div id="form-search">
-      <InputGroup value={props.value} onChange={props.onChange} label="Keyword" placeholder="Type to search..." />
+      <Col span={18}>
+        <Form form={form}>
+          <Form.Item label="Keyword" labelCol={{ span: 2 }} name="search">
+            <Input onChange={props.onChange} placeholder="Type to search..." />
+          </Form.Item>
+        </Form>
+      </Col>
+
       <div className="wrapper-search">
         <BaseButton
           text="Reset"
@@ -21,7 +37,7 @@ export const FormSearch = (props: IProps) => {
           marginRight="5px"
           marginLeft="50px"
           disabled={props.disabled}
-          backgroundColor="#6C757D"
+          backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
           onClick={props.onReset}
         />
         <BaseButton
@@ -31,7 +47,7 @@ export const FormSearch = (props: IProps) => {
           disabled={props.disabled}
           border="1px solid #007BFF"
           marginRight={''}
-          backgroundColor="#007BFF"
+          backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}
           onClick={props.handleSearch}
           marginLeft={''}
         />

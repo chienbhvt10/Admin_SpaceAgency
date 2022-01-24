@@ -12,7 +12,7 @@ import { OrderOfSorter } from 'helpers/string';
 import FilterForm from 'modules/StylesCollection/components/FilterForm';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import { useRemoveStyle } from 'modules/StylesCollection/hooks/useRemoveStyle';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import StyleCollectionTable from './Table';
 
@@ -21,19 +21,32 @@ const StyleCollectionPage = () => {
     useListStyles();
   const navigate = useNavigate();
   const { removeStyle } = useRemoveStyle();
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [theme, setTheme] = useState<string>('');
+  const [searchValue, setSearchValue] = React.useState<string>('');
+  const [theme, setTheme] = React.useState<string>('');
+  const [disabled, setDisabled] = React.useState<boolean>();
 
   React.useEffect(() => {
     setTitle('Style Collection');
   }, []);
+
+  React.useEffect(() => {
+    if (searchValue) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [searchValue]);
+
   const onChangeValue = (e: any) => {
     setSearchValue(e.target.value);
   };
+
   const onChangeTheme = (value: string) => {
     setTheme(value);
   };
+
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterStyle.NAME, value: '' }];
+
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -44,6 +57,7 @@ const StyleCollectionPage = () => {
       breadcrumbName: 'Style Collection',
     },
   ];
+
   const onChange = (paginationTable: TablePaginationConfig, _: any, sorter: SorterResult<any>) => {
     const order = OrderOfSorter(sorter.order);
     const limit = pagination?.limit || TypePagination.DEFAULT_LIMIT;
@@ -60,32 +74,29 @@ const StyleCollectionPage = () => {
       },
     );
   };
+
   const onNew = () => {
     navigate(CommonPath.STYLES_COLLECTION_NEW);
   };
+
   const onDelete = (record: IStyle) => () => {
     removeStyle({
       id: record.id,
     });
   };
+
   const onEdit = (record: IStyle) => () => {
     navigate('/styles-collection/detail/' + record.id);
   };
-  const handleSearch = (value: string, theme: string) => () => {
-    const newFilter = arrFilter.map((filter) => {
-      switch (filter.key) {
-        case TypeKeyFilterStyle.NAME:
-          return {
-            ...filter,
-            value: value,
-          };
 
-        default:
-          return { ...filter };
-      }
-    });
+  const handleSearch = () => {
+    const newFilter = arrFilter.map((i) => ({
+      ...i,
+      value: i.key === TypeKeyFilterStyle.NAME ? searchValue : '',
+    }));
     filterStyles(newFilter);
   };
+
   const onReset = () => {
     setSearchValue('');
     filterStyles([]);
@@ -105,6 +116,7 @@ const StyleCollectionPage = () => {
           <Col span={24}>
             <FilterForm
               theme={theme}
+              disabled={disabled}
               onChangeTheme={onChangeTheme}
               value={searchValue}
               handleSearch={handleSearch}

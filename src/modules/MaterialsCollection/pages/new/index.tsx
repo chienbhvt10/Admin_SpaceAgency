@@ -38,9 +38,6 @@ const MaterialCreateNew = () => {
               unit: CurrencyUnit.Jpy,
               value: values.pricePremium,
             },
-            material: {
-              id: values.themeId,
-            },
           },
         ],
         style: {

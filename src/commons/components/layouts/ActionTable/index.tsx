@@ -13,7 +13,7 @@ export default function UserRowActions(props: IProps) {
   return (
     <Space size="small">
       <Button type="ghost" onClick={props.onEdit(props.record)} shape="circle" icon={<EditOutlined />} size="middle" />
-       
+
       <Popconfirm
         title={props.title}
         cancelText="No"
@@ -22,9 +22,9 @@ export default function UserRowActions(props: IProps) {
         onConfirm={props.onDelete(props.record)}
         icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
       >
-        <Button type="ghost" shape="circle" icon={<DeleteOutlined />} size="middle" style={{ color: 'red' }}/>
+        <Button type="ghost" shape="circle" icon={<DeleteOutlined />} size="middle" style={{ color: 'red' }} />
       </Popconfirm>
-      <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" />
+      {/* <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" /> */}
     </Space>
   );
 }
