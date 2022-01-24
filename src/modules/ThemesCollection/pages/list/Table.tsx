@@ -4,7 +4,6 @@ import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { ITheme } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
-import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
 import { useNavigate } from 'react-router';
 import { useRemoveTheme } from '../../hooks/useRemoveTheme';
 interface IProps {

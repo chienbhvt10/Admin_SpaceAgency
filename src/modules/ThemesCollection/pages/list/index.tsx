@@ -39,6 +39,7 @@ const ThemeCollectionPage = () => {
   const handleAdd = () => {
     navigate(CommonPath.THEME_COLLECTION_NEW);
   };
+
   const onChange = (paginationTable: TablePaginationConfig, _: any, sorter: SorterResult<any>) => {
     const order = OrderOfSorter(sorter.order);
     const limit = pagination?.limit || TypePagination.DEFAULT_LIMIT;
@@ -55,6 +56,7 @@ const ThemeCollectionPage = () => {
       },
     );
   };
+
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
@@ -65,6 +67,7 @@ const ThemeCollectionPage = () => {
       breadcrumbName: 'Themes Collection',
     },
   ];
+
   const handleSearch = () => {
     const newFilter = arrFilter.map((i) => ({
       ...i,

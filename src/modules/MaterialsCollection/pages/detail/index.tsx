@@ -49,9 +49,6 @@ const MaterialUpdate = () => {
             value: values?.pricePremium || 0,
           },
           title: values.namePremium || '',
-          material: {
-            id: values.themeId,
-          },
         },
       ],
       style: {

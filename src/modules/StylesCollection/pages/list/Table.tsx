@@ -3,7 +3,6 @@ import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { IStyle } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
 import TableRowAction from 'modules/StylesCollection/components/Table-action';
-import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import React from 'react';
 interface IProps {
   items: IStyle[];
@@ -15,8 +14,7 @@ interface IProps {
 }
 const StyleCollectionTable = (props: IProps) => {
   const { items, loading, onChange, pagination, onDelete, onEdit } = props;
-  const { paginationTable } = useListStyles();
-  const { current, pageSize } = paginationTable;
+  const { current, pageSize } = pagination;
   const rowKey = (item: IStyle) => `${item.id}`;
 
   const columns: ColumnsType<IStyle> = [

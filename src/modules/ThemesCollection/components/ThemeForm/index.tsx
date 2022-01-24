@@ -66,7 +66,7 @@ const ThemesForm = (props: Props) => {
                   label="Name"
                   name="name"
                 >
-                  <Input />
+                  <Input placeholder="Name" />
                 </Form.Item>
               </Col>
               <Col span={22}>
@@ -77,7 +77,7 @@ const ThemesForm = (props: Props) => {
                   rules={[requireRule]}
                   name="nameEnglish"
                 >
-                  <Input />
+                  <Input placeholder="Name English" />
                 </Form.Item>
               </Col>
               <Col span={22}>
@@ -87,24 +87,24 @@ const ThemesForm = (props: Props) => {
                   label="Description"
                   name="description"
                 >
-                  <TextArea rows={5} showCount maxLength={1000} />
+                  <TextArea placeholder="Description" rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
-              <Col span={22}>
+              {/* <Col span={22}>
                 <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} className="code" label="Code" name="code">
                   <Input style={{ width: 'calc(100% - 83px)' }} />
                 </Form.Item>
-              </Col>
+              </Col> */}
               <Col span={22} className="price-order-box">
                 <Row>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Price" name="price">
-                      <InputNumber style={{ width: '100%', marginLeft: '10PX' }} />
+                      <InputNumber placeholder="Price" style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Order" name="order">
-                      <InputNumber style={{ width: '100%' }} />
+                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Code" name="code">
+                      <Input placeholder="Code" style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
                 </Row>

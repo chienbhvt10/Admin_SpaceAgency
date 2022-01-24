@@ -4,7 +4,7 @@ import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger'
 import FormDropdown from 'commons/components/layouts/FormDropdown';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import { CreateMaterialsTypeInput, TypeForm } from 'commons/type';
-import { IMaterial } from 'graphql/generated/graphql';
+import { IMaterial, IStyle, ITheme } from 'graphql/generated/graphql';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
 import { useNavigate } from 'react-router';
@@ -23,8 +23,12 @@ interface Props {
 }
 const MaterialForm = (props: Props) => {
   const { loading, item, title, onFinish, type } = props;
+  const [themeId, setThemeId] = React.useState<string>();
+  const [styleId, setStyleId] = React.useState<string>();
   const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
   const { dataAllStyles, getAllStyles, loading: loadingSelectStyle } = useGetAllStyles();
+  const [dataFilterThemes, setDataFilterThemes] = React.useState<ITheme[]>([]);
+  const [dataFilterStyles, setDataFilterStyles] = React.useState<IStyle[]>([]);
   const [form] = Form.useForm<CreateMaterialsTypeInput>();
   const [updateMaterialInput, setUpdateMaterialInput] = React.useState<CreateMaterialsTypeInput>({
     codePremium: '',
@@ -40,12 +44,40 @@ const MaterialForm = (props: Props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (type === TypeForm.UPDATE) {
-      getAllThemes();
-      getAllStyles();
+    getAllThemes();
+    getAllStyles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  React.useEffect(() => {
+    if (dataAllStyles) {
+      if (themeId) {
+        const arrStyles = dataAllStyles?.filter((i) => i.theme?.id === themeId);
+        if (arrStyles) {
+          setDataFilterStyles(arrStyles);
+        }
+      } else {
+        setDataFilterStyles(dataAllStyles || []);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type]);
+  }, [themeId, dataAllStyles]);
+
+  React.useEffect(() => {
+    if (dataAllThemes) {
+      if (styleId) {
+        const findTheme = dataFilterStyles.find((f) => f.id === styleId);
+        const arrThemes = dataAllThemes.filter((i) => i.id === findTheme?.theme?.id);
+        if (arrThemes) {
+          setDataFilterThemes(arrThemes);
+        }
+      } else {
+        setDataFilterThemes(dataAllThemes);
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [styleId, dataAllThemes]);
 
   React.useEffect(() => {
     if (item) {
@@ -61,6 +93,7 @@ const MaterialForm = (props: Props) => {
         nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
         namePremium: (item && item.materialTypes && item?.materialTypes[1]?.title) || '',
       });
+      setThemeId(item.style?.theme?.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
@@ -75,14 +108,20 @@ const MaterialForm = (props: Props) => {
   const onCancel = () => {
     navigate(CommonPath.MATERIAL_COLLECTION);
   };
-  const onDropdownVisibleChangeTheme = (open: boolean) => {
-    if (open && type === TypeForm.CREATE) {
-      getAllThemes();
+
+  const onSelectTheme = (value: string) => {
+    if (value) {
+      setThemeId(value);
+    } else {
+      setThemeId(undefined);
     }
   };
-  const onDropdownVisibleChangeStyles = (open: boolean) => {
-    if (open && type === TypeForm.CREATE) {
-      getAllStyles();
+
+  const onSelectStyle = (value: string) => {
+    if (value) {
+      setStyleId(value);
+    } else {
+      setStyleId(undefined);
     }
   };
   return (
@@ -108,9 +147,9 @@ const MaterialForm = (props: Props) => {
                       name: 'themeId',
                       labelCol: { span: 4 },
                     }}
+                    onSelect={onSelectTheme}
                     loading={loadingSelectTheme}
-                    onDropdownVisibleChange={onDropdownVisibleChangeTheme}
-                    items={dataAllThemes}
+                    items={dataFilterThemes}
                     options={[]}
                   />
                   <FormDropdown
@@ -119,9 +158,9 @@ const MaterialForm = (props: Props) => {
                       name: 'styleId',
                       labelCol: { span: 4 },
                     }}
+                    onSelect={onSelectStyle}
                     loading={loadingSelectStyle}
-                    onDropdownVisibleChange={onDropdownVisibleChangeStyles}
-                    items={dataAllStyles}
+                    items={dataFilterStyles}
                     options={[]}
                   />
                 </div>
@@ -141,15 +180,15 @@ const MaterialForm = (props: Props) => {
                   <TextArea rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
-              <Col span={22} className="price-order-box">
+              {/* <Col span={22} className="price-order-box">
                 <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="Order" name="order">
                   <InputNumber style={{ width: '100%', marginLeft: '6px' }} />
                 </Form.Item>
-              </Col>
+              </Col> */}
 
-              <Col className="image-upload-title" span={24} style={{ marginBottom: '50px' }}>
+              {/* <Col className="image-upload-title" span={24} style={{ marginBottom: '50px' }}>
                 <Title level={3}>Type Collection</Title>
-              </Col>
+              </Col> */}
               <Col span={22} style={{ marginBottom: '50px' }}>
                 <Row>
                   <Col span={12}>
@@ -202,7 +241,7 @@ const MaterialForm = (props: Props) => {
                       <Input style={{ width: 'calc(100% - 93px)' }} />
                     </Form.Item>
                   </Col>
-                  <Col span={12}>
+                  {/* <Col span={12}>
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       label="Image Preview"
@@ -217,19 +256,10 @@ const MaterialForm = (props: Props) => {
                             <UploadDragger />
                           </Col>
                         </Row>
-                        {/* <Upload
-                          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                          listType="picture"
-                          className="upload-list-inline"
-                          name="image"
-                        >
-                        style={{ width: 'calc(100% - 111px)', marginLeft: '10px' }}
-                          <Button icon={<UploadOutlined />}>Upload</Button>
-                        </Upload> */}
                       </Col>
                     </Form.Item>
-                  </Col>
-                  <Col span={12}>
+                  </Col> */}
+                  {/* <Col span={12}>
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       label="Image Preview"
@@ -244,19 +274,10 @@ const MaterialForm = (props: Props) => {
                             <UploadDragger />
                           </Col>
                         </Row>
-                        {/* <Input style={{ width: 'calc(100% - 111px)' }} />
-                        <Upload
-                          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                          listType="picture"
-                          className="upload-list-inline"
-                          name="image"
-                        >
-                          <Button icon={<UploadOutlined />}>Upload</Button>
-                        </Upload> */}
                       </Col>
                     </Form.Item>
-                  </Col>
-                  <Col span={12}>
+                  </Col> */}
+                  {/* <Col span={12}>
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="name"
@@ -275,7 +296,7 @@ const MaterialForm = (props: Props) => {
                     >
                       <Input style={{ width: '97%' }} />
                     </Form.Item>
-                  </Col>
+                  </Col> */}
                 </Row>
               </Col>
             </Row>

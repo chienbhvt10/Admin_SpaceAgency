@@ -1,5 +1,5 @@
-import { Col, Form, Input, Row, Select } from 'antd';
-import BaseButton from 'commons/components/layouts/BaseButton';
+import { Col, Form, Row, Select } from 'antd';
+import { FormSearch } from 'commons/components/layouts/FormSearch';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
 const { Option } = Select;
@@ -8,11 +8,12 @@ interface Props {
   theme: string;
   onChangeTheme: (value: string) => void;
   onChangeValue: (e: any) => void;
-  handleSearch: (value: string, theme: string) => () => void;
+  handleSearch: () => void;
   onReset: () => void;
+  disabled?: boolean;
 }
 const FilterForm = (props: Props) => {
-  const { value, onChangeValue, handleSearch, onReset, onChangeTheme, theme } = props;
+  const { value, onChangeValue, handleSearch, onReset, onChangeTheme, disabled } = props;
   const { getAllThemes, dataAllThemes } = useGetAllThemes();
 
   const themeOptions = dataAllThemes.map((theme, index) => (
@@ -30,51 +31,20 @@ const FilterForm = (props: Props) => {
     <Form className="filter-form">
       <Row>
         <Col span={18}>
-          <Form.Item labelCol={{ span: 6 }} label="Theme" name="theme">
+          <Form.Item labelCol={{ span: 2 }} label="Theme" name="theme">
             <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---All---" onChange={onChangeTheme}>
               {themeOptions}
             </Select>
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Row>
-            <Col span={18}>
-              <Form.Item labelCol={{ span: 6 }} label="Keyword" name="keyword">
-                <Input placeholder="Type to search..." value={value} onChange={onChangeValue} />
-              </Form.Item>
-            </Col>
-            <Col span={5}>
-              <Row justify="space-between">
-                <Col span={12}>
-                  <Row justify="space-around">
-                    <BaseButton
-                      text="Reset"
-                      width={'90%'}
-                      height={''}
-                      marginRight=""
-                      marginLeft=""
-                      backgroundColor="#6C757D"
-                      onClick={onReset}
-                    />
-                  </Row>
-                </Col>
-                <Col span={12}>
-                  <Row justify="space-around">
-                    <BaseButton
-                      text="Search"
-                      width={'90%'}
-                      height={''}
-                      border="1px solid #007BFF"
-                      marginLeft={''}
-                      marginRight={''}
-                      backgroundColor="#007BFF"
-                      onClick={handleSearch(value, theme)}
-                    />
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+          <FormSearch
+            disabled={disabled}
+            onReset={onReset}
+            onChange={onChangeValue}
+            value={value}
+            handleSearch={handleSearch}
+          />
         </Col>
       </Row>
     </Form>

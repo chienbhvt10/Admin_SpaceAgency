@@ -8,13 +8,19 @@ interface IProps {
   items?: any[];
   loading?: boolean;
   onDropdownVisibleChange?: (open: boolean) => void;
+  onSelect?: (value: any) => void;
 }
 const { Option } = Select;
 const FormDropdown = (props: IProps) => {
-  const { options, formItem, colOffSet, items, onDropdownVisibleChange, loading } = props;
+  const { formItem, items, onDropdownVisibleChange, loading, onSelect } = props;
   return (
     <Form.Item {...formItem}>
-      <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---All---" loading={loading}>
+      <Select
+        onSelect={onSelect}
+        onDropdownVisibleChange={onDropdownVisibleChange}
+        placeholder="---All---"
+        loading={loading}
+      >
         <Option key="">---All---</Option>
         {items?.map((i) => {
           return <Option key={i?.id}>{i?.title}</Option>;

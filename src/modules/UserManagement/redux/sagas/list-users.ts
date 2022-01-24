@@ -8,7 +8,7 @@ export function* getListUsersAsync(action: UsersAction) {
   try {
     const data: GetListUsers = yield apis.getListUsers(action.payload);
     const totalStyles: GetTotalCount = yield apis.getTotalUsers({
-      type: SchemaType.Theme,
+      type: SchemaType.User,
       where: { ...action.payload.where },
     });
     yield put(
