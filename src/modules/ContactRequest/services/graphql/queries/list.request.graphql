@@ -1,0 +1,5 @@
+query getListRequest($pagination: PaginationInput, $where: WhereInput) {
+  requests(pagination: $pagination, where: $where) {
+    ...IRequest
+  }
+}

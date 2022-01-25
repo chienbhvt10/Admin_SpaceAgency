@@ -2,22 +2,24 @@ import { Col, Form, Input, Row } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import React from 'react';
 
-interface Props {}
+interface Props {
+  onReset: () => void;
+  handleSearch: () => void;
+  value: string;
+  disabled: boolean;
+  onChangeValue: (e: any) => void;
+}
 
 const FormSearch = (props: Props) => {
-  const onReset = () => {
-    console.log('ok');
-  };
-  const handleSearch = () => {
-    console.log('1');
-  };
+  const { onReset, handleSearch, value, disabled, onChangeValue } = props;
+
   return (
     <Col span={24}>
       <Row>
         <Col span={18}>
           <Form.Item labelCol={{ span: 5 }} label="Keyword" name="keyword">
             <Col offset={1}>
-              <Input placeholder="Type to search..." />
+              <Input onChange={onChangeValue} placeholder="Type to search..." value={value} />
             </Col>
           </Form.Item>
         </Col>
@@ -27,7 +29,8 @@ const FormSearch = (props: Props) => {
               <Row justify="space-around">
                 <BaseButton
                   text="Reset"
-                  width={'90%'}
+                  width={''}
+                  disabled={disabled}
                   height={''}
                   marginRight=""
                   marginLeft=""
@@ -40,7 +43,7 @@ const FormSearch = (props: Props) => {
               <Row justify="space-around">
                 <BaseButton
                   text="Search"
-                  width={'90%'}
+                  width={''}
                   height={''}
                   border="1px solid #007BFF"
                   marginLeft={''}

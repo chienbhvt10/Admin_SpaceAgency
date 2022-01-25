@@ -5,8 +5,8 @@ import React from 'react';
 const { Option } = Select;
 interface Props {
   value: string;
-  theme: string;
-  onChangeTheme: (value: string) => void;
+  themeId: string;
+  onChangeTheme: (value: any) => void;
   onChangeValue: (e: any) => void;
   handleSearch: () => void;
   onReset: () => void;
@@ -31,8 +31,8 @@ const FilterForm = (props: Props) => {
     <Form className="filter-form">
       <Row>
         <Col span={18}>
-          <Form.Item labelCol={{ span: 2 }} label="Theme" name="theme">
-            <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---All---" onChange={onChangeTheme}>
+          <Form.Item labelCol={{ span: 2 }} label="Theme" name="themeId">
+            <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---All---" onSelect={onChangeTheme}>
               {themeOptions}
             </Select>
           </Form.Item>

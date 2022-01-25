@@ -5,6 +5,7 @@ import themeSaga from 'modules/ThemesCollection/redux/sagas';
 import userSaga from 'modules/UserManagement/redux/sagas';
 import styleSaga from 'modules/StylesCollection/redux/sagas';
 import materialsSaga from 'modules/MaterialsCollection/redux/sagas';
+import requestsSaga from 'modules/ContactRequest/redux/sagas';
 import simulationsSaga from 'modules/CustomerSimulation/redux/sagas';
 
 export default function* rootSaga() {
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     styleSaga(),
     materialsSaga(),
     simulationsSaga(),
+    requestsSaga(),
     commonSaga.checkErrorAsync(),
   ]);
 }

@@ -3,6 +3,7 @@ import { GetListUsersVariables, IUsersFields, PaginationInput, WhereInput } from
 export const LIST_USERS = 'LIST_USERS';
 export const LIST_USERS_SUCCESS = 'LIST_USERS_SUCCESS';
 export const LIST_USERS_ERROR = 'LIST_USERS_ERROR';
+export const DEFAULT_USERS = 'DEFAULT_USERS';
 
 export interface UsersData {
   dataUsers: IUsersFields[];
@@ -28,8 +29,12 @@ export interface UsersActionSuccess {
   payload: UsersData;
 }
 
+export interface DefaultUsersAction {
+  type: typeof DEFAULT_USERS;
+}
+
 export interface UsersActionError {
   type: typeof LIST_USERS_ERROR;
   payload: AppError;
 }
-export type UsersActionTypes = UsersAction | UsersActionSuccess | UsersActionError;
+export type UsersActionTypes = UsersAction | UsersActionSuccess | UsersActionError | DefaultUsersAction;

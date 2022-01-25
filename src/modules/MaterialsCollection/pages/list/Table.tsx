@@ -2,9 +2,8 @@ import { Table, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { IMaterial, MaterialType } from 'graphql/generated/graphql';
-import { NumberOfRow } from 'helpers/string';
+import { formatToDate, NumberOfRow } from 'helpers/string';
 import React from 'react';
-import { useNavigate } from 'react-router';
 interface IProps {
   items: IMaterial[];
   loading: boolean;
@@ -14,7 +13,6 @@ interface IProps {
   onDelete: (record: IMaterial) => () => void;
 }
 function TableMaterial(props: IProps) {
-  const navigate = useNavigate();
   const { items, loading, onChange, pagination } = props;
   const rowKey = (item: IMaterial) => `${item.id}`;
   const { current, pageSize } = pagination;
@@ -33,7 +31,7 @@ function TableMaterial(props: IProps) {
         dataIndex: 'price',
         render: (_: any, record) => <>{record.price?.value}</>,
       },
-      { title: 'Code', dataIndex: 'code3d', key: '#' },
+      // { title: 'Code', dataIndex: 'code3d', key: '#' },
     ];
     return <Table columns={columnsType} dataSource={data.materialTypes || []} pagination={false} />;
   };
@@ -60,10 +58,11 @@ function TableMaterial(props: IProps) {
       render: (_: any, record) => <>{record.title}</>,
     },
     {
-      title: 'Order',
-      dataIndex: 'order',
-      key: 'order',
+      title: 'Create At',
+      dataIndex: 'status',
+      key: 'createdAt',
       sorter: false,
+      render: (t: string) => <>{formatToDate(t)}</>,
     },
     {
       title: 'Design',
@@ -71,12 +70,6 @@ function TableMaterial(props: IProps) {
       key: 'design',
       sorter: false,
       render: (_: any, record) => <>{record.style?.title}</>,
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      sorter: false,
     },
     {
       title: 'Tools',

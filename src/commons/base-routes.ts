@@ -13,11 +13,11 @@ const STYLES_COLLECTION_DETAIL = '/styles-collection/detail/';
 const MATERIAL_COLLECTION = '/material-collection/';
 const MATERIAL_COLLECTION_NEW = '/material-collection/new/';
 const MATERIAL_COLLECTION_DETAIL = '/material-collection/detail/:id';
-const USER_SIMULATE_COLLECTION = '/user-simulate-collection';
+const USER_SIMULATE_COLLECTION = '/user-simulate-collection/';
 const USER_SIMULATE_COLLECTION_NEW = '/user-simulate-collection/new/';
 const USER_SIMULATE_COLLECTION_DETAIL = '/user-simulate-collection/detail/';
 
-const CONTACT_REQUEST = '/contact-request';
+const CONTACT_REQUEST = '/contact-request/';
 const ROLES_LIST = '/roles-list/';
 
 export const CommonPath = {

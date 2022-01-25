@@ -1,11 +1,12 @@
 import React from 'react';
 import EmptyLayout from '../Empty';
 
-interface IProps {
+interface Props {
   children: React.ReactNode;
 }
-const UserLayout = (props: IProps) => {
+
+const ContactRequestLayout = (props: Props) => {
   return <EmptyLayout>{props.children}</EmptyLayout>;
 };
 
-export default UserLayout;
+export default ContactRequestLayout;

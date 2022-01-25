@@ -1,0 +1,5 @@
+query getListSimulationComponents($where: WhereInput, $pagination: PaginationInput) {
+  simulationComponents(where: $where, pagination: $pagination) {
+    ...ISimulationComponent
+  }
+}

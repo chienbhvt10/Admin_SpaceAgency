@@ -58,6 +58,11 @@ export interface CreateStyleTypeInput {
   title: string;
 }
 
+export interface TypeSelect {
+  id: string;
+  title: string;
+}
+
 export const dataNav: DataNav[] = [
   {
     id: 0,
@@ -163,8 +168,19 @@ export enum TypeKeyFilterMaterials {
   THEME = 'theme',
   STYLE = 'style',
 }
+export enum TypeKeyFilterUserSimulation {
+  NAME = 'firstName',
+  THEME = 'theme',
+  STYLE = 'style',
+  START_DATE = '',
+  END_DATE = '',
+}
 export enum TypeKeyFilterTheme {
   NAME = 'title',
+  THEME = 'id',
+}
+export enum TypeKeyFilterRequest {
+  EMAIL = 'email',
 }
 export enum TypeKeyFilterStyle {
   NAME = 'title',
