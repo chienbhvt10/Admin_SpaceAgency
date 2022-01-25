@@ -23,38 +23,29 @@ const FormSearch = (props: Props) => {
             </Col>
           </Form.Item>
         </Col>
-        <Col span={5}>
-          <Row justify="space-between">
-            <Col span={12}>
-              <Row justify="space-around">
-                <BaseButton
-                  text="Reset"
-                  width={''}
-                  disabled={disabled}
-                  height={''}
-                  marginRight=""
-                  marginLeft=""
-                  backgroundColor="#6C757D"
-                  onClick={onReset}
-                />
-              </Row>
-            </Col>
-            <Col span={12}>
-              <Row justify="space-around">
-                <BaseButton
-                  text="Search"
-                  width={''}
-                  height={''}
-                  border="1px solid #007BFF"
-                  marginLeft={''}
-                  marginRight={''}
-                  backgroundColor="#007BFF"
-                  onClick={handleSearch}
-                />
-              </Row>
-            </Col>
-          </Row>
-        </Col>
+        <div className="wrapper-search">
+          <BaseButton
+            text="Reset"
+            width={''}
+            height={''}
+            marginRight="5px"
+            marginLeft="50px"
+            disabled={props.disabled}
+            backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
+            onClick={onReset}
+          />
+          <BaseButton
+            text="Search"
+            width={''}
+            height={''}
+            disabled={props.disabled}
+            border="1px solid #007BFF"
+            marginRight={''}
+            backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}
+            onClick={handleSearch}
+            marginLeft={''}
+          />
+        </div>
       </Row>
     </Col>
   );
