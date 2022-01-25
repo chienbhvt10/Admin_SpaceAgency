@@ -12,6 +12,7 @@ import { useListSimulations } from 'modules/CustomerSimulation/hooks/useListCust
 import React from 'react';
 import { useNavigate } from 'react-router';
 import CustomerSimulationTable from './Table';
+import { useRemoveSimulation } from '../../hooks/useRemoveSimulation';
 
 const CustomerSimulationPage = () => {
   const {
@@ -26,18 +27,26 @@ const CustomerSimulationPage = () => {
   const [themeId, setThemeId] = React.useState<string>('');
   const [styleId, setStyleId] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(false);
-  // const { removeSimulation } = useRemoveSimulation();
   const navigate = useNavigate();
+  const { removeSimulation } = useRemoveSimulation();
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterUserSimulation.NAME, value: '' }];
+
   React.useEffect(() => {
     setTitle('Customer Simulation Collections');
   });
 
+  React.useEffect(() => {
+    if (value || themeId || styleId) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [themeId, styleId, value]);
+
   const onDelete = (record: ISimulation) => () => {
-    console.log(parseInt(record.id));
-    // removeSimulation({
-    //   id: parseFloat(record.id),
-    // });
+    removeSimulation({
+      id: parseFloat(record.id),
+    });
   };
   const onEdit = (record: ISimulation) => () => {
     navigate('/user-simulate-collection/detail/' + record.id);

@@ -1,11 +1,10 @@
 import { Col, DatePicker, Form, Row } from 'antd';
 import SelectFormItem from 'modules/CustomerSimulation/components/select-form-item';
-import React from 'react';
-import FormSearch from './FormSearch';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
-import { useGetAllStyles } from '../../../StylesCollection/hooks/useGetAllStyles';
 import { useGetAllUser } from 'modules/UserManagement/hooks/useGetAllUser';
-import { TypeSelect } from 'commons/type';
+import React from 'react';
+import { useGetAllStyles } from '../../../StylesCollection/hooks/useGetAllStyles';
+import FormSearch from './FormSearch';
 interface Props {
   options?: any;
   onChangeTheme?: (value: string) => void;
