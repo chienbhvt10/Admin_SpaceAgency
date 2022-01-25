@@ -19,7 +19,7 @@ const ButtonGroup = ({ onCancel, loading, type }: IProps) => {
       </Button>
       {isUpdate ? (
         <>
-          <Button style={{ backgroundColor: '#a83242' }} size="large" htmlType="submit" loading={loading}>
+          <Button style={{ backgroundColor: '#a83242' }} htmlType="submit" size="large" loading={loading}>
             Reject
           </Button>
           <Button type="primary" size="large" htmlType="submit" loading={loading}>

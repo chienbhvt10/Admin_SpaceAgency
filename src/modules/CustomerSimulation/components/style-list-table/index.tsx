@@ -1,20 +1,15 @@
 import { Col, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
+import { Quotation } from 'graphql/generated/graphql';
 import React from 'react';
 
 interface Props {
   colOffSet: string | number;
+  dataSource?: Quotation[];
 }
 
-const dataSource = [
-  { name: 'name', type: 'type', price: 12 },
-  { name: 'name', type: 'type', price: 12 },
-  { name: 'name', type: 'type', price: 12 },
-  { name: 'name', type: 'type', price: 12 },
-  { name: 'name', type: 'type', price: 12 },
-];
 const StyleListTable = (props: Props) => {
-  const { colOffSet } = props;
+  const { colOffSet, dataSource } = props;
   const columns: ColumnsType<any> = [
     {
       title: 'Name',

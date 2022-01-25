@@ -1,7 +1,7 @@
 // export const formatString = (str: string) => {
 import { SortOrder } from 'antd/lib/table/interface';
 import { dataNav } from 'commons/type';
-import { MaterialType, SortValue } from 'graphql/generated/graphql';
+import { MaterialType, RequestType, SortValue } from 'graphql/generated/graphql';
 import moment from 'moment';
 //   if (str) return str.replace(/[&\/\\#,+()$~%.'":*?<>{}\[\]^|]/g, '');
 //   return str;
@@ -53,4 +53,32 @@ export function totalPrice(arr: MaterialType[]) {
 }
 export function formatToDate(t: string) {
   return moment(t).format('L');
+}
+export function formatRequestType(type: RequestType) {
+  if (type === RequestType.Meeting) {
+    return '2';
+  }
+  if (type === RequestType.Other) {
+    return '3';
+  }
+  if (type === RequestType.SendDocument) {
+    return '1';
+  }
+  return undefined;
+}
+export function formatPriceJapan(price: number) {
+  if (price === 0) {
+    return 0;
+  }
+  return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(price);
+}
+export function formatPricePercent(percent: number) {
+  if (percent === 0) {
+    return 0;
+  }
+  return new Intl.NumberFormat('de-DE', {
+    style: 'percent',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(percent);
 }

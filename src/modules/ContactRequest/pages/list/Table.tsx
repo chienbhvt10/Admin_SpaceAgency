@@ -30,12 +30,14 @@ function ContactRequestTable(props: IProps) {
       dataIndex: 'email',
       key: 'email',
       sorter: true,
+      sortDirections: ['descend', 'ascend'],
     },
     {
       title: 'FullName',
       dataIndex: 'requesterFullName',
       key: 'requesterFullName',
       sorter: true,
+      sortDirections: ['descend', 'ascend'],
     },
     {
       title: 'Phone',

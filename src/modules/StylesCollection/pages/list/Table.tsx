@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { IStyle } from 'graphql/generated/graphql';
-import { NumberOfRow } from 'helpers/string';
+import { formatPriceJapan, NumberOfRow } from 'helpers/string';
 import TableRowAction from 'modules/StylesCollection/components/Table-action';
 import React from 'react';
 interface IProps {
@@ -40,13 +40,6 @@ const StyleCollectionTable = (props: IProps) => {
       sorter: false,
       render: (_, record) => <>{record.theme?.title}</>,
     },
-    // {
-    //   title: 'Order',
-    //   dataIndex: 'order',
-    //   key: 'order',
-    //   sortDirections: ['descend', 'ascend'],
-    //   sorter: true,
-    // },
     {
       title: '3D Code',
       dataIndex: 'code3d',
@@ -60,7 +53,7 @@ const StyleCollectionTable = (props: IProps) => {
       sortDirections: ['descend', 'ascend'],
       key: 'price',
       sorter: false,
-      render: (_, record) => <>{record.price?.value}</>,
+      render: (_, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
       title: 'Tool',
