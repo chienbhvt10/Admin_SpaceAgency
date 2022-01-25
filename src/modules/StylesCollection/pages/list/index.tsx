@@ -22,7 +22,7 @@ const StyleCollectionPage = () => {
   const navigate = useNavigate();
   const { removeStyle } = useRemoveStyle();
   const [searchValue, setSearchValue] = React.useState<string>('');
-  const [theme, setTheme] = React.useState<string>('');
+  const [themeId, setThemeId] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>();
 
   React.useEffect(() => {
@@ -30,22 +30,25 @@ const StyleCollectionPage = () => {
   }, []);
 
   React.useEffect(() => {
-    if (searchValue) {
+    if (searchValue || themeId) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [searchValue]);
+  }, [searchValue, themeId]);
 
   const onChangeValue = (e: any) => {
     setSearchValue(e.target.value);
   };
 
   const onChangeTheme = (value: string) => {
-    setTheme(value);
+    setThemeId(value);
   };
 
-  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterStyle.NAME, value: '' }];
+  const arrFilter: FilterInput[] = [
+    { key: TypeKeyFilterStyle.NAME, value: '', isRef: false },
+    { key: TypeKeyFilterStyle.THEME, value: '', isRef: false },
+  ];
 
   const routes = [
     {
@@ -92,7 +95,7 @@ const StyleCollectionPage = () => {
   const handleSearch = () => {
     const newFilter = arrFilter.map((i) => ({
       ...i,
-      value: i.key === TypeKeyFilterStyle.NAME ? searchValue : '',
+      value: i.key === TypeKeyFilterStyle.NAME ? searchValue : i.key === TypeKeyFilterStyle.THEME ? themeId : '',
     }));
     filterStyles(newFilter);
   };
@@ -115,7 +118,7 @@ const StyleCollectionPage = () => {
         <Row justify="center">
           <Col span={24}>
             <FilterForm
-              theme={theme}
+              themeId={themeId}
               disabled={disabled}
               onChangeTheme={onChangeTheme}
               value={searchValue}

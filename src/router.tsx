@@ -1,4 +1,4 @@
-import { contentRouter } from 'modules/Contents/router';
+import { contactRequestRouter } from 'modules/ContactRequest/router';
 import {
   customerSimulationDetailRouter,
   customerSimulationRouter,
@@ -26,7 +26,6 @@ import { homeRouter } from './modules/Home/router';
 const routes: RouteObject[] = [
   { ...authRouter },
   { ...homeRouter },
-  { ...contentRouter },
   { ...themeCollectionRouter },
   { ...createThemeCreateRouter },
   { ...updateThemeRouter },
@@ -42,6 +41,7 @@ const routes: RouteObject[] = [
   { ...userManagementRouter },
   { ...detailUserManagementRouter },
   { ...createUserManagementRouter },
+  { ...contactRequestRouter },
 ];
 
 export default routes;

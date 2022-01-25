@@ -24,7 +24,7 @@ const TableRowAction = (props: IProps) => {
       >
         <Button type="ghost" shape="circle" style={{ color: 'red' }} icon={<DeleteOutlined />} size="middle" />
       </Popconfirm>
-      <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" />
+      {/* <Button type="ghost" shape="circle" icon={<EllipsisOutlined />} size="middle" /> */}
     </Space>
   );
 };

@@ -1,0 +1,5 @@
+mutation removeSimulation($id: Int!) {
+  removeSimulation(id: $id) {
+    ...ISimulation
+  }
+}

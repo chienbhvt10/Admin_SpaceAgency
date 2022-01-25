@@ -1,5 +1,6 @@
 import { TypePagination } from 'commons/type';
 import {
+  DEFAULT_USERS,
   LIST_USERS,
   LIST_USERS_ERROR,
   LIST_USERS_SUCCESS,
@@ -50,6 +51,15 @@ export default (state = initialState, action: UsersActionTypes | UpdateUserActio
       return {
         ...state,
         loading: false,
+      };
+    case DEFAULT_USERS:
+      return {
+        ...state,
+        loading: false,
+        pagination: {
+          skip: TypePagination.DEFAULT_SKIP,
+          limit: TypePagination.DEFAULT_LIMIT,
+        },
       };
     case UPDATE_USERS:
       return {

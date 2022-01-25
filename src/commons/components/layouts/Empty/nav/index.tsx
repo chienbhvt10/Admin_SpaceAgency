@@ -12,6 +12,7 @@ import { PieChartOutlined } from '@ant-design/icons';
 import './nav.scss';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
+import { useGetAllUser } from 'modules/UserManagement/hooks/useGetAllUser';
 const { Sider } = Layout;
 interface IProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ function NavBar(props: IProps) {
   const [openKeys, setOpenKeys] = React.useState<string[]>(['menu_1', 'menu_2', 'menu_3']);
   const { defaultThemes } = useGetAllThemes();
   const { defaultStyles } = useGetAllStyles();
+  const { defaultUser } = useGetAllUser();
 
   const { pathname } = useLocation();
 
@@ -61,6 +63,7 @@ function NavBar(props: IProps) {
   const onClickSubMenu = () => {
     defaultThemes();
     defaultStyles();
+    defaultUser();
   };
   return (
     <Layout className="layout-nav">

@@ -1,13 +1,13 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Row, Select, Table } from 'antd';
+import { Button, Col, Row, Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
+import { CommonPath } from 'commons/base-routes';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { ISimulation, MaterialType } from 'graphql/generated/graphql';
 import { NumberOfRow, totalPrice } from 'helpers/string';
-import { nestedSimulationTableColumns } from 'helpers/table-columns';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
-const { Option } = Select;
+import { useNavigate } from 'react-router';
 
 interface Props {
   items: ISimulation[];
@@ -29,14 +29,14 @@ const CustomerSimulationTable = (props: Props) => {
         title: 'Material',
         dataIndex: 'material',
         key: 'material',
-        sorter: true,
+        sorter: false,
         render: (_: any, record) => <>{record.material?.title}</>,
       },
       {
         title: 'Price',
         dataIndex: 'price',
         key: 'price',
-        sorter: true,
+        sorter: false,
         render: (_any, record) => <>{record.price?.value}</>,
       },
     ];
@@ -46,11 +46,9 @@ const CustomerSimulationTable = (props: Props) => {
         dataSource={record.simulationComponent?.materialTypes || []}
         columns={columns}
         pagination={false}
-      ></Table>
+      />
     );
   };
-
-  const onNew = () => {};
 
   const tableColumns: ColumnsType<ISimulation> = [
     {
@@ -63,7 +61,7 @@ const CustomerSimulationTable = (props: Props) => {
     {
       title: 'Customer Name',
       dataIndex: 'customerName',
-      key: '#',
+      key: 'customerName',
       width: 40,
       sorter: true,
       render: (_: any, record) => (
@@ -76,7 +74,7 @@ const CustomerSimulationTable = (props: Props) => {
     {
       title: 'Type',
       dataIndex: 'type',
-      key: '#',
+      key: 'type',
       width: 40,
       sorter: false,
       render: (_: any, record) => <>{record.request?.type}</>,
@@ -84,7 +82,7 @@ const CustomerSimulationTable = (props: Props) => {
     {
       title: 'Design',
       dataIndex: 'design',
-      key: '#',
+      key: 'design',
       width: 40,
       sorter: false,
       render: (_: any, record) => <>{record.simulationComponent?.style?.title}</>,
@@ -92,7 +90,7 @@ const CustomerSimulationTable = (props: Props) => {
     {
       title: 'Total Price',
       dataIndex: 'totalPrice',
-      key: '#',
+      key: 'totalPrice',
       width: 40,
       sorter: true,
       render: (_: any, record) => <>{totalPrice(record.simulationComponent?.materialTypes || [])}</>,
@@ -100,58 +98,43 @@ const CustomerSimulationTable = (props: Props) => {
     {
       title: 'Status',
       dataIndex: 'status',
-      key: '#',
+      key: 'status',
       width: 40,
       sorter: true,
     },
     {
       title: 'Tool',
       dataIndex: '',
-      key: '#',
+      key: 'tool',
       width: 40,
-      sorter: true,
+      sorter: false,
       render: (_, record) => (
         <TableRowAction
           onDelete={onDelete}
           onEdit={onEdit}
           record={record}
           title="Are you sure to delete this Simulation?"
-          key={rowKey.toString()}
         />
       ),
     },
   ];
 
   return (
-    <TableHeader
-      title="Customer Simulation Collections"
-      extra={
-        <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
-          Simulation
-        </Button>
-      }
-    >
-      <Row justify="center">
-        <Col span={24}>{/* <FilterForm options={themeOptions} /> */}</Col>
-        <Col span={24}>
-          <Table
-            expandable={{
-              expandedRowRender,
-              expandRowByClick: false,
-            }}
-            pagination={{
-              ...pagination,
-            }}
-            columns={tableColumns}
-            dataSource={items}
-            loading={loading}
-            rowKey={rowKey.toString()}
-            onChange={onChange}
-            bordered
-          />
-        </Col>
-      </Row>
-    </TableHeader>
+    <Table
+      expandable={{
+        expandedRowRender,
+        expandRowByClick: false,
+      }}
+      pagination={{
+        ...pagination,
+      }}
+      columns={tableColumns}
+      dataSource={items}
+      loading={loading}
+      rowKey={rowKey}
+      onChange={onChange}
+      bordered
+    />
   );
 };
 

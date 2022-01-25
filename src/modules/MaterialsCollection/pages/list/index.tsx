@@ -34,8 +34,8 @@ const MaterialCollectionPage = () => {
   });
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterMaterials.NAME, value: '' },
-    // { key: TypeKeyFilterMaterials.STYLE, value: '' },
-    // { key: TypeKeyFilterMaterials.THEME, value: '' },
+    { key: TypeKeyFilterMaterials.STYLE, value: '', isRef: false },
+    { key: TypeKeyFilterMaterials.THEME, value: '', isRef: false },
   ];
 
   React.useEffect(() => {
@@ -43,12 +43,12 @@ const MaterialCollectionPage = () => {
   }, []);
 
   React.useEffect(() => {
-    if (value) {
+    if (value || selectId.themeId || selectId.styleId) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [value]);
+  }, [value, selectId]);
 
   const handleAdd = () => {
     navigate(CommonPath.MATERIAL_COLLECTION_NEW);

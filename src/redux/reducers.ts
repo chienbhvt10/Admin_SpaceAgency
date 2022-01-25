@@ -5,7 +5,7 @@ import users, { UsersModuleState } from 'modules/UserManagement/redux/reducers';
 import styles, { StylesModuleState } from 'modules/StylesCollection/redux/reducers';
 import materials, { MaterialsModuleState } from 'modules/MaterialsCollection/redux/reducers';
 import simulations, { SimulationsModuleState } from 'modules/CustomerSimulation/redux/reducers';
-
+import requests, { RequestsModuleState } from 'modules/ContactRequest/redux/reducers';
 import loadingReducer from '../utils/loading/redux/loadingReducer';
 import { LoadingState } from './action-types';
 
@@ -17,6 +17,7 @@ export interface RootState {
   styles: StylesModuleState;
   materials: MaterialsModuleState;
   simulations: SimulationsModuleState;
+  requests: RequestsModuleState;
 }
 
 export default combineReducers<RootState>({
@@ -27,4 +28,5 @@ export default combineReducers<RootState>({
   styles,
   materials,
   simulations,
+  requests,
 });

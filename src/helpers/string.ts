@@ -2,6 +2,7 @@
 import { SortOrder } from 'antd/lib/table/interface';
 import { dataNav } from 'commons/type';
 import { MaterialType, SortValue } from 'graphql/generated/graphql';
+import moment from 'moment';
 //   if (str) return str.replace(/[&\/\\#,+()$~%.'":*?<>{}\[\]^|]/g, '');
 //   return str;
 // };
@@ -49,4 +50,7 @@ export function totalPrice(arr: MaterialType[]) {
     totalPrice += i.price?.value || 0;
   });
   return totalPrice;
+}
+export function formatToDate(t: string) {
+  return moment(t).format('L');
 }

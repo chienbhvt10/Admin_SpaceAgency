@@ -1,3 +1,5 @@
+import { TypeSelect } from 'commons/type';
+import React from 'react';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
@@ -5,7 +7,23 @@ import { actionDefaultStyles, actionStyles } from '../redux/actions';
 
 export function useGetAllStyles() {
   const dispatch = useDispatch();
+  const [arrStyles, setArrStyles] = React.useState<TypeSelect[]>();
+
   const { dataStyles: dataAllStyles, loading } = useSelector((state: RootState) => state.styles.stylesState);
+
+  React.useEffect(() => {
+    let arr: TypeSelect[] = [];
+    if (dataAllStyles) {
+      for (let i = 0; i < dataAllStyles.length; i++) {
+        arr.push({
+          id: dataAllStyles[i].id,
+          title: dataAllStyles[i].title || '',
+        });
+      }
+      setArrStyles(arr);
+    }
+  }, [dataAllStyles]);
+
   const getAllStyles = useCallback(() => {
     dispatch(
       actionStyles({
@@ -24,6 +42,7 @@ export function useGetAllStyles() {
   return {
     getAllStyles,
     dataAllStyles,
+    arrStyles,
     loading,
     defaultStyles,
   };

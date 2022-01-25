@@ -1,11 +1,10 @@
 import { TypePagination } from 'commons/type';
-import { SortValue } from 'graphql/generated/graphql';
 import {
+  LIST_SIMULATION,
+  LIST_SIMULATION_ERROR,
+  LIST_SIMULATION_SUCCESS,
   SimulationsActionTypes,
   SimulationsState,
-  LIST_SIMULATION,
-  LIST_SIMULATION_SUCCESS,
-  LIST_SIMULATION_ERROR,
 } from '../action-types';
 
 const initialState: SimulationsState = {
