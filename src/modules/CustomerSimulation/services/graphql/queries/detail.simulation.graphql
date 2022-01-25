@@ -1,0 +1,5 @@
+query detailSimulation($id: String!) {
+  simulation(id: $id) {
+    ...ISimulation
+  }
+}

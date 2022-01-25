@@ -2,7 +2,7 @@ import { Table, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { IMaterial, MaterialType } from 'graphql/generated/graphql';
-import { formatToDate, NumberOfRow } from 'helpers/string';
+import { formatPriceJapan, formatToDate, NumberOfRow } from 'helpers/string';
 import React from 'react';
 interface IProps {
   items: IMaterial[];
@@ -29,9 +29,8 @@ function TableMaterial(props: IProps) {
         title: 'Price',
         key: '#',
         dataIndex: 'price',
-        render: (_: any, record) => <>{record.price?.value}</>,
+        render: (_: any, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
       },
-      // { title: 'Code', dataIndex: 'code3d', key: '#' },
     ];
     return <Table columns={columnsType} dataSource={data.materialTypes || []} pagination={false} />;
   };

@@ -1,13 +1,9 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Row, Table } from 'antd';
+import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
-import { CommonPath } from 'commons/base-routes';
-import TableHeader from 'commons/components/layouts/TableHeader';
 import { ISimulation, MaterialType } from 'graphql/generated/graphql';
 import { NumberOfRow, totalPrice } from 'helpers/string';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
-import { useNavigate } from 'react-router';
 
 interface Props {
   items: ISimulation[];

@@ -1,4 +1,5 @@
 import {
+  DetailSimulationVariables,
   GetListSimulationComponentsVariables,
   GetListSimulationsVariables,
   GetTotalCountVariables,
@@ -17,6 +18,10 @@ export const getListSimulationsComponents = async (variables?: GetListSimulation
 export const removeSimulation = async (variables: RemoveSimulationVariables) => {
   const sdk = getSDK(true);
   return sdk.removeSimulation(variables);
+};
+export const detailSimulation = async (variables: DetailSimulationVariables) => {
+  const sdk = getSDK(true);
+  return sdk.detailSimulation(variables);
 };
 export const getTotalSimulations = async (variables: GetTotalCountVariables) => {
   const sdk = getSDK(true);

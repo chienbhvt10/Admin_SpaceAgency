@@ -3,7 +3,7 @@ import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { ITheme } from 'graphql/generated/graphql';
-import { NumberOfRow } from 'helpers/string';
+import { formatPriceJapan, NumberOfRow } from 'helpers/string';
 import { useNavigate } from 'react-router';
 import { useRemoveTheme } from '../../hooks/useRemoveTheme';
 interface IProps {
@@ -61,7 +61,7 @@ function TableThemes(props: IProps) {
       key: 'price',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      render: (_: any, record: ITheme) => <>{record.price?.value}</>,
+      render: (_: any, record: ITheme) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
       title: 'Tools',

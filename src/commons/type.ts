@@ -58,6 +58,19 @@ export interface CreateStyleTypeInput {
   title: string;
 }
 
+export interface SimulationTypeInput {
+  postCode: string;
+  content: string;
+  location: string;
+  email: string;
+  furigana: string;
+  name: string;
+  otherQuestion: string;
+  ownerConstruction: string;
+  quotationList: undefined;
+  tel: string;
+}
+
 export interface TypeSelect {
   id: string;
   title: string;

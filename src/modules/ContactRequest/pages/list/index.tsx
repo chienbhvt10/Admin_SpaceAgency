@@ -11,12 +11,14 @@ import { useListRequests } from 'modules/ContactRequest/hooks/useListRequest/use
 import { OrderOfSorter } from 'helpers/string';
 import { TypeKeyFilterRequest, TypePagination } from 'commons/type';
 import { FormSearch } from 'modules/ContactRequest/components/Filter-Form';
+import { useNavigate } from 'react-router';
 
 function ContactRequestPage() {
   const { dataRequests, loading, paginationTable, updatePaginationAndSorterRequests, pagination, filterRequests } =
     useListRequests();
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>('');
+  const navigate = useNavigate();
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterRequest.EMAIL, value: '' }];
 
   React.useEffect(() => {
@@ -26,7 +28,9 @@ function ContactRequestPage() {
       setDisabled(true);
     }
   }, [value]);
-  const onNew = () => {};
+  const onNew = () => {
+    navigate(CommonPath.CONTACT_REQUEST_NEW);
+  };
 
   const onDelete = (record: IRequest) => () => {};
 
@@ -66,14 +70,7 @@ function ContactRequestPage() {
   return (
     <ContactRequestLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <TableHeader
-        title="Contact Request Collections"
-        extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
-            Request
-          </Button>
-        }
-      >
+      <TableHeader title="Contact Request Collections">
         <FormSearch
           disabled={disabled}
           value={value}

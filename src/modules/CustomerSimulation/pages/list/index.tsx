@@ -1,19 +1,17 @@
-import { Button, Col, Row, TablePaginationConfig } from 'antd';
+import { Col, Row, TablePaginationConfig } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import CustomerSimulationLayout from 'commons/components/layouts/CustomerSimulation';
 import PageHeader from 'commons/components/layouts/PageHeader';
-import { PlusOutlined } from '@ant-design/icons';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { TypeKeyFilterUserSimulation, TypePagination } from 'commons/type';
 import { FilterInput, ISimulation } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
+import FilterForm from 'modules/CustomerSimulation/components/filter-form';
 import { useListSimulations } from 'modules/CustomerSimulation/hooks/useListCustomerSimulation';
 import React from 'react';
-import CustomerSimulationTable from './Table';
 import { useNavigate } from 'react-router';
-import FilterForm from 'modules/CustomerSimulation/components/filter-form';
-import { useRemoveSimulation } from '../../hooks/useRemoveSimulation';
+import CustomerSimulationTable from './Table';
 
 const CustomerSimulationPage = () => {
   const {
@@ -28,13 +26,9 @@ const CustomerSimulationPage = () => {
   const [themeId, setThemeId] = React.useState<string>('');
   const [styleId, setStyleId] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(false);
-  const { removeSimulation } = useRemoveSimulation();
+  // const { removeSimulation } = useRemoveSimulation();
   const navigate = useNavigate();
-  const arrFilter: FilterInput[] = [
-    { key: TypeKeyFilterUserSimulation.NAME, value: '' },
-    // { key: TypeKeyFilterMaterials.STYLE, value: '' },
-    // { key: TypeKeyFilterMaterials.THEME, value: '' },
-  ];
+  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterUserSimulation.NAME, value: '' }];
   React.useEffect(() => {
     setTitle('Customer Simulation Collections');
   });
@@ -45,7 +39,9 @@ const CustomerSimulationPage = () => {
     //   id: parseFloat(record.id),
     // });
   };
-  const onEdit = (record: ISimulation) => () => {};
+  const onEdit = (record: ISimulation) => () => {
+    navigate('/user-simulate-collection/detail/' + record.id);
+  };
   const onChange = (paginationTable: TablePaginationConfig, __: any, sorter: any) => {
     const order = OrderOfSorter(sorter.order);
     const limit = pagination?.limit || TypePagination.DEFAULT_LIMIT;
@@ -98,14 +94,7 @@ const CustomerSimulationPage = () => {
   return (
     <CustomerSimulationLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <TableHeader
-        title="Customer Simulation Collections"
-        extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
-            Simulation
-          </Button>
-        }
-      >
+      <TableHeader title="Customer Simulation Collections">
         <Row justify="center">
           <Col span={24}>
             <FilterForm
