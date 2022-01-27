@@ -1,4 +1,4 @@
-mutation removeSimulation($id: Int!) {
+mutation removeSimulation($id: String!) {
   removeSimulation(id: $id) {
     ...ISimulation
   }

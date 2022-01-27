@@ -3,7 +3,7 @@ fragment ISimulation on Simulation {
   updatedAt
   id
   status
-  request {
+  requests {
     ...IRequest
   }
   simulationComponent {
@@ -13,7 +13,7 @@ fragment ISimulation on Simulation {
     ...IUsersFields
   }
   quotation {
-    exampleField
+    ...IQuotation
   }
 }
 fragment ISimulationComponent on SimulationComponent {

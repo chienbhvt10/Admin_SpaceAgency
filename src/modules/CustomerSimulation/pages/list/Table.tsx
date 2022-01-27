@@ -73,7 +73,7 @@ const CustomerSimulationTable = (props: Props) => {
       key: 'type',
       width: 40,
       sorter: false,
-      render: (_: any, record) => <>{record.request?.type}</>,
+      // render: (_: any, record) => <>{record.requests?.type}</>,
     },
     {
       title: 'Design',

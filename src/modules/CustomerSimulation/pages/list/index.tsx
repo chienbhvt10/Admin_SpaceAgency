@@ -45,7 +45,7 @@ const CustomerSimulationPage = () => {
 
   const onDelete = (record: ISimulation) => () => {
     removeSimulation({
-      id: parseFloat(record.id),
+      id: record.id,
     });
   };
   const onEdit = (record: ISimulation) => () => {
