@@ -24,22 +24,22 @@ const CustomerSimulationForm = (props: Props) => {
   const taxRate = formatPricePercent(10);
   const [totPrice, setTotPrice] = React.useState<number>();
 
-  React.useEffect(() => {
-    if (item) {
-      form.setFieldsValue({
-        content: formatRequestType(item.request?.type || RequestType.SendDocument),
-        name: item.request?.requesterFullName || '',
-        furigana: item.request?.furigana || '',
-        tel: item.request?.phone || '',
-        email: item.request?.email || '',
-        postCode: item.request?.address || '',
-        location: item.request?.address || '',
-        otherQuestion: item.request?.content || '',
-        ownerConstruction: item.request?.hasLand ? '1' : '2',
-      });
-      setTotPrice(totalPrice(item.simulationComponent?.materialTypes || []));
-    }
-  }, [form, item]);
+  // React.useEffect(() => {
+  //   if (item) {
+  //     form.setFieldsValue({
+  //       content: formatRequestType(item.requests?.type || RequestType.SendDocument),
+  //       name: item.requests?.requesterFullName || '',
+  //       furigana: item.requests?.furigana || '',
+  //       tel: item.requests?.phone || '',
+  //       email: item.requests?.email || '',
+  //       postCode: item.requests?.address || '',
+  //       location: item.requests?.address || '',
+  //       otherQuestion: item.requests?.content || '',
+  //       ownerConstruction: item.requests?.hasLand ? '1' : '2',
+  //     });
+  //     setTotPrice(totalPrice(item.simulationComponent?.materialTypes || []));
+  //   }
+  // }, [form, item]);
 
   const onFinishFailed = () => {};
 

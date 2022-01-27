@@ -1,0 +1,6 @@
+fragment IQuotation on Quotation {
+  createdAt
+  updatedAt
+  id
+  taxRate
+}
