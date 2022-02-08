@@ -197,7 +197,7 @@ export enum TypeKeyFilterRequest {
 }
 export enum TypeKeyFilterStyle {
   NAME = 'title',
-  THEME = 'id',
+  THEME = 'theme',
 }
 export enum TypeSortUser {
   EMAIL = 'email',
