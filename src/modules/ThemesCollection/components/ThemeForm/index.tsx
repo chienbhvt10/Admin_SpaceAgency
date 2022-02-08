@@ -1,5 +1,7 @@
 import { Col, Form, Input, InputNumber, Row, Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
+import BaseButton from 'commons/components/layouts/BaseButton';
+import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import { CreateThemeTypeInput, TypeForm } from 'commons/type';
 import { ITheme } from 'graphql/generated/graphql';
@@ -106,6 +108,108 @@ const ThemesForm = (props: Props) => {
                     <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Code" name="code">
                       <Input placeholder="Code" style={{ width: '100%' }} />
                     </Form.Item>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={22} style={{ marginBottom: '20px' }}>
+                <Row>
+                  <Col span={4}>
+                    <Title level={4}>Image Upload</Title>
+                  </Col>
+                  <Col span={20}>
+                    <BaseButton
+                      text="Add Image"
+                      height=""
+                      width=""
+                      marginLeft="20px"
+                      marginRight=""
+                      backgroundColor="#28A745"
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={22} style={{ marginBottom: '20px' }}>
+                <Row>
+                  <Col span={16}>
+                    <Row>
+                      <Col span={18}>
+                        <Form.Item
+                          rules={[requireRule]}
+                          labelCol={{ span: 8, style: { marginRight: 20 } }}
+                          label="Inside Preview"
+                          name="insidePreview"
+                        >
+                          <Input placeholder="Inside Preview" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={4}>
+                        <BaseButton
+                          text="Choose Image"
+                          height=""
+                          width=""
+                          marginLeft=""
+                          marginRight=""
+                          backgroundColor="#17A2B8"
+                        />
+                      </Col>
+                    </Row>
+                    <Col span={24}>
+                      <Form.Item
+                        rules={[requireRule]}
+                        labelCol={{ span: 6, style: { marginRight: 20 } }}
+                        wrapperCol={{ span: 16 }}
+                        label="Name"
+                        name="insidePreviewName"
+                      >
+                        <Input placeholder="Inside Preview Name" />
+                      </Form.Item>
+                    </Col>
+                  </Col>
+                  <Col span={8} style={{ height: '300px' }}>
+                    <UploadDragger />
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={22} style={{ marginBottom: '20px' }}>
+                <Row>
+                  <Col span={16}>
+                    <Row>
+                      <Col span={18}>
+                        <Form.Item
+                          rules={[requireRule]}
+                          labelCol={{ span: 8, style: { marginRight: 20 } }}
+                          label="Outside Preview"
+                          name="outsidePreview"
+                        >
+                          <Input placeholder="Outside Preview" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={4}>
+                        <BaseButton
+                          text="Choose Image"
+                          height=""
+                          width=""
+                          marginLeft=""
+                          marginRight=""
+                          backgroundColor="#17A2B8"
+                        />
+                      </Col>
+                    </Row>
+                    <Col span={24}>
+                      <Form.Item
+                        rules={[requireRule]}
+                        labelCol={{ span: 6, style: { marginRight: 20 } }}
+                        wrapperCol={{ span: 16 }}
+                        className="name"
+                        label="Name"
+                        name="outsidePreviewName"
+                      >
+                        <Input placeholder="Outside Preview Name" />
+                      </Form.Item>
+                    </Col>
+                  </Col>
+                  <Col span={8} style={{ height: '300px' }}>
+                    <UploadDragger />
                   </Col>
                 </Row>
               </Col>
