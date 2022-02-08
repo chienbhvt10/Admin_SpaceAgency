@@ -47,7 +47,7 @@ const StyleCollectionPage = () => {
 
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterStyle.NAME, value: '', isRef: false },
-    { key: TypeKeyFilterStyle.THEME, value: '', isRef: false },
+    { key: TypeKeyFilterStyle.THEME, value: '', isRef: true },
   ];
 
   const routes = [
