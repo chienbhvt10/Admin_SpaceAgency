@@ -19,21 +19,21 @@ const StyleCollectionTable = (props: IProps) => {
 
   const columns: ColumnsType<IStyle> = [
     {
-      title: 'STT',
+      title: 'No',
       dataIndex: '#',
       key: '#',
       width: 40,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: 'Name',
+      title: '名称',
       dataIndex: 'title',
       key: 'title',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
-      title: 'Theme',
+      title: 'テーマ',
       dataIndex: 'theme',
       key: 'theme',
       sortDirections: ['descend', 'ascend'],
@@ -41,14 +41,14 @@ const StyleCollectionTable = (props: IProps) => {
       render: (_, record) => <>{record.theme?.title}</>,
     },
     {
-      title: '3D Code',
+      title: '3Dコード',
       dataIndex: 'code3d',
       key: 'code3d',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
-      title: 'Price',
+      title: '価格',
       dataIndex: 'price',
       sortDirections: ['descend', 'ascend'],
       key: 'price',
@@ -56,7 +56,7 @@ const StyleCollectionTable = (props: IProps) => {
       render: (_, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
-      title: 'Tool',
+      title: '編集',
       dataIndex: '',
       key: '#',
       width: 40,

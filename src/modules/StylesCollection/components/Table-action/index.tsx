@@ -18,7 +18,7 @@ const TableRowAction = (props: IProps) => {
       <Popconfirm
         title={title}
         cancelText="No"
-        okText="Yes"
+        okText="はい"
         placement="left"
         onConfirm={onDelete(record)}
         icon={<QuestionCircleOutlined style={{ color: 'red' }} />}

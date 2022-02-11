@@ -12,19 +12,19 @@ const StyleListTable = (props: Props) => {
   const { colOffSet, dataSource } = props;
   const columns: ColumnsType<any> = [
     {
-      title: 'Name',
+      title: '名称',
       dataIndex: 'name',
       key: '#',
       width: 40,
     },
     {
-      title: 'Type',
+      title: 'タイプ',
       dataIndex: 'type',
       key: '#',
       width: 40,
     },
     {
-      title: 'Price',
+      title: '価格',
       dataIndex: 'price',
       key: '#',
       width: 40,

@@ -17,8 +17,8 @@ const TableRowAction = (props: IProps) => {
       <Button type="ghost" onClick={onEdit(record)} shape="circle" icon={<EditOutlined />} size="middle" />
       <Popconfirm
         title={title}
-        cancelText="No"
-        okText="Yes"
+        cancelText="いいえ"
+        okText="はい"
         placement="left"
         onConfirm={onDelete(record)}
         icon={<QuestionCircleOutlined style={{ color: 'red' }} />}

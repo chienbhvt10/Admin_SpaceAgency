@@ -60,11 +60,11 @@ const MaterialUpdate = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
+      breadcrumbName: 'HOME',
     },
     {
       path: CommonPath.MATERIAL_COLLECTION,
-      breadcrumbName: 'Material Collection',
+      breadcrumbName: 'マテリアル一覧',
     },
     {
       path: CommonPath.MATERIAL_COLLECTION_DETAIL,

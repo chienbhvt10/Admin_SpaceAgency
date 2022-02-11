@@ -25,7 +25,7 @@ function ListUserManagement() {
   const [status, setStatus] = React.useState<string>('');
 
   React.useEffect(() => {
-    setTitle('User Management');
+    setTitle('ユーザー管理');
   }, []);
 
   React.useEffect(() => {
@@ -54,11 +54,11 @@ function ListUserManagement() {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
+      breadcrumbName: 'HOME',
     },
     {
       path: CommonPath.USERS_MANAGEMENT,
-      breadcrumbName: 'User Management',
+      breadcrumbName: 'ユーザー管理',
     },
   ];
   const onChange = (paginationTable: TablePaginationConfig, _: any, sorter: SorterResult<any>) => {
@@ -110,7 +110,7 @@ function ListUserManagement() {
     <UserManagementLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="User Management"
+        title="ユーザー管理"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
             New User

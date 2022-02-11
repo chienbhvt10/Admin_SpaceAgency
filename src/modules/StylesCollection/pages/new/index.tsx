@@ -60,7 +60,7 @@ const routes = [
   },
   {
     path: CommonPath.STYLES_COLLECTION,
-    breadcrumbName: 'Style Collection',
+    breadcrumbName: 'スタイル一覧',
   },
   {
     path: CommonPath.STYLES_COLLECTION_NEW,

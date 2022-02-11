@@ -20,13 +20,13 @@ function TableMaterial(props: IProps) {
   const expandedRowRender = (data: IMaterial) => {
     const columnsType: ColumnsType<MaterialType> = [
       {
-        title: 'Type Name',
+        title: 'タイプ',
         dataIndex: 'title',
         key: '#',
       },
-      { title: 'Code', dataIndex: 'code3d', key: '#' },
+      { title: 'コード', dataIndex: 'code3d', key: '#' },
       {
-        title: 'Price',
+        title: '価格',
         key: '#',
         dataIndex: 'price',
         render: (_: any, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
@@ -37,47 +37,49 @@ function TableMaterial(props: IProps) {
 
   const columns: ColumnsType<IMaterial> = [
     {
-      title: 'STT',
+      title: 'No',
       dataIndex: '#',
       key: '#',
-      width: 40,
+      width: 60,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: 'Name',
+      title: '名称',
       dataIndex: 'title',
       key: 'title',
       sorter: true,
+      width: 100,
     },
     {
-      title: 'Description',
+      title: '詳細',
       dataIndex: 'description',
       key: 'description',
       sorter: false,
-      render: (_: any, record) => <>{record.title}</>,
+      width: 600,
+      render: (_: any, record) => <>{record.style?.description}</>,
     },
     {
-      title: 'Create At',
+      title: '作成日',
       dataIndex: 'status',
       key: 'createdAt',
       sorter: false,
       render: (t: string) => <>{formatToDate(t)}</>,
     },
     {
-      title: 'Design',
+      title: 'デザイン',
       dataIndex: 'design',
       key: 'design',
       sorter: false,
       render: (_: any, record) => <>{record.style?.title}</>,
     },
     {
-      title: 'Tools',
+      title: '編集',
       dataIndex: '',
       key: '#',
 
       render: (_: any, record: any) => (
         <UserRowActions
-          title="Are you sure you want to delete this user?"
+          title="Are you sure you want to delete this material?"
           record={record}
           onDelete={props.onDelete}
           onEdit={props.onEdit}

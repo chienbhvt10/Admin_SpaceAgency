@@ -25,7 +25,7 @@ const ThemeCollectionPage = () => {
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterTheme.NAME, value: '' }];
 
   React.useEffect(() => {
-    setTitle('Theme Collection');
+    setTitle('テーマ一覧');
   }, []);
 
   React.useEffect(() => {
@@ -60,11 +60,11 @@ const ThemeCollectionPage = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
+      breadcrumbName: 'HOME',
     },
     {
       path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'Themes Collection',
+      breadcrumbName: 'テーマ一覧',
     },
   ];
 
@@ -88,7 +88,7 @@ const ThemeCollectionPage = () => {
     <ThemeCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="Theme Collection"
+        title="テーマ一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             New Theme

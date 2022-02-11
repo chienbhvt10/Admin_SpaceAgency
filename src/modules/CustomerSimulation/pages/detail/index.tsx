@@ -29,7 +29,7 @@ const CustomerSimulationDetail = (props: Props) => {
   }, [id]);
 
   React.useEffect(() => {
-    setTitle('Simulation Approve');
+    setTitle('シミュレーション 承認');
   });
 
   const onFinish = (values: SimulationTypeInput) => {
@@ -43,7 +43,7 @@ const CustomerSimulationDetail = (props: Props) => {
         item={dataSimulation}
         loading={loadingUpdate}
         onFinish={onFinish}
-        title="Simulation Approve"
+        title="シミュレーション 承認"
         type={TypeForm.UPDATE}
         onCancel={onCancel}
       />
@@ -59,10 +59,10 @@ const routes = [
   },
   {
     path: CommonPath.USER_SIMULATE_COLLECTION,
-    breadcrumbName: 'Customer Simulation',
+    breadcrumbName: 'カスタマーシミュレーション',
   },
   {
     path: CommonPath.USER_SIMULATE_COLLECTION_DETAIL,
-    breadcrumbName: 'Customer Simulation Detail',
+    breadcrumbName: 'カスタマーシミュレーションの詳細',
   },
 ];

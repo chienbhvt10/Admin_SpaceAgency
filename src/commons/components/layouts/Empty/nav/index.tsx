@@ -83,7 +83,7 @@ function NavBar(props: IProps) {
         <div className="logo" />
         <Menu openKeys={openKeys} theme="dark" selectedKeys={[`${keyNav}`]} mode="inline" onSelect={onSelect}>
           <Menu.Item key="-1" icon={<PieChartOutlined />}>
-            Dashboard
+            ダッシュボード
           </Menu.Item>
           {dataNav.map((i) => {
             return (

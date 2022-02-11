@@ -31,8 +31,8 @@ const FilterForm = (props: Props) => {
     <Form className="filter-form">
       <Row>
         <Col span={18}>
-          <Form.Item labelCol={{ span: 2 }} label="Theme" name="themeId">
-            <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---All---" onSelect={onChangeTheme}>
+          <Form.Item labelCol={{ span: 2 }} label="テーマ" name="themeId">
+            <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---全部---" onSelect={onChangeTheme}>
               {themeOptions}
             </Select>
           </Form.Item>

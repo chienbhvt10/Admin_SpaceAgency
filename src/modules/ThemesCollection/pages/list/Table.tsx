@@ -27,21 +27,21 @@ function TableThemes(props: IProps) {
   };
   const columns: ColumnsType<ITheme> = [
     {
-      title: 'STT',
+      title: 'No',
       dataIndex: '#',
       key: '#',
       width: 40,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: 'Name',
+      title: '名称',
       dataIndex: 'title',
       key: 'title',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
-      title: 'Name English',
+      title: '英語表記',
       key: 'nameEnglish',
       sorter: false,
       render: (_: any, record: ITheme) => (
@@ -49,14 +49,14 @@ function TableThemes(props: IProps) {
       ),
     },
     {
-      title: '3D Code',
+      title: '3Dコード',
       dataIndex: 'code3D',
       key: 'code3D',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
-      title: 'Price',
+      title: '価格',
       dataIndex: 'price',
       key: 'price',
       sortDirections: ['descend', 'ascend'],
@@ -64,13 +64,13 @@ function TableThemes(props: IProps) {
       render: (_: any, record: ITheme) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
-      title: 'Tools',
+      title: '編集',
       dataIndex: '',
       key: 'tools',
       align: 'center',
       render: (_: any, record: ITheme) => (
         <UserRowActions
-          title="Are you sure you want to delete this user?"
+          title="Are you sure you want to delete this theme?"
           record={record}
           onDelete={onDelete}
           onEdit={onEdit}

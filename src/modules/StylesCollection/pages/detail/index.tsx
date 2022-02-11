@@ -66,11 +66,11 @@ export default StyleCollectionDetail;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'Home',
+    breadcrumbName: 'HOME',
   },
   {
     path: CommonPath.STYLES_COLLECTION,
-    breadcrumbName: 'Style Collection',
+    breadcrumbName: 'スタイル一覧',
   },
   {
     path: CommonPath.STYLES_COLLECTION_DETAIL,

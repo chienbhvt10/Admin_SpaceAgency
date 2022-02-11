@@ -23,21 +23,21 @@ function CustomUserManagementTable(props: IProps) {
 
   const columns: ColumnsType<IUsersFields> = [
     {
-      title: 'STT',
+      title: 'No',
       dataIndex: '#',
       key: '#',
       width: 40,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: 'Full Name',
+      title: '氏名',
       dataIndex: 'fullName',
       key: 'fullName',
       sorter: false,
       render: (_, record: IUsersFields, __) => <Text>{record.firstName + ' ' + record.lastName}</Text>,
     },
     {
-      title: 'Email',
+      title: 'Eメール',
       dataIndex: 'email',
       key: 'email',
       sortDirections: ['descend', 'ascend'],
@@ -56,7 +56,7 @@ function CustomUserManagementTable(props: IProps) {
       sorter: false,
     },
     {
-      title: 'Tools',
+      title: '編集',
       dataIndex: '',
       key: 'Action',
       render: (_: any, record: IUsersFields) => (

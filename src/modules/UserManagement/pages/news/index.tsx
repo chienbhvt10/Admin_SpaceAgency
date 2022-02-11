@@ -15,11 +15,11 @@ function NewUserManagement() {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
+      breadcrumbName: 'HOME',
     },
     {
       path: CommonPath.USERS_MANAGEMENT,
-      breadcrumbName: 'User management',
+      breadcrumbName: 'ユーザー管理',
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,

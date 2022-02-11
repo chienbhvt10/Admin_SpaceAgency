@@ -39,7 +39,7 @@ const MaterialCollectionPage = () => {
   ];
 
   React.useEffect(() => {
-    setTitle('Material Collection');
+    setTitle('マテリアル一覧');
   }, []);
 
   React.useEffect(() => {
@@ -127,7 +127,7 @@ const MaterialCollectionPage = () => {
     <MaterialCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="Material Collection"
+        title="マテリアル一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
             New Material
@@ -137,7 +137,7 @@ const MaterialCollectionPage = () => {
         <Form onValuesChange={onValuesChange} className="dropdown-select">
           <FormDropdown
             formItem={{
-              label: 'Theme',
+              label: 'テーマ',
               name: 'themeId',
               labelCol: { span: 3 },
             }}
@@ -148,7 +148,7 @@ const MaterialCollectionPage = () => {
           />
           <FormDropdown
             formItem={{
-              label: 'Design',
+              label: 'デザイン',
               name: 'styleId',
               labelCol: { span: 3 },
             }}
@@ -186,6 +186,6 @@ const routes = [
   },
   {
     path: CommonPath.MATERIAL_COLLECTION,
-    breadcrumbName: 'Material Collection',
+    breadcrumbName: 'マテリアル一覧',
   },
 ];

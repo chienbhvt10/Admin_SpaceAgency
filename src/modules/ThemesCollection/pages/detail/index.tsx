@@ -22,7 +22,7 @@ function ThemesUpdate() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   React.useEffect(() => {
-    setTitle('Update Themes');
+    setTitle('テーマ更新');
   }, []);
 
   const onFinishUpdateTheme = (values: CreateThemeTypeInput) => {
@@ -48,7 +48,7 @@ function ThemesUpdate() {
         <PageHeader title="" breadcrumb={{ routes }} />
         <ThemesForm
           onFinish={onFinishUpdateTheme}
-          title="Update Themes Collection"
+          title="テーマコレクション更新"
           type={TypeForm.UPDATE}
           items={items}
           loading={loading}
@@ -62,14 +62,14 @@ export default ThemesUpdate;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'Home',
+    breadcrumbName: 'HOME',
   },
   {
     path: CommonPath.THEME_COLLECTION,
-    breadcrumbName: 'Themes Collection',
+    breadcrumbName: 'テーマ一覧',
   },
   {
     path: CommonPath.THEME_COLLECTION_UPDATE,
-    breadcrumbName: 'Update Themes Collection',
+    breadcrumbName: 'テーマコレクション更新',
   },
 ];

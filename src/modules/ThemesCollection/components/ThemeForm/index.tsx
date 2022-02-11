@@ -65,7 +65,7 @@ const ThemesForm = (props: Props) => {
                   rules={[requireRule]}
                   labelCol={{ span: 4, style: { marginRight: 20 } }}
                   className="name"
-                  label="Name"
+                  label="名称"
                   name="name"
                 >
                   <Input placeholder="Name" />
@@ -75,21 +75,21 @@ const ThemesForm = (props: Props) => {
                 <Form.Item
                   labelCol={{ span: 4, style: { marginRight: 20 } }}
                   className=""
-                  label="Name English"
+                  label="英語表記"
                   rules={[requireRule]}
                   name="nameEnglish"
                 >
-                  <Input placeholder="Name English" />
+                  <Input placeholder="英語表記" />
                 </Form.Item>
               </Col>
               <Col span={22}>
                 <Form.Item
                   labelCol={{ span: 4, style: { marginRight: 20 } }}
                   className=""
-                  label="Description"
+                  label="詳細"
                   name="description"
                 >
-                  <TextArea placeholder="Description" rows={5} showCount maxLength={1000} />
+                  <TextArea placeholder="詳細" rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
               {/* <Col span={22}>
@@ -100,13 +100,13 @@ const ThemesForm = (props: Props) => {
               <Col span={22} className="price-order-box">
                 <Row>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Price" name="price">
+                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="価格" name="price">
                       <InputNumber placeholder="Price" style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="Code" name="code">
-                      <Input placeholder="Code" style={{ width: '100%' }} />
+                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="コード" name="code">
+                      <Input placeholder="コード" style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
                 </Row>

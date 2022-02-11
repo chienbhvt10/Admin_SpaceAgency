@@ -22,7 +22,7 @@ const SelectFormItem = (props: Props) => {
           loading={loading}
           onDropdownVisibleChange={onDropdownVisibleChange}
           onSelect={onSelect}
-          placeholder="---All---"
+          placeholder="---全部---"
         >
           {data.map((item) => {
             return <Option key={item?.id}>{item?.title}</Option>;

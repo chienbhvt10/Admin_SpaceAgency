@@ -36,7 +36,7 @@ const FilterForm = (props: Props) => {
           <Row justify="center">
             <Col span={12}>
               <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Role" name="role">
-                <Select placeholder="---All---" onChange={onRoleChange}>
+                <Select placeholder="---全部---" onChange={onRoleChange}>
                   <Option value="">---All---</Option>
                   <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
                   <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
@@ -46,7 +46,7 @@ const FilterForm = (props: Props) => {
             </Col>
             <Col span={12}>
               <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Status" name="status">
-                <Select placeholder="---All---" onChange={onStatusChange}>
+                <Select placeholder="---全部---" onChange={onStatusChange}>
                   <Option value="">---All---</Option>
                   <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
                   <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
@@ -58,7 +58,7 @@ const FilterForm = (props: Props) => {
         <Col span={24}>
           <Row>
             <Col span={18}>
-              <Form.Item labelCol={{ span: 4 }} label="Keyword" name="keyword">
+              <Form.Item labelCol={{ span: 4 }} label="キーワード" name="keyword">
                 <Input value={value} onChange={onChange} placeholder="Type username, email to search..." />
               </Form.Item>
             </Col>
@@ -67,7 +67,7 @@ const FilterForm = (props: Props) => {
                 <Col span={12}>
                   <Row justify="space-around">
                     <BaseButton
-                      text="Reset"
+                      text="リセット"
                       disabled={disabled}
                       width={'90%'}
                       height={''}
@@ -81,7 +81,7 @@ const FilterForm = (props: Props) => {
                 <Col span={12}>
                   <Row justify="space-around">
                     <BaseButton
-                      text="Search"
+                      text="検索"
                       disabled={disabled}
                       width={'90%'}
                       height={''}

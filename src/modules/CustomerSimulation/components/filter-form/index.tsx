@@ -53,7 +53,7 @@ const FilterForm = (props: Props) => {
                 colOffSet={1}
                 data={arrThemes || []}
                 formItem={{
-                  label: 'Theme',
+                  label: 'テーマ',
                   name: 'theme',
                   labelCol: { span: 8 },
                 }}
@@ -67,7 +67,7 @@ const FilterForm = (props: Props) => {
                 colOffSet={1}
                 data={arrStyles || []}
                 formItem={{
-                  label: 'Design',
+                  label: 'デザイン',
                   name: 'design',
                   labelCol: { span: 8 },
                 }}
@@ -86,14 +86,14 @@ const FilterForm = (props: Props) => {
                 data={arrUsers || []}
                 onDropdownVisibleChange={onDropdownVisibleChangeUser}
                 formItem={{
-                  label: 'Customer/User',
+                  label: '顧客／ユーザー',
                   name: 'theme',
                   labelCol: { span: 8 },
                 }}
               />
             </Col>
             <Col span={12}>
-              <Form.Item labelCol={{ span: 8 }} label="Date" name="date">
+              <Form.Item labelCol={{ span: 8 }} label="日付" name="date">
                 <Col offset={1}>
                   <RangePicker style={{ width: '100%' }} format={dateFormat} />
                 </Col>

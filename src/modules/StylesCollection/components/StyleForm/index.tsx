@@ -57,8 +57,8 @@ const StyleCollectionForm = (props: Props) => {
           <Row className="style-form-control">
             <Col span={22}>
               <Col span={16}>
-                <Form.Item labelCol={{ span: 6 }} label="Theme" name="themeId" rules={[requireRule]}>
-                  <Select placeholder="---All---">{themeOptions}</Select>
+                <Form.Item labelCol={{ span: 6 }} label="テーマ" name="themeId" rules={[requireRule]}>
+                  <Select placeholder="---全部---">{themeOptions}</Select>
                 </Form.Item>
               </Col>
             </Col>
@@ -68,14 +68,14 @@ const StyleCollectionForm = (props: Props) => {
               </Form.Item>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} label="Description" name="description">
+              <Form.Item labelCol={{ span: 4 }} label="詳細" name="description">
                 <TextArea rows={5} showCount maxLength={1000} />
               </Form.Item>
             </Col>
             <Col span={22}>
               <Row>
                 <Col span={16}>
-                  <Form.Item labelCol={{ span: 6 }} label="Code3D" name="code3d">
+                  <Form.Item labelCol={{ span: 6 }} label="3Dコード" name="code3d">
                     <Input />
                   </Form.Item>
                 </Col>
@@ -89,7 +89,7 @@ const StyleCollectionForm = (props: Props) => {
             <Col span={22} className="price-order-box">
               <Row>
                 <Col span={12}>
-                  <Form.Item labelCol={{ span: 8 }} label="Price" name="price">
+                  <Form.Item labelCol={{ span: 8 }} label="価格" name="price">
                     <InputNumber style={{ width: '100%' }} />
                   </Form.Item>
                 </Col>
@@ -123,7 +123,7 @@ const StyleCollectionForm = (props: Props) => {
                       </Upload>
                     </Col>
                   </Row>
-                  <Form.Item labelCol={{ span: 6 }} label="Name" name="imageName">
+                  <Form.Item labelCol={{ span: 6 }} label="名称" name="imageName">
                     <Input />
                   </Form.Item>
                 </Col>
