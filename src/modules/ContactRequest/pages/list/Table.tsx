@@ -19,47 +19,47 @@ function ContactRequestTable(props: IProps) {
 
   const columns: ColumnsType<IRequest> = [
     {
-      title: 'STT',
+      title: 'No',
       dataIndex: '#',
       key: '#',
       width: 40,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: 'Email',
+      title: 'Eメール',
       dataIndex: 'email',
       key: 'email',
       sorter: true,
       sortDirections: ['descend', 'ascend'],
     },
     {
-      title: 'FullName',
+      title: '氏名',
       dataIndex: 'requesterFullName',
       key: 'requesterFullName',
       sorter: true,
       sortDirections: ['descend', 'ascend'],
     },
     {
-      title: 'Phone',
+      title: '電話番号',
       dataIndex: 'phone',
       key: 'phone',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
     },
     {
-      title: 'Type',
+      title: 'タイプ',
       dataIndex: 'type',
       key: 'type',
       sorter: false,
     },
     {
-      title: 'Post Code',
+      title: '郵便番号',
       dataIndex: 'postcode',
       key: 'postcode',
       sorter: false,
     },
     {
-      title: 'Tools',
+      title: 'ツール',
       dataIndex: '',
       key: 'Action',
       render: (_: any, record: IRequest) => (

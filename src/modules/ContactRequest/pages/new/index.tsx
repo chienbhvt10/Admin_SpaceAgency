@@ -15,7 +15,7 @@ export default RequestsCreateNew;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'Home',
+    breadcrumbName: 'HOME',
   },
   {
     path: CommonPath.CONTACT_REQUEST,

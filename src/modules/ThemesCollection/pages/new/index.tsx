@@ -13,7 +13,7 @@ const ThemesCreateNew = () => {
   const { createTheme, loading } = useCreateThemes();
 
   React.useEffect(() => {
-    setTitle('Create Themes');
+    setTitle('テーマ作成');
   }, []);
 
   const onFinishCreateTheme = (values: CreateThemeTypeInput) => {
@@ -38,7 +38,7 @@ const ThemesCreateNew = () => {
         <ThemesForm
           onFinish={onFinishCreateTheme}
           loading={loading}
-          title="Create Themes Collection"
+          title="テーマコレクション作成"
           type={TypeForm.CREATE}
         />
       </ThemeCollectionLayout>
@@ -50,14 +50,14 @@ export default ThemesCreateNew;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'Home',
+    breadcrumbName: 'HOME',
   },
   {
     path: CommonPath.THEME_COLLECTION,
-    breadcrumbName: 'Themes Collection',
+    breadcrumbName: 'テーマ一覧',
   },
   {
     path: CommonPath.THEME_COLLECTION_NEW,
-    breadcrumbName: 'Create Themes Collection',
+    breadcrumbName: 'テーマコレクション作成',
   },
 ];

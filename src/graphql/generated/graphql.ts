@@ -57,11 +57,6 @@ export type CreatePriceInput = {
   value?: InputMaybe<Scalars['Float']>;
 };
 
-export type CreateQuotationInput = {
-  /** Example field (placeholder) */
-  exampleField: Scalars['Int'];
-};
-
 export type CreateRequestInput = {
   address: Scalars['String'];
   content: Scalars['String'];
@@ -181,7 +176,6 @@ export type Mutation = {
   createMaterial: Material;
   /** Create new Material Type */
   createMaterialType: MaterialType;
-  createQuotation: Quotation;
   createRequest: Request;
   createSimulationComponent: SimulationComponent;
   /** Create new style */
@@ -191,11 +185,11 @@ export type Mutation = {
   createThemeImage: ThemeImage;
   loginAdmin: Auth;
   loginCustomer: Auth;
+  previewQuotation?: Maybe<Quotation>;
   /** find one material and remove */
   removeMaterial: Material;
   /** find one and remove material type */
   removeMaterialType: MaterialType;
-  removeQuotation: Quotation;
   removeRequest: Request;
   removeSimulation: Simulation;
   removeSimulationComponent: SimulationComponent;
@@ -206,11 +200,11 @@ export type Mutation = {
   /** Remove user by id */
   removeUser: User;
   submitDraftSimulation: Simulation;
+  submitSimulation: Simulation;
   /** find one material and update */
   updateMaterial: Material;
   /** find one material type and update */
   updateMaterialType: MaterialType;
-  updateQuotation: Quotation;
   updateRequestStatus: Request;
   updateSimulationComponent: SimulationComponent;
   updateStyle: Style;
@@ -244,11 +238,6 @@ export type MutationCreateMaterialArgs = {
 
 export type MutationCreateMaterialTypeArgs = {
   createMaterialTypeInput: CreateMaterialTypeInput;
-};
-
-
-export type MutationCreateQuotationArgs = {
-  createQuotationInput: CreateQuotationInput;
 };
 
 
@@ -292,17 +281,17 @@ export type MutationLoginCustomerArgs = {
 };
 
 
+export type MutationPreviewQuotationArgs = {
+  previewQuotationInput: PreviewQuotationInput;
+};
+
+
 export type MutationRemoveMaterialArgs = {
   id: Scalars['String'];
 };
 
 
 export type MutationRemoveMaterialTypeArgs = {
-  id: Scalars['String'];
-};
-
-
-export type MutationRemoveQuotationArgs = {
   id: Scalars['String'];
 };
 
@@ -352,6 +341,11 @@ export type MutationSubmitDraftSimulationArgs = {
 };
 
 
+export type MutationSubmitSimulationArgs = {
+  submitSimulationInput: SubmitSimulationInput;
+};
+
+
 export type MutationUpdateMaterialArgs = {
   updateMaterialInput: UpdateMaterialInput;
 };
@@ -359,11 +353,6 @@ export type MutationUpdateMaterialArgs = {
 
 export type MutationUpdateMaterialTypeArgs = {
   updateMaterialType: UpdateMaterialTypeInput;
-};
-
-
-export type MutationUpdateQuotationArgs = {
-  updateQuotationInput: UpdateQuotationInput;
 };
 
 
@@ -407,6 +396,11 @@ export type PaginationInput = {
   skip?: InputMaybe<Scalars['Int']>;
 };
 
+export type PreviewQuotationInput = {
+  componentId?: InputMaybe<RefInput>;
+  createSimulationComponentInput?: InputMaybe<CreateSimulationComponentInput>;
+};
+
 export type Price = {
   __typename?: 'Price';
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -431,8 +425,6 @@ export type Query = {
   materials?: Maybe<Array<Material>>;
   /** Get current user profile */
   me: User;
-  quotation: Quotation;
-  quotations: Array<Quotation>;
   request?: Maybe<Request>;
   requests: Array<Request>;
   simulation: Simulation;
@@ -480,11 +472,6 @@ export type QueryMaterialTypesArgs = {
 export type QueryMaterialsArgs = {
   pagination?: InputMaybe<PaginationInput>;
   where?: InputMaybe<WhereInput>;
-};
-
-
-export type QueryQuotationArgs = {
-  id: Scalars['Int'];
 };
 
 
@@ -566,9 +553,24 @@ export type QueryUsersArgs = {
 
 export type Quotation = {
   __typename?: 'Quotation';
+  amountGross: Scalars['Float'];
+  amountNet: Scalars['Float'];
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
-  taxRate?: Maybe<Scalars['Float']>;
+  quotationItems: Array<QuotationItem>;
+  taxRate: Scalars['Float'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
+};
+
+export type QuotationItem = {
+  __typename?: 'QuotationItem';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
+  priceUnit: CurrencyUnit;
+  priceValue: Scalars['Float'];
+  refId: Scalars['String'];
+  refType: RefType;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -694,6 +696,12 @@ export type SubmitDraftSimulationInput = {
   simulationComponent: CreateSimulationComponentInput;
 };
 
+export type SubmitSimulationInput = {
+  createSimulationComponentInput?: InputMaybe<CreateSimulationComponentInput>;
+  simulation?: InputMaybe<RefInput>;
+  simulationComponent?: InputMaybe<RefInput>;
+};
+
 export type Theme = {
   __typename?: 'Theme';
   code3D?: Maybe<Scalars['String']>;
@@ -741,12 +749,6 @@ export type UpdateMaterialTypeInput = {
   price?: InputMaybe<CreatePriceInput>;
   /** title of material type */
   title?: InputMaybe<Scalars['String']>;
-};
-
-export type UpdateQuotationInput = {
-  /** Example field (placeholder) */
-  exampleField?: InputMaybe<Scalars['Int']>;
-  id: Scalars['Int'];
 };
 
 export type UpdateSimulationComponentInput = {
@@ -832,11 +834,11 @@ export type IMaterialType = { __typename?: 'MaterialType', createdAt?: any | nul
 
 export type IPrice = { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType };
 
-export type IQuotation = { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate?: number | null | undefined };
+export type IQuotation = { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number };
 
 export type IRequest = { __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined };
 
-export type ISimulation = { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate?: number | null | undefined } | null | undefined };
+export type ISimulation = { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number } | null | undefined };
 
 export type ISimulationComponent = { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined };
 
@@ -875,14 +877,14 @@ export type RemoveSimulationVariables = Exact<{
 }>;
 
 
-export type RemoveSimulation = { __typename?: 'Mutation', removeSimulation: { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate?: number | null | undefined } | null | undefined } };
+export type RemoveSimulation = { __typename?: 'Mutation', removeSimulation: { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number } | null | undefined } };
 
 export type DetailSimulationVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type DetailSimulation = { __typename?: 'Query', simulation: { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate?: number | null | undefined } | null | undefined } };
+export type DetailSimulation = { __typename?: 'Query', simulation: { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number } | null | undefined } };
 
 export type GetListSimulationComponentsVariables = Exact<{
   where?: InputMaybe<WhereInput>;
@@ -898,7 +900,7 @@ export type GetListSimulationsVariables = Exact<{
 }>;
 
 
-export type GetListSimulations = { __typename?: 'Query', simulations: Array<{ __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate?: number | null | undefined } | null | undefined }> };
+export type GetListSimulations = { __typename?: 'Query', simulations: Array<{ __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number } | null | undefined }> };
 
 export type CreateMaterialVariables = Exact<{
   createMaterialInput: CreateMaterialInput;

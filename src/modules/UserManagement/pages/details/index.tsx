@@ -31,7 +31,7 @@ function DetailUserManagement() {
     },
     {
       path: CommonPath.USERS_MANAGEMENT,
-      breadcrumbName: 'User management',
+      breadcrumbName: 'ユーザー管理',
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,

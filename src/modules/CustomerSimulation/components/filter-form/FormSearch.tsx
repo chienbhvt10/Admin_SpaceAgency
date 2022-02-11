@@ -17,15 +17,15 @@ const FormSearch = (props: Props) => {
     <Col span={24}>
       <Row>
         <Col span={18}>
-          <Form.Item labelCol={{ span: 5 }} label="Keyword" name="keyword">
+          <Form.Item labelCol={{ span: 5 }} label="キーワード" name="keyword">
             <Col offset={1}>
-              <Input onChange={onChangeValue} placeholder="Type to search..." value={value} />
+              <Input onChange={onChangeValue} placeholder="キーワードを入力してください。..." value={value} />
             </Col>
           </Form.Item>
         </Col>
         <div className="wrapper-search">
           <BaseButton
-            text="Reset"
+            text="リセット"
             width={''}
             height={''}
             marginRight="5px"
@@ -35,7 +35,7 @@ const FormSearch = (props: Props) => {
             onClick={onReset}
           />
           <BaseButton
-            text="Search"
+            text="検索"
             width={''}
             height={''}
             disabled={props.disabled}

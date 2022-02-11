@@ -17,7 +17,7 @@ interface Props {
   onFinish?: (values: SimulationTypeInput) => void;
 }
 
-const requireRule = { required: true, message: 'This is required information!' };
+const requireRule = { required: true, message: 'これは必須情報です。' };
 const CustomerSimulationForm = (props: Props) => {
   const { item, loading, title, type, onCancel, onFinish } = props;
   const [form] = Form.useForm<SimulationTypeInput>();
@@ -49,14 +49,14 @@ const CustomerSimulationForm = (props: Props) => {
         <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel} type={type}>
           <Row justify="center" className="simulation-form-control">
             <Col className="simulation-contact" span={24}>
-              <Title level={4}>Contact</Title>
+              <Title level={4}>連絡</Title>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4, style: { marginRight: 15 } }} name="content" label="Content">
+              <Form.Item labelCol={{ span: 4, style: { marginRight: 15 } }} name="content" label="コンテンツ">
                 <Radio.Group>
-                  <Radio value="1">Request detail material</Radio>
-                  <Radio value="2">Need interview architecture</Radio>
-                  <Radio value="3">Other</Radio>
+                  <Radio value="1">詳細資料の請求</Radio>
+                  <Radio value="2">インタビューアーキテクチャが必要です。</Radio>
+                  <Radio value="3">その他</Radio>
                 </Radio.Group>
               </Form.Item>
             </Col>
@@ -66,7 +66,7 @@ const CustomerSimulationForm = (props: Props) => {
                   <Form.Item
                     labelCol={{ span: 8, style: { marginRight: 15 } }}
                     className="name"
-                    label="Name"
+                    label="名称"
                     name="name"
                     rules={[requireRule]}
                   >
@@ -76,7 +76,7 @@ const CustomerSimulationForm = (props: Props) => {
                 <Col span={12}>
                   <Form.Item
                     labelCol={{ span: 8, style: { marginRight: 15 } }}
-                    label="Furigana"
+                    label="フリガナ"
                     name="furigana"
                     rules={[requireRule]}
                   >
@@ -90,7 +90,7 @@ const CustomerSimulationForm = (props: Props) => {
                 <Col span={12}>
                   <Form.Item
                     labelCol={{ span: 8, style: { marginRight: 15 } }}
-                    label="Tel"
+                    label="電話番号"
                     name="tel"
                     rules={[requireRule]}
                   >
@@ -100,7 +100,7 @@ const CustomerSimulationForm = (props: Props) => {
                 <Col span={12}>
                   <Form.Item
                     labelCol={{ span: 8, style: { marginRight: 15 } }}
-                    label="Email"
+                    label="メール"
                     name="email"
                     rules={[requireRule]}
                   >
@@ -114,11 +114,11 @@ const CustomerSimulationForm = (props: Props) => {
                 <Col span={8}>
                   <Form.Item
                     labelCol={{ span: 12, style: { marginRight: 15 } }}
-                    label="Address"
+                    label="住所"
                     name="postCode"
                     rules={[requireRule]}
                   >
-                    <Input placeholder="Post Code" />
+                    <Input placeholder="郵便番号" />
                   </Form.Item>
                 </Col>
                 <Col span={16}>
@@ -128,7 +128,7 @@ const CustomerSimulationForm = (props: Props) => {
                     name="location"
                     rules={[requireRule]}
                   >
-                    <Input placeholder="Location" />
+                    <Input placeholder="現在地" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -137,18 +137,18 @@ const CustomerSimulationForm = (props: Props) => {
               <Form.Item
                 labelCol={{ span: 4, style: { marginRight: 15 } }}
                 name="ownerConstruction"
-                label="Owner construction"
+                label="オーナー建設"
               >
                 <Radio.Group>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="2">Not Yet</Radio>
+                  <Radio value="yes">はい</Radio>
+                  <Radio value="notYet">まだ</Radio>
                 </Radio.Group>
               </Form.Item>
             </Col>
             <Col span={22}>
               <Form.Item
                 labelCol={{ span: 4, style: { marginRight: 15 } }}
-                label="Other Question"
+                label="その他ご質問"
                 name="otherQuestion"
                 rules={[requireRule]}
               >
@@ -156,7 +156,7 @@ const CustomerSimulationForm = (props: Props) => {
               </Form.Item>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} label="Quotation List" name="quotationList">
+              <Form.Item labelCol={{ span: 4 }} label="見積もり一覧" name="quotationList">
                 <StyleListTable colOffSet={1} />
               </Form.Item>
             </Col>
@@ -164,10 +164,10 @@ const CustomerSimulationForm = (props: Props) => {
               <Row>
                 <Col span={18}>
                   <Row justify="end">
-                    <Title level={5}>Tax Rate</Title>
+                    <Title level={5}>税率</Title>
                   </Row>
                   <Row justify="end">
-                    <Title level={5}>Total Price</Title>
+                    <Title level={5}>合計</Title>
                   </Row>
                 </Col>
                 <Col span={5} offset={1}>

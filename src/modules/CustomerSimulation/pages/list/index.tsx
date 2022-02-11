@@ -136,7 +136,7 @@ export default CustomerSimulationPage;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'Home',
+    breadcrumbName: 'HOME',
   },
   {
     path: CommonPath.USER_SIMULATE_COLLECTION,

@@ -143,7 +143,7 @@ const MaterialForm = (props: Props) => {
                 <div className="dropdown-select">
                   <FormDropdown
                     formItem={{
-                      label: 'Theme',
+                      label: 'テーマ',
                       name: 'themeId',
                       labelCol: { span: 4 },
                     }}
@@ -154,7 +154,7 @@ const MaterialForm = (props: Props) => {
                   />
                   <FormDropdown
                     formItem={{
-                      label: 'Design',
+                      label: 'デザイン',
                       name: 'styleId',
                       labelCol: { span: 4 },
                     }}
@@ -174,7 +174,7 @@ const MaterialForm = (props: Props) => {
                 <Form.Item
                   labelCol={{ span: 4, style: { marginRight: 20 } }}
                   className=""
-                  label="Description"
+                  label="詳細"
                   name="description"
                 >
                   <TextArea rows={5} showCount maxLength={1000} />
@@ -195,7 +195,7 @@ const MaterialForm = (props: Props) => {
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="name"
-                      label="Name"
+                      label="名称"
                       name="nameStandard"
                     >
                       <Input style={{ width: '96%', marginLeft: '10px' }} />
@@ -205,19 +205,19 @@ const MaterialForm = (props: Props) => {
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="name"
-                      label="Name"
+                      label="名称"
                       name="namePremium"
                     >
                       <Input style={{ width: '96%' }} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="Price" name="priceStandard">
+                    <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="価格" name="priceStandard">
                       <InputNumber style={{ width: '96%', marginLeft: '10px' }} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="Price" name="pricePremium">
+                    <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="価格" name="pricePremium">
                       <InputNumber style={{ width: '96%' }} />
                     </Form.Item>
                   </Col>
@@ -225,7 +225,7 @@ const MaterialForm = (props: Props) => {
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="code"
-                      label="Code"
+                      label="コード"
                       name="codeStandard"
                     >
                       <Input style={{ width: 'calc(100% - 94px)', marginLeft: '10px' }} />
@@ -235,7 +235,7 @@ const MaterialForm = (props: Props) => {
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="code"
-                      label="Code"
+                      label="コード"
                       name="codePremium"
                     >
                       <Input style={{ width: 'calc(100% - 93px)' }} />
@@ -281,7 +281,7 @@ const MaterialForm = (props: Props) => {
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="name"
-                      label="Name"
+                      label="名称"
                       name="nameImage1"
                     >
                       <Input style={{ width: '97%', marginLeft: '10px' }} />
@@ -291,7 +291,7 @@ const MaterialForm = (props: Props) => {
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="name"
-                      label="Name"
+                      label="名称"
                       name="nameImage2"
                     >
                       <Input style={{ width: '97%' }} />

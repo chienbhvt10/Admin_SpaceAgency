@@ -15,20 +15,20 @@ const ButtonGroup = ({ onCancel, loading, type }: IProps) => {
   return (
     <div className="button-group">
       <Button size="large" onClick={onCancel}>
-        Cancel
+        キャンセル
       </Button>
       {isUpdate ? (
         <>
           <Button style={{ backgroundColor: '#a83242' }} htmlType="submit" size="large" loading={loading}>
-            Reject
+            解除
           </Button>
           <Button type="primary" size="large" htmlType="submit" loading={loading}>
-            Approve
+            承認
           </Button>
         </>
       ) : (
         <Button type="primary" size="large" htmlType="submit" loading={loading}>
-          Save
+          保存
         </Button>
       )}
     </div>

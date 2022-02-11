@@ -21,10 +21,10 @@ const FormHeader = (props: IProps) => {
         extra={
           <div className="button-group">
             <Button size="large" onClick={onCancel}>
-              Cancel
+              キャンセル
             </Button>
             <Button size="large" htmlType="submit" loading={loading}>
-              Save
+              保存
             </Button>
           </div>
         }

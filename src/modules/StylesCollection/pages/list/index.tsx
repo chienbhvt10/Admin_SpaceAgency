@@ -26,7 +26,7 @@ const StyleCollectionPage = () => {
   const [disabled, setDisabled] = React.useState<boolean>();
 
   React.useEffect(() => {
-    setTitle('Style Collection');
+    setTitle('スタイル一覧');
   }, []);
 
   React.useEffect(() => {
@@ -53,11 +53,11 @@ const StyleCollectionPage = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'Home',
+      breadcrumbName: 'HOME',
     },
     {
       path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'Style Collection',
+      breadcrumbName: 'スタイル一覧',
     },
   ];
 
@@ -108,7 +108,7 @@ const StyleCollectionPage = () => {
     <StyleCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="Style list"
+        title="スタイル一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
             Style

@@ -147,7 +147,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Email</Title>}
+                  label={<Title level={5}>Eメール</Title>}
                   name="email"
                   rules={[requireRule, requireEmail]}
                   {...tailLayout}
@@ -193,7 +193,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Last NameF</Title>}
+                  label={<Title level={5}>First NameF</Title>}
                   name="firstNameF"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -215,7 +215,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Phone</Title>}
+                  label={<Title level={5}>電話番号</Title>}
                   name="phone"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -244,7 +244,7 @@ function ThemeForm(props: IProps) {
               </Col>
               <Col span={20}>
                 <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Role</Title>} name="role">
-                  <Select placeholder="---All---">
+                  <Select placeholder="---全部---">
                     <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
                     <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
                     <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
@@ -253,7 +253,7 @@ function ThemeForm(props: IProps) {
               </Col>
               <Col span={20}>
                 <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Status</Title>} name="status">
-                  <Select placeholder="---All---">
+                  <Select placeholder="---全部---">
                     <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
                     <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
                   </Select>

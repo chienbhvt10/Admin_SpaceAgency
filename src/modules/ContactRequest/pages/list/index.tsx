@@ -70,7 +70,7 @@ function ContactRequestPage() {
   return (
     <ContactRequestLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <TableHeader title="Contact Request Collections">
+      <TableHeader title="お問い合わせ一覧">
         <FormSearch
           disabled={disabled}
           value={value}
@@ -95,10 +95,10 @@ export default ContactRequestPage;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'Home',
+    breadcrumbName: 'HOME',
   },
   {
     path: CommonPath.CONTACT_REQUEST,
-    breadcrumbName: 'Contact Request Collections',
+    breadcrumbName: 'お問い合わせ一覧',
   },
 ];

@@ -12,7 +12,7 @@ export function* updateMaterialAsync(action: UpdateMaterialAction) {
     const data: UpdateMaterial = yield apis.updateMaterials(action.payload);
     yield put(actionUpdateMaterialSuccess(data.updateMaterial));
     getNavigate(CommonPath.MATERIAL_COLLECTION);
-    NotificationSuccess('Thông báo!', 'Update User Success.');
+    NotificationSuccess('Thông báo!', 'Update Material Success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateMaterialError(err));

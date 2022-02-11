@@ -5,10 +5,10 @@ export interface LoginInput {
   passWord: String;
 }
 export enum INameNav {
-  DASHBOARD = 'Dashboard',
-  CONTENT_MANAGEMENT = 'Content Management',
-  SIMULATION_MANAGEMENT = 'Simulation Management',
-  ADMINISTRATOR = 'Administrator',
+  DASHBOARD = 'スタイル一覧',
+  CONTENT_MANAGEMENT = 'コンテンツ管理',
+  SIMULATION_MANAGEMENT = 'シミュレーション管理',
+  ADMINISTRATOR = '管理者',
 }
 export interface ItemNav {
   key: string;
@@ -84,17 +84,17 @@ export const dataNav: DataNav[] = [
     item: [
       {
         key: '1',
-        nameSub: 'Themes Collection',
+        nameSub: 'テーマ一覧',
         router: CommonPath.THEME_COLLECTION,
       },
       {
         key: '2',
-        nameSub: 'Styles Collection',
+        nameSub: 'スタイル一覧',
         router: CommonPath.STYLES_COLLECTION,
       },
       {
         key: '3',
-        nameSub: 'Material Collection',
+        nameSub: 'マテリアル一覧',
         router: CommonPath.MATERIAL_COLLECTION,
       },
     ],
@@ -107,12 +107,12 @@ export const dataNav: DataNav[] = [
     item: [
       {
         key: '4',
-        nameSub: 'User Simulate Collection',
+        nameSub: 'ユーザーのシミュレーション一覧',
         router: CommonPath.USER_SIMULATE_COLLECTION,
       },
       {
         key: '5',
-        nameSub: 'Contact Request',
+        nameSub: 'お問い合わせ',
         router: CommonPath.CONTACT_REQUEST,
       },
     ],
@@ -125,12 +125,12 @@ export const dataNav: DataNav[] = [
     item: [
       {
         key: '6',
-        nameSub: 'User Management',
+        nameSub: 'ユーザー管理',
         router: CommonPath.USERS_MANAGEMENT,
       },
       {
         key: '7',
-        nameSub: 'Roles List',
+        nameSub: 'ロール一覧',
         router: CommonPath.ROLES_LIST,
       },
     ],
