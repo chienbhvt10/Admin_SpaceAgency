@@ -12,6 +12,8 @@ export interface UpdateThemeState {
 export interface UpdateTypeInput extends UpdateThemeVariables {
   idCategory: string;
   titleCategory: string;
+  insidePreviewUrl: string;
+  outsidePreviewUrl: string;
 }
 
 export interface UpdateThemeAction {

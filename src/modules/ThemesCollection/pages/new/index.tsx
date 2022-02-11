@@ -19,6 +19,8 @@ const ThemesCreateNew = () => {
   const onFinishCreateTheme = (values: CreateThemeTypeInput) => {
     const variables: CreateTypeInput = {
       titleCategory: values.nameEnglish,
+      insidePreviewUrl: values.insidePreviewUrl,
+      outsidePreviewUrl: values.outsidePreviewUrl,
       createThemeInput: {
         title: values.name,
         code3D: values.code,

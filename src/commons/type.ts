@@ -47,6 +47,8 @@ export interface CreateThemeTypeInput {
   nameEnglish: string;
   order?: string;
   price: number;
+  insidePreviewUrl: string;
+  outsidePreviewUrl: string;
 }
 
 export interface CreateStyleTypeInput {

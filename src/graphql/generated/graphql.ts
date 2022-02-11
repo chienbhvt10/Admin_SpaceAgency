@@ -996,6 +996,13 @@ export type CreateThemeVariables = Exact<{
 
 export type CreateTheme = { __typename?: 'Mutation', createTheme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } };
 
+export type CreateThemeImageVariables = Exact<{
+  createThemeImageInput: CreateThemeImageInput;
+}>;
+
+
+export type CreateThemeImage = { __typename?: 'Mutation', createThemeImage: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } };
+
 export type RemoveThemeVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -1391,6 +1398,15 @@ export const CreateThemeDocument = gql`
   }
 }
     ${ITheme}`;
+export const CreateThemeImageDocument = gql`
+    mutation createThemeImage($createThemeImageInput: CreateThemeImageInput!) {
+  createThemeImage(createThemeImageInput: $createThemeImageInput) {
+    id
+    outsidePreviewUrl
+    insidePreviewUrl
+  }
+}
+    `;
 export const RemoveThemeDocument = gql`
     mutation removeTheme($id: String!) {
   removeTheme(id: $id) {
@@ -1531,6 +1547,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     createTheme(variables: CreateThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateTheme>(CreateThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createTheme');
+    },
+    createThemeImage(variables: CreateThemeImageVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateThemeImage> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateThemeImage>(CreateThemeImageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createThemeImage');
     },
     removeTheme(variables: RemoveThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<RemoveTheme>(RemoveThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeTheme');

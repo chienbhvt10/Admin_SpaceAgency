@@ -1,3 +1,4 @@
+import { CreateThemeImageVariables } from './../../../graphql/generated/graphql';
 import {
   CreateThemeCategoryVariables,
   CreateThemeVariables,
@@ -35,6 +36,10 @@ export const createThemeCategory = async (variables: CreateThemeCategoryVariable
 export const updateThemeCategory = async (variables: UpdateThemeCategoryVariables) => {
   const sdk = getSDK(true);
   return sdk.updateThemeCategory(variables);
+};
+export const createThemeImage = async (variables: CreateThemeImageVariables) => {
+  const sdk = getSDK(true);
+  return sdk.createThemeImage(variables);
 };
 
 export const removeTheme = async (variables: RemoveThemeVariables) => {
