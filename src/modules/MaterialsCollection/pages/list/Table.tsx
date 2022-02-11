@@ -40,7 +40,7 @@ function TableMaterial(props: IProps) {
       title: 'No',
       dataIndex: '#',
       key: '#',
-      width: 40,
+      width: 60,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
@@ -48,13 +48,15 @@ function TableMaterial(props: IProps) {
       dataIndex: 'title',
       key: 'title',
       sorter: true,
+      width: 100,
     },
     {
       title: '詳細',
       dataIndex: 'description',
       key: 'description',
       sorter: false,
-      render: (_: any, record) => <>{record.title}</>,
+      width: 600,
+      render: (_: any, record) => <>{record.style?.description}</>,
     },
     {
       title: '作成日',
