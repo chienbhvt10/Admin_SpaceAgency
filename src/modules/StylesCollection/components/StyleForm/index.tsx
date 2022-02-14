@@ -1,4 +1,5 @@
-import { Col, Form, Input, InputNumber, Row, Select, Typography } from 'antd';
+import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
+import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import { CreateStyleTypeInput, TypeForm } from 'commons/type';
 import { IStyle } from 'graphql/generated/graphql';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
@@ -127,7 +128,7 @@ const StyleCollectionForm = (props: Props) => {
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col span={8}>
+                <Col span={8} style={{ height: '250px' }}>
                   <UploadDragger />
                 </Col>
               </Row>

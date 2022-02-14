@@ -133,7 +133,6 @@ const ThemesForm = (props: Props) => {
               <Col span={22} style={{ marginBottom: '20px' }}>
                 <Row>
                   <Col span={16}>
-                    D
                     <Row>
                       <Col span={18}>
                         <Form.Item

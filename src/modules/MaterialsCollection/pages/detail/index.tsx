@@ -74,7 +74,7 @@ const MaterialUpdate = () => {
   return (
     <div>
       <MaterialCollectionLayout>
-        <PageHeader title="Update Material Collection" breadcrumb={{ routes }} />
+        <PageHeader title="" breadcrumb={{ routes }} />
         <MaterialForm
           onFinish={onFinish}
           item={item}
