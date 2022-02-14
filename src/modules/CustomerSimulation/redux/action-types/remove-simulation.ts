@@ -15,7 +15,7 @@ export interface RemoveSimulationAction {
 
 export interface RemoveSimulationActionSuccess {
   type: typeof REMOVE_SIMULATION_SUCCESS;
-  payload: ISimulation;
+  payload: ISimulation | undefined;
 }
 
 export interface RemoveSimulationActionError {
