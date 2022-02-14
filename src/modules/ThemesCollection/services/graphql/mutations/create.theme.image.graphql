@@ -1,0 +1,7 @@
+mutation createThemeImage($createThemeImageInput: CreateThemeImageInput!) {
+  createThemeImage(createThemeImageInput: $createThemeImageInput) {
+    id
+    outsidePreviewUrl
+    insidePreviewUrl
+  }
+}

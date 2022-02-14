@@ -1,0 +1,7 @@
+mutation updateThemeImage($updateThemeImageInput: UpdateThemeImageInput!) {
+  updateThemeImage(updateThemeImageInput: $updateThemeImageInput) {
+    id
+    outsidePreviewUrl
+    insidePreviewUrl
+  }
+}

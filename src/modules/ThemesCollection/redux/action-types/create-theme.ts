@@ -11,6 +11,8 @@ export interface CreateThemeState {
 
 export interface CreateTypeInput extends CreateThemeVariables {
   titleCategory: string;
+  insidePreviewUrl: string;
+  outsidePreviewUrl: string;
 }
 
 export interface CreateThemeAction {

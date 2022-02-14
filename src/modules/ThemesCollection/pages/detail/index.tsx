@@ -27,8 +27,11 @@ function ThemesUpdate() {
 
   const onFinishUpdateTheme = (values: CreateThemeTypeInput) => {
     const variables: UpdateTypeInput = {
+      idImage: (items && items.themeCategories && items?.themeImage?.id) || '',
       idCategory: (items && items.themeCategories && items?.themeCategories[0].id) || '',
       titleCategory: values.nameEnglish || '',
+      insidePreviewUrl: values.insidePreviewUrl || '',
+      outsidePreviewUrl: values.outsidePreviewUrl || '',
       updateThemeInput: {
         id: items?.id || '',
         code3D: values?.code || '',

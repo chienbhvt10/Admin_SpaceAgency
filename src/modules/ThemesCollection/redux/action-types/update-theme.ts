@@ -1,6 +1,5 @@
 import { AppError } from 'commons/type';
 import { UpdateThemeVariables } from 'graphql/generated/graphql';
-import { CreateTypeInput } from './create-theme';
 export const UPDATE_THEME = 'UPDATE_THEME';
 export const UPDATE_THEME_SUCCESS = 'UPDATE_THEME_SUCCESS';
 export const UPDATE_THEME_ERROR = 'UPDATE_THEME_ERROR';
@@ -12,6 +11,9 @@ export interface UpdateThemeState {
 export interface UpdateTypeInput extends UpdateThemeVariables {
   idCategory: string;
   titleCategory: string;
+  idImage: string;
+  insidePreviewUrl: string;
+  outsidePreviewUrl: string;
 }
 
 export interface UpdateThemeAction {

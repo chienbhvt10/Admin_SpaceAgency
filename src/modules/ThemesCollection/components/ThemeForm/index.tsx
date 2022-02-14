@@ -36,6 +36,8 @@ const ThemesForm = (props: Props) => {
         nameEnglish: (items && items.themeCategories && items?.themeCategories[0]?.title) || '',
         order: '',
         price: items.price?.value || 0,
+        insidePreviewUrl: items.themeImage?.insidePreviewUrl || '',
+        outsidePreviewUrl: items.themeImage?.outsidePreviewUrl || '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,7 +107,7 @@ const ThemesForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="コード" name="code">
+                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="3Dコード" name="code">
                       <Input placeholder="コード" style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>
@@ -137,7 +139,7 @@ const ThemesForm = (props: Props) => {
                           rules={[requireRule]}
                           labelCol={{ span: 8, style: { marginRight: 20 } }}
                           label="Inside Preview"
-                          name="insidePreview"
+                          name="insidePreviewUrl"
                         >
                           <Input placeholder="Inside Preview" />
                         </Form.Item>
@@ -155,7 +157,6 @@ const ThemesForm = (props: Props) => {
                     </Row>
                     <Col span={24}>
                       <Form.Item
-                        rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
                         label="Name"
@@ -179,7 +180,7 @@ const ThemesForm = (props: Props) => {
                           rules={[requireRule]}
                           labelCol={{ span: 8, style: { marginRight: 20 } }}
                           label="Outside Preview"
-                          name="outsidePreview"
+                          name="outsidePreviewUrl"
                         >
                           <Input placeholder="Outside Preview" />
                         </Form.Item>
@@ -197,7 +198,6 @@ const ThemesForm = (props: Props) => {
                     </Row>
                     <Col span={24}>
                       <Form.Item
-                        rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
                         className="name"

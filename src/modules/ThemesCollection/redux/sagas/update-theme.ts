@@ -1,6 +1,12 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
-import { UpdateTheme, UpdateThemeCategory, UpdateThemeCategoryVariables } from 'graphql/generated/graphql';
+import {
+  UpdateTheme,
+  UpdateThemeCategory,
+  UpdateThemeCategoryVariables,
+  UpdateThemeImage,
+  UpdateThemeImageVariables,
+} from 'graphql/generated/graphql';
 import { getNavigate } from 'helpers/history';
 import * as apis from 'modules/ThemesCollection/services/apis';
 import { put } from 'redux-saga/effects';
@@ -15,11 +21,20 @@ export function* updateThemeAsync(action: UpdateThemeAction) {
         title: action.payload.titleCategory,
       },
     };
+    const updateThemeImageVariable: UpdateThemeImageVariables = {
+      updateThemeImageInput: {
+        id: action.payload.idImage || '',
+        insidePreviewUrl: action.payload.insidePreviewUrl || '',
+        outsidePreviewUrl: action.payload.outsidePreviewUrl || '',
+      },
+    };
     const dataThemeCategory: UpdateThemeCategory = yield apis.updateThemeCategory(variables);
+    const dataThemeImage: UpdateThemeImage = yield apis.updateThemeImage(updateThemeImageVariable);
     const data: UpdateTheme = yield apis.updateTheme({
       updateThemeInput: {
         ...action.payload.updateThemeInput,
         themeCategories: [{ id: dataThemeCategory.updateThemeCategory.id }],
+        themeImage: { id: dataThemeImage.updateThemeImage.id },
       },
     });
     getNavigate(CommonPath.THEME_COLLECTION);

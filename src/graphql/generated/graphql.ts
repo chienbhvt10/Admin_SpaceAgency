@@ -23,6 +23,19 @@ export type Auth = {
   refreshToken?: Maybe<Scalars['String']>;
 };
 
+export type BusinessCustomer = {
+  __typename?: 'BusinessCustomer';
+  companyName: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  furiquana: Scalars['String'];
+  id: Scalars['String'];
+  questionContent: Scalars['String'];
+  questionTitle: Scalars['String'];
+  representative: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
 export type ChangePasswordInput = {
   newPass: Scalars['String'];
   oldPass: Scalars['String'];
@@ -31,6 +44,15 @@ export type ChangePasswordInput = {
 export type CreateAuthInput = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type CreateBusinessCustomerInput = {
+  companyName: Scalars['String'];
+  email: Scalars['String'];
+  furiquana: Scalars['String'];
+  questionContent: Scalars['String'];
+  questionTitle: Scalars['String'];
+  representative: Scalars['String'];
 };
 
 export type CreateMaterialInput = {
@@ -170,6 +192,7 @@ export type Mutation = {
   changePassword: Scalars['Boolean'];
   /** Create new Admin */
   createAdmin: User;
+  createBusinessCustomer: BusinessCustomer;
   /** Create new Customer */
   createCustomer: User;
   /** Create new Material */
@@ -191,7 +214,7 @@ export type Mutation = {
   /** find one and remove material type */
   removeMaterialType: MaterialType;
   removeRequest: Request;
-  removeSimulation: Simulation;
+  removeSimulation?: Maybe<Simulation>;
   removeSimulationComponent: SimulationComponent;
   removeStyle: Style;
   removeTheme: Theme;
@@ -223,6 +246,11 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreateAdminArgs = {
   createUserInput: CreateUserInput;
+};
+
+
+export type MutationCreateBusinessCustomerArgs = {
+  createBusinessCustomer: CreateBusinessCustomerInput;
 };
 
 
@@ -571,6 +599,7 @@ export type QuotationItem = {
   priceValue: Scalars['Float'];
   refId: Scalars['String'];
   refType: RefType;
+  title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -877,7 +906,7 @@ export type RemoveSimulationVariables = Exact<{
 }>;
 
 
-export type RemoveSimulation = { __typename?: 'Mutation', removeSimulation: { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number } | null | undefined } };
+export type RemoveSimulation = { __typename?: 'Mutation', removeSimulation?: { __typename?: 'Simulation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null | undefined, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined }> | null | undefined, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } | null | undefined, style?: { __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined } | null | undefined, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null | undefined, id: string, title?: string | null | undefined, code3d?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, email?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, firstNameF?: string | null | undefined, lastNameF?: string | null | undefined, address?: string | null | undefined, phone?: string | null | undefined, role?: Role | null | undefined } | null | undefined, quotation?: { __typename?: 'Quotation', createdAt?: any | null | undefined, updatedAt?: any | null | undefined, id: string, taxRate: number } | null | undefined } | null | undefined };
 
 export type DetailSimulationVariables = Exact<{
   id: Scalars['String'];
@@ -996,6 +1025,13 @@ export type CreateThemeVariables = Exact<{
 
 export type CreateTheme = { __typename?: 'Mutation', createTheme: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } | null | undefined, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null | undefined, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null | undefined, code3d?: string | null | undefined, description?: string | null | undefined, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, refId: string, refType: RefType } | null | undefined, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null | undefined, code3D?: string | null | undefined, createdAt: any, updatedAt: any } | null | undefined }> | null | undefined } };
 
+export type CreateThemeImageVariables = Exact<{
+  createThemeImageInput: CreateThemeImageInput;
+}>;
+
+
+export type CreateThemeImage = { __typename?: 'Mutation', createThemeImage: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } };
+
 export type RemoveThemeVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -1016,6 +1052,13 @@ export type UpdateThemeVariables = Exact<{
 
 
 export type UpdateTheme = { __typename?: 'Mutation', updateTheme: { __typename?: 'Theme', id: string, title: string } };
+
+export type UpdateThemeImageVariables = Exact<{
+  updateThemeImageInput: UpdateThemeImageInput;
+}>;
+
+
+export type UpdateThemeImage = { __typename?: 'Mutation', updateThemeImage: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null | undefined, insidePreviewUrl?: string | null | undefined } };
 
 export type GetDetailThemeVariables = Exact<{
   id: Scalars['String'];
@@ -1391,6 +1434,15 @@ export const CreateThemeDocument = gql`
   }
 }
     ${ITheme}`;
+export const CreateThemeImageDocument = gql`
+    mutation createThemeImage($createThemeImageInput: CreateThemeImageInput!) {
+  createThemeImage(createThemeImageInput: $createThemeImageInput) {
+    id
+    outsidePreviewUrl
+    insidePreviewUrl
+  }
+}
+    `;
 export const RemoveThemeDocument = gql`
     mutation removeTheme($id: String!) {
   removeTheme(id: $id) {
@@ -1412,6 +1464,15 @@ export const UpdateThemeDocument = gql`
   updateTheme(updateThemeInput: $updateThemeInput) {
     id
     title
+  }
+}
+    `;
+export const UpdateThemeImageDocument = gql`
+    mutation updateThemeImage($updateThemeImageInput: UpdateThemeImageInput!) {
+  updateThemeImage(updateThemeImageInput: $updateThemeImageInput) {
+    id
+    outsidePreviewUrl
+    insidePreviewUrl
   }
 }
     `;
@@ -1532,6 +1593,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     createTheme(variables: CreateThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateTheme>(CreateThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createTheme');
     },
+    createThemeImage(variables: CreateThemeImageVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateThemeImage> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateThemeImage>(CreateThemeImageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createThemeImage');
+    },
     removeTheme(variables: RemoveThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<RemoveTheme>(RemoveThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeTheme');
     },
@@ -1540,6 +1604,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     updateTheme(variables: UpdateThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateTheme>(UpdateThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateTheme');
+    },
+    updateThemeImage(variables: UpdateThemeImageVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateThemeImage> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateThemeImage>(UpdateThemeImageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateThemeImage');
     },
     getDetailTheme(variables: GetDetailThemeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDetailTheme> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDetailTheme>(GetDetailThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDetailTheme');
