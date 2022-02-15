@@ -45,6 +45,10 @@ const ThemesForm = (props: Props) => {
         insidePreviewUrl: items.themeImage?.insidePreviewUrl || '',
         outsidePreviewUrl: items.themeImage?.outsidePreviewUrl || '',
       });
+      setObjUrlImage({
+        insidePreviewUrl: items?.themeImage?.insidePreviewUrl || '',
+        outsidePreviewUrl: items?.themeImage?.outsidePreviewUrl || '',
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, form]);
@@ -60,6 +64,16 @@ const ThemesForm = (props: Props) => {
 
   const onFinishFailed = () => {};
 
+  const handleResetInsideUrl = () => {
+    form.setFieldsValue({
+      insidePreviewUrl: '',
+    });
+  };
+  const handleResetOutsideUrl = () => {
+    form.setFieldsValue({
+      outsidePreviewUrl: '',
+    });
+  };
   const handleChangeInside = async (info: any) => {
     const urlImage = (await uploadImages(info)) as string;
     setObjUrlImage({
@@ -135,7 +149,7 @@ const ThemesForm = (props: Props) => {
                 <Row>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="価格" name="price">
-                      <InputNumber placeholder="Price" style={{ width: '100%' }} />
+                      <InputNumber style={{ width: '100%' }} defaultValue={0} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
@@ -166,10 +180,11 @@ const ThemesForm = (props: Props) => {
                 <Row>
                   <Col span={16}>
                     <Row>
-                      <Col span={18}>
+                      <Col span={24}>
                         <Form.Item
                           rules={[requireRule]}
-                          labelCol={{ span: 8, style: { marginRight: 20 } }}
+                          labelCol={{ span: 6, style: { marginRight: 20 } }}
+                          wrapperCol={{ span: 16 }}
                           label="Inside Preview"
                           name="insidePreviewUrl"
                         >
@@ -193,6 +208,7 @@ const ThemesForm = (props: Props) => {
                       loading={loadingImage}
                       handleChange={handleChangeInside}
                       imageUrl={objUrlImage.insidePreviewUrl}
+                      resetToDefault={() => handleResetInsideUrl()}
                     />
                   </Col>
                 </Row>
@@ -201,10 +217,11 @@ const ThemesForm = (props: Props) => {
                 <Row>
                   <Col span={16}>
                     <Row>
-                      <Col span={18}>
+                      <Col span={24}>
                         <Form.Item
                           rules={[requireRule]}
-                          labelCol={{ span: 8, style: { marginRight: 20 } }}
+                          labelCol={{ span: 6, style: { marginRight: 20 } }}
+                          wrapperCol={{ span: 16 }}
                           label="Outside Preview"
                           name="outsidePreviewUrl"
                         >
@@ -229,6 +246,7 @@ const ThemesForm = (props: Props) => {
                       loading={loadingImage}
                       handleChange={handleChangeOutside}
                       imageUrl={objUrlImage.outsidePreviewUrl}
+                      resetToDefault={() => handleResetOutsideUrl()}
                     />
                   </Col>
                 </Row>

@@ -51,6 +51,7 @@ const StyleCollectionForm = (props: Props) => {
       {theme.title}
     </Option>
   ));
+
   return (
     <div id="style-form">
       <Form name="basic" form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
@@ -104,7 +105,7 @@ const StyleCollectionForm = (props: Props) => {
               </Row>
             </Col>
 
-            {/* <Col className="image-upload-title" span={24}>
+            <Col className="image-upload-title" span={24}>
               <Title level={3}>Image Upload</Title>
             </Col>
             <Col span={22}>
@@ -132,7 +133,7 @@ const StyleCollectionForm = (props: Props) => {
                   <UploadDragger />
                 </Col>
               </Row>
-            </Col> */}
+            </Col>
           </Row>
         </FormHeader>
       </Form>

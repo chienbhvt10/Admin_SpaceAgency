@@ -242,7 +242,7 @@ const MaterialForm = (props: Props) => {
                       <Input style={{ width: 'calc(100% - 93px)' }} />
                     </Form.Item>
                   </Col>
-                  {/* <Col span={12}>
+                  <Col span={12}>
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       label="Image Preview"
@@ -259,8 +259,8 @@ const MaterialForm = (props: Props) => {
                         </Row>
                       </Col>
                     </Form.Item>
-                  </Col> */}
-                  {/* <Col span={12}>
+                  </Col>
+                  <Col span={12}>
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       label="Image Preview"
@@ -277,8 +277,8 @@ const MaterialForm = (props: Props) => {
                         </Row>
                       </Col>
                     </Form.Item>
-                  </Col> */}
-                  {/* <Col span={12}>
+                  </Col>
+                  <Col span={12}>
                     <Form.Item
                       labelCol={{ span: 4, style: { marginRight: 20 } }}
                       className="name"
@@ -297,7 +297,7 @@ const MaterialForm = (props: Props) => {
                     >
                       <Input style={{ width: '97%' }} />
                     </Form.Item>
-                  </Col> */}
+                  </Col>
                 </Row>
               </Col>
             </Row>
