@@ -21,6 +21,7 @@ interface IProps {
   height?: number;
   handleChange?: (info: any) => void;
   mustBeSquare?: boolean;
+  resetToDefault?: () => void;
 }
 
 export default function UploadDragger(props: IProps) {
@@ -70,16 +71,21 @@ export default function UploadDragger(props: IProps) {
     loading: false,
     value: props.value,
   });
-
+  React.useEffect(() => {
+    setState({
+      ...state,
+      imageUrl: props.imageUrl || '',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.imageUrl]);
   const [stateIMG, setStateIMG] = useState({
     previewVisible: false,
   });
 
   const customRequest = ({ onSuccess, onError, file }: any) => {};
-
   return (
     <>
-      {props.imageUrl ? (
+      {state.imageUrl ? (
         <div className="container">
           <Modal
             visible={stateIMG.previewVisible}
@@ -92,7 +98,7 @@ export default function UploadDragger(props: IProps) {
           </Modal>
           <input
             type="image"
-            src={props.imageUrl}
+            src={state.imageUrl}
             value={props.value?.id}
             className="image"
             alt="avatar"
@@ -107,7 +113,7 @@ export default function UploadDragger(props: IProps) {
                 size="middle"
                 title="Xóa"
                 onClick={() => {
-                  props.onChange && props.onChange(undefined);
+                  props.resetToDefault?.();
                   setState({
                     imageUrl: '',
                     loading: false,
