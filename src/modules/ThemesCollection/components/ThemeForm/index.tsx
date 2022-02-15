@@ -3,7 +3,8 @@ import { CommonPath } from 'commons/base-routes';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
-import { CreateThemeTypeInput, TypeForm } from 'commons/type';
+import { useUploadImages } from 'commons/hooks/useUploadImages/useUploadImages';
+import { CreateThemeTypeInput, ObjImage, TypeForm } from 'commons/type';
 import { ITheme } from 'graphql/generated/graphql';
 import 'modules/ThemesCollection/style/style.scss';
 import React from 'react';
@@ -24,7 +25,12 @@ const requireRule = { required: true, message: 'This is required information!' }
 
 const ThemesForm = (props: Props) => {
   const { loading, type, items, onFinish, title } = props;
+  const { uploadImages, loading: loadingImage } = useUploadImages();
   const [form] = Form.useForm<CreateThemeTypeInput>();
+  const [objUrlImage, setObjUrlImage] = React.useState({
+    insidePreviewUrl: '',
+    outsidePreviewUrl: '',
+  });
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -42,7 +48,33 @@ const ThemesForm = (props: Props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, form]);
+
+  React.useEffect(() => {
+    if (objUrlImage) {
+      form.setFieldsValue({
+        insidePreviewUrl: objUrlImage.insidePreviewUrl,
+        outsidePreviewUrl: objUrlImage.outsidePreviewUrl,
+      });
+    }
+  }, [objUrlImage, form]);
+
   const onFinishFailed = () => {};
+
+  const handleChangeInside = async (info: any) => {
+    const urlImage = (await uploadImages(info)) as string;
+    setObjUrlImage({
+      ...objUrlImage,
+      insidePreviewUrl: urlImage,
+    });
+  };
+
+  const handleChangeOutside = async (info: any) => {
+    const urlImage = (await uploadImages(info)) as string;
+    setObjUrlImage({
+      ...objUrlImage,
+      outsidePreviewUrl: urlImage,
+    });
+  };
 
   const onCancel = () => {
     navigate(CommonPath.THEME_COLLECTION);
@@ -141,18 +173,8 @@ const ThemesForm = (props: Props) => {
                           label="Inside Preview"
                           name="insidePreviewUrl"
                         >
-                          <Input placeholder="Inside Preview" />
+                          <Input placeholder="Inside Preview" disabled={true} />
                         </Form.Item>
-                      </Col>
-                      <Col span={4}>
-                        <BaseButton
-                          text="Choose Image"
-                          height=""
-                          width=""
-                          marginLeft=""
-                          marginRight=""
-                          backgroundColor="#17A2B8"
-                        />
                       </Col>
                     </Row>
                     <Col span={24}>
@@ -167,7 +189,11 @@ const ThemesForm = (props: Props) => {
                     </Col>
                   </Col>
                   <Col span={8} style={{ height: '300px' }}>
-                    <UploadDragger />
+                    <UploadDragger
+                      loading={loadingImage}
+                      handleChange={handleChangeInside}
+                      imageUrl={objUrlImage.insidePreviewUrl}
+                    />
                   </Col>
                 </Row>
               </Col>
@@ -182,18 +208,8 @@ const ThemesForm = (props: Props) => {
                           label="Outside Preview"
                           name="outsidePreviewUrl"
                         >
-                          <Input placeholder="Outside Preview" />
+                          <Input placeholder="Outside Preview" disabled={true} />
                         </Form.Item>
-                      </Col>
-                      <Col span={4}>
-                        <BaseButton
-                          text="Choose Image"
-                          height=""
-                          width=""
-                          marginLeft=""
-                          marginRight=""
-                          backgroundColor="#17A2B8"
-                        />
                       </Col>
                     </Row>
                     <Col span={24}>
@@ -209,7 +225,11 @@ const ThemesForm = (props: Props) => {
                     </Col>
                   </Col>
                   <Col span={8} style={{ height: '300px' }}>
-                    <UploadDragger />
+                    <UploadDragger
+                      loading={loadingImage}
+                      handleChange={handleChangeOutside}
+                      imageUrl={objUrlImage.outsidePreviewUrl}
+                    />
                   </Col>
                 </Row>
               </Col>

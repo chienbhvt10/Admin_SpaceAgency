@@ -14,9 +14,12 @@ function getBase64(img: any, callback: any) {
 
 interface IProps {
   value?: any;
+  imageUrl?: string;
   onChange?(media: any | undefined): void;
   width?: number;
+  loading?: boolean;
   height?: number;
+  handleChange?: (info: any) => void;
   mustBeSquare?: boolean;
 }
 
@@ -72,34 +75,11 @@ export default function UploadDragger(props: IProps) {
     previewVisible: false,
   });
 
-  const handleChange = (info: any) => {
-    console.log(info);
-    if (info.file.status === 'uploading') {
-      props.onChange && props.onChange(undefined);
-      setState({
-        ...state,
-        loading: true,
-        value: undefined,
-      });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl: string) =>
-        setState({
-          ...state,
-          imageUrl,
-          loading: false,
-        }),
-      );
-    }
-  };
-
   const customRequest = ({ onSuccess, onError, file }: any) => {};
 
   return (
     <>
-      {state.imageUrl ? (
+      {props.imageUrl ? (
         <div className="container">
           <Modal
             visible={stateIMG.previewVisible}
@@ -108,11 +88,11 @@ export default function UploadDragger(props: IProps) {
             }}
             footer={null}
           >
-            <img alt="ImgProduct" src={state.imageUrl} style={{ width: '100%' }} />
+            <img alt="ImgProduct" src={props.imageUrl} style={{ width: '100%' }} />
           </Modal>
           <input
             type="image"
-            src={state.imageUrl}
+            src={props.imageUrl}
             value={props.value?.id}
             className="image"
             alt="avatar"
@@ -150,16 +130,16 @@ export default function UploadDragger(props: IProps) {
         </div>
       ) : (
         <Upload.Dragger
-          name="files"
+          name="image"
           className="upload"
           customRequest={customRequest}
           multiple={false}
           showUploadList={false}
           beforeUpload={beforeUpload}
-          onChange={handleChange}
+          onChange={props.handleChange}
         >
           <div>
-            {state.loading ? <LoadingOutlined /> : <PlusOutlined />}
+            {props.loading ? <LoadingOutlined /> : <PlusOutlined />}
             <div style={{ marginTop: 8 }}>Upload</div>
           </div>
         </Upload.Dragger>
