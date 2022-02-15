@@ -204,3 +204,6 @@ export enum TypeKeyFilterStyle {
 export enum TypeSortUser {
   EMAIL = 'email',
 }
+export interface ObjImage {
+  imagePath: string;
+}
