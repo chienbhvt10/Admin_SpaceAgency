@@ -9,7 +9,7 @@ export interface ResponseGenerator {
 export function* checkErrorAsync() {
   while (true) {
     const action: ResponseGenerator = yield take((action: any) => /.+_ERROR/.test(action.type));
-    if (action.payload.response.errors[0].extensions.code === 'UNAUTHENTICATED') {
+    if (action.payload.response.errors[0].code === 'A000') {
       getNavigate(CommonPath.LOGIN_PATH);
       return;
     }
