@@ -6,14 +6,12 @@ interface IProps {
   record: any;
   title: string;
   onDelete: (record: any) => () => void;
-  onEdit: (record: any) => () => void;
 }
 
 const TableRowAction = (props: IProps) => {
-  const { onDelete, onEdit, record, title } = props;
+  const { onDelete, record, title } = props;
   return (
     <Space size="small">
-      <Button type="ghost" onClick={onEdit(record)} shape="circle" icon={<EditOutlined />} size="middle" />
       <Popconfirm
         title={title}
         cancelText="No"

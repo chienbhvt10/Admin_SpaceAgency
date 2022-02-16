@@ -11,6 +11,7 @@ fragment IRequest on Request {
   content
   postcode
   type
+  status
   user {
     ...IUsersFields
   }

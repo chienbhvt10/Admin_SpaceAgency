@@ -59,6 +59,12 @@ function ContactRequestTable(props: IProps) {
       sorter: false,
     },
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      sorter: false,
+    },
+    {
       title: 'ツール',
       dataIndex: '',
       key: 'Action',

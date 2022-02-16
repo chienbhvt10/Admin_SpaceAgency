@@ -9,7 +9,7 @@ export interface CreateThemeState {
   dataTheme?: ITheme;
 }
 
-export interface CreateTypeInput extends CreateThemeVariables {
+export interface CreateThemeInputType extends CreateThemeVariables {
   titleCategory: string;
   insidePreviewUrl: string;
   outsidePreviewUrl: string;
@@ -17,7 +17,7 @@ export interface CreateTypeInput extends CreateThemeVariables {
 
 export interface CreateThemeAction {
   type: typeof CREATE_THEME;
-  payload: CreateTypeInput;
+  payload: CreateThemeInputType;
 }
 
 export interface CreateThemeActionSuccess {

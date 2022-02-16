@@ -18,7 +18,7 @@ const USER_SIMULATE_COLLECTION_NEW = '/user-simulate-collection/new/';
 const USER_SIMULATE_COLLECTION_DETAIL = '/user-simulate-collection/detail/';
 
 const CONTACT_REQUEST = '/contact-request/';
-const CONTACT_REQUEST_NEW = '/contact-request/new';
+const CONTACT_REQUEST_DETAIL = '/contact-request/detail/:id';
 
 const ROLES_LIST = '/roles-list/';
 
@@ -42,5 +42,5 @@ export const CommonPath = {
   USER_SIMULATE_COLLECTION_NEW,
   USER_SIMULATE_COLLECTION_DETAIL,
   CONTACT_REQUEST,
-  CONTACT_REQUEST_NEW,
+  CONTACT_REQUEST_DETAIL,
 };

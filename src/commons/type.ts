@@ -1,4 +1,5 @@
 import { CommonPath } from 'commons/base-routes';
+import { RequestStatus } from 'graphql/generated/graphql';
 export const NEXT_LOCALE = 'NEXT_LOCALE';
 export interface LoginInput {
   userName: String;
@@ -59,7 +60,10 @@ export interface CreateStyleTypeInput {
   themeId: string;
   title: string;
 }
-
+export interface UpdateRequestStatusInput {
+  id: string;
+  status: RequestStatus;
+}
 export interface SimulationTypeInput {
   postCode: string;
   content: string;

@@ -23,6 +23,7 @@ const NewStyleCollection = () => {
 
   const onFinishCreateStyle = (values: CreateStyleTypeInput) => {
     createStyle({
+      previewImageUrl: '',
       createStyleInput: {
         title: values.title || '',
         code3d: values.code3d || '',

@@ -22,7 +22,7 @@ const routes = [
     breadcrumbName: 'Contact Request Collection',
   },
   {
-    path: CommonPath.CONTACT_REQUEST_NEW,
+    path: CommonPath.CONTACT_REQUEST_DETAIL,
     breadcrumbName: 'Create Contact Request',
   },
 ];

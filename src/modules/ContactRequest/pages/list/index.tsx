@@ -1,17 +1,17 @@
-import { Button, TablePaginationConfig } from 'antd';
+import { TablePaginationConfig } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import ContactRequestLayout from 'commons/components/layouts/ContactRequest';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import TableHeader from 'commons/components/layouts/TableHeader';
-import { PlusOutlined } from '@ant-design/icons';
-import React from 'react';
-import ContactRequestTable from './Table';
-import { FilterInput, IRequest } from 'graphql/generated/graphql';
-import { useListRequests } from 'modules/ContactRequest/hooks/useListRequest/useListRequest';
-import { OrderOfSorter } from 'helpers/string';
 import { TypeKeyFilterRequest, TypePagination } from 'commons/type';
+import { FilterInput, IRequest } from 'graphql/generated/graphql';
+import { OrderOfSorter } from 'helpers/string';
 import { FormSearch } from 'modules/ContactRequest/components/Filter-Form';
+import { useListRequests } from 'modules/ContactRequest/hooks/useListRequest';
+import { useRemoveRequest } from 'modules/ContactRequest/hooks/useRemoveRequest';
+import React from 'react';
 import { useNavigate } from 'react-router';
+import ContactRequestTable from './Table';
 
 function ContactRequestPage() {
   const { dataRequests, loading, paginationTable, updatePaginationAndSorterRequests, pagination, filterRequests } =
@@ -19,6 +19,7 @@ function ContactRequestPage() {
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>('');
   const navigate = useNavigate();
+  const { removeRequest } = useRemoveRequest();
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterRequest.EMAIL, value: '' }];
 
   React.useEffect(() => {
@@ -28,13 +29,16 @@ function ContactRequestPage() {
       setDisabled(true);
     }
   }, [value]);
-  const onNew = () => {
-    navigate(CommonPath.CONTACT_REQUEST_NEW);
+
+  const onDelete = (record: IRequest) => () => {
+    removeRequest({
+      id: record.id,
+    });
   };
 
-  const onDelete = (record: IRequest) => () => {};
-
-  const onEdit = (record: IRequest) => () => {};
+  const onEdit = (record: IRequest) => () => {
+    navigate('/contact-request/detail/' + record.id);
+  };
 
   const onChange = (paginationTable: TablePaginationConfig, __: any, sorter: any) => {
     const order = OrderOfSorter(sorter.order);

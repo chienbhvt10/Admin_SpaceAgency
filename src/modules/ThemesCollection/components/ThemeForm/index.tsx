@@ -160,21 +160,7 @@ const ThemesForm = (props: Props) => {
                 </Row>
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
-                <Row>
-                  <Col span={4}>
-                    <Title level={4}>Image Upload</Title>
-                  </Col>
-                  <Col span={20}>
-                    <BaseButton
-                      text="Add Image"
-                      height=""
-                      width=""
-                      marginLeft="20px"
-                      marginRight=""
-                      backgroundColor="#28A745"
-                    />
-                  </Col>
-                </Row>
+                <Title level={4}>Image Upload</Title>
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
                 <Row>

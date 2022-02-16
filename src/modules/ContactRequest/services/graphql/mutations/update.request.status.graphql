@@ -1,0 +1,5 @@
+mutation updateRequestStatus($status: RequestStatus!, $id: String!) {
+  updateRequestStatus(status: $status, id: $id) {
+    ...IRequest
+  }
+}

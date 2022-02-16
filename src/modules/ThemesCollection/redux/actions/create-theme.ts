@@ -2,13 +2,13 @@ import { AppError } from 'commons/type';
 import { ITheme } from 'graphql/generated/graphql';
 import {
   CreateThemeActionTypes,
-  CreateTypeInput,
+  CreateThemeInputType,
   CREATE_THEME,
   CREATE_THEME_ERROR,
   CREATE_THEME_SUCCESS,
 } from '../action-types';
 
-export const actionCreateTheme = (payload: CreateTypeInput): CreateThemeActionTypes => ({
+export const actionCreateTheme = (payload: CreateThemeInputType): CreateThemeActionTypes => ({
   type: CREATE_THEME,
   payload,
 });

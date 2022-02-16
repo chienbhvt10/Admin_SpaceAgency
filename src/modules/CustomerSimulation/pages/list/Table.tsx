@@ -105,12 +105,7 @@ const CustomerSimulationTable = (props: Props) => {
       width: 40,
       sorter: false,
       render: (_, record) => (
-        <TableRowAction
-          onDelete={onDelete}
-          onEdit={onEdit}
-          record={record}
-          title="Are you sure to delete this Simulation?"
-        />
+        <TableRowAction onDelete={onDelete} record={record} title="Are you sure to delete this Simulation?" />
       ),
     },
   ];

@@ -32,10 +32,10 @@ export default function UploadDragger(props: IProps) {
         message.error('Bạn chỉ có thể tải lên tệp JPG / PNG!');
         throw new Error('Bạn chỉ có thể tải lên tệp JPG / PNG! ');
       }
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isLt2M = file.size / 1024 / 1024 < 5;
       if (!isLt2M) {
-        message.error('Hình ảnh phải có kích thước nhỏ hơn 2MB!');
-        throw new Error('Hình ảnh phải có kích thước nhỏ hơn 2MB! ');
+        message.error('Hình ảnh phải có kích thước nhỏ hơn 5MB!');
+        throw new Error('Hình ảnh phải có kích thước nhỏ hơn 5MB! ');
       }
       const dimensions = await getDimensions(file);
 

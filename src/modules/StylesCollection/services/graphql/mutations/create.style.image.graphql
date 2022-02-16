@@ -1,0 +1,9 @@
+mutation createStyleImage($createStyleImageInput: CreateStyleImageInput!) {
+  createStylesImage(createStyleImageInput: $createStyleImageInput) {
+    __typename
+    id
+    previewImageUrl
+    createdAt
+    updatedAt
+  }
+}
