@@ -1,8 +1,14 @@
 import { AppError } from 'commons/type';
-import { CreateStyleVariables, IStyle } from 'graphql/generated/graphql';
-import { CreateStyleActionTypes, CREATE_STYLE, CREATE_STYLE_ERROR, CREATE_STYLE_SUCCESS } from '../action-types';
+import { IStyle } from 'graphql/generated/graphql';
+import {
+  CreateStyleActionTypes,
+  CreateStyleInputType,
+  CREATE_STYLE,
+  CREATE_STYLE_ERROR,
+  CREATE_STYLE_SUCCESS,
+} from '../action-types';
 
-export const actionCreateStyle = (payload: CreateStyleVariables): CreateStyleActionTypes => ({
+export const actionCreateStyle = (payload: CreateStyleInputType): CreateStyleActionTypes => ({
   type: CREATE_STYLE,
   payload,
 });

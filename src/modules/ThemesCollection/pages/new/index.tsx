@@ -6,7 +6,7 @@ import { CurrencyUnit } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import ThemesForm from 'modules/ThemesCollection/components/ThemeForm';
 import { useCreateThemes } from 'modules/ThemesCollection/hooks/useCreateThemes';
-import { CreateTypeInput } from 'modules/ThemesCollection/redux/action-types';
+import { CreateThemeInputType } from 'modules/ThemesCollection/redux/action-types';
 import React from 'react';
 
 const ThemesCreateNew = () => {
@@ -17,7 +17,7 @@ const ThemesCreateNew = () => {
   }, []);
 
   const onFinishCreateTheme = (values: CreateThemeTypeInput) => {
-    const variables: CreateTypeInput = {
+    const variables: CreateThemeInputType = {
       titleCategory: values.nameEnglish,
       insidePreviewUrl: values.insidePreviewUrl,
       outsidePreviewUrl: values.outsidePreviewUrl,

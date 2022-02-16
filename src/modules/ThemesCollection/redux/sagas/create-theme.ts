@@ -28,13 +28,13 @@ export function* createThemeAsync(action: CreateThemeAction) {
       },
     };
     const dataThemeCategory: CreateThemeCategory = yield apis.createThemeCategory(createThemeCategoryVariables);
-    const createThemeImage: CreateThemeImage = yield apis.createThemeImage(createThemeImageVariables);
+    const createThemeImageData: CreateThemeImage = yield apis.createThemeImage(createThemeImageVariables);
     const data: CreateTheme = yield apis.createTheme({
       ...action.payload.createThemeInput,
       createThemeInput: {
         ...action.payload.createThemeInput,
         themeCategories: [{ id: dataThemeCategory.createThemeCategory.id }],
-        themeImage: { id: createThemeImage.createThemeImage.id },
+        themeImage: { id: createThemeImageData.createThemeImage.id },
       },
     });
     yield put(

@@ -1,0 +1,5 @@
+mutation removeRequest($id: String!) {
+  removeRequest(id: $id) {
+    ...IRequest
+  }
+}

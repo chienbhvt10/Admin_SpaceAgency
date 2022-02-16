@@ -1,26 +1,26 @@
 import { AppError } from 'commons/type';
-import { CreateStyleVariables, IStyle } from 'graphql/generated/graphql';
-export const CREATE_STYLE = 'CREATE_STYLE';
-export const CREATE_STYLE_SUCCESS = 'CREATE_STYLE_SUCCESS';
-export const CREATE_STYLE_ERROR = 'CREATE_STYLE_ERROR';
+import { CreateStyleVariables, IStyle, UpdateStyleVariables } from 'graphql/generated/graphql';
+export const UPDATE_STYLE = 'UPDATE_STYLE';
+export const UPDATE_STYLE_SUCCESS = 'UPDATE_STYLE_SUCCESS';
+export const UPDATE_STYLE_ERROR = 'UPDATE_STYLE_ERROR';
 
-export interface CreateStyleState {
+export interface UpdateStyleState {
   loading: boolean;
   dataStyle?: IStyle;
 }
 
-export interface CreateStyleAction {
-  type: typeof CREATE_STYLE;
-  payload: CreateStyleVariables;
+export interface UpdateStyleAction {
+  type: typeof UPDATE_STYLE;
+  payload: UpdateStyleVariables;
 }
 
-export interface CreateStyleActionSuccess {
-  type: typeof CREATE_STYLE_SUCCESS;
+export interface UpdateStyleActionSuccess {
+  type: typeof UPDATE_STYLE_SUCCESS;
   payload: IStyle;
 }
 
-export interface CreateStyleActionError {
-  type: typeof CREATE_STYLE_ERROR;
+export interface UpdateStyleActionError {
+  type: typeof UPDATE_STYLE_ERROR;
   payload: AppError;
 }
-export type CreateStyleActionTypes = CreateStyleAction | CreateStyleActionSuccess | CreateStyleActionError;
+export type UpdateStyleActionTypes = UpdateStyleAction | UpdateStyleActionSuccess | UpdateStyleActionError;

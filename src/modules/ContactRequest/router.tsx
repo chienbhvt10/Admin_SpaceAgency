@@ -1,13 +1,14 @@
 import { CommonPath } from 'commons/base-routes';
 import { RouteObject } from 'react-router';
+import RequestStatusUpdate from './pages/detail';
 import ContactRequestPage from './pages/list';
-import RequestsCreateNew from './pages/new';
 
 export const contactRequestRouter: RouteObject = {
   path: CommonPath.CONTACT_REQUEST,
   element: <ContactRequestPage />,
 };
-export const contactRequestNewRouter: RouteObject = {
-  path: CommonPath.CONTACT_REQUEST_NEW,
-  element: <RequestsCreateNew />,
+
+export const contactRequestDetailRouter: RouteObject = {
+  path: CommonPath.CONTACT_REQUEST_DETAIL,
+  element: <RequestStatusUpdate />,
 };
