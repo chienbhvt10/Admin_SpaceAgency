@@ -102,7 +102,8 @@ export default function UploadDragger(props: IProps) {
             value={props.value?.id}
             className="image"
             alt="avatar"
-            style={{ width: '100%' }}
+            height={300}
+            style={{ width: '100%', objectFit: 'cover' }}
           />
           <div className="middle">
             <Space>
@@ -143,6 +144,7 @@ export default function UploadDragger(props: IProps) {
           showUploadList={false}
           beforeUpload={beforeUpload}
           onChange={props.handleChange}
+          accept="image/*"
         >
           <div>
             {props.loading ? <LoadingOutlined /> : <PlusOutlined />}

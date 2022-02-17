@@ -6,6 +6,7 @@ export const REMOVE_SIMULATION_ERROR = 'REMOVE_SIMULATION_ERROR';
 
 export interface RemoveSimulationState {
   loading: boolean;
+  dataRemoveSimulation: undefined;
 }
 
 export interface RemoveSimulationAction {
@@ -15,7 +16,7 @@ export interface RemoveSimulationAction {
 
 export interface RemoveSimulationActionSuccess {
   type: typeof REMOVE_SIMULATION_SUCCESS;
-  payload: ISimulation | undefined;
+  payload: ISimulation;
 }
 
 export interface RemoveSimulationActionError {

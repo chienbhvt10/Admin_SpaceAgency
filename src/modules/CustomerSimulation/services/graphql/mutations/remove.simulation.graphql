@@ -1,5 +1,8 @@
 mutation removeSimulation($id: String!) {
   removeSimulation(id: $id) {
-    ...ISimulation
+    createdAt
+    updatedAt
+    id
+    status
   }
 }

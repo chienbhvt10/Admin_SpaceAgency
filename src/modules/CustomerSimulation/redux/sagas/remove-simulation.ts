@@ -1,5 +1,5 @@
 import { NotificationSuccess } from 'commons/components/Notification';
-import { ISimulation, RemoveSimulation, SimulationStatus } from 'graphql/generated/graphql';
+import { RemoveSimulation } from 'graphql/generated/graphql';
 import * as apis from 'modules/CustomerSimulation/services/apis';
 import { put, select } from 'redux-saga/effects';
 import { actionLoadingSuccess } from 'redux/actions';
@@ -10,7 +10,7 @@ export function* removeSimulationAsync(action: RemoveSimulationAction) {
   try {
     const data: RemoveSimulation = yield apis.removeSimulation(action.payload);
     const { pagination } = yield select((state: RootState) => state.simulations.simulationsState);
-    // yield put(actionRemoveSimulationSuccess(data.removeSimulation));
+    if (data.removeSimulation) yield put(actionRemoveSimulationSuccess(data.removeSimulation));
     yield put(actionSimulations({ pagination }));
     NotificationSuccess('Thông báo!', 'Delete simulation success');
     yield put(actionLoadingSuccess());

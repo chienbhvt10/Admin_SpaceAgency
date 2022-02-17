@@ -6,7 +6,7 @@ export const REMOVE_STYLE_ERROR = 'REMOVE_STYLE_ERROR';
 
 export interface RemoveStyleState {
   loading: boolean;
-  dataRemoveStyle?: IUsersFields;
+  dataRemoveStyle?: IStyle;
 }
 
 export interface RemoveStyleAction {

@@ -100,6 +100,7 @@ const ThemesForm = (props: Props) => {
           name="basic"
           initialValues={{
             ...items,
+            price: 0,
           }}
           form={form}
           onFinish={onFinish}
@@ -148,8 +149,13 @@ const ThemesForm = (props: Props) => {
               <Col span={22} className="price-order-box">
                 <Row>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="価格" name="price">
-                      <InputNumber style={{ width: '100%' }} defaultValue={0} />
+                    <Form.Item
+                      labelCol={{ span: 8, style: { marginRight: 20 } }}
+                      label="価格"
+                      name="price"
+                      rules={[requireRule]}
+                    >
+                      <InputNumber style={{ width: '100%' }} min={0} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>

@@ -21,7 +21,6 @@ const FormDropdown = (props: IProps) => {
         placeholder="---All---"
         loading={loading}
       >
-        <Option key="">---All---</Option>
         {items?.map((i) => {
           return <Option key={i?.id}>{i?.title}</Option>;
         })}

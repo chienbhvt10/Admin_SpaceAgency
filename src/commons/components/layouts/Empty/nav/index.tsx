@@ -81,7 +81,14 @@ function NavBar(props: IProps) {
         }}
       >
         <div className="logo" />
-        <Menu openKeys={openKeys} theme="dark" selectedKeys={[`${keyNav}`]} mode="inline" onSelect={onSelect}>
+        <Menu
+          openKeys={openKeys}
+          theme="dark"
+          selectedKeys={[`${keyNav}`]}
+          mode="inline"
+          onSelect={onSelect}
+          expandIcon={<></>}
+        >
           <Menu.Item key="-1" icon={<PieChartOutlined />}>
             ダッシュボード
           </Menu.Item>
