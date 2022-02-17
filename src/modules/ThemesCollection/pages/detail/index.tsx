@@ -73,6 +73,6 @@ const routes = [
   },
   {
     path: CommonPath.THEME_COLLECTION_UPDATE,
-    breadcrumbName: 'テーマコレクション更新',
+    breadcrumbName: 'Update Theme Collection',
   },
 ];

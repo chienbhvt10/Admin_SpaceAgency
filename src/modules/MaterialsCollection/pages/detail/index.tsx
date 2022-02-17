@@ -68,7 +68,7 @@ const MaterialUpdate = () => {
     },
     {
       path: CommonPath.MATERIAL_COLLECTION_DETAIL,
-      breadcrumbName: 'Detail Material Collection',
+      breadcrumbName: 'Update Material Collection',
     },
   ];
   return (

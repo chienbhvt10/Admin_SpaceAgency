@@ -59,6 +59,6 @@ const routes = [
   },
   {
     path: CommonPath.CONTACT_REQUEST_DETAIL,
-    breadcrumbName: 'Contact request detail',
+    breadcrumbName: 'Update Contact Request',
   },
 ];

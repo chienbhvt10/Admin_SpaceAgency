@@ -11,13 +11,13 @@ import { actionCreateStyleError, actionCreateStyleSuccess } from '../actions';
 import { actionStyles } from '../actions/list-styles';
 export function* createStyleAsync(action: CreateStyleAction) {
   try {
-    const createStyleImageVariable: CreateStyleImageVariables = {
-      createStyleImageInput: {
-        previewImageUrl: '',
-        style: { id: '' },
-      },
-    };
-    const createStyleImageData: CreateStyleImage = yield apis.createStyleImage(createStyleImageVariable);
+    // const createStyleImageVariable: CreateStyleImageVariables = {
+    //   createStyleImageInput: {
+    //     previewImageUrl: '',
+    //     style: { id: '' },
+    //   },
+    // };
+    // const createStyleImageData: CreateStyleImage = yield apis.createStyleImage(createStyleImageVariable);
 
     const createStyleData: CreateStyle = yield apis.createStyle({
       createStyleInput: action.payload.createStyleInput,

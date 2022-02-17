@@ -23,7 +23,7 @@ const StyleCollectionDetail = () => {
   }, []);
 
   React.useEffect(() => {
-    setTitle('Style Collection Detail');
+    setTitle('Update Style Collection');
   }, []);
 
   const onCancel = () => {
@@ -74,6 +74,6 @@ const routes = [
   },
   {
     path: CommonPath.STYLES_COLLECTION_DETAIL,
-    breadcrumbName: 'Style Collection Detail',
+    breadcrumbName: 'Update Style Collection',
   },
 ];

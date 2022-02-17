@@ -214,12 +214,12 @@ const MaterialForm = (props: Props) => {
                   </Col>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="価格" name="priceStandard">
-                      <InputNumber style={{ width: '96%', marginLeft: '10px' }} />
+                      <InputNumber style={{ width: '96%', marginLeft: '10px' }} min={0} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
                     <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="価格" name="pricePremium">
-                      <InputNumber style={{ width: '96%' }} />
+                      <InputNumber style={{ width: '96%' }} min={0} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>

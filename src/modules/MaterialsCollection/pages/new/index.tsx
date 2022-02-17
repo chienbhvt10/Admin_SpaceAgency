@@ -63,7 +63,7 @@ const MaterialCreateNew = () => {
   return (
     <div>
       <MaterialCollectionLayout>
-        <PageHeader title="Create Material Collection" breadcrumb={{ routes }} />
+        <PageHeader title="" breadcrumb={{ routes }} />
         <MaterialForm title="Create Material Collection" type={TypeForm.CREATE} loading={loading} onFinish={onFinish} />
       </MaterialCollectionLayout>
     </div>

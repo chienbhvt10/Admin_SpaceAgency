@@ -1,17 +1,6 @@
-import {
-  Button,
-  Col,
-  Form,
-  FormItemProps,
-  FormProps,
-  Input,
-  Radio,
-  Row,
-  Select,
-  Space,
-  Typography,
-  Upload,
-} from 'antd';
+import { Button, Col, Form, FormItemProps, FormProps, Input, Radio, Row, Select, Upload } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
+import Title from 'antd/lib/typography/Title';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import { TypeActiveAccount, TypeForm, TypeRole } from 'commons/type';
 import { CreateUserInput, IUsersFields, UpdateUserInput } from 'graphql/generated/graphql';
@@ -20,9 +9,6 @@ import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
 import FormHeader from '../FormHeader';
 
-import { useDispatch } from 'react-redux';
-import Title from 'antd/lib/typography/Title';
-import TextArea from 'antd/lib/input/TextArea';
 const layout: FormProps = {
   layout: 'horizontal',
 };
@@ -182,8 +168,8 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Last Name</Title>}
-                  name="lastName"
+                  label={<Title level={5}>First NameF</Title>}
+                  name="firstNameF"
                   rules={[requireRule]}
                   {...tailLayout}
                 >
@@ -193,14 +179,15 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>First NameF</Title>}
-                  name="firstNameF"
+                  label={<Title level={5}>Last Name</Title>}
+                  name="lastName"
                   rules={[requireRule]}
                   {...tailLayout}
                 >
                   <Input />
                 </Form.Item>
               </Col>
+
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
@@ -261,20 +248,16 @@ function ThemeForm(props: IProps) {
               </Col>
             </Col>
             <Col span={8}>
-              <Row>
-                <Col span={16}>
-                  <Form.Item labelCol={{ span: 8 }} label="Avatar" name="avatar" rules={[requireRule]}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={8}>
-                  <Upload name="image">
-                    <Button htmlType="button" type="primary">
-                      Choose Images
-                    </Button>
-                  </Upload>
-                </Col>
-              </Row>
+              <Form.Item
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 16 }}
+                label="Avatar"
+                name="avatar"
+                rules={[requireRule]}
+              >
+                <Input />
+              </Form.Item>
+
               <Col span={23} style={{ height: '350px' }}>
                 <UploadDragger />
               </Col>

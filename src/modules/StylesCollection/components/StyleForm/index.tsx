@@ -54,7 +54,17 @@ const StyleCollectionForm = (props: Props) => {
 
   return (
     <div id="style-form">
-      <Form name="basic" form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+      <Form
+        name="basic"
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+        initialValues={{
+          ...item,
+          price: 0,
+        }}
+      >
         <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
           <Row className="style-form-control">
             <Col span={22}>
@@ -92,7 +102,7 @@ const StyleCollectionForm = (props: Props) => {
               <Row>
                 <Col span={12}>
                   <Form.Item labelCol={{ span: 8 }} label="価格" name="price">
-                    <InputNumber style={{ width: '100%' }} />
+                    <InputNumber style={{ width: '100%' }} min={0} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -111,20 +121,10 @@ const StyleCollectionForm = (props: Props) => {
             <Col span={22}>
               <Row>
                 <Col span={16}>
-                  <Row>
-                    <Col span={18}>
-                      <Form.Item labelCol={{ span: 8 }} label="Preview" name="preview">
-                        <Input />
-                      </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                      <Upload name="image">
-                        <Button htmlType="button" type="primary">
-                          Choose Images
-                        </Button>
-                      </Upload>
-                    </Col>
-                  </Row>
+                  <Form.Item labelCol={{ span: 6 }} label="Preview" name="preview">
+                    <Input />
+                  </Form.Item>
+
                   <Form.Item labelCol={{ span: 6 }} label="名称" name="imageName">
                     <Input />
                   </Form.Item>

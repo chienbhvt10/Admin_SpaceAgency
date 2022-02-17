@@ -35,7 +35,7 @@ function DetailUserManagement() {
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,
-      breadcrumbName: 'Detail User Management',
+      breadcrumbName: 'Update User Management',
     },
   ];
   return (
