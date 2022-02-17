@@ -21,6 +21,8 @@ interface Props {
   onChange?(): void;
   onFinish?: (values: CreateMaterialsTypeInput) => void;
 }
+const requireRule = { required: true, message: 'This is required information!' };
+
 const MaterialForm = (props: Props) => {
   const { loading, item, title, onFinish, type } = props;
   const [themeId, setThemeId] = React.useState<string>();
@@ -213,12 +215,22 @@ const MaterialForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="価格" name="priceStandard">
+                    <Form.Item
+                      labelCol={{ span: 4, style: { marginRight: 20 } }}
+                      label="価格"
+                      name="priceStandard"
+                      rules={[requireRule]}
+                    >
                       <InputNumber style={{ width: '96%', marginLeft: '10px' }} min={0} />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="価格" name="pricePremium">
+                    <Form.Item
+                      labelCol={{ span: 4, style: { marginRight: 20 } }}
+                      label="価格"
+                      name="pricePremium"
+                      rules={[requireRule]}
+                    >
                       <InputNumber style={{ width: '96%' }} min={0} />
                     </Form.Item>
                   </Col>
