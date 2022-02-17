@@ -26,7 +26,7 @@ function CustomUserManagementTable(props: IProps) {
       title: 'No',
       dataIndex: '#',
       key: '#',
-      width: 40,
+      width: 60,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
@@ -34,6 +34,7 @@ function CustomUserManagementTable(props: IProps) {
       dataIndex: 'fullName',
       key: 'fullName',
       sorter: false,
+      width: 300,
       render: (_, record: IUsersFields, __) => <Text>{record.firstName + ' ' + record.lastName}</Text>,
     },
     {
@@ -42,23 +43,27 @@ function CustomUserManagementTable(props: IProps) {
       key: 'email',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 300,
     },
     {
       title: 'Role',
       dataIndex: 'role',
       key: 'role',
       sorter: false,
+      width: 120,
     },
     {
       title: 'Is Active',
       dataIndex: 'isActive',
       key: 'isActive',
       sorter: false,
+      width: 120,
     },
     {
       title: '編集',
       dataIndex: '',
       key: 'Action',
+      width: 120,
       render: (_: any, record: IUsersFields) => (
         <UserRowActions
           title="Are you sure you want to delete this user?"

@@ -44,7 +44,7 @@ export function* autoLoginFlowAsync(action: LoginActionSuccess) {
 export function* getMeAsync() {
   try {
     const data: Me = yield apis.me();
-    yield put(meSuccess(data.me));
+    if (data.me) yield put(meSuccess(data.me));
   } catch (err: any) {
     yield put(loginError(err));
   }

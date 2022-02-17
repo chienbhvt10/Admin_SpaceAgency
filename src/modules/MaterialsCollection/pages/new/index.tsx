@@ -30,6 +30,7 @@ const MaterialCreateNew = () => {
             material: {
               id: values.themeId,
             },
+            previewImageUrl: values.imagePreview,
           },
           {
             title: values.namePremium,
@@ -38,6 +39,10 @@ const MaterialCreateNew = () => {
               unit: CurrencyUnit.Jpy,
               value: values.pricePremium,
             },
+            material: {
+              id: values.themeId,
+            },
+            previewImageUrl: values.imagePreview2,
           },
         ],
         style: {

@@ -30,7 +30,7 @@ function TableThemes(props: IProps) {
       title: 'No',
       dataIndex: '#',
       key: '#',
-      width: 40,
+      width: 60,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
@@ -39,11 +39,13 @@ function TableThemes(props: IProps) {
       key: 'title',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 300,
     },
     {
       title: '英語表記',
       key: 'nameEnglish',
       sorter: false,
+      width: 300,
       render: (_: any, record: ITheme) => (
         <>{record && record.themeCategories && record.themeCategories.length && record.themeCategories[0].title}</>
       ),
@@ -54,6 +56,7 @@ function TableThemes(props: IProps) {
       key: 'code3D',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 150,
     },
     {
       title: '価格',
@@ -61,6 +64,7 @@ function TableThemes(props: IProps) {
       key: 'price',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 150,
       render: (_: any, record: ITheme) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
@@ -68,6 +72,7 @@ function TableThemes(props: IProps) {
       dataIndex: '',
       key: 'tools',
       align: 'center',
+      width: 150,
       render: (_: any, record: ITheme) => (
         <UserRowActions
           title="Are you sure you want to delete this theme?"

@@ -14,4 +14,11 @@ fragment IStyle on Style {
     createdAt
     updatedAt
   }
+  styleImage {
+    ...IStyleImage
+  }
+}
+fragment IStyleImage on StyleImage {
+  id
+  previewImageUrl
 }

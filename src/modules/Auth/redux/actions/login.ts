@@ -1,5 +1,5 @@
 import { AppError } from 'commons/type';
-import { Auth, LoginAdminVariables, User } from 'graphql/generated/graphql';
+import { Auth, IUsersFields, LoginAdminVariables, User } from 'graphql/generated/graphql';
 import {
   AUTO_LOGIN_FLOW,
   LOGIN,
@@ -29,7 +29,7 @@ export const me = (): LoginActionTypes => ({
   type: ME_ACTION,
 });
 
-export const meSuccess = (payload: User) => ({
+export const meSuccess = (payload: IUsersFields) => ({
   type: ME_ACTION_SUCCESS,
   payload,
 });

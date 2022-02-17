@@ -22,7 +22,7 @@ function ContactRequestTable(props: IProps) {
       title: 'No',
       dataIndex: '#',
       key: '#',
-      width: 40,
+      width: 60,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
@@ -31,6 +31,7 @@ function ContactRequestTable(props: IProps) {
       key: 'email',
       sorter: true,
       sortDirections: ['descend', 'ascend'],
+      width: 200,
     },
     {
       title: '氏名',
@@ -38,6 +39,7 @@ function ContactRequestTable(props: IProps) {
       key: 'requesterFullName',
       sorter: true,
       sortDirections: ['descend', 'ascend'],
+      width: 200,
     },
     {
       title: '電話番号',
@@ -45,29 +47,34 @@ function ContactRequestTable(props: IProps) {
       key: 'phone',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 100,
     },
     {
       title: 'タイプ',
       dataIndex: 'type',
       key: 'type',
       sorter: false,
+      width: 100,
     },
     {
       title: '郵便番号',
       dataIndex: 'postcode',
       key: 'postcode',
       sorter: false,
+      width: 100,
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
       sorter: false,
+      width: 60,
     },
     {
       title: 'ツール',
       dataIndex: '',
       key: 'Action',
+      width: 100,
       render: (_: any, record: IRequest) => (
         <UserRowActions
           title="Are you sure you want to delete this request?"

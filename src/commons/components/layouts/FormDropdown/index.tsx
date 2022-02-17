@@ -16,6 +16,7 @@ const FormDropdown = (props: IProps) => {
   return (
     <Form.Item {...formItem}>
       <Select
+        style={{ marginLeft: '20px' }}
         onSelect={onSelect}
         onDropdownVisibleChange={onDropdownVisibleChange}
         placeholder="---All---"
