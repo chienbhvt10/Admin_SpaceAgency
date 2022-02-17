@@ -23,8 +23,8 @@ const NewStyleCollection = () => {
 
   const onFinishCreateStyle = (values: CreateStyleTypeInput) => {
     createStyle({
-      previewImageUrl: '',
       createStyleInput: {
+        previewImageUrl: values.previewImageUrl,
         title: values.title || '',
         code3d: values.code3d || '',
         description: values.description || '',

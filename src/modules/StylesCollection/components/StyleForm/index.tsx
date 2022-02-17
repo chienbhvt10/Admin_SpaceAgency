@@ -1,9 +1,10 @@
 import { Button, Col, Form, Input, InputNumber, Row, Select, Typography, Upload } from 'antd';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
+import { useUploadImages } from 'commons/hooks/useUploadImages/useUploadImages';
 import { CreateStyleTypeInput, TypeForm } from 'commons/type';
 import { IStyle } from 'graphql/generated/graphql';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/style-form.scss';
 import FormHeader from '../FormHeader';
 const { Option } = Select;
@@ -26,6 +27,8 @@ const StyleCollectionForm = (props: Props) => {
   const { loading, type, item, onCancel, title, onFinish } = props;
   const [form] = Form.useForm<CreateStyleTypeInput>();
   const { dataAllThemes, getAllThemes } = useGetAllThemes();
+  const { uploadImages, loading: loadingImage } = useUploadImages();
+  const [previewImageUrl, setPreviewImageUrl] = useState('');
 
   React.useEffect(() => {
     getAllThemes();
@@ -40,10 +43,20 @@ const StyleCollectionForm = (props: Props) => {
         description: item.description || '',
         price: item.price?.value || 0,
         title: item.title || '',
+        previewImageUrl: item.styleImage?.previewImageUrl,
       });
+      console.log('old image ', item.styleImage?.previewImageUrl);
+      setPreviewImageUrl(item?.styleImage?.previewImageUrl || '');
     }
   }, [type, form, item]);
 
+  React.useEffect(() => {
+    if (previewImageUrl) {
+      form.setFieldsValue({
+        previewImageUrl: previewImageUrl,
+      });
+    }
+  }, [previewImageUrl, form]);
   const onFinishFailed = () => {};
 
   const themeOptions = dataAllThemes.map((theme, index) => (
@@ -52,6 +65,15 @@ const StyleCollectionForm = (props: Props) => {
     </Option>
   ));
 
+  const handleChangePreviewUrl = async (info: any) => {
+    const urlImage = (await uploadImages(info)) as string;
+    setPreviewImageUrl(urlImage);
+  };
+  const handleResetPreviewUrl = () => {
+    form.setFieldsValue({
+      previewImageUrl: '',
+    });
+  };
   return (
     <div id="style-form">
       <Form
@@ -119,20 +141,23 @@ const StyleCollectionForm = (props: Props) => {
               <Title level={3}>Image Upload</Title>
             </Col>
             <Col span={22}>
-              <Row>
-                <Col span={16}>
-                  <Form.Item labelCol={{ span: 6 }} label="Preview" name="preview">
-                    <Input />
-                  </Form.Item>
-
-                  <Form.Item labelCol={{ span: 6 }} label="名称" name="imageName">
-                    <Input />
+              <Col span={14}>
+                <Col span={24}>
+                  <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 16 }} label="Preview" name="previewImageUrl">
+                    <Input disabled={true} />
                   </Form.Item>
                 </Col>
-                <Col span={8} style={{ height: '250px' }}>
-                  <UploadDragger />
+                <Col span={16} offset={6}>
+                  <div style={{ marginLeft: '5px', height: '300px' }}>
+                    <UploadDragger
+                      loading={loadingImage}
+                      handleChange={handleChangePreviewUrl}
+                      imageUrl={previewImageUrl}
+                      resetToDefault={() => handleResetPreviewUrl()}
+                    />
+                  </div>
                 </Col>
-              </Row>
+              </Col>
             </Col>
           </Row>
         </FormHeader>

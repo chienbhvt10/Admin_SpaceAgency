@@ -37,7 +37,6 @@ const FilterForm = (props: Props) => {
             <Col span={12}>
               <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Role" name="role">
                 <Select placeholder="---全部---" onChange={onRoleChange}>
-                  <Option value="">---All---</Option>
                   <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
                   <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
                   <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
@@ -47,7 +46,6 @@ const FilterForm = (props: Props) => {
             <Col span={12}>
               <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Status" name="status">
                 <Select placeholder="---全部---" onChange={onStatusChange}>
-                  <Option value="">---All---</Option>
                   <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
                   <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
                 </Select>

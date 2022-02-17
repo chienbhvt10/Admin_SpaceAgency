@@ -22,7 +22,7 @@ const StyleCollectionTable = (props: IProps) => {
       title: 'No',
       dataIndex: '#',
       key: '#',
-      width: 40,
+      width: 60,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
@@ -31,6 +31,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'title',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 300,
     },
     {
       title: 'テーマ',
@@ -38,6 +39,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'theme',
       sortDirections: ['descend', 'ascend'],
       sorter: false,
+      width: 300,
       render: (_, record) => <>{record.theme?.title}</>,
     },
     {
@@ -46,6 +48,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'code3d',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
+      width: 150,
     },
     {
       title: '価格',
@@ -53,13 +56,14 @@ const StyleCollectionTable = (props: IProps) => {
       sortDirections: ['descend', 'ascend'],
       key: 'price',
       sorter: false,
+      width: 150,
       render: (_, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
       title: '編集',
       dataIndex: '',
       key: '#',
-      width: 40,
+      width: 120,
       render: (_, record) => (
         <TableRowAction
           onDelete={onDelete}

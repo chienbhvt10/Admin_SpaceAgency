@@ -48,14 +48,14 @@ function TableMaterial(props: IProps) {
       dataIndex: 'title',
       key: 'title',
       sorter: true,
-      width: 100,
+      width: 120,
     },
     {
       title: '詳細',
       dataIndex: 'description',
       key: 'description',
       sorter: false,
-      width: 600,
+      width: 500,
       render: (_: any, record) => <>{record.style?.description}</>,
     },
     {
@@ -63,6 +63,8 @@ function TableMaterial(props: IProps) {
       dataIndex: 'status',
       key: 'createdAt',
       sorter: false,
+      width: 120,
+
       render: (t: string) => <>{formatToDate(t)}</>,
     },
     {
@@ -70,13 +72,14 @@ function TableMaterial(props: IProps) {
       dataIndex: 'design',
       key: 'design',
       sorter: false,
+      width: 180,
       render: (_: any, record) => <>{record.style?.title}</>,
     },
     {
       title: '編集',
       dataIndex: '',
       key: '#',
-
+      width: 120,
       render: (_: any, record: any) => (
         <UserRowActions
           title="Are you sure you want to delete this material?"

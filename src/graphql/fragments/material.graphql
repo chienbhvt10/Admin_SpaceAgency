@@ -19,4 +19,11 @@ fragment IMaterialType on MaterialType {
   price {
     ...IPrice
   }
+  materialImage {
+    ...IMaterialImage
+  }
+}
+fragment IMaterialImage on MaterialImage {
+  id
+  previewImageUrl
 }

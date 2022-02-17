@@ -2,6 +2,7 @@ import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
 import StyleCollectionLayout from 'commons/components/layouts/StylesCollection';
 import { CreateStyleTypeInput, TypeForm } from 'commons/type';
+import { CurrencyUnit } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import StyleCollectionDetailForm from 'modules/StylesCollection/components/StyleForm';
 import { useStyleDetail } from 'modules/StylesCollection/hooks/useStyleDetail';
@@ -31,13 +32,16 @@ const StyleCollectionDetail = () => {
   };
 
   const onFinishUpdateStyle = (values: CreateStyleTypeInput) => {
+    console.log('new image', values.previewImageUrl);
     updateStyle({
       updateStyleInput: {
         id: item?.id || '',
+        previewImageUrl: values.previewImageUrl || '',
         code3d: values?.code3d || '',
         description: values.description || '',
         price: {
           value: values.price || 0,
+          unit: CurrencyUnit.Jpy,
         },
         theme: {
           id: values.themeId || '',

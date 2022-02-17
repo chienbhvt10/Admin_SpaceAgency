@@ -170,76 +170,51 @@ const ThemesForm = (props: Props) => {
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
                 <Row>
-                  <Col span={16}>
-                    <Row>
-                      <Col span={24}>
-                        <Form.Item
-                          rules={[requireRule]}
-                          labelCol={{ span: 6, style: { marginRight: 20 } }}
-                          wrapperCol={{ span: 16 }}
-                          label="Inside Preview"
-                          name="insidePreviewUrl"
-                        >
-                          <Input placeholder="Inside Preview" disabled={true} />
-                        </Form.Item>
-                      </Col>
-                    </Row>
+                  <Col span={12}>
                     <Col span={24}>
                       <Form.Item
+                        rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
-                        label="Name"
-                        name="insidePreviewName"
+                        label="Inside Preview"
+                        name="insidePreviewUrl"
                       >
-                        <Input placeholder="Inside Preview Name" />
+                        <Input placeholder="Inside Preview" disabled={true} />
                       </Form.Item>
                     </Col>
+                    <Col span={16} offset={6}>
+                      <div style={{ marginLeft: '5px', height: '300px' }}>
+                        <UploadDragger
+                          loading={loadingImage}
+                          handleChange={handleChangeInside}
+                          imageUrl={objUrlImage.insidePreviewUrl}
+                          resetToDefault={() => handleResetInsideUrl()}
+                        />
+                      </div>
+                    </Col>
                   </Col>
-                  <Col span={8} style={{ height: '300px' }}>
-                    <UploadDragger
-                      loading={loadingImage}
-                      handleChange={handleChangeInside}
-                      imageUrl={objUrlImage.insidePreviewUrl}
-                      resetToDefault={() => handleResetInsideUrl()}
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              <Col span={22} style={{ marginBottom: '20px' }}>
-                <Row>
-                  <Col span={16}>
-                    <Row>
-                      <Col span={24}>
-                        <Form.Item
-                          rules={[requireRule]}
-                          labelCol={{ span: 6, style: { marginRight: 20 } }}
-                          wrapperCol={{ span: 16 }}
-                          label="Outside Preview"
-                          name="outsidePreviewUrl"
-                        >
-                          <Input placeholder="Outside Preview" disabled={true} />
-                        </Form.Item>
-                      </Col>
-                    </Row>
+                  <Col span={12}>
                     <Col span={24}>
                       <Form.Item
+                        rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
-                        className="name"
-                        label="Name"
-                        name="outsidePreviewName"
+                        label="Outside Preview"
+                        name="outsidePreviewUrl"
                       >
-                        <Input placeholder="Outside Preview Name" />
+                        <Input placeholder="Outside Preview" disabled={true} />
                       </Form.Item>
                     </Col>
-                  </Col>
-                  <Col span={8} style={{ height: '300px' }}>
-                    <UploadDragger
-                      loading={loadingImage}
-                      handleChange={handleChangeOutside}
-                      imageUrl={objUrlImage.outsidePreviewUrl}
-                      resetToDefault={() => handleResetOutsideUrl()}
-                    />
+                    <Col span={16} offset={6}>
+                      <div style={{ marginLeft: '5px', height: '300px' }}>
+                        <UploadDragger
+                          loading={loadingImage}
+                          handleChange={handleChangeOutside}
+                          imageUrl={objUrlImage.outsidePreviewUrl}
+                          resetToDefault={() => handleResetOutsideUrl()}
+                        />
+                      </div>
+                    </Col>
                   </Col>
                 </Row>
               </Col>

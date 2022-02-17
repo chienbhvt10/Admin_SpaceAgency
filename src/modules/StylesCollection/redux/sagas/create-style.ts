@@ -1,7 +1,7 @@
 import { CommonPath } from 'commons/base-routes';
 import { NotificationSuccess } from 'commons/components/Notification';
 import { TypePagination } from 'commons/type';
-import { CreateStyle, CreateStyleImage, CreateStyleImageVariables } from 'graphql/generated/graphql';
+import { CreateStyle } from 'graphql/generated/graphql';
 import { getNavigate } from 'helpers/history';
 import * as apis from 'modules/StylesCollection/services/apis';
 import { put } from 'redux-saga/effects';
@@ -11,16 +11,10 @@ import { actionCreateStyleError, actionCreateStyleSuccess } from '../actions';
 import { actionStyles } from '../actions/list-styles';
 export function* createStyleAsync(action: CreateStyleAction) {
   try {
-    // const createStyleImageVariable: CreateStyleImageVariables = {
-    //   createStyleImageInput: {
-    //     previewImageUrl: '',
-    //     style: { id: '' },
-    //   },
-    // };
-    // const createStyleImageData: CreateStyleImage = yield apis.createStyleImage(createStyleImageVariable);
-
     const createStyleData: CreateStyle = yield apis.createStyle({
-      createStyleInput: action.payload.createStyleInput,
+      createStyleInput: {
+        ...action.payload.createStyleInput,
+      },
     });
 
     yield put(

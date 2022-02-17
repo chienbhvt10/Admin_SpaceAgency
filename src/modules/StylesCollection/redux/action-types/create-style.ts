@@ -8,12 +8,9 @@ export interface CreateStyleState {
   loading: boolean;
   dataStyle?: IStyle;
 }
-export interface CreateStyleInputType extends CreateStyleVariables {
-  previewImageUrl: string;
-}
 export interface CreateStyleAction {
   type: typeof CREATE_STYLE;
-  payload: CreateStyleInputType;
+  payload: CreateStyleVariables;
 }
 
 export interface CreateStyleActionSuccess {

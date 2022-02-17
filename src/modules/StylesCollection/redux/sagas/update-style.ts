@@ -9,7 +9,11 @@ import { UpdateStyleAction } from '../action-types';
 import { actionUpdateStyleError, actionUpdateStyleSuccess } from '../actions';
 export function* updateStyleAsync(action: UpdateStyleAction) {
   try {
-    const data: UpdateStyle = yield apis.updateStyle(action.payload);
+    const data: UpdateStyle = yield apis.updateStyle({
+      updateStyleInput: {
+        ...action.payload.updateStyleInput,
+      },
+    });
     yield put(actionUpdateStyleSuccess(data.updateStyle));
     getNavigate(CommonPath.STYLES_COLLECTION);
     NotificationSuccess('Thông báo!', 'Update Style Success.');

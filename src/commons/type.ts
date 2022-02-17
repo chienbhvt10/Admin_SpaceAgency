@@ -55,7 +55,7 @@ export interface CreateThemeTypeInput {
 export interface CreateStyleTypeInput {
   code3d: string;
   description: string;
-  imageName: string;
+  previewImageUrl: string;
   price: number;
   themeId: string;
   title: string;

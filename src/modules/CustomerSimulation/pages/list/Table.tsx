@@ -26,14 +26,18 @@ const CustomerSimulationTable = (props: Props) => {
         dataIndex: 'material',
         key: 'material',
         sorter: false,
-        render: (_: any, record) => <>{record.material?.title}</>,
+        align: 'center',
+        width: 620,
+        render: (_: any, record) => <p style={{ textAlign: 'center' }}>{record.material?.title}</p>,
       },
       {
         title: 'Price',
         dataIndex: 'price',
         key: 'price',
+        align: 'center',
         sorter: false,
-        render: (_any, record) => <>{record.price?.value}</>,
+        width: 300,
+        render: (_any, record) => <p style={{ textAlign: 'center' }}>{record.price?.value}</p>,
       },
     ];
     return (
@@ -58,7 +62,7 @@ const CustomerSimulationTable = (props: Props) => {
       title: 'Customer Name',
       dataIndex: 'customerName',
       key: 'customerName',
-      width: 40,
+      width: 200,
       sorter: true,
       render: (_: any, record) => (
         <>
@@ -71,7 +75,7 @@ const CustomerSimulationTable = (props: Props) => {
       title: 'Type',
       dataIndex: 'type',
       key: 'type',
-      width: 40,
+      width: 150,
       sorter: false,
       // render: (_: any, record) => <>{record.requests?.type}</>,
     },
@@ -79,7 +83,7 @@ const CustomerSimulationTable = (props: Props) => {
       title: 'Design',
       dataIndex: 'design',
       key: 'design',
-      width: 40,
+      width: 150,
       sorter: false,
       render: (_: any, record) => <>{record.simulationComponent?.style?.title}</>,
     },
@@ -87,7 +91,7 @@ const CustomerSimulationTable = (props: Props) => {
       title: 'Total Price',
       dataIndex: 'totalPrice',
       key: 'totalPrice',
-      width: 40,
+      width: 100,
       sorter: true,
       render: (_: any, record) => <>{totalPrice(record.simulationComponent?.materialTypes || [])}</>,
     },
@@ -95,14 +99,14 @@ const CustomerSimulationTable = (props: Props) => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      width: 40,
+      width: 100,
       sorter: true,
     },
     {
       title: 'Tool',
       dataIndex: '',
       key: 'tool',
-      width: 40,
+      width: 50,
       sorter: false,
       render: (_, record) => (
         <TableRowAction onDelete={onDelete} record={record} title="Are you sure to delete this Simulation?" />

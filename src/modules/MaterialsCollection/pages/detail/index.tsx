@@ -40,6 +40,7 @@ const MaterialUpdate = () => {
           material: {
             id: values.themeId,
           },
+          previewImageUrl: values.imagePreview,
         },
         {
           id: (item && item.materialTypes && item?.materialTypes[1]?.id) || '',
@@ -49,6 +50,10 @@ const MaterialUpdate = () => {
             value: values?.pricePremium || 0,
           },
           title: values.namePremium || '',
+          material: {
+            id: values.themeId,
+          },
+          previewImageUrl: values.imagePreview2,
         },
       ],
       style: {
