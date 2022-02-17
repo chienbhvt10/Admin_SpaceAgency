@@ -116,7 +116,7 @@ const StyleCollectionPage = () => {
         }
       >
         <Row justify="center">
-          <Col span={24}>
+          <Col span={23}>
             <FilterForm
               themeId={themeId}
               disabled={disabled}
@@ -127,7 +127,7 @@ const StyleCollectionPage = () => {
               onChangeValue={onChangeValue}
             />
           </Col>
-          <Col span={24}>
+          <Col span={23}>
             <StyleCollectionTable
               pagination={paginationTable}
               onDelete={onDelete}

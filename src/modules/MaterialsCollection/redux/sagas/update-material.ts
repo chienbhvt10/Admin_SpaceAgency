@@ -9,6 +9,7 @@ import { UpdateMaterialAction } from '../action-types';
 import { actionUpdateMaterialError, actionUpdateMaterialSuccess } from '../actions';
 export function* updateMaterialAsync(action: UpdateMaterialAction) {
   try {
+    console.log('saga image', action.payload.updateMaterialInput.materialTypes);
     const data: UpdateMaterial = yield apis.updateMaterials(action.payload);
     yield put(actionUpdateMaterialSuccess(data.updateMaterial));
     getNavigate(CommonPath.MATERIAL_COLLECTION);

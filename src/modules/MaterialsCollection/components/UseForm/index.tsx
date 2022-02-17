@@ -107,6 +107,7 @@ const MaterialForm = (props: Props) => {
         previewUrl: item?.materialTypes[0].materialImage?.previewImageUrl || '',
         previewUrl2: item?.materialTypes[1].materialImage?.previewImageUrl || '',
       });
+      console.log('new image', item.materialTypes);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
@@ -193,6 +194,7 @@ const MaterialForm = (props: Props) => {
                         name: 'themeId',
                         labelCol: { span: 4 },
                         wrapperCol: { span: 16 },
+                        rules: [requireRule],
                       }}
                       onSelect={onSelectTheme}
                       loading={loadingSelectTheme}
@@ -207,6 +209,7 @@ const MaterialForm = (props: Props) => {
                         name: 'styleId',
                         labelCol: { span: 4 },
                         wrapperCol: { span: 16 },
+                        rules: [requireRule],
                       }}
                       onSelect={onSelectStyle}
                       loading={loadingSelectStyle}
@@ -290,6 +293,7 @@ const MaterialForm = (props: Props) => {
                         wrapperCol={{ span: 24 }}
                         label="Image Preview"
                         name="imagePreview"
+                        rules={[requireRule]}
                       >
                         <Input disabled={true} />
                       </Form.Item>
@@ -346,6 +350,7 @@ const MaterialForm = (props: Props) => {
                         wrapperCol={{ span: 24 }}
                         label="Image Preview"
                         name="imagePreview2"
+                        rules={[requireRule]}
                       >
                         <Input disabled={true} />
                       </Form.Item>

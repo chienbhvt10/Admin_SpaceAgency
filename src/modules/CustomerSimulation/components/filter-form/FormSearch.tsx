@@ -17,35 +17,34 @@ const FormSearch = (props: Props) => {
     <Col span={24}>
       <Row>
         <Col span={18}>
-          <Form.Item labelCol={{ span: 5 }} label="キーワード" name="keyword">
-            <Col offset={1}>
+          <Form.Item
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 18, style: { marginLeft: '10px' } }}
+            label="キーワード"
+            name="keyword"
+          >
+            <Col>
               <Input onChange={onChangeValue} placeholder="キーワードを入力してください。..." value={value} />
             </Col>
           </Form.Item>
         </Col>
-        <div className="wrapper-search">
+        <Col span={4} style={{ display: 'flex' }}>
           <BaseButton
-            text="リセット"
-            width={''}
-            height={''}
-            marginRight="5px"
-            marginLeft="50px"
+            text="Reset"
             disabled={props.disabled}
             backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
-            onClick={onReset}
+            onClick={props.onReset}
+            marginLeft={'10px'}
           />
           <BaseButton
-            text="検索"
-            width={''}
-            height={''}
+            text="Search"
             disabled={props.disabled}
             border="1px solid #007BFF"
-            marginRight={''}
             backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}
-            onClick={handleSearch}
-            marginLeft={''}
+            onClick={props.handleSearch}
+            marginLeft={'10px'}
           />
-        </div>
+        </Col>
       </Row>
     </Col>
   );

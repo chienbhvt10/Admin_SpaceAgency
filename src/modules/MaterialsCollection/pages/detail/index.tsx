@@ -25,6 +25,8 @@ const MaterialUpdate = () => {
   }, [id]);
 
   const onFinish = (values: CreateMaterialsTypeInput) => {
+    console.log('old image', values.imagePreview);
+    console.log('old image', values.imagePreview2);
     const updateMaterialInput: UpdateMaterialInput = {
       id: item?.id || '',
       title: values.name || '',

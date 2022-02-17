@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, PageHeader, TablePaginationConfig } from 'antd';
+import { Button, PageHeader, TablePaginationConfig, Row, Col } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import TableHeader from 'commons/components/layouts/TableHeader';
@@ -117,25 +117,31 @@ function ListUserManagement() {
           </Button>
         }
       >
-        <FilterForm
-          role={role}
-          disabled={disabled}
-          status={status}
-          value={value}
-          onRoleChange={onRoleChange}
-          onStatusChange={onStatusChange}
-          onChange={onChangeValue}
-          handleSearch={handleSearch}
-          onReset={onReset}
-        />
-        <CustomUserManagementTable
-          onDelete={onDelete}
-          onEdit={onEdit}
-          items={dataUsers}
-          loading={loading}
-          pagination={paginationTable}
-          onChange={onChange}
-        />
+        <Row justify="center">
+          <Col span={23}>
+            <FilterForm
+              role={role}
+              disabled={disabled}
+              status={status}
+              value={value}
+              onRoleChange={onRoleChange}
+              onStatusChange={onStatusChange}
+              onChange={onChangeValue}
+              handleSearch={handleSearch}
+              onReset={onReset}
+            />
+          </Col>
+          <Col span={23}>
+            <CustomUserManagementTable
+              onDelete={onDelete}
+              onEdit={onEdit}
+              items={dataUsers}
+              loading={loading}
+              pagination={paginationTable}
+              onChange={onChange}
+            />
+          </Col>
+        </Row>
       </TableHeader>
     </UserManagementLayout>
   );
