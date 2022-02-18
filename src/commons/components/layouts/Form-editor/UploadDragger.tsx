@@ -82,6 +82,13 @@ export default function UploadDragger(props: IProps) {
     previewVisible: false,
   });
 
+  const handleChange = (info: any) => {
+    if (info.file.status === 'uploading') {
+      props.handleChange && props.handleChange(info);
+      return;
+    }
+  };
+
   const customRequest = ({ onSuccess, onError, file }: any) => {};
   return (
     <>
@@ -143,7 +150,7 @@ export default function UploadDragger(props: IProps) {
           multiple={false}
           showUploadList={false}
           beforeUpload={beforeUpload}
-          onChange={props.handleChange}
+          onChange={handleChange}
           accept="image/*"
         >
           <div>

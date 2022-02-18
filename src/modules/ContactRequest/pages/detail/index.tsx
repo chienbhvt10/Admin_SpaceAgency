@@ -26,7 +26,6 @@ const RequestStatusUpdate = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onFinishUpdateRequestStatus = (values: UpdateRequestStatusInput) => {
-    console.log(values.status);
     updateRequestStatus({
       id: item?.id || '',
       status: values.status,
