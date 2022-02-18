@@ -7,7 +7,7 @@ import { useUploadImages } from 'commons/hooks/useUploadImages/useUploadImages';
 import { CreateMaterialsTypeInput, TypeForm } from 'commons/type';
 import { IMaterial, IStyle, ITheme } from 'graphql/generated/graphql';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useGetAllStyles } from '../../../StylesCollection/hooks/useGetAllStyles';
 import './style.scss';
@@ -26,7 +26,10 @@ const requireRule = { required: true, message: 'This is required information!' }
 
 const MaterialForm = (props: Props) => {
   const { loading, item, title, onFinish, type } = props;
-  const { uploadImages, loading: loadingImage } = useUploadImages();
+  const { uploadImages } = useUploadImages();
+  const [loadingImage, setLoadingImage] = useState<boolean>(false);
+  const [loadingImage2, setLoadingImage2] = useState<boolean>(false);
+
   const [themeId, setThemeId] = React.useState<string>();
   const [styleId, setStyleId] = React.useState<string>();
   const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
@@ -46,8 +49,8 @@ const MaterialForm = (props: Props) => {
     nameStandard: '',
     pricePremium: 0,
     priceStandard: 0,
-    styleId: '',
-    themeId: '',
+    styleId: undefined,
+    themeId: undefined,
   });
   const navigate = useNavigate();
 
@@ -92,8 +95,8 @@ const MaterialForm = (props: Props) => {
       setUpdateMaterialInput({
         ...updateMaterialInput,
         name: item.title || '',
-        themeId: item.style?.theme?.id || '',
-        styleId: item.style?.id || '',
+        themeId: item.style?.theme?.id || undefined,
+        styleId: item.style?.id || undefined,
         codePremium: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
         codeStandard: (item && item.materialTypes && item.materialTypes[0]?.code3d) || '',
         description: (item && item.style?.description && item.style.description) || '',
@@ -156,14 +159,18 @@ const MaterialForm = (props: Props) => {
     });
   };
   const handleChangePreviewUrl = async (info: any) => {
+    setLoadingImage(true);
     const urlImage = (await uploadImages(info)) as string;
+    setLoadingImage(false);
     setObjUrlImage({
       ...objUrlImage,
       previewUrl: urlImage,
     });
   };
   const handleChangePreviewUrl2 = async (info: any) => {
+    setLoadingImage2(true);
     const urlImage = (await uploadImages(info)) as string;
+    setLoadingImage2(false);
     setObjUrlImage({
       ...objUrlImage,
       previewUrl2: urlImage,
@@ -186,13 +193,13 @@ const MaterialForm = (props: Props) => {
             <Row justify="center">
               <Col span={22}>
                 <Row>
-                  <Col span={12}>
+                  <Col span={11} style={{ marginLeft: '18px' }}>
                     <FormDropdown
                       formItem={{
                         label: 'テーマ',
                         name: 'themeId',
                         labelCol: { span: 4 },
-                        wrapperCol: { span: 16 },
+                        wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                         rules: [requireRule],
                       }}
                       onSelect={onSelectTheme}
@@ -207,7 +214,7 @@ const MaterialForm = (props: Props) => {
                         label: 'デザイン',
                         name: 'styleId',
                         labelCol: { span: 4 },
-                        wrapperCol: { span: 16 },
+                        wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                         rules: [requireRule],
                       }}
                       onSelect={onSelectStyle}
@@ -357,7 +364,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={21} offset={1}>
                       <div style={{ marginLeft: '6px', height: '300px' }}>
                         <UploadDragger
-                          loading={loadingImage}
+                          loading={loadingImage2}
                           handleChange={handleChangePreviewUrl2}
                           imageUrl={objUrlImage.previewUrl2}
                           resetToDefault={() => handleResetPreviewUrl2()}

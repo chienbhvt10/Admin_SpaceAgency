@@ -28,7 +28,7 @@ const MaterialCreateNew = () => {
               value: values.priceStandard,
             },
             material: {
-              id: values.themeId,
+              id: values.themeId || '',
             },
             previewImageUrl: values.imagePreview,
           },
@@ -40,13 +40,13 @@ const MaterialCreateNew = () => {
               value: values.pricePremium,
             },
             material: {
-              id: values.themeId,
+              id: values.themeId || '',
             },
             previewImageUrl: values.imagePreview2,
           },
         ],
         style: {
-          id: values.styleId,
+          id: values.styleId || '',
         },
       },
     });

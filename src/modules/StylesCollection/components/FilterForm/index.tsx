@@ -1,4 +1,5 @@
 import { Col, Form, Row, Select } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
@@ -13,6 +14,7 @@ interface Props {
   disabled?: boolean;
 }
 const FilterForm = (props: Props) => {
+  const [form] = useForm();
   const { value, onChangeValue, handleSearch, onReset, onChangeTheme, disabled } = props;
   const { getAllThemes, dataAllThemes } = useGetAllThemes();
 
@@ -27,8 +29,12 @@ const FilterForm = (props: Props) => {
       getAllThemes();
     }
   };
+  const resetFields = () => {
+    form.setFieldsValue({ themeId: undefined });
+    onReset && onReset();
+  };
   return (
-    <Form className="filter-form">
+    <Form className="filter-form" form={form}>
       <Row justify="center">
         <Col span={22} style={{ marginLeft: '33px' }}>
           <Form.Item labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} label="テーマ" name="themeId">
@@ -40,7 +46,7 @@ const FilterForm = (props: Props) => {
         <Col span={22}>
           <FormSearch
             disabled={disabled}
-            onReset={onReset}
+            onReset={resetFields}
             onChange={onChangeValue}
             value={value}
             handleSearch={handleSearch}

@@ -33,7 +33,7 @@ const FormSearch = (props: Props) => {
             text="Reset"
             disabled={props.disabled}
             backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
-            onClick={props.onReset}
+            onClick={onReset}
             marginLeft={'10px'}
           />
           <BaseButton
