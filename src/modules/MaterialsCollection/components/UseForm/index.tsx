@@ -107,7 +107,6 @@ const MaterialForm = (props: Props) => {
         previewUrl: item?.materialTypes[0].materialImage?.previewImageUrl || '',
         previewUrl2: item?.materialTypes[1].materialImage?.previewImageUrl || '',
       });
-      console.log('new image', item.materialTypes);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
