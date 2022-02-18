@@ -17,7 +17,7 @@ import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles'
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import { useForm } from 'antd/lib/form/Form';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import './style.scss';
 import TableMaterial from './Table';
@@ -27,6 +27,7 @@ const MaterialCollectionPage = () => {
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
   const { removeMaterial } = useRemoveMaterial();
+  const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
   const [themeId, setThemeId] = React.useState<string>();
   const { getAllStyles, dataAllStyles, loading: loadingAllThemes } = useGetAllStyles();
   const { getAllThemes, dataAllThemes, loading: loadingAllStyles } = useGetAllThemes();
@@ -63,6 +64,7 @@ const MaterialCollectionPage = () => {
   const onSelectTheme = (value: string) => {
     if (value) {
       setThemeId(value);
+      setVisibleStyleDropdown(false);
     } else {
       setThemeId(undefined);
     }
@@ -190,6 +192,7 @@ const MaterialCollectionPage = () => {
                       labelCol: { span: 6 },
                       wrapperCol: { span: 16 },
                     }}
+                    disabled={visibleStyleDropdown}
                     loading={loadingAllStyles}
                     onDropdownVisibleChange={onDropdownVisibleChangeStyles}
                     items={dataFilterStyles}

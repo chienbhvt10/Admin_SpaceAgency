@@ -29,7 +29,6 @@ const MaterialForm = (props: Props) => {
   const { uploadImages } = useUploadImages();
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [loadingImage2, setLoadingImage2] = useState<boolean>(false);
-
   const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
   const [themeId, setThemeId] = React.useState<string>();
   const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
