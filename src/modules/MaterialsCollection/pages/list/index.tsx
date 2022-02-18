@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form, TablePaginationConfig } from 'antd';
+import { Button, Form, TablePaginationConfig, Col, Row } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
@@ -134,45 +134,61 @@ const MaterialCollectionPage = () => {
           </Button>
         }
       >
-        <Form onValuesChange={onValuesChange} className="dropdown-select">
-          <FormDropdown
-            formItem={{
-              label: 'テーマ',
-              name: 'themeId',
-              labelCol: { span: 3 },
-            }}
-            loading={loadingAllThemes}
-            options={[]}
-            onDropdownVisibleChange={onDropdownVisibleChangeThemes}
-            items={dataAllThemes}
-          />
-          <FormDropdown
-            formItem={{
-              label: 'デザイン',
-              name: 'styleId',
-              labelCol: { span: 3 },
-            }}
-            loading={loadingAllStyles}
-            onDropdownVisibleChange={onDropdownVisibleChangeStyles}
-            items={dataAllStyles}
-            options={[]}
-          />
-        </Form>
-        <FormSearch
-          disabled={disabled}
-          onReset={onReset}
-          value={value}
-          onChange={onChangeValue}
-          handleSearch={handleSearch}
-        />
-        <TableMaterial
-          items={dataMaterials || []}
-          loading={loading}
-          onChange={onChange}
-          pagination={paginationTable}
-          onDelete={onDelete}
-          onEdit={onEdit}
-        />
+        <Row justify="center">
+          <Col span={23}>
+            <Form onValuesChange={onValuesChange} className="dropdown-select">
+              <Row style={{ marginLeft: '20px' }}>
+                <Col span={12}>
+                  <FormDropdown
+                    formItem={{
+                      label: 'テーマ',
+                      name: 'themeId',
+                      labelCol: { span: 6 },
+                      wrapperCol: { span: 16 },
+                    }}
+                    loading={loadingAllThemes}
+                    options={[]}
+                    onDropdownVisibleChange={onDropdownVisibleChangeThemes}
+                    items={dataAllThemes}
+                  />
+                </Col>
+                <Col span={12}>
+                  <FormDropdown
+                    formItem={{
+                      label: 'デザイン',
+                      name: 'styleId',
+                      labelCol: { span: 6 },
+                      wrapperCol: { span: 16 },
+                    }}
+                    loading={loadingAllStyles}
+                    onDropdownVisibleChange={onDropdownVisibleChangeStyles}
+                    items={dataAllStyles}
+                    options={[]}
+                  />
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+          <Col span={23}>
+            <FormSearch
+              disabled={disabled}
+              onReset={onReset}
+              value={value}
+              onChange={onChangeValue}
+              handleSearch={handleSearch}
+            />
+          </Col>
+          <Col span={23}>
+            <TableMaterial
+              items={dataMaterials || []}
+              loading={loading}
+              onChange={onChange}
+              pagination={paginationTable}
+              onDelete={onDelete}
+              onEdit={onEdit}
+            />
+          </Col>
+        </Row>
       </TableHeader>
     </MaterialCollectionLayout>
   );

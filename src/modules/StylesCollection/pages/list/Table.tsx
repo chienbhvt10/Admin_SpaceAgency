@@ -48,7 +48,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'code3d',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      width: 150,
+      width: 100,
     },
     {
       title: '価格',

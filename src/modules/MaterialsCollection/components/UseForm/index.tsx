@@ -193,6 +193,7 @@ const MaterialForm = (props: Props) => {
                         name: 'themeId',
                         labelCol: { span: 4 },
                         wrapperCol: { span: 16 },
+                        rules: [requireRule],
                       }}
                       onSelect={onSelectTheme}
                       loading={loadingSelectTheme}
@@ -207,6 +208,7 @@ const MaterialForm = (props: Props) => {
                         name: 'styleId',
                         labelCol: { span: 4 },
                         wrapperCol: { span: 16 },
+                        rules: [requireRule],
                       }}
                       onSelect={onSelectStyle}
                       loading={loadingSelectStyle}
@@ -290,6 +292,7 @@ const MaterialForm = (props: Props) => {
                         wrapperCol={{ span: 24 }}
                         label="Image Preview"
                         name="imagePreview"
+                        rules={[requireRule]}
                       >
                         <Input disabled={true} />
                       </Form.Item>
@@ -346,6 +349,7 @@ const MaterialForm = (props: Props) => {
                         wrapperCol={{ span: 24 }}
                         label="Image Preview"
                         name="imagePreview2"
+                        rules={[requireRule]}
                       >
                         <Input disabled={true} />
                       </Form.Item>

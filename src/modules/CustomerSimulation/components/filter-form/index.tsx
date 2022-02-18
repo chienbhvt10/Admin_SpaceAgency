@@ -44,18 +44,18 @@ const FilterForm = (props: Props) => {
 
   return (
     <Form className="filter-form">
-      <Row>
-        <Col span={24}>
+      <Row justify="center">
+        <Col span={22}>
           <Row>
             <Col span={12}>
               <SelectFormItem
                 loading={loadingTheme}
-                colOffSet={1}
                 data={arrThemes || []}
                 formItem={{
                   label: 'テーマ',
                   name: 'theme',
-                  labelCol: { span: 8 },
+                  labelCol: { span: 6 },
+                  wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                 }}
                 onDropdownVisibleChange={onDropdownVisibleChangeTheme}
                 onSelect={onChangeTheme}
@@ -64,12 +64,12 @@ const FilterForm = (props: Props) => {
             <Col span={12}>
               <SelectFormItem
                 loading={loadingStyle}
-                colOffSet={1}
                 data={arrStyles || []}
                 formItem={{
                   label: 'デザイン',
                   name: 'design',
-                  labelCol: { span: 8 },
+                  labelCol: { span: 6 },
+                  wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                 }}
                 onDropdownVisibleChange={onDropdownVisibleChangeStyle}
                 onSelect={onChangeStyle}
@@ -77,37 +77,42 @@ const FilterForm = (props: Props) => {
             </Col>
           </Row>
         </Col>
-        <Col span={24}>
+        <Col span={22}>
           <Row>
             <Col span={12}>
               <SelectFormItem
                 loading={loadingUser}
-                colOffSet={1}
                 data={arrUsers || []}
                 onDropdownVisibleChange={onDropdownVisibleChangeUser}
                 formItem={{
                   label: '顧客／ユーザー',
                   name: 'theme',
-                  labelCol: { span: 8 },
+                  labelCol: { span: 6 },
+                  wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                 }}
               />
             </Col>
             <Col span={12}>
-              <Form.Item labelCol={{ span: 8 }} label="日付" name="date">
-                <Col offset={1}>
-                  <RangePicker style={{ width: '100%' }} format={dateFormat} />
-                </Col>
+              <Form.Item
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 16, style: { marginLeft: '10px' } }}
+                label="日付"
+                name="date"
+              >
+                <RangePicker style={{ width: '100%' }} format={dateFormat} />
               </Form.Item>
             </Col>
           </Row>
         </Col>
-        <FormSearch
-          onChangeValue={onChangeValue}
-          onReset={onReset}
-          handleSearch={handleSearch}
-          disabled={disabled}
-          value={value}
-        />
+        <Col span={22}>
+          <FormSearch
+            onChangeValue={onChangeValue}
+            onReset={onReset}
+            handleSearch={handleSearch}
+            disabled={disabled}
+            value={value}
+          />
+        </Col>
       </Row>
     </Form>
   );

@@ -3,10 +3,9 @@ import PageHeader from 'commons/components/layouts/PageHeader';
 import ThemeCollectionLayout from 'commons/components/layouts/ThemesCollection';
 import { setTitle } from 'helpers/dom';
 import React from 'react';
-import './style.scss';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import TableThemes from './Table';
-import { Button, TablePaginationConfig } from 'antd';
+import { Button, TablePaginationConfig, Row, Col } from 'antd';
 import { useNavigate } from 'react-router';
 import { PlusOutlined } from '@ant-design/icons';
 import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
@@ -95,20 +94,26 @@ const ThemeCollectionPage = () => {
           </Button>
         }
       >
-        <FormSearch
-          disabled={disabled}
-          onReset={onReset}
-          onChange={onChangeValue}
-          value={value}
-          handleSearch={handleSearch}
-        />
-        <TableThemes
-          pagination={paginationTable}
-          items={dataThemes}
-          loading={loading}
-          onChange={onChange}
-          handleAdd={handleAdd}
-        />
+        <Row justify="center">
+          <Col span={23}>
+            <FormSearch
+              disabled={disabled}
+              onReset={onReset}
+              onChange={onChangeValue}
+              value={value}
+              handleSearch={handleSearch}
+            />
+          </Col>
+          <Col span={23}>
+            <TableThemes
+              pagination={paginationTable}
+              items={dataThemes}
+              loading={loading}
+              onChange={onChange}
+              handleAdd={handleAdd}
+            />
+          </Col>
+        </Row>
       </TableHeader>
     </ThemeCollectionLayout>
   );

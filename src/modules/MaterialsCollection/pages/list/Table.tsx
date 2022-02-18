@@ -76,6 +76,14 @@ function TableMaterial(props: IProps) {
       render: (_: any, record) => <>{record.style?.title}</>,
     },
     {
+      title: 'Theme',
+      dataIndex: 'style',
+      key: 'design',
+      sorter: false,
+      width: 180,
+      render: (_: any, record) => <>{record.style?.theme?.title}</>,
+    },
+    {
       title: '編集',
       dataIndex: '',
       key: '#',

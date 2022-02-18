@@ -1,6 +1,5 @@
 import { Form, FormItemProps, Select } from 'antd';
 import React from 'react';
-import './style.scss';
 interface IProps {
   options: React.ReactNode[];
   formItem?: FormItemProps;
@@ -16,7 +15,6 @@ const FormDropdown = (props: IProps) => {
   return (
     <Form.Item {...formItem}>
       <Select
-        style={{ marginLeft: '20px' }}
         onSelect={onSelect}
         onDropdownVisibleChange={onDropdownVisibleChange}
         placeholder="---All---"

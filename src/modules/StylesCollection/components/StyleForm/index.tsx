@@ -45,7 +45,6 @@ const StyleCollectionForm = (props: Props) => {
         title: item.title || '',
         previewImageUrl: item.styleImage?.previewImageUrl,
       });
-      console.log('old image ', item.styleImage?.previewImageUrl);
       setPreviewImageUrl(item?.styleImage?.previewImageUrl || '');
     }
   }, [type, form, item]);
@@ -143,7 +142,13 @@ const StyleCollectionForm = (props: Props) => {
             <Col span={22}>
               <Col span={14}>
                 <Col span={24}>
-                  <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 16 }} label="Preview" name="previewImageUrl">
+                  <Form.Item
+                    labelCol={{ span: 7 }}
+                    wrapperCol={{ span: 16 }}
+                    label="Preview"
+                    name="previewImageUrl"
+                    rules={[requireRule]}
+                  >
                     <Input disabled={true} />
                   </Form.Item>
                 </Col>

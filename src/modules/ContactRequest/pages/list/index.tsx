@@ -1,4 +1,4 @@
-import { TablePaginationConfig } from 'antd';
+import { TablePaginationConfig, Row, Col } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import ContactRequestLayout from 'commons/components/layouts/ContactRequest';
 import PageHeader from 'commons/components/layouts/PageHeader';
@@ -75,21 +75,26 @@ function ContactRequestPage() {
     <ContactRequestLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader title="お問い合わせ一覧">
-        <FormSearch
-          disabled={disabled}
-          value={value}
-          onChange={onChangeValue}
-          handleSearch={handleSearch}
-          onReset={onReset}
-        />
-        <ContactRequestTable
-          onDelete={onDelete}
-          onEdit={onEdit}
-          items={dataRequests}
-          loading={loading}
-          pagination={paginationTable}
-          onChange={onChange}
-        />
+        <Row justify="center">
+          <Col span={23}>
+            <FormSearch
+              disabled={disabled}
+              value={value}
+              onChange={onChangeValue}
+              handleSearch={handleSearch}
+              onReset={onReset}
+            />
+            <Col span={23}></Col>
+            <ContactRequestTable
+              onDelete={onDelete}
+              onEdit={onEdit}
+              items={dataRequests}
+              loading={loading}
+              pagination={paginationTable}
+              onChange={onChange}
+            />
+          </Col>
+        </Row>
       </TableHeader>
     </ContactRequestLayout>
   );

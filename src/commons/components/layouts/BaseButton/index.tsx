@@ -1,11 +1,11 @@
 import { Button } from 'antd';
 import React from 'react';
 interface IProps {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   text: string;
-  marginRight: string;
-  marginLeft: string;
+  marginRight?: string;
+  marginLeft?: string;
   border?: string;
   backgroundColor?: string;
   onClick?(): void;

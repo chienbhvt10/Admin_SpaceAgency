@@ -39,13 +39,13 @@ function TableThemes(props: IProps) {
       key: 'title',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      width: 300,
+      width: 400,
     },
     {
       title: '英語表記',
       key: 'nameEnglish',
       sorter: false,
-      width: 300,
+      width: 400,
       render: (_: any, record: ITheme) => (
         <>{record && record.themeCategories && record.themeCategories.length && record.themeCategories[0].title}</>
       ),
@@ -56,7 +56,7 @@ function TableThemes(props: IProps) {
       key: 'code3D',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      width: 150,
+      width: 200,
     },
     {
       title: '価格',
@@ -95,6 +95,7 @@ function TableThemes(props: IProps) {
         loading={loading}
         rowKey={rowKey}
         onChange={onChange}
+        bordered
       />
     </div>
   );

@@ -32,7 +32,6 @@ const StyleCollectionDetail = () => {
   };
 
   const onFinishUpdateStyle = (values: CreateStyleTypeInput) => {
-    console.log('new image', values.previewImageUrl);
     updateStyle({
       updateStyleInput: {
         id: item?.id || '',

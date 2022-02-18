@@ -105,7 +105,7 @@ const CustomerSimulationPage = () => {
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader title="Customer Simulation Collections">
         <Row justify="center">
-          <Col span={24}>
+          <Col span={23}>
             <FilterForm
               onChangeTheme={onChangeTheme}
               value={value}
@@ -116,7 +116,7 @@ const CustomerSimulationPage = () => {
               onChangeStyle={onChangeStyle}
             />
           </Col>
-          <Col span={24}>
+          <Col span={23}>
             <CustomerSimulationTable
               onDelete={onDelete}
               onEdit={onEdit}
