@@ -73,7 +73,6 @@ const ThemeCollectionPage = () => {
     }));
     filterTheme(newFilter);
     setArrFilter([{ key: TypeKeyFilterTheme.NAME, value: '' }]);
-    console.log('filter :', arrFilter);
   };
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
