@@ -21,7 +21,7 @@ const ThemeCollectionPage = () => {
     useListThemes();
   const [value, setValue] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(true);
-  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterTheme.NAME, value: '' }];
+  const [arrFilter, setArrFilter] = React.useState<FilterInput[]>([{ key: TypeKeyFilterTheme.NAME, value: '' }]);
 
   const routes = [
     {
@@ -72,11 +72,12 @@ const ThemeCollectionPage = () => {
       value: filterInput.key === TypeKeyFilterTheme.NAME ? value : '',
     }));
     filterTheme(newFilter);
+    setArrFilter([{ key: TypeKeyFilterTheme.NAME, value: '' }]);
+    console.log('filter :', arrFilter);
   };
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
-
   const onReset = () => {
     setValue('');
     filterTheme([]);

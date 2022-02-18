@@ -47,7 +47,7 @@ function ContactRequestTable(props: IProps) {
       key: 'phone',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      width: 100,
+      width: 150,
     },
     {
       title: 'タイプ',

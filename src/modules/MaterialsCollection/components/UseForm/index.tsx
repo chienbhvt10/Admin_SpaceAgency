@@ -61,6 +61,7 @@ const MaterialForm = (props: Props) => {
   React.useEffect(() => {
     if (dataAllStyles) {
       if (themeId) {
+        setVisibleStyleDropdown(false);
         const arrStyles = dataAllStyles?.filter((i) => i.theme?.id === themeId);
         if (arrStyles) {
           setDataFilterStyles(arrStyles);
@@ -117,6 +118,9 @@ const MaterialForm = (props: Props) => {
 
   const onSelectTheme = (value: string) => {
     if (value) {
+      form.setFieldsValue({
+        styleId: undefined,
+      });
       setThemeId(value);
       setVisibleStyleDropdown(false);
     } else {
