@@ -25,6 +25,20 @@ const StyleCollectionPage = () => {
   const [themeId, setThemeId] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>();
 
+  const arrFilter: FilterInput[] = [
+    { key: TypeKeyFilterStyle.NAME, value: '', isRef: false },
+    { key: TypeKeyFilterStyle.THEME, value: '', isRef: true },
+  ];
+  const routes = [
+    {
+      path: CommonPath.DEFAULT_PATH,
+      breadcrumbName: 'HOME',
+    },
+    {
+      path: CommonPath.THEME_COLLECTION,
+      breadcrumbName: 'スタイル一覧',
+    },
+  ];
   React.useEffect(() => {
     setTitle('スタイル一覧');
   }, []);
@@ -37,29 +51,9 @@ const StyleCollectionPage = () => {
     }
   }, [searchValue, themeId]);
 
-  const onChangeValue = (e: any) => {
-    setSearchValue(e.target.value);
-  };
-
   const onChangeTheme = (value: string) => {
     setThemeId(value);
   };
-
-  const arrFilter: FilterInput[] = [
-    { key: TypeKeyFilterStyle.NAME, value: '', isRef: false },
-    { key: TypeKeyFilterStyle.THEME, value: '', isRef: true },
-  ];
-
-  const routes = [
-    {
-      path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
-    },
-    {
-      path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'スタイル一覧',
-    },
-  ];
 
   const onChange = (paginationTable: TablePaginationConfig, _: any, sorter: SorterResult<any>) => {
     const order = OrderOfSorter(sorter.order);
@@ -93,13 +87,21 @@ const StyleCollectionPage = () => {
   };
 
   const handleSearch = () => {
-    const newFilter = arrFilter.map((i) => ({
-      ...i,
-      value: i.key === TypeKeyFilterStyle.NAME ? searchValue : i.key === TypeKeyFilterStyle.THEME ? themeId : '',
+    const newFilter = arrFilter.map((filterInput) => ({
+      ...filterInput,
+      value:
+        filterInput.key === TypeKeyFilterStyle.NAME
+          ? searchValue
+          : filterInput.key === TypeKeyFilterStyle.THEME
+          ? themeId
+          : '',
     }));
     filterStyles(newFilter);
   };
 
+  const onChangeValue = (e: any) => {
+    setSearchValue(e.target.value);
+  };
   const onReset = () => {
     setSearchValue('');
     filterStyles([]);

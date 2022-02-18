@@ -23,6 +23,16 @@ const ThemeCollectionPage = () => {
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterTheme.NAME, value: '' }];
 
+  const routes = [
+    {
+      path: CommonPath.DEFAULT_PATH,
+      breadcrumbName: 'HOME',
+    },
+    {
+      path: CommonPath.THEME_COLLECTION,
+      breadcrumbName: 'テーマ一覧',
+    },
+  ];
   React.useEffect(() => {
     setTitle('テーマ一覧');
   }, []);
@@ -56,21 +66,10 @@ const ThemeCollectionPage = () => {
     );
   };
 
-  const routes = [
-    {
-      path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
-    },
-    {
-      path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'テーマ一覧',
-    },
-  ];
-
   const handleSearch = () => {
-    const newFilter = arrFilter.map((i) => ({
-      ...i,
-      value: i.key === TypeKeyFilterTheme.NAME ? value : '',
+    const newFilter = arrFilter.map((filterInput) => ({
+      ...filterInput,
+      value: filterInput.key === TypeKeyFilterTheme.NAME ? value : '',
     }));
     filterTheme(newFilter);
   };

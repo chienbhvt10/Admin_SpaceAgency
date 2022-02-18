@@ -29,12 +29,10 @@ const MaterialForm = (props: Props) => {
   const { uploadImages } = useUploadImages();
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [loadingImage2, setLoadingImage2] = useState<boolean>(false);
-
+  const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
   const [themeId, setThemeId] = React.useState<string>();
-  const [styleId, setStyleId] = React.useState<string>();
   const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
   const { dataAllStyles, getAllStyles, loading: loadingSelectStyle } = useGetAllStyles();
-  const [dataFilterThemes, setDataFilterThemes] = React.useState<ITheme[]>([]);
   const [dataFilterStyles, setDataFilterStyles] = React.useState<IStyle[]>([]);
   const [form] = Form.useForm<CreateMaterialsTypeInput>();
   const [objUrlImage, setObjUrlImage] = React.useState({
@@ -73,22 +71,6 @@ const MaterialForm = (props: Props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [themeId, dataAllStyles]);
-
-  React.useEffect(() => {
-    if (dataAllThemes) {
-      if (styleId) {
-        const findTheme = dataFilterStyles.find((f) => f.id === styleId);
-        const arrThemes = dataAllThemes.filter((i) => i.id === findTheme?.theme?.id);
-        if (arrThemes) {
-          setDataFilterThemes(arrThemes);
-        }
-      } else {
-        setDataFilterThemes(dataAllThemes);
-      }
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [styleId, dataAllThemes]);
 
   React.useEffect(() => {
     if (item && item?.materialTypes) {
@@ -136,18 +118,12 @@ const MaterialForm = (props: Props) => {
   const onSelectTheme = (value: string) => {
     if (value) {
       setThemeId(value);
+      setVisibleStyleDropdown(false);
     } else {
       setThemeId(undefined);
     }
   };
 
-  const onSelectStyle = (value: string) => {
-    if (value) {
-      setStyleId(value);
-    } else {
-      setStyleId(undefined);
-    }
-  };
   const handleResetPreviewUrl = () => {
     form.setFieldsValue({
       imagePreview: '',
@@ -204,7 +180,7 @@ const MaterialForm = (props: Props) => {
                       }}
                       onSelect={onSelectTheme}
                       loading={loadingSelectTheme}
-                      items={dataFilterThemes}
+                      items={dataAllThemes}
                       options={[]}
                     />
                   </Col>
@@ -217,7 +193,7 @@ const MaterialForm = (props: Props) => {
                         wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                         rules: [requireRule],
                       }}
-                      onSelect={onSelectStyle}
+                      disabled={visibleStyleDropdown}
                       loading={loadingSelectStyle}
                       items={dataFilterStyles}
                       options={[]}
