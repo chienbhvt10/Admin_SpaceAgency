@@ -67,6 +67,7 @@ export const useListThemes = () => {
     current: skip / limit + 1,
     total: total || 0,
   };
+
   return {
     dataThemes,
     loading,

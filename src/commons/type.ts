@@ -134,11 +134,11 @@ export const dataNav: DataNav[] = [
         nameSub: 'ユーザー管理',
         router: CommonPath.USERS_MANAGEMENT,
       },
-      {
-        key: '7',
-        nameSub: 'ロール一覧',
-        router: CommonPath.ROLES_LIST,
-      },
+      // {
+      //   key: '7',
+      //   nameSub: 'ロール一覧',
+      //   router: CommonPath.ROLES_LIST,
+      // },
     ],
   },
 ];

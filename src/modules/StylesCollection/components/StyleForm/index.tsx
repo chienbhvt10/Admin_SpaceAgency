@@ -90,7 +90,13 @@ const StyleCollectionForm = (props: Props) => {
           <Row className="style-form-control">
             <Col span={22}>
               <Col span={16}>
-                <Form.Item labelCol={{ span: 6 }} label="テーマ" name="themeId" rules={[requireRule]}>
+                <Form.Item
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 18 }}
+                  label="テーマ"
+                  name="themeId"
+                  rules={[requireRule]}
+                >
                   <Select placeholder="---全部---">{themeOptions}</Select>
                 </Form.Item>
               </Col>
