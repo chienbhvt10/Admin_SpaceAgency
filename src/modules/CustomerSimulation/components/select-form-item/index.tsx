@@ -7,28 +7,25 @@ interface Props {
   data: TypeSelect[];
   formItem?: FormItemProps;
   className?: string;
-  colOffSet?: number | string;
   onSelect?: (value: any) => void;
   onDropdownVisibleChange?: (open: boolean) => void;
   loading: boolean;
 }
 
 const SelectFormItem = (props: Props) => {
-  const { data, className, formItem, colOffSet, onSelect, onDropdownVisibleChange, loading } = props;
+  const { data, className, formItem, onSelect, onDropdownVisibleChange, loading } = props;
   return (
     <Form.Item {...formItem} className={className}>
-      <Col offset={colOffSet}>
-        <Select
-          loading={loading}
-          onDropdownVisibleChange={onDropdownVisibleChange}
-          onSelect={onSelect}
-          placeholder="---全部---"
-        >
-          {data.map((item) => {
-            return <Option key={item?.id}>{item?.title}</Option>;
-          })}
-        </Select>
-      </Col>
+      <Select
+        loading={loading}
+        onDropdownVisibleChange={onDropdownVisibleChange}
+        onSelect={onSelect}
+        placeholder="---全部---"
+      >
+        {data.map((item) => {
+          return <Option key={item?.id}>{item?.title}</Option>;
+        })}
+      </Select>
     </Form.Item>
   );
 };

@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form, TablePaginationConfig, Col, Row } from 'antd';
+import { Button, TablePaginationConfig, Col, Row, Form } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
@@ -15,12 +15,15 @@ import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMateri
 import { useRemoveMaterial } from 'modules/MaterialsCollection/hooks/useRemoveMaterial';
 import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
+import { useForm } from 'antd/lib/form/Form';
+
 import React from 'react';
 import { useNavigate } from 'react-router';
 import './style.scss';
 import TableMaterial from './Table';
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
+  const [form] = useForm();
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
   const { removeMaterial } = useRemoveMaterial();
@@ -86,11 +89,6 @@ const MaterialCollectionPage = () => {
     filterMaterials(newFilter);
   };
 
-  const onReset = () => {
-    setValue('');
-    filterMaterials([]);
-  };
-
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
@@ -123,6 +121,14 @@ const MaterialCollectionPage = () => {
     }
   };
 
+  const onReset = () => {
+    setValue('');
+    form.setFieldsValue({
+      styleId: undefined,
+      themeId: undefined,
+    });
+    filterMaterials([]);
+  };
   return (
     <MaterialCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
@@ -136,7 +142,7 @@ const MaterialCollectionPage = () => {
       >
         <Row justify="center">
           <Col span={23}>
-            <Form onValuesChange={onValuesChange} className="dropdown-select">
+            <Form onValuesChange={onValuesChange} className="dropdown-select" form={form}>
               <Row style={{ marginLeft: '20px' }}>
                 <Col span={12}>
                   <FormDropdown

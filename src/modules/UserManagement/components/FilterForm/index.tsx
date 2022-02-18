@@ -21,10 +21,10 @@ const FilterForm = (props: Props) => {
 
   const [form] = Form.useForm<any>();
 
-  const resetField = () => {
+  const resetFields = () => {
     form.setFieldsValue({
-      role: '',
-      status: '',
+      role: undefined,
+      status: undefined,
       keyword: '',
     });
     onReset && onReset();
@@ -68,11 +68,10 @@ const FilterForm = (props: Props) => {
                       text="リセット"
                       disabled={disabled}
                       width={'90%'}
-                      height={''}
-                      marginRight=""
-                      marginLeft=""
                       backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
-                      onClick={resetField}
+                      onClick={() => {
+                        resetFields();
+                      }}
                     />
                   </Row>
                 </Col>
@@ -82,10 +81,7 @@ const FilterForm = (props: Props) => {
                       text="検索"
                       disabled={disabled}
                       width={'90%'}
-                      height={''}
                       border="1px solid #007BFF"
-                      marginLeft={''}
-                      marginRight={''}
                       backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}
                       onClick={handleSearch}
                     />

@@ -69,7 +69,10 @@ function ContactRequestPage() {
     filterRequests(newFilter);
   };
 
-  const onReset = () => {};
+  const onReset = () => {
+    setValue('');
+    filterRequests([]);
+  };
 
   return (
     <ContactRequestLayout>

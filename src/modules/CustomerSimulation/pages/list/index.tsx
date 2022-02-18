@@ -84,7 +84,10 @@ const CustomerSimulationPage = () => {
     setStyleId(value);
   };
 
-  const onReset = () => {};
+  const onReset = () => {
+    setValue('');
+    filterSimulations([]);
+  };
 
   const handleSearch = () => {
     const newFilter = arrFilter.map((i) => ({

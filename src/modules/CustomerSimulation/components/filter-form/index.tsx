@@ -1,4 +1,5 @@
 import { Col, DatePicker, Form, Row } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 import SelectFormItem from 'modules/CustomerSimulation/components/select-form-item';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import { useGetAllUser } from 'modules/UserManagement/hooks/useGetAllUser';
@@ -19,6 +20,7 @@ interface Props {
 const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD';
 const FilterForm = (props: Props) => {
+  const [form] = useForm();
   const { getAllThemes, arrThemes, loading: loadingTheme } = useGetAllThemes();
   const { getAllStyles, arrStyles, loading: loadingStyle } = useGetAllStyles();
   const { getAllUser, arrUsers, loading: loadingUser } = useGetAllUser();
@@ -42,8 +44,17 @@ const FilterForm = (props: Props) => {
     }
   };
 
+  const resetFields = () => {
+    form.setFieldsValue({
+      theme: undefined,
+      design: undefined,
+      date: undefined,
+      user: undefined,
+    });
+    onReset && onReset();
+  };
   return (
-    <Form className="filter-form">
+    <Form className="filter-form" form={form}>
       <Row justify="center">
         <Col span={22}>
           <Row>
@@ -86,7 +97,7 @@ const FilterForm = (props: Props) => {
                 onDropdownVisibleChange={onDropdownVisibleChangeUser}
                 formItem={{
                   label: '顧客／ユーザー',
-                  name: 'theme',
+                  name: 'user',
                   labelCol: { span: 6 },
                   wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                 }}
@@ -107,7 +118,7 @@ const FilterForm = (props: Props) => {
         <Col span={22}>
           <FormSearch
             onChangeValue={onChangeValue}
-            onReset={onReset}
+            onReset={resetFields}
             handleSearch={handleSearch}
             disabled={disabled}
             value={value}
