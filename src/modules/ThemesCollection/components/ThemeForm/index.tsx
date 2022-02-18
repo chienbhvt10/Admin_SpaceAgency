@@ -24,7 +24,7 @@ const requireRule = { required: true, message: 'This is required information!' }
 
 const ThemesForm = (props: Props) => {
   const { loading, type, items, onFinish, title } = props;
-  const { uploadImages, loading: loadingImage } = useUploadImages();
+  const { uploadImages } = useUploadImages();
   const [form] = Form.useForm<CreateThemeTypeInput>();
   const [loadingInside, setLoadingInside] = React.useState<boolean>(false);
   const [loadingOutside, setLoadingOutside] = React.useState<boolean>(false);
@@ -150,11 +150,6 @@ const ThemesForm = (props: Props) => {
                   <TextArea placeholder="詳細" rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
-              {/* <Col span={22}>
-                <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} className="code" label="Code" name="code">
-                  <Input style={{ width: 'calc(100% - 83px)' }} />
-                </Form.Item>
-              </Col> */}
               <Col span={22} className="price-order-box">
                 <Row>
                   <Col span={12}>
