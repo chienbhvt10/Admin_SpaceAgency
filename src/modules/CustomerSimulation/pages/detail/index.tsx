@@ -32,9 +32,7 @@ const CustomerSimulationDetail = (props: Props) => {
     setTitle('シミュレーション 承認');
   });
 
-  const onFinish = (values: SimulationTypeInput) => {
-    console.log(values);
-  };
+  const onFinish = (values: SimulationTypeInput) => {};
 
   return (
     <CustomerSimulationLayout>

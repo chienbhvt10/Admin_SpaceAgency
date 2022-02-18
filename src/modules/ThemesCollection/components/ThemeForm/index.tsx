@@ -1,10 +1,9 @@
 import { Col, Form, Input, InputNumber, Row, Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
-import BaseButton from 'commons/components/layouts/BaseButton';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import { useUploadImages } from 'commons/hooks/useUploadImages/useUploadImages';
-import { CreateThemeTypeInput, ObjImage, TypeForm } from 'commons/type';
+import { CreateThemeTypeInput, TypeForm } from 'commons/type';
 import { ITheme } from 'graphql/generated/graphql';
 import 'modules/ThemesCollection/style/style.scss';
 import React from 'react';
@@ -25,8 +24,10 @@ const requireRule = { required: true, message: 'This is required information!' }
 
 const ThemesForm = (props: Props) => {
   const { loading, type, items, onFinish, title } = props;
-  const { uploadImages, loading: loadingImage } = useUploadImages();
+  const { uploadImages } = useUploadImages();
   const [form] = Form.useForm<CreateThemeTypeInput>();
+  const [loadingInside, setLoadingInside] = React.useState<boolean>(false);
+  const [loadingOutside, setLoadingOutside] = React.useState<boolean>(false);
   const [objUrlImage, setObjUrlImage] = React.useState({
     insidePreviewUrl: '',
     outsidePreviewUrl: '',
@@ -75,19 +76,27 @@ const ThemesForm = (props: Props) => {
     });
   };
   const handleChangeInside = async (info: any) => {
+    setLoadingInside(true);
     const urlImage = (await uploadImages(info)) as string;
-    setObjUrlImage({
-      ...objUrlImage,
-      insidePreviewUrl: urlImage,
-    });
+    setLoadingOutside(false);
+    if (urlImage) {
+      setObjUrlImage({
+        ...objUrlImage,
+        insidePreviewUrl: urlImage,
+      });
+    }
   };
 
   const handleChangeOutside = async (info: any) => {
+    setLoadingOutside(true);
     const urlImage = (await uploadImages(info)) as string;
-    setObjUrlImage({
-      ...objUrlImage,
-      outsidePreviewUrl: urlImage,
-    });
+    setLoadingOutside(false);
+    if (urlImage) {
+      setObjUrlImage({
+        ...objUrlImage,
+        outsidePreviewUrl: urlImage,
+      });
+    }
   };
 
   const onCancel = () => {
@@ -141,11 +150,6 @@ const ThemesForm = (props: Props) => {
                   <TextArea placeholder="詳細" rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
-              {/* <Col span={22}>
-                <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} className="code" label="Code" name="code">
-                  <Input style={{ width: 'calc(100% - 83px)' }} />
-                </Form.Item>
-              </Col> */}
               <Col span={22} className="price-order-box">
                 <Row>
                   <Col span={12}>
@@ -185,7 +189,7 @@ const ThemesForm = (props: Props) => {
                     <Col span={16} offset={6}>
                       <div style={{ marginLeft: '5px', height: '300px' }}>
                         <UploadDragger
-                          loading={loadingImage}
+                          loading={loadingInside}
                           handleChange={handleChangeInside}
                           imageUrl={objUrlImage.insidePreviewUrl}
                           resetToDefault={() => handleResetInsideUrl()}
@@ -208,7 +212,7 @@ const ThemesForm = (props: Props) => {
                     <Col span={16} offset={6}>
                       <div style={{ marginLeft: '5px', height: '300px' }}>
                         <UploadDragger
-                          loading={loadingImage}
+                          loading={loadingOutside}
                           handleChange={handleChangeOutside}
                           imageUrl={objUrlImage.outsidePreviewUrl}
                           resetToDefault={() => handleResetOutsideUrl()}

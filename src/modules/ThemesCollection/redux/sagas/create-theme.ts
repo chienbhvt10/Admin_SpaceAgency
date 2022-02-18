@@ -50,7 +50,6 @@ export function* createThemeAsync(action: CreateThemeAction) {
     NotificationSuccess('Thông báo!', 'Create theme success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
-    console.log('error');
     yield put(actionCreateThemeError(err));
   }
 }
