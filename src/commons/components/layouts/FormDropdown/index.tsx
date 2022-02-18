@@ -8,13 +8,15 @@ interface IProps {
   loading?: boolean;
   onDropdownVisibleChange?: (open: boolean) => void;
   onSelect?: (value: any) => void;
+  disabled?: boolean;
 }
 const { Option } = Select;
 const FormDropdown = (props: IProps) => {
-  const { formItem, items, onDropdownVisibleChange, loading, onSelect } = props;
+  const { formItem, items, onDropdownVisibleChange, loading, onSelect, disabled } = props;
   return (
     <Form.Item {...formItem}>
       <Select
+        disabled={disabled}
         onSelect={onSelect}
         onDropdownVisibleChange={onDropdownVisibleChange}
         placeholder="---All---"

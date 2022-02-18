@@ -8,7 +8,7 @@ import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollect
 import PageHeader from 'commons/components/layouts/PageHeader';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { TypeKeyFilterMaterials, TypePagination } from 'commons/type';
-import { FilterInput, IMaterial } from 'graphql/generated/graphql';
+import { FilterInput, IMaterial, IStyle, ITheme } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
@@ -27,8 +27,10 @@ const MaterialCollectionPage = () => {
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
   const { removeMaterial } = useRemoveMaterial();
+  const [themeId, setThemeId] = React.useState<string>();
   const { getAllStyles, dataAllStyles, loading: loadingAllThemes } = useGetAllStyles();
   const { getAllThemes, dataAllThemes, loading: loadingAllStyles } = useGetAllThemes();
+  const [dataFilterStyles, setDataFilterStyles] = React.useState<IStyle[]>([]);
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const [value, setValue] = React.useState<string>('');
   const [selectId, setSelectId] = React.useState<{ themeId: string; styleId: string }>({
@@ -44,6 +46,27 @@ const MaterialCollectionPage = () => {
   React.useEffect(() => {
     setTitle('マテリアル一覧');
   }, []);
+  React.useEffect(() => {
+    if (dataAllStyles) {
+      if (themeId) {
+        const arrStyles = dataAllStyles?.filter((i) => i.theme?.id === themeId);
+        if (arrStyles) {
+          setDataFilterStyles(arrStyles);
+        }
+      } else {
+        setDataFilterStyles(dataAllStyles || []);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [themeId, dataAllStyles]);
+
+  const onSelectTheme = (value: string) => {
+    if (value) {
+      setThemeId(value);
+    } else {
+      setThemeId(undefined);
+    }
+  };
 
   React.useEffect(() => {
     if (value || selectId.themeId || selectId.styleId) {
@@ -152,6 +175,7 @@ const MaterialCollectionPage = () => {
                       labelCol: { span: 6 },
                       wrapperCol: { span: 16 },
                     }}
+                    onSelect={onSelectTheme}
                     loading={loadingAllThemes}
                     options={[]}
                     onDropdownVisibleChange={onDropdownVisibleChangeThemes}
@@ -168,7 +192,7 @@ const MaterialCollectionPage = () => {
                     }}
                     loading={loadingAllStyles}
                     onDropdownVisibleChange={onDropdownVisibleChangeStyles}
-                    items={dataAllStyles}
+                    items={dataFilterStyles}
                     options={[]}
                   />
                 </Col>
