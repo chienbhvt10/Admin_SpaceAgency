@@ -78,7 +78,7 @@ const ThemesForm = (props: Props) => {
   const handleChangeInside = async (info: any) => {
     setLoadingInside(true);
     const urlImage = (await uploadImages(info)) as string;
-    setLoadingOutside(false);
+    setLoadingInside(false);
     if (urlImage) {
       setObjUrlImage({
         ...objUrlImage,

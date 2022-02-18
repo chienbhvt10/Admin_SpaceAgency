@@ -38,7 +38,7 @@ const MaterialUpdate = () => {
           },
           title: values.nameStandard || '',
           material: {
-            id: values.themeId,
+            id: values.themeId || '',
           },
           previewImageUrl: values.imagePreview,
         },
@@ -51,13 +51,13 @@ const MaterialUpdate = () => {
           },
           title: values.namePremium || '',
           material: {
-            id: values.themeId,
+            id: values.themeId || '',
           },
           previewImageUrl: values.imagePreview2,
         },
       ],
       style: {
-        id: values.styleId,
+        id: values.styleId || '',
       },
     };
     updateMaterial({ updateMaterialInput });
