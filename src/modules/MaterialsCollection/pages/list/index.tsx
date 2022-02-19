@@ -63,6 +63,9 @@ const MaterialCollectionPage = () => {
 
   const onSelectTheme = (value: string) => {
     if (value) {
+      form.setFieldsValue({
+        styleId: undefined,
+      });
       setThemeId(value);
       setVisibleStyleDropdown(false);
     } else {

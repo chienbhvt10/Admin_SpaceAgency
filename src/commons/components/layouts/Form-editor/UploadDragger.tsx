@@ -1,4 +1,4 @@
-import { LoadingOutlined, PlusOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined, DeleteOutlined, EyeOutlined, CloseSquareOutlined } from '@ant-design/icons';
 import { message, Upload, Button, Space } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import env from 'env';
@@ -100,6 +100,7 @@ export default function UploadDragger(props: IProps) {
               setStateIMG({ previewVisible: false });
             }}
             footer={null}
+            closeIcon={<CloseSquareOutlined size={3} style={{ fontSize: '30px', color: 'black' }} />}
           >
             <img alt="ImgProduct" src={props.imageUrl} style={{ width: '100%' }} />
           </Modal>
