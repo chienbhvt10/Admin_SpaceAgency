@@ -86,7 +86,7 @@ function NavBar(props: IProps) {
           theme="dark"
           selectedKeys={[`${keyNav}`]}
           mode="inline"
-          onSelect={onSelect}
+          onClick={onSelect}
           expandIcon={<></>}
         >
           <Menu.Item key="-1" icon={<PieChartOutlined />}>
