@@ -131,6 +131,7 @@ const MaterialCollectionPage = () => {
 
   const onReset = () => {
     setValue('');
+    setDisabled(true);
     form.setFieldsValue({
       styleId: undefined,
       themeId: undefined,
@@ -160,7 +161,6 @@ const MaterialCollectionPage = () => {
                       labelCol: { span: 6 },
                       wrapperCol: { span: 16 },
                     }}
-                    // onSelect={onSelectTheme}
                     loading={loadingAllThemes}
                     options={[]}
                     onDropdownVisibleChange={onDropdownVisibleChangeThemes}
@@ -175,7 +175,6 @@ const MaterialCollectionPage = () => {
                       labelCol: { span: 6 },
                       wrapperCol: { span: 16 },
                     }}
-                    // disabled={visibleStyleDropdown}
                     loading={loadingAllStyles}
                     onDropdownVisibleChange={onDropdownVisibleChangeStyles}
                     items={dataAllStyles}

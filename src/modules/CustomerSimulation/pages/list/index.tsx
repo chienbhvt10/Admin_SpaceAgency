@@ -34,7 +34,7 @@ const CustomerSimulationPage = () => {
   React.useEffect(() => {
     filterSimulations([]);
     setTitle('Customer Simulation Collections');
-  });
+  }, []);
 
   React.useEffect(() => {
     if (value || themeId || styleId) {
@@ -87,6 +87,7 @@ const CustomerSimulationPage = () => {
 
   const onReset = () => {
     setValue('');
+    setDisabled(true);
     filterSimulations([]);
   };
 

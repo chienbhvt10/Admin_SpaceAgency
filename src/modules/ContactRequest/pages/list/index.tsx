@@ -76,6 +76,7 @@ function ContactRequestPage() {
 
   const onReset = () => {
     setValue('');
+    setDisabled(true);
     filterRequests([]);
   };
 

@@ -105,6 +105,7 @@ const StyleCollectionPage = () => {
   };
   const onReset = () => {
     setSearchValue('');
+    setDisabled(true);
     filterStyles([]);
   };
   return (

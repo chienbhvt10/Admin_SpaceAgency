@@ -105,6 +105,7 @@ function ListUserManagement() {
   };
   const onReset = () => {
     setValue('');
+    setDisabled(true);
     filterUser([]);
   };
   return (
