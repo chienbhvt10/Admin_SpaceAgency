@@ -1,5 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, TablePaginationConfig, Col, Row, Form } from 'antd';
+import { Button, Col, Form, Row, TablePaginationConfig } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
@@ -8,30 +9,26 @@ import MaterialCollectionLayout from 'commons/components/layouts/MaterialCollect
 import PageHeader from 'commons/components/layouts/PageHeader';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { TypeKeyFilterMaterials, TypePagination } from 'commons/type';
-import { FilterInput, IMaterial, IStyle, ITheme } from 'graphql/generated/graphql';
+import { FilterInput, IMaterial } from 'graphql/generated/graphql';
 import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
 import { useRemoveMaterial } from 'modules/MaterialsCollection/hooks/useRemoveMaterial';
 import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
-import { useForm } from 'antd/lib/form/Form';
-
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import './style.scss';
 import TableMaterial from './Table';
+
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
   const [form] = useForm();
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
   const { removeMaterial } = useRemoveMaterial();
-  const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
-  const [themeId, setThemeId] = React.useState<string>();
   const { getAllStyles, dataAllStyles, loading: loadingAllThemes } = useGetAllStyles();
   const { getAllThemes, dataAllThemes, loading: loadingAllStyles } = useGetAllThemes();
-  const [dataFilterStyles, setDataFilterStyles] = React.useState<IStyle[]>([]);
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const [value, setValue] = React.useState<string>('');
   const [selectId, setSelectId] = React.useState<{ themeId: string; styleId: string }>({
@@ -40,38 +37,13 @@ const MaterialCollectionPage = () => {
   });
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterMaterials.NAME, value: '' },
-    { key: TypeKeyFilterMaterials.STYLE, value: '', isRef: false },
-    { key: TypeKeyFilterMaterials.THEME, value: '', isRef: false },
+    { key: TypeKeyFilterMaterials.STYLE, value: '', isRef: true },
+    { key: TypeKeyFilterMaterials.THEME, value: '', isRef: true },
   ];
 
   React.useEffect(() => {
     setTitle('マテリアル一覧');
   }, []);
-  React.useEffect(() => {
-    if (dataAllStyles) {
-      if (themeId) {
-        const arrStyles = dataAllStyles?.filter((i) => i.theme?.id === themeId);
-        if (arrStyles) {
-          setDataFilterStyles(arrStyles);
-        }
-      } else {
-        setDataFilterStyles(dataAllStyles || []);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [themeId, dataAllStyles]);
-
-  const onSelectTheme = (value: string) => {
-    if (value) {
-      form.setFieldsValue({
-        styleId: undefined,
-      });
-      setThemeId(value);
-      setVisibleStyleDropdown(false);
-    } else {
-      setThemeId(undefined);
-    }
-  };
 
   React.useEffect(() => {
     if (value || selectId.themeId || selectId.styleId) {
@@ -122,11 +94,18 @@ const MaterialCollectionPage = () => {
   };
 
   const onValuesChange = (values: { themeId: string; styleId: string }) => {
-    setSelectId({
-      ...selectId,
-      styleId: values.styleId,
-      themeId: values.themeId,
-    });
+    if (values.styleId) {
+      setSelectId({
+        ...selectId,
+        styleId: values.styleId,
+      });
+    }
+    if (values.themeId) {
+      setSelectId({
+        ...selectId,
+        themeId: values.themeId,
+      });
+    }
   };
 
   const onEdit = (record: IMaterial) => () => {
@@ -180,7 +159,7 @@ const MaterialCollectionPage = () => {
                       labelCol: { span: 6 },
                       wrapperCol: { span: 16 },
                     }}
-                    onSelect={onSelectTheme}
+                    // onSelect={onSelectTheme}
                     loading={loadingAllThemes}
                     options={[]}
                     onDropdownVisibleChange={onDropdownVisibleChangeThemes}
@@ -195,10 +174,10 @@ const MaterialCollectionPage = () => {
                       labelCol: { span: 6 },
                       wrapperCol: { span: 16 },
                     }}
-                    disabled={visibleStyleDropdown}
+                    // disabled={visibleStyleDropdown}
                     loading={loadingAllStyles}
                     onDropdownVisibleChange={onDropdownVisibleChangeStyles}
-                    items={dataFilterStyles}
+                    items={dataAllStyles}
                     options={[]}
                   />
                 </Col>
