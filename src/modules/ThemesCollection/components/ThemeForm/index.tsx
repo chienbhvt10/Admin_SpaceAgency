@@ -121,7 +121,8 @@ const ThemesForm = (props: Props) => {
               <Col span={22}>
                 <Form.Item
                   rules={[requireRule]}
-                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  labelCol={{ span: 3, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 20 }}
                   className="name"
                   label="名称"
                   name="name"
@@ -131,7 +132,8 @@ const ThemesForm = (props: Props) => {
               </Col>
               <Col span={22}>
                 <Form.Item
-                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  labelCol={{ span: 3, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 20 }}
                   className=""
                   label="英語表記"
                   rules={[requireRule]}
@@ -142,7 +144,8 @@ const ThemesForm = (props: Props) => {
               </Col>
               <Col span={22}>
                 <Form.Item
-                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  labelCol={{ span: 3, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 20 }}
                   className=""
                   label="詳細"
                   name="description"
@@ -154,7 +157,8 @@ const ThemesForm = (props: Props) => {
                 <Row>
                   <Col span={12}>
                     <Form.Item
-                      labelCol={{ span: 8, style: { marginRight: 20 } }}
+                      labelCol={{ span: 6, style: { marginRight: 20 } }}
+                      wrapperCol={{ span: 16 }}
                       label="価格"
                       name="price"
                       rules={[requireRule]}
@@ -163,7 +167,12 @@ const ThemesForm = (props: Props) => {
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item labelCol={{ span: 8, style: { marginRight: 20 } }} label="3Dコード" name="code">
+                    <Form.Item
+                      labelCol={{ span: 6, style: { marginRight: 20 } }}
+                      wrapperCol={{ span: 16 }}
+                      label="3Dコード"
+                      name="code"
+                    >
                       <Input placeholder="コード" style={{ width: '100%' }} />
                     </Form.Item>
                   </Col>

@@ -104,7 +104,7 @@ function ContactRequestForm(props: IProps) {
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
                 label={<Title level={5}>Requester FullName</Title>}
-                name="requesterFullName"
+                name="氏名"
                 {...tailLayout}
               >
                 <Input disabled />

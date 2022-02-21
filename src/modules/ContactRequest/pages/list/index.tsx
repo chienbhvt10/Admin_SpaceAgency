@@ -5,6 +5,7 @@ import PageHeader from 'commons/components/layouts/PageHeader';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import { TypeKeyFilterRequest, TypePagination } from 'commons/type';
 import { FilterInput, IRequest } from 'graphql/generated/graphql';
+import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { FormSearch } from 'modules/ContactRequest/components/Filter-Form';
 import { useListRequests } from 'modules/ContactRequest/hooks/useListRequest';
@@ -22,6 +23,10 @@ function ContactRequestPage() {
   const { removeRequest } = useRemoveRequest();
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterRequest.EMAIL, value: '' }];
 
+  React.useEffect(() => {
+    filterRequests([]);
+    setTitle('お問い合わせ');
+  }, []);
   React.useEffect(() => {
     if (value) {
       setDisabled(false);
@@ -71,6 +76,7 @@ function ContactRequestPage() {
 
   const onReset = () => {
     setValue('');
+    setDisabled(true);
     filterRequests([]);
   };
 

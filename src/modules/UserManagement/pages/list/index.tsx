@@ -25,6 +25,7 @@ function ListUserManagement() {
   const [status, setStatus] = React.useState<string>('');
 
   React.useEffect(() => {
+    filterUser([]);
     setTitle('ユーザー管理');
   }, []);
 
@@ -104,6 +105,7 @@ function ListUserManagement() {
   };
   const onReset = () => {
     setValue('');
+    setDisabled(true);
     filterUser([]);
   };
   return (

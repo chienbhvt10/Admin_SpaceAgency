@@ -1,5 +1,6 @@
-import { Col, Form, Row, Select } from 'antd';
+import { Col, Form, Input, Row, Select } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
+import BaseButton from 'commons/components/layouts/BaseButton';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
@@ -29,8 +30,16 @@ const FilterForm = (props: Props) => {
       getAllThemes();
     }
   };
+  React.useEffect(() => {
+    if (!props.value) {
+      form.setFieldsValue({
+        search: '',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.value]);
   const resetFields = () => {
-    form.setFieldsValue({ themeId: undefined });
+    form.setFieldsValue({ themeId: undefined, search: '' });
     onReset && onReset();
   };
   return (
@@ -44,13 +53,32 @@ const FilterForm = (props: Props) => {
           </Form.Item>
         </Col>
         <Col span={22}>
-          <FormSearch
-            disabled={disabled}
-            onReset={resetFields}
-            onChange={onChangeValue}
-            value={value}
-            handleSearch={handleSearch}
-          />
+          <Col span={24} style={{ marginLeft: '20px' }}>
+            <Row>
+              <Col span={18}>
+                <Form.Item label="Keyword" labelCol={{ span: 4 }} wrapperCol={{ span: 19 }} name="search">
+                  <Input onChange={onChangeValue} placeholder="Type to search..." />
+                </Form.Item>
+              </Col>
+              <Col span={4} style={{ display: 'flex' }}>
+                <BaseButton
+                  text="Reset"
+                  disabled={disabled}
+                  backgroundColor={disabled ? '#C0C0C0' : '#6C757D'}
+                  onClick={resetFields}
+                  marginLeft={'10px'}
+                />
+                <BaseButton
+                  text="Search"
+                  disabled={disabled}
+                  border="1px solid #007BFF"
+                  backgroundColor={disabled ? '#C0C0C0' : '#007BFF'}
+                  onClick={handleSearch}
+                  marginLeft={'10px'}
+                />
+              </Col>
+            </Row>
+          </Col>
         </Col>
       </Row>
     </Form>

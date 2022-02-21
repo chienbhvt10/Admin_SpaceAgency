@@ -40,6 +40,7 @@ const StyleCollectionPage = () => {
     },
   ];
   React.useEffect(() => {
+    filterStyles([]);
     setTitle('スタイル一覧');
   }, []);
 
@@ -104,6 +105,7 @@ const StyleCollectionPage = () => {
   };
   const onReset = () => {
     setSearchValue('');
+    setDisabled(true);
     filterStyles([]);
   };
   return (

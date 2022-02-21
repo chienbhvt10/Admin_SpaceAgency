@@ -21,7 +21,7 @@ const ThemeCollectionPage = () => {
     useListThemes();
   const [value, setValue] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(true);
-  const [arrFilter, setArrFilter] = React.useState<FilterInput[]>([{ key: TypeKeyFilterTheme.NAME, value: '' }]);
+  const arrFilter = [{ key: TypeKeyFilterTheme.NAME, value: '' }];
 
   const routes = [
     {
@@ -35,6 +35,7 @@ const ThemeCollectionPage = () => {
   ];
   React.useEffect(() => {
     setTitle('テーマ一覧');
+    filterTheme([]);
   }, []);
 
   React.useEffect(() => {
@@ -65,14 +66,12 @@ const ThemeCollectionPage = () => {
       },
     );
   };
-
   const handleSearch = () => {
     const newFilter = arrFilter.map((filterInput) => ({
       ...filterInput,
       value: filterInput.key === TypeKeyFilterTheme.NAME ? value : '',
     }));
     filterTheme(newFilter);
-    setArrFilter([{ key: TypeKeyFilterTheme.NAME, value: '' }]);
   };
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
