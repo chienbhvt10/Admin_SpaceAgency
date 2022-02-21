@@ -32,6 +32,7 @@ const CustomerSimulationPage = () => {
   const arrFilter: FilterInput[] = [{ key: TypeKeyFilterUserSimulation.NAME, value: '' }];
 
   React.useEffect(() => {
+    filterSimulations([]);
     setTitle('Customer Simulation Collections');
   });
 

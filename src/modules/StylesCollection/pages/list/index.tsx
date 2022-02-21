@@ -40,6 +40,7 @@ const StyleCollectionPage = () => {
     },
   ];
   React.useEffect(() => {
+    filterStyles([]);
     setTitle('スタイル一覧');
   }, []);
 

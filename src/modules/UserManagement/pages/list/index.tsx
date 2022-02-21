@@ -25,6 +25,7 @@ function ListUserManagement() {
   const [status, setStatus] = React.useState<string>('');
 
   React.useEffect(() => {
+    filterUser([]);
     setTitle('ユーザー管理');
   }, []);
 

@@ -242,7 +242,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         className="name"
                         label="Name Standard"
                         name="nameStandard"
@@ -253,7 +253,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         label="Price Standard"
                         name="priceStandard"
                         rules={[requireRule]}
@@ -264,7 +264,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         className="code"
                         label="Code Standard"
                         name="codeStandard"
@@ -276,7 +276,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         label="Image Preview"
                         name="imagePreview"
                         rules={[requireRule]}
@@ -300,7 +300,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         className="name"
                         label="Name Premium"
                         name="namePremium"
@@ -311,7 +311,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         label="Price Premium"
                         name="pricePremium"
                         rules={[requireRule]}
@@ -322,7 +322,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         className="code"
                         label="Code Premium"
                         name="codePremium"
@@ -333,7 +333,7 @@ const MaterialForm = (props: Props) => {
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
                         label="Image Preview"
                         name="imagePreview2"
                         rules={[requireRule]}

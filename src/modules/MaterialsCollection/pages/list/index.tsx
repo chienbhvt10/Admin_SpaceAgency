@@ -42,6 +42,7 @@ const MaterialCollectionPage = () => {
   ];
 
   React.useEffect(() => {
+    filterMaterials([]);
     setTitle('マテリアル一覧');
   }, []);
 
