@@ -14,7 +14,6 @@ const RequestStatusUpdate = () => {
   const { item, getDetailRequest } = useRequestDetail();
   const navigate = useNavigate();
   const { updateRequestStatus, loading } = useUpdateRequestStatus();
-
   React.useEffect(() => {
     setTitle('Contact Request Detail');
   }, []);

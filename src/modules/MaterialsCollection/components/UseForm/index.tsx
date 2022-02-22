@@ -82,7 +82,7 @@ const MaterialForm = (props: Props) => {
         styleId: item.style?.id || undefined,
         codePremium: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
         codeStandard: (item && item.materialTypes && item.materialTypes[0]?.code3d) || '',
-        description: (item && item.style?.description && item.style.description) || '',
+        // description: (item && item.style?.description && item.style.description) || '',
         priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
         pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
         nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
@@ -178,7 +178,7 @@ const MaterialForm = (props: Props) => {
                       formItem={{
                         label: 'テーマ',
                         name: 'themeId',
-                        labelCol: { span: 4 },
+                        labelCol: { span: 6 },
                         wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                         rules: [requireRule],
                       }}
@@ -193,7 +193,7 @@ const MaterialForm = (props: Props) => {
                       formItem={{
                         label: 'デザイン',
                         name: 'styleId',
-                        labelCol: { span: 4 },
+                        labelCol: { span: 6 },
                         wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                         rules: [requireRule],
                       }}
@@ -207,16 +207,17 @@ const MaterialForm = (props: Props) => {
               </Col>
               <Col span={22}>
                 <Form.Item
-                  labelCol={{ span: 2, style: { marginRight: 20 } }}
-                  wrapperCol={{ span: 20 }}
+                  labelCol={{ span: 3, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 19 }}
                   className="name"
-                  label="Name"
+                  label="Material Name"
                   name="name"
                 >
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={22}>
+
+              {/* <Col span={22}>
                 <Form.Item
                   labelCol={{ span: 2, style: { marginRight: 20 } }}
                   wrapperCol={{ span: 20 }}
@@ -226,7 +227,8 @@ const MaterialForm = (props: Props) => {
                 >
                   <TextArea rows={5} showCount maxLength={1000} />
                 </Form.Item>
-              </Col>
+              </Col> */}
+
               {/* <Col span={22} className="price-order-box">
                 <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="Order" name="order">
                   <InputNumber style={{ width: '100%', marginLeft: '6px' }} />
@@ -236,12 +238,12 @@ const MaterialForm = (props: Props) => {
               {/* <Col className="image-upload-title" span={24} style={{ marginBottom: '50px' }}>
                 <Title level={3}>Type Collection</Title>
               </Col> */}
-              <Col span={19} style={{ marginBottom: '50px' }}>
+              <Col span={19} style={{ marginBottom: '50px', marginLeft: '40px' }}>
                 <Row justify="center">
-                  <Col span={12}>
+                  <Col span={11} style={{ marginLeft: 20 }}>
                     <Col span={22} offset={2}>
                       <Form.Item
-                        labelCol={{ span: 24, style: { marginRight: 20 } }}
+                        labelCol={{ span: 24 }}
                         wrapperCol={{ span: 23 }}
                         className="name"
                         label="Name Standard"
@@ -296,7 +298,7 @@ const MaterialForm = (props: Props) => {
                     </Col>
                   </Col>
 
-                  <Col span={12}>
+                  <Col span={11}>
                     <Col span={22} offset={2}>
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}

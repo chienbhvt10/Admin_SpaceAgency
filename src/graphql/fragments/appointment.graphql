@@ -1,0 +1,14 @@
+fragment IAppointmentRequest on AppointmentRequest {
+  __typename
+  createdAt
+  updatedAt
+  id
+  requesterFullName
+  furigana
+  address
+  tel
+  email
+  appointmentDate1
+  appointmentDate2
+  question
+}

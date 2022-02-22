@@ -5,7 +5,7 @@ import { NumberOfRow, totalPrice } from 'helpers/string';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
 
-interface Props {
+interface IProps {
   items: ISimulation[];
   loading: boolean;
   onChange: (pagination: TablePaginationConfig, __: any, sorter: any) => void;
@@ -14,7 +14,7 @@ interface Props {
   onDelete: (record: ISimulation) => () => void;
 }
 
-const CustomerSimulationTable = (props: Props) => {
+const CustomerSimulationTable = (props: IProps) => {
   const { items, loading, onChange, onEdit, onDelete, pagination } = props;
   const { current, pageSize } = pagination;
   const rowKey = (item: ISimulation) => `${item.id}`;

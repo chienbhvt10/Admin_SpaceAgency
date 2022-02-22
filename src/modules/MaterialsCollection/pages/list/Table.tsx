@@ -50,14 +50,14 @@ function TableMaterial(props: IProps) {
       sorter: true,
       width: 120,
     },
-    {
-      title: '詳細',
-      dataIndex: 'description',
-      key: 'description',
-      sorter: false,
-      width: 500,
-      render: (_: any, record) => <>{record.style?.description}</>,
-    },
+    // {
+    //   title: '詳細',
+    //   dataIndex: 'description',
+    //   key: 'description',
+    //   sorter: false,
+    //   width: 500,
+    //   render: (_: any, record) => <>{record.style?.description}</>,
+    // },
     {
       title: '作成日',
       dataIndex: 'status',

@@ -28,7 +28,7 @@ export interface CreateMaterialsTypeInput {
   codeStandard: string;
   codePremium: string;
   name: string;
-  description?: string;
+  // description?: string;
   styleId?: string;
   imagePreview?: string;
   imagePreview2?: string;
@@ -121,6 +121,21 @@ export const dataNav: DataNav[] = [
         nameSub: 'お問い合わせ',
         router: CommonPath.CONTACT_REQUEST,
       },
+      {
+        key: '6',
+        nameSub: 'Appointment Request',
+        router: CommonPath.APPOINTMENTS_REQUEST,
+      },
+      {
+        key: '7',
+        nameSub: 'Document Request',
+        router: CommonPath.DOCUMENTS_REQUEST,
+      },
+      {
+        key: '8',
+        nameSub: 'Business Customer',
+        router: CommonPath.BUSINESS_CUSTOMER,
+      },
     ],
   },
   {
@@ -130,12 +145,12 @@ export const dataNav: DataNav[] = [
     router: '/content',
     item: [
       {
-        key: '6',
+        key: '9',
         nameSub: 'ユーザー管理',
         router: CommonPath.USERS_MANAGEMENT,
       },
       // {
-      //   key: '7',
+      //   key: '10',
       //   nameSub: 'ロール一覧',
       //   router: CommonPath.ROLES_LIST,
       // },
@@ -199,6 +214,9 @@ export enum TypeKeyFilterTheme {
   THEME = 'id',
 }
 export enum TypeKeyFilterRequest {
+  EMAIL = 'email',
+}
+export enum TypeKeyFilterAppointment {
   EMAIL = 'email',
 }
 export enum TypeKeyFilterStyle {
