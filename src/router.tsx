@@ -1,3 +1,4 @@
+import { appointmentRequestRouter } from 'modules/AppointmentRequest/routes';
 import { contactRequestRouter, contactRequestDetailRouter } from 'modules/ContactRequest/router';
 import {
   customerSimulationDetailRouter,
@@ -43,6 +44,7 @@ const routes: RouteObject[] = [
   { ...createUserManagementRouter },
   { ...contactRequestRouter },
   { ...contactRequestDetailRouter },
+  { ...appointmentRequestRouter },
 ];
 
 export default routes;

@@ -1,0 +1,5 @@
+query getListAppointments($where: WhereInput, $pagination: PaginationInput) {
+  appointmentRequests(where: $where, pagination: $pagination) {
+    ...IAppointmentRequest
+  }
+}

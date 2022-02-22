@@ -38,7 +38,7 @@ const MaterialCollectionPage = () => {
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterMaterials.NAME, value: '' },
     { key: TypeKeyFilterMaterials.STYLE, value: '', isRef: true },
-    { key: TypeKeyFilterMaterials.THEME, value: '', isRef: true },
+    // { key: TypeKeyFilterMaterials.THEME, value: '', isRef: true },
   ];
 
   React.useEffect(() => {
@@ -153,7 +153,7 @@ const MaterialCollectionPage = () => {
           <Col span={23}>
             <Form onValuesChange={onValuesChange} className="dropdown-select" form={form}>
               <Row style={{ marginLeft: '20px' }}>
-                <Col span={12}>
+                {/* <Col span={12}>
                   <FormDropdown
                     formItem={{
                       label: 'テーマ',
@@ -166,7 +166,7 @@ const MaterialCollectionPage = () => {
                     onDropdownVisibleChange={onDropdownVisibleChangeThemes}
                     items={dataAllThemes}
                   />
-                </Col>
+                </Col> */}
                 <Col span={12}>
                   <FormDropdown
                     formItem={{

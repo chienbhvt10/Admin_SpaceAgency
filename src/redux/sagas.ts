@@ -7,7 +7,7 @@ import styleSaga from 'modules/StylesCollection/redux/sagas';
 import materialsSaga from 'modules/MaterialsCollection/redux/sagas';
 import requestsSaga from 'modules/ContactRequest/redux/sagas';
 import simulationsSaga from 'modules/CustomerSimulation/redux/sagas';
-
+import appointmentSaga from 'modules/AppointmentRequest/redux/sagas';
 export default function* rootSaga() {
   yield all([
     authSaga(),
@@ -17,6 +17,7 @@ export default function* rootSaga() {
     materialsSaga(),
     simulationsSaga(),
     requestsSaga(),
+    appointmentSaga(),
     commonSaga.checkErrorAsync(),
   ]);
 }
