@@ -7,6 +7,8 @@ import materials, { MaterialsModuleState } from 'modules/MaterialsCollection/red
 import simulations, { SimulationsModuleState } from 'modules/CustomerSimulation/redux/reducers';
 import requests, { RequestsModuleState } from 'modules/ContactRequest/redux/reducers';
 import appointments, { AppointmentsModuleState } from 'modules/AppointmentRequest/redux/reducers';
+import documents, { DocumentsModuleState } from 'modules/DocumentRequest/redux/reducers';
+
 import loadingReducer from '../utils/loading/redux/loadingReducer';
 import { LoadingState } from './action-types';
 
@@ -20,6 +22,7 @@ export interface RootState {
   simulations: SimulationsModuleState;
   requests: RequestsModuleState;
   appointments: AppointmentsModuleState;
+  documents: DocumentsModuleState;
 }
 
 export default combineReducers<RootState>({
@@ -32,4 +35,5 @@ export default combineReducers<RootState>({
   simulations,
   requests,
   appointments,
+  documents,
 });

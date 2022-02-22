@@ -219,6 +219,9 @@ export enum TypeKeyFilterRequest {
 export enum TypeKeyFilterAppointment {
   EMAIL = 'email',
 }
+export enum TypeKeyFilterDocument {
+  EMAIL = 'email',
+}
 export enum TypeKeyFilterStyle {
   NAME = 'title',
   THEME = 'theme',

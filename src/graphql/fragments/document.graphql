@@ -1,0 +1,18 @@
+fragment IDocumentRequest on DocumentRequest {
+  __typename
+  id
+  documentType
+  requesterFullName
+  furigana
+  age
+  address
+  tel
+  question
+  email
+  desiredContactMethod
+  question
+  currentHouseType
+  hasLand
+  desiredDeploymentTime
+  marketingChannels
+}

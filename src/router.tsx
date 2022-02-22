@@ -21,6 +21,8 @@ import {
   detailUserManagementRouter,
   userManagementRouter,
 } from 'modules/UserManagement/router';
+
+import { documentRequestRouter } from 'modules/DocumentRequest/routes';
 import { RouteObject } from 'react-router-dom';
 import { authRouter } from './modules/Auth/router';
 import { homeRouter } from './modules/Home/router';
@@ -45,6 +47,7 @@ const routes: RouteObject[] = [
   { ...contactRequestRouter },
   { ...contactRequestDetailRouter },
   { ...appointmentRequestRouter },
+  { ...documentRequestRouter },
 ];
 
 export default routes;

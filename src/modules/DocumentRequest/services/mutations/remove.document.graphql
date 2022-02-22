@@ -1,0 +1,5 @@
+mutation removeDocumentRequest($id: String!) {
+  removeDocumentRequest(id: $id) {
+    ...IDocumentRequest
+  }
+}
