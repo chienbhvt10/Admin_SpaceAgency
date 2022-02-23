@@ -1,7 +1,7 @@
 import { Col, Form, FormItemProps, FormProps, Input, Radio, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
-import { TypeForm } from 'commons/type';
+import { TypeForm, UpdateRequestStatusTypeInput } from 'commons/type';
 import { IRequest, RequestStatus, UpdateRequestStatusVariables } from 'graphql/generated/graphql';
 import { useUpdateRequestStatus } from 'modules/Request/hooks/useUpdateRequestStatus';
 import React from 'react';
@@ -20,51 +20,52 @@ interface IProps {
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;
-  onFinish?: (values: UpdateRequestStatusVariables) => void;
+  onFinish?: (values: UpdateRequestStatusTypeInput) => void;
 }
 
 function ContactRequestForm(props: IProps) {
   const { loading, item, onCancel, onChange, title, type, onFinish } = props;
   const { updateRequestStatus } = useUpdateRequestStatus();
-  const [form] = Form.useForm<IRequest>();
+  const [form] = Form.useForm<UpdateRequestStatusTypeInput>();
 
+  const updateRequestVariables = {
+    email: item?.email || '',
+    address: item?.address || '',
+    furigana: item?.furigana || '',
+    phone: item?.phone || '',
+    requesterFullName: item?.requesterFullName || '',
+    content: item?.content || '',
+    hasLand: item?.hasLand ? 'Has land' : 'Landless',
+    postcode: item?.postcode || '',
+    type: item?.type,
+    status: item?.status,
+  };
   React.useEffect(() => {
     if (item && type === TypeForm.UPDATE) {
-      form.setFieldsValue({
-        email: item.email || '',
-        address: item.address || '',
-        furigana: item.furigana || '',
-        phone: item.phone || '',
-        requesterFullName: item.requesterFullName || '',
-        content: item.content || '',
-        hasLand: item.hasLand || false,
-        postcode: item.postcode || '',
-        type: item.type,
-        status: item.status,
-      });
+      form.setFieldsValue(updateRequestVariables);
     }
   }, [type, form, item]);
-  React.useEffect(() => {
-    if (item) {
-      form.setFieldsValue(item);
-    }
-  }, [form, item]);
+  // React.useEffect(() => {
+  //   if (item) {
+  //     form.setFieldsValue(item);
+  //   }
+  // }, [form, item]);
   const onFinishFailed = () => {};
   const onDone = () => {
     form.setFieldsValue({
-      ...item,
+      ...updateRequestVariables,
       status: RequestStatus.Open,
     });
   };
   const onReject = () => {
     form.setFieldsValue({
-      ...item,
+      ...updateRequestVariables,
       status: RequestStatus.Rejected,
     });
   };
   const onApprove = () => {
     form.setFieldsValue({
-      ...item,
+      ...updateRequestVariables,
       status: RequestStatus.Accepted,
     });
   };
@@ -103,8 +104,8 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Requester FullName</Title>}
-                name="氏名"
+                label={<Title level={5}>氏名</Title>}
+                name="requesterFullName"
                 {...tailLayout}
               >
                 <Input disabled />
@@ -123,6 +124,15 @@ function ContactRequestForm(props: IProps) {
                 wrapperCol={{ span: 14 }}
                 label={<Title level={5}>Phone</Title>}
                 name="phone"
+                {...tailLayout}
+              >
+                <Input disabled />
+              </Form.Item>
+              <Form.Item
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 14 }}
+                label={<Title level={5}>Has land</Title>}
+                name="hasLand"
                 {...tailLayout}
               >
                 <Input disabled />

@@ -1,5 +1,5 @@
 import { CommonPath } from 'commons/base-routes';
-import { RequestStatus } from 'graphql/generated/graphql';
+import { RequestStatus, RequestType } from 'graphql/generated/graphql';
 export const NEXT_LOCALE = 'NEXT_LOCALE';
 export interface LoginInput {
   userName: String;
@@ -40,6 +40,18 @@ export interface CreateMaterialsTypeInput {
   priceStandard: number;
   pricePremium: number;
   themeId?: string;
+}
+export interface UpdateRequestStatusTypeInput {
+  requesterFullName: string;
+  furigana: string;
+  address: string;
+  phone: string;
+  email: string;
+  hasLand: string;
+  content: string;
+  postcode: string;
+  type: RequestType;
+  status: RequestStatus;
 }
 export interface CreateThemeTypeInput {
   code: string;

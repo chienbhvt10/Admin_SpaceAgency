@@ -1,7 +1,7 @@
 import { CommonPath } from 'commons/base-routes';
 import RequestLayout from 'commons/components/layouts/Request';
 import PageHeader from 'commons/components/layouts/PageHeader';
-import { TypeForm, UpdateRequestStatusInput } from 'commons/type';
+import { TypeForm, UpdateRequestStatusInput, UpdateRequestStatusTypeInput } from 'commons/type';
 import { setTitle } from 'helpers/dom';
 import ContactRequestForm from 'modules/Request/components/request-form';
 import { useRequestDetail } from 'modules/Request/hooks/useRequestDetail';
@@ -24,7 +24,7 @@ const RequestStatusUpdate = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const onFinishUpdateRequestStatus = (values: UpdateRequestStatusInput) => {
+  const onFinishUpdateRequestStatus = (values: UpdateRequestStatusTypeInput) => {
     updateRequestStatus({
       id: item?.id || '',
       status: values.status,

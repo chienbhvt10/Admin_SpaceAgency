@@ -229,6 +229,29 @@ const ThemesForm = (props: Props) => {
                       </div>
                     </Col>
                   </Col>
+                  <Col span={12} style={{ marginTop: 25 }}>
+                    <Col span={24}>
+                      <Form.Item
+                        rules={[requireRule]}
+                        labelCol={{ span: 6, style: { marginRight: 20 } }}
+                        wrapperCol={{ span: 16 }}
+                        label="Outside Preview"
+                        name="outsidePreviewUrl"
+                      >
+                        <Input placeholder="Outside Preview" disabled={true} />
+                      </Form.Item>
+                    </Col>
+                    <Col span={16} offset={6}>
+                      <div style={{ marginLeft: '5px', height: '300px' }}>
+                        <UploadDragger
+                          loading={loadingOutside}
+                          handleChange={handleChangeOutside}
+                          imageUrl={objUrlImage.outsidePreviewUrl}
+                          resetToDefault={() => handleResetOutsideUrl()}
+                        />
+                      </div>
+                    </Col>
+                  </Col>
                 </Row>
               </Col>
             </Row>
