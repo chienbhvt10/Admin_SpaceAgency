@@ -1,5 +1,0 @@
-query getListDocuments($where: WhereInput, $pagination: PaginationInput) {
-  documentRequests(where: $where, pagination: $pagination) {
-    ...IDocumentRequest
-  }
-}

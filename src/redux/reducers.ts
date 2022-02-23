@@ -5,12 +5,9 @@ import users, { UsersModuleState } from 'modules/UserManagement/redux/reducers';
 import styles, { StylesModuleState } from 'modules/StylesCollection/redux/reducers';
 import materials, { MaterialsModuleState } from 'modules/MaterialsCollection/redux/reducers';
 import simulations, { SimulationsModuleState } from 'modules/CustomerSimulation/redux/reducers';
-import requests, { RequestsModuleState } from 'modules/ContactRequest/redux/reducers';
-import appointments, { AppointmentsModuleState } from 'modules/AppointmentRequest/redux/reducers';
-import documents, { DocumentsModuleState } from 'modules/DocumentRequest/redux/reducers';
-
 import loadingReducer from '../utils/loading/redux/loadingReducer';
 import { LoadingState } from './action-types';
+import requests, { RequestsModuleState } from 'modules/Request/redux/reducers';
 
 export interface RootState {
   auth: AuthModuleState;
@@ -21,8 +18,6 @@ export interface RootState {
   materials: MaterialsModuleState;
   simulations: SimulationsModuleState;
   requests: RequestsModuleState;
-  appointments: AppointmentsModuleState;
-  documents: DocumentsModuleState;
 }
 
 export default combineReducers<RootState>({
@@ -34,6 +29,4 @@ export default combineReducers<RootState>({
   materials,
   simulations,
   requests,
-  appointments,
-  documents,
 });

@@ -1,5 +1,0 @@
-mutation removeAppointmentRequest($id: String!) {
-  removeAppointmentRequest(id: $id) {
-    ...IAppointmentRequest
-  }
-}

@@ -121,21 +121,6 @@ export const dataNav: DataNav[] = [
         nameSub: 'お問い合わせ',
         router: CommonPath.CONTACT_REQUEST,
       },
-      {
-        key: '6',
-        nameSub: 'Appointment Request',
-        router: CommonPath.APPOINTMENTS_REQUEST,
-      },
-      {
-        key: '7',
-        nameSub: 'Document Request',
-        router: CommonPath.DOCUMENTS_REQUEST,
-      },
-      {
-        key: '8',
-        nameSub: 'Business Customer',
-        router: CommonPath.BUSINESS_CUSTOMER,
-      },
     ],
   },
   {

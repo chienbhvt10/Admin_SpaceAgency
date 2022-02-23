@@ -1292,21 +1292,6 @@ export type IThemeCategory = { __typename?: 'ThemeCategory', id: string, title: 
 
 export type IUsersFields = { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus };
 
-export type RemoveAppointmentRequestVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type RemoveAppointmentRequest = { __typename?: 'Mutation', removeAppointmentRequest: { __typename: 'AppointmentRequest', createdAt?: any | null, updatedAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, tel: string, email: string, appointmentDate1?: any | null, appointmentDate2?: any | null, question?: string | null } };
-
-export type GetListAppointmentsVariables = Exact<{
-  where?: InputMaybe<WhereInput>;
-  pagination?: InputMaybe<PaginationInput>;
-}>;
-
-
-export type GetListAppointments = { __typename?: 'Query', appointmentRequests?: Array<{ __typename: 'AppointmentRequest', createdAt?: any | null, updatedAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, tel: string, email: string, appointmentDate1?: any | null, appointmentDate2?: any | null, question?: string | null }> | null };
-
 export type LoginAdminVariables = Exact<{
   loginInput: CreateAuthInput;
 }>;
@@ -1318,51 +1303,6 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } };
-
-export type RemoveBusinessCustomerVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type RemoveBusinessCustomer = { __typename?: 'Mutation', removeBusinessCustomer: { __typename: 'BusinessCustomer', createdAt?: any | null, updatedAt?: any | null, id: string, companyName: string, representative: string, furiquana: string, email: string, questionTitle: string, questionContent: string } };
-
-export type GetListBusinessCustomersVariables = Exact<{
-  where?: InputMaybe<WhereInput>;
-  pagination?: InputMaybe<PaginationInput>;
-}>;
-
-
-export type GetListBusinessCustomers = { __typename?: 'Query', businessCustomers?: Array<{ __typename: 'BusinessCustomer', createdAt?: any | null, updatedAt?: any | null, id: string, companyName: string, representative: string, furiquana: string, email: string, questionTitle: string, questionContent: string }> | null };
-
-export type RemoveRequestVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type RemoveRequest = { __typename?: 'Mutation', removeRequest: { __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null } };
-
-export type UpdateRequestStatusVariables = Exact<{
-  status: RequestStatus;
-  id: Scalars['String'];
-}>;
-
-
-export type UpdateRequestStatus = { __typename?: 'Mutation', updateRequestStatus: { __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null } };
-
-export type GetRequestVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type GetRequest = { __typename?: 'Query', request: { __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null } };
-
-export type GetListRequestVariables = Exact<{
-  pagination?: InputMaybe<PaginationInput>;
-  where?: InputMaybe<WhereInput>;
-}>;
-
-
-export type GetListRequest = { __typename?: 'Query', requests: Array<{ __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null }> };
 
 export type RemoveSimulationVariables = Exact<{
   id: Scalars['String'];
@@ -1393,21 +1333,6 @@ export type GetListSimulationsVariables = Exact<{
 
 
 export type GetListSimulations = { __typename?: 'Query', simulations: Array<{ __typename?: 'Simulation', createdAt?: any | null, updatedAt?: any | null, id: string, status: SimulationStatus, requests?: Array<{ __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null }> | null, simulationComponent?: { __typename?: 'SimulationComponent', createdAt?: any | null, updatedAt?: any | null, id: string, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null, code3D?: string | null, createdAt: any, updatedAt: any, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null, updatedAt?: any | null, refId: string, refType: RefType } | null, themeImage?: { __typename?: 'ThemeImage', id: string, outsidePreviewUrl?: string | null, insidePreviewUrl?: string | null } | null, themeCategories?: Array<{ __typename?: 'ThemeCategory', id: string, title: string }> | null, styles?: Array<{ __typename?: 'Style', id: string, title?: string | null, code3d?: string | null, description?: string | null, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null, updatedAt?: any | null, refId: string, refType: RefType } | null, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null, code3D?: string | null, createdAt: any, updatedAt: any } | null, styleImage?: { __typename?: 'StyleImage', id: string, previewImageUrl: string } | null }> | null } | null, style?: { __typename?: 'Style', id: string, title?: string | null, code3d?: string | null, description?: string | null, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null, updatedAt?: any | null, refId: string, refType: RefType } | null, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null, code3D?: string | null, createdAt: any, updatedAt: any } | null, styleImage?: { __typename?: 'StyleImage', id: string, previewImageUrl: string } | null } | null, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null, id: string, title?: string | null, code3d?: string | null, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null, updatedAt?: any | null, refId: string, refType: RefType } | null, materialImage?: { __typename?: 'MaterialImage', id: string, previewImageUrl?: string | null } | null }> | null } | null, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null, quotation?: { __typename?: 'Quotation', createdAt?: any | null, updatedAt?: any | null, id: string, taxRate: number } | null }> };
-
-export type RemoveDocumentRequestVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type RemoveDocumentRequest = { __typename?: 'Mutation', removeDocumentRequest: { __typename: 'DocumentRequest', id: string, documentType: DocumentType, requesterFullName: string, furigana: string, age?: DocumentRequestAge | null, address: string, tel: string, question?: string | null, email: string, desiredContactMethod?: DesiredContactMethod | null, currentHouseType?: CurrentHouseType | null, hasLand?: boolean | null, desiredDeploymentTime?: DesiredDeploymentTime | null, marketingChannels?: Array<string> | null } };
-
-export type GetListDocumentsVariables = Exact<{
-  where?: InputMaybe<WhereInput>;
-  pagination?: InputMaybe<PaginationInput>;
-}>;
-
-
-export type GetListDocuments = { __typename?: 'Query', documentRequests?: Array<{ __typename: 'DocumentRequest', id: string, documentType: DocumentType, requesterFullName: string, furigana: string, age?: DocumentRequestAge | null, address: string, tel: string, question?: string | null, email: string, desiredContactMethod?: DesiredContactMethod | null, currentHouseType?: CurrentHouseType | null, hasLand?: boolean | null, desiredDeploymentTime?: DesiredDeploymentTime | null, marketingChannels?: Array<string> | null }> | null };
 
 export type CreateMaterialVariables = Exact<{
   createMaterialInput: CreateMaterialInput;
@@ -1452,6 +1377,36 @@ export type GetTotalCountVariables = Exact<{
 
 
 export type GetTotalCount = { __typename?: 'Query', count: number };
+
+export type RemoveRequestVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveRequest = { __typename?: 'Mutation', removeRequest: { __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null } };
+
+export type UpdateRequestStatusVariables = Exact<{
+  status: RequestStatus;
+  id: Scalars['String'];
+}>;
+
+
+export type UpdateRequestStatus = { __typename?: 'Mutation', updateRequestStatus: { __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null } };
+
+export type GetRequestVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetRequest = { __typename?: 'Query', request: { __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null } };
+
+export type GetListRequestVariables = Exact<{
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<WhereInput>;
+}>;
+
+
+export type GetListRequest = { __typename?: 'Query', requests: Array<{ __typename?: 'Request', createdAt?: any | null, id: string, requesterFullName: string, furigana: string, address: string, phone: string, email: string, hasLand: boolean, content: string, postcode: string, type: RequestType, status: RequestStatus, user?: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } | null }> };
 
 export type CreateStyleVariables = Exact<{
   createStyleInput: CreateStyleInput;
@@ -1843,20 +1798,6 @@ export const ISimulation = gql`
 ${ISimulationComponent}
 ${IUsersFields}
 ${IQuotation}`;
-export const RemoveAppointmentRequestDocument = gql`
-    mutation removeAppointmentRequest($id: String!) {
-  removeAppointmentRequest(id: $id) {
-    ...IAppointmentRequest
-  }
-}
-    ${IAppointmentRequest}`;
-export const GetListAppointmentsDocument = gql`
-    query getListAppointments($where: WhereInput, $pagination: PaginationInput) {
-  appointmentRequests(where: $where, pagination: $pagination) {
-    ...IAppointmentRequest
-  }
-}
-    ${IAppointmentRequest}`;
 export const LoginAdminDocument = gql`
     mutation loginAdmin($loginInput: CreateAuthInput!) {
   loginAdmin(loginInput: $loginInput) {
@@ -1872,48 +1813,6 @@ export const MeDocument = gql`
   }
 }
     ${IUsersFields}`;
-export const RemoveBusinessCustomerDocument = gql`
-    mutation removeBusinessCustomer($id: String!) {
-  removeBusinessCustomer(id: $id) {
-    ...IBusinessCustomer
-  }
-}
-    ${IBusinessCustomer}`;
-export const GetListBusinessCustomersDocument = gql`
-    query getListBusinessCustomers($where: WhereInput, $pagination: PaginationInput) {
-  businessCustomers(where: $where, pagination: $pagination) {
-    ...IBusinessCustomer
-  }
-}
-    ${IBusinessCustomer}`;
-export const RemoveRequestDocument = gql`
-    mutation removeRequest($id: String!) {
-  removeRequest(id: $id) {
-    ...IRequest
-  }
-}
-    ${IRequest}`;
-export const UpdateRequestStatusDocument = gql`
-    mutation updateRequestStatus($status: RequestStatus!, $id: String!) {
-  updateRequestStatus(status: $status, id: $id) {
-    ...IRequest
-  }
-}
-    ${IRequest}`;
-export const GetRequestDocument = gql`
-    query getRequest($id: String!) {
-  request(id: $id) {
-    ...IRequest
-  }
-}
-    ${IRequest}`;
-export const GetListRequestDocument = gql`
-    query getListRequest($pagination: PaginationInput, $where: WhereInput) {
-  requests(pagination: $pagination, where: $where) {
-    ...IRequest
-  }
-}
-    ${IRequest}`;
 export const RemoveSimulationDocument = gql`
     mutation removeSimulation($id: String!) {
   removeSimulation(id: $id) {
@@ -1945,20 +1844,6 @@ export const GetListSimulationsDocument = gql`
   }
 }
     ${ISimulation}`;
-export const RemoveDocumentRequestDocument = gql`
-    mutation removeDocumentRequest($id: String!) {
-  removeDocumentRequest(id: $id) {
-    ...IDocumentRequest
-  }
-}
-    ${IDocumentRequest}`;
-export const GetListDocumentsDocument = gql`
-    query getListDocuments($where: WhereInput, $pagination: PaginationInput) {
-  documentRequests(where: $where, pagination: $pagination) {
-    ...IDocumentRequest
-  }
-}
-    ${IDocumentRequest}`;
 export const CreateMaterialDocument = gql`
     mutation createMaterial($createMaterialInput: CreateMaterialInput!) {
   createMaterial(createMaterialInput: $createMaterialInput) {
@@ -2000,6 +1885,34 @@ export const GetTotalCountDocument = gql`
   count(type: $type, where: $where)
 }
     `;
+export const RemoveRequestDocument = gql`
+    mutation removeRequest($id: String!) {
+  removeRequest(id: $id) {
+    ...IRequest
+  }
+}
+    ${IRequest}`;
+export const UpdateRequestStatusDocument = gql`
+    mutation updateRequestStatus($status: RequestStatus!, $id: String!) {
+  updateRequestStatus(status: $status, id: $id) {
+    ...IRequest
+  }
+}
+    ${IRequest}`;
+export const GetRequestDocument = gql`
+    query getRequest($id: String!) {
+  request(id: $id) {
+    ...IRequest
+  }
+}
+    ${IRequest}`;
+export const GetListRequestDocument = gql`
+    query getListRequest($pagination: PaginationInput, $where: WhereInput) {
+  requests(pagination: $pagination, where: $where) {
+    ...IRequest
+  }
+}
+    ${IRequest}`;
 export const CreateStyleDocument = gql`
     mutation createStyle($createStyleInput: CreateStyleInput!) {
   createStyle(createStyleInput: $createStyleInput) {
@@ -2149,35 +2062,11 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    removeAppointmentRequest(variables: RemoveAppointmentRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveAppointmentRequest> {
-      return withWrapper((wrappedRequestHeaders) => client.request<RemoveAppointmentRequest>(RemoveAppointmentRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeAppointmentRequest');
-    },
-    getListAppointments(variables?: GetListAppointmentsVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListAppointments> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetListAppointments>(GetListAppointmentsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListAppointments');
-    },
     loginAdmin(variables: LoginAdminVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LoginAdmin> {
       return withWrapper((wrappedRequestHeaders) => client.request<LoginAdmin>(LoginAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'loginAdmin');
     },
     me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
-    },
-    removeBusinessCustomer(variables: RemoveBusinessCustomerVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveBusinessCustomer> {
-      return withWrapper((wrappedRequestHeaders) => client.request<RemoveBusinessCustomer>(RemoveBusinessCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeBusinessCustomer');
-    },
-    getListBusinessCustomers(variables?: GetListBusinessCustomersVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListBusinessCustomers> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetListBusinessCustomers>(GetListBusinessCustomersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListBusinessCustomers');
-    },
-    removeRequest(variables: RemoveRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveRequest> {
-      return withWrapper((wrappedRequestHeaders) => client.request<RemoveRequest>(RemoveRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeRequest');
-    },
-    updateRequestStatus(variables: UpdateRequestStatusVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateRequestStatus> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateRequestStatus>(UpdateRequestStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateRequestStatus');
-    },
-    getRequest(variables: GetRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetRequest> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetRequest>(GetRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getRequest');
-    },
-    getListRequest(variables?: GetListRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListRequest> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetListRequest>(GetListRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListRequest');
     },
     removeSimulation(variables: RemoveSimulationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveSimulation> {
       return withWrapper((wrappedRequestHeaders) => client.request<RemoveSimulation>(RemoveSimulationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeSimulation');
@@ -2190,12 +2079,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getListSimulations(variables?: GetListSimulationsVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListSimulations> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListSimulations>(GetListSimulationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListSimulations');
-    },
-    removeDocumentRequest(variables: RemoveDocumentRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveDocumentRequest> {
-      return withWrapper((wrappedRequestHeaders) => client.request<RemoveDocumentRequest>(RemoveDocumentRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeDocumentRequest');
-    },
-    getListDocuments(variables?: GetListDocumentsVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListDocuments> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetListDocuments>(GetListDocumentsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListDocuments');
     },
     createMaterial(variables: CreateMaterialVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateMaterial> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateMaterial>(CreateMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMaterial');
@@ -2214,6 +2097,18 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getTotalCount(variables: GetTotalCountVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTotalCount> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetTotalCount>(GetTotalCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTotalCount');
+    },
+    removeRequest(variables: RemoveRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveRequest> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveRequest>(RemoveRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeRequest');
+    },
+    updateRequestStatus(variables: UpdateRequestStatusVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateRequestStatus> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateRequestStatus>(UpdateRequestStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateRequestStatus');
+    },
+    getRequest(variables: GetRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetRequest> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetRequest>(GetRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getRequest');
+    },
+    getListRequest(variables?: GetListRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListRequest> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListRequest>(GetListRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListRequest');
     },
     createStyle(variables: CreateStyleVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateStyle> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateStyle>(CreateStyleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createStyle');
