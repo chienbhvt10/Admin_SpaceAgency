@@ -25,6 +25,7 @@ export function* createThemeAsync(action: CreateThemeAction) {
       createThemeImageInput: {
         insidePreviewUrl: action.payload.insidePreviewUrl || '',
         outsidePreviewUrl: action.payload.outsidePreviewUrl || '',
+        diagramImage: action.payload.diagramImageUrl || '',
       },
     };
     const dataThemeCategory: CreateThemeCategory = yield apis.createThemeCategory(createThemeCategoryVariables);
@@ -47,7 +48,7 @@ export function* createThemeAsync(action: CreateThemeAction) {
     );
     getNavigate(CommonPath.THEME_COLLECTION);
     yield put(actionCreateThemeSuccess(data.createTheme));
-    NotificationSuccess('Thông báo!', 'Create theme success.');
+    NotificationSuccess('通知!', 'タイプの追加に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionCreateThemeError(err));

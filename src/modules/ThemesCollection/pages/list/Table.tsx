@@ -34,7 +34,7 @@ function TableThemes(props: IProps) {
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: '名称',
+      title: 'タイトル',
       dataIndex: 'title',
       key: 'title',
       sortDirections: ['descend', 'ascend'],
@@ -68,14 +68,14 @@ function TableThemes(props: IProps) {
       render: (_: any, record: ITheme) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
-      title: '編集',
+      title: 'ツール',
       dataIndex: '',
       key: 'tools',
       align: 'center',
       width: 150,
       render: (_: any, record: ITheme) => (
         <UserRowActions
-          title="Are you sure you want to delete this theme?"
+          title="このタイプを削除します。よろしいですか。"
           record={record}
           onDelete={onDelete}
           onEdit={onEdit}

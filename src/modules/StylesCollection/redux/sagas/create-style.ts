@@ -27,7 +27,7 @@ export function* createStyleAsync(action: CreateStyleAction) {
     );
     getNavigate(CommonPath.STYLES_COLLECTION);
     yield put(actionCreateStyleSuccess(createStyleData.createStyle));
-    NotificationSuccess('Thông báo!', 'Create style success.');
+    NotificationSuccess('通知!', 'Create style success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionCreateStyleError(err));

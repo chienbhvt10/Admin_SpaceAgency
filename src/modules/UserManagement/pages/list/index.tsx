@@ -55,7 +55,7 @@ function ListUserManagement() {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
+      breadcrumbName: 'Home',
     },
     {
       path: CommonPath.USERS_MANAGEMENT,

@@ -14,6 +14,7 @@ export interface UpdateTypeInput extends UpdateThemeVariables {
   idImage: string;
   insidePreviewUrl: string;
   outsidePreviewUrl: string;
+  diagramImageUrl: string;
 }
 
 export interface UpdateThemeAction {

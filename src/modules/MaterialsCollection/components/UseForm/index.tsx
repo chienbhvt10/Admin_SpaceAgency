@@ -22,7 +22,7 @@ interface Props {
   onChange?(): void;
   onFinish?: (values: CreateMaterialsTypeInput) => void;
 }
-const requireRule = { required: true, message: 'This is required information!' };
+const requireRule = { required: true, message: 'この項目は必須です。' };
 
 const MaterialForm = (props: Props) => {
   const { loading, item, title, onFinish, type } = props;

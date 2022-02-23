@@ -1,5 +1,5 @@
 import { CommonPath } from 'commons/base-routes';
-import { RequestStatus } from 'graphql/generated/graphql';
+import { RequestStatus, RequestType } from 'graphql/generated/graphql';
 export const NEXT_LOCALE = 'NEXT_LOCALE';
 export interface LoginInput {
   userName: String;
@@ -41,7 +41,19 @@ export interface CreateMaterialsTypeInput {
   pricePremium: number;
   themeId?: string;
 }
-export interface CreateThemeTypeInput {
+export interface UpdateRequestStatusTypeInput {
+  requesterFullName: string;
+  furigana: string;
+  address: string;
+  phone: string;
+  email: string;
+  hasLand: string;
+  content: string;
+  postcode: string;
+  type: RequestType;
+  status: RequestStatus;
+}
+export interface ThemeTypeInput {
   code: string;
   description?: string;
   name: string;
@@ -50,6 +62,7 @@ export interface CreateThemeTypeInput {
   price: number;
   insidePreviewUrl: string;
   outsidePreviewUrl: string;
+  diagramImageUrl: string;
 }
 
 export interface CreateStyleTypeInput {
@@ -90,17 +103,17 @@ export const dataNav: DataNav[] = [
     item: [
       {
         key: '1',
-        nameSub: 'テーマ一覧',
+        nameSub: 'タイプ覧',
         router: CommonPath.THEME_COLLECTION,
       },
       {
         key: '2',
-        nameSub: 'スタイル一覧',
+        nameSub: 'デザイン一覧',
         router: CommonPath.STYLES_COLLECTION,
       },
       {
         key: '3',
-        nameSub: 'マテリアル一覧',
+        nameSub: 'カスタマイズ一覧',
         router: CommonPath.MATERIAL_COLLECTION,
       },
     ],
@@ -120,21 +133,6 @@ export const dataNav: DataNav[] = [
         key: '5',
         nameSub: 'お問い合わせ',
         router: CommonPath.CONTACT_REQUEST,
-      },
-      {
-        key: '6',
-        nameSub: 'Appointment Request',
-        router: CommonPath.APPOINTMENTS_REQUEST,
-      },
-      {
-        key: '7',
-        nameSub: 'Document Request',
-        router: CommonPath.DOCUMENTS_REQUEST,
-      },
-      {
-        key: '8',
-        nameSub: 'Business Customer',
-        router: CommonPath.BUSINESS_CUSTOMER,
       },
     ],
   },
@@ -217,6 +215,9 @@ export enum TypeKeyFilterRequest {
   EMAIL = 'email',
 }
 export enum TypeKeyFilterAppointment {
+  EMAIL = 'email',
+}
+export enum TypeKeyFilterDocument {
   EMAIL = 'email',
 }
 export enum TypeKeyFilterStyle {

@@ -14,7 +14,7 @@ const NewStyleCollection = () => {
   const { createStyle } = useCreateStyle();
 
   React.useEffect(() => {
-    setTitle('Create Style');
+    setTitle('デザイン追加');
   });
 
   const onCancel = () => {
@@ -45,7 +45,7 @@ const NewStyleCollection = () => {
       <CreateStyleForm
         onFinish={onFinishCreateStyle}
         onCancel={onCancel}
-        title="Create Style Collection"
+        title="デザイン追加"
         type={TypeForm.CREATE}
         loading={loading}
       />
@@ -61,10 +61,10 @@ const routes = [
   },
   {
     path: CommonPath.STYLES_COLLECTION,
-    breadcrumbName: 'スタイル一覧',
+    breadcrumbName: 'デザイン一覧',
   },
   {
     path: CommonPath.STYLES_COLLECTION_NEW,
-    breadcrumbName: 'Create Style Collection',
+    breadcrumbName: 'デザイン追加',
   },
 ];

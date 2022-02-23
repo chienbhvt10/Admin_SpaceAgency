@@ -46,7 +46,7 @@ const FilterForm = (props: Props) => {
     <Form className="filter-form" form={form}>
       <Row justify="center">
         <Col span={22} style={{ marginLeft: '33px' }}>
-          <Form.Item labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} label="テーマ" name="themeId">
+          <Form.Item labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} label="タイプ" name="themeId">
             <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---全部---" onSelect={onChangeTheme}>
               {themeOptions}
             </Select>
@@ -56,20 +56,20 @@ const FilterForm = (props: Props) => {
           <Col span={24} style={{ marginLeft: '20px' }}>
             <Row>
               <Col span={18}>
-                <Form.Item label="Keyword" labelCol={{ span: 4 }} wrapperCol={{ span: 19 }} name="search">
-                  <Input onChange={onChangeValue} placeholder="Type to search..." />
+                <Form.Item label="キーワード" labelCol={{ span: 4 }} wrapperCol={{ span: 19 }} name="search">
+                  <Input onChange={onChangeValue} placeholder="キーワードを入力してください。" />
                 </Form.Item>
               </Col>
               <Col span={4} style={{ display: 'flex' }}>
                 <BaseButton
-                  text="Reset"
+                  text="リセット"
                   disabled={disabled}
                   backgroundColor={disabled ? '#C0C0C0' : '#6C757D'}
                   onClick={resetFields}
                   marginLeft={'10px'}
                 />
                 <BaseButton
-                  text="Search"
+                  text="検索"
                   disabled={disabled}
                   border="1px solid #007BFF"
                   backgroundColor={disabled ? '#C0C0C0' : '#007BFF'}

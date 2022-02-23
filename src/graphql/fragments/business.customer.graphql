@@ -1,0 +1,12 @@
+fragment IBusinessCustomer on BusinessCustomer {
+  __typename
+  createdAt
+  updatedAt
+  id
+  companyName
+  representative
+  furiquana
+  email
+  questionTitle
+  questionContent
+}

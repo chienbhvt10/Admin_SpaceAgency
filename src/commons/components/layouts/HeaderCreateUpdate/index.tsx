@@ -19,7 +19,7 @@ const HeaderCreateUpdate = (props: IProps) => {
         extra={
           <div className="wrapper-button">
             <BaseButton
-              text="Cancel"
+              text="キャンセル"
               width={''}
               height={''}
               marginRight="5px"
@@ -28,7 +28,7 @@ const HeaderCreateUpdate = (props: IProps) => {
               onClick={onCancel}
             />
             <BaseButton
-              text="Save"
+              text="保存"
               type="premium"
               htmlType="submit"
               loading={props.loading}

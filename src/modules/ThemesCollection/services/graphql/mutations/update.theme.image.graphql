@@ -3,5 +3,6 @@ mutation updateThemeImage($updateThemeImageInput: UpdateThemeImageInput!) {
     id
     outsidePreviewUrl
     insidePreviewUrl
+    diagramImage
   }
 }

@@ -1,5 +1,4 @@
-import { appointmentRequestRouter } from 'modules/AppointmentRequest/routes';
-import { contactRequestRouter, contactRequestDetailRouter } from 'modules/ContactRequest/router';
+import { contactRequestRouter, contactRequestDetailRouter } from 'modules/Request/router';
 import {
   customerSimulationDetailRouter,
   customerSimulationRouter,
@@ -21,6 +20,7 @@ import {
   detailUserManagementRouter,
   userManagementRouter,
 } from 'modules/UserManagement/router';
+
 import { RouteObject } from 'react-router-dom';
 import { authRouter } from './modules/Auth/router';
 import { homeRouter } from './modules/Home/router';
@@ -44,7 +44,6 @@ const routes: RouteObject[] = [
   { ...createUserManagementRouter },
   { ...contactRequestRouter },
   { ...contactRequestDetailRouter },
-  { ...appointmentRequestRouter },
 ];
 
 export default routes;

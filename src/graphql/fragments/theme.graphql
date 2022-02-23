@@ -22,6 +22,7 @@ fragment IThemeImage on ThemeImage {
   id
   outsidePreviewUrl
   insidePreviewUrl
+  diagramImage
 }
 fragment IThemeCategory on ThemeCategory {
   id

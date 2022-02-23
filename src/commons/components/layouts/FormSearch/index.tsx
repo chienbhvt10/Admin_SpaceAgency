@@ -24,21 +24,21 @@ export const FormSearch = (props: IProps) => {
         <Row>
           <Col span={18}>
             <Form form={form}>
-              <Form.Item label="Keyword" labelCol={{ span: 4 }} wrapperCol={{ span: 19 }} name="search">
-                <Input onChange={props.onChange} placeholder="Type to search..." />
+              <Form.Item label="キーワード" labelCol={{ span: 4 }} wrapperCol={{ span: 19 }} name="search">
+                <Input onChange={props.onChange} placeholder="キーワードを入力してください。" />
               </Form.Item>
             </Form>
           </Col>
           <Col span={4} style={{ display: 'flex' }}>
             <BaseButton
-              text="Reset"
+              text="リセット"
               disabled={props.disabled}
               backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
               onClick={props.onReset}
               marginLeft={'10px'}
             />
             <BaseButton
-              text="Search"
+              text="検索"
               disabled={props.disabled}
               border="1px solid #007BFF"
               backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}

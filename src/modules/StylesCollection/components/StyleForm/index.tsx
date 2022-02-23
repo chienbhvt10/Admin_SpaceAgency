@@ -21,7 +21,7 @@ interface Props {
   onFinish?: (values: CreateStyleTypeInput) => void;
 }
 
-const requireRule = { required: true, message: 'This is required information!' };
+const requireRule = { required: true, message: 'この項目は必須です。' };
 
 const StyleCollectionForm = (props: Props) => {
   const { loading, type, item, onCancel, title, onFinish } = props;
@@ -93,7 +93,7 @@ const StyleCollectionForm = (props: Props) => {
                 <Form.Item
                   labelCol={{ span: 6 }}
                   wrapperCol={{ span: 18 }}
-                  label="テーマ"
+                  label="タイプ"
                   name="themeId"
                   rules={[requireRule]}
                 >
@@ -102,7 +102,7 @@ const StyleCollectionForm = (props: Props) => {
               </Col>
             </Col>
             <Col span={22}>
-              <Form.Item labelCol={{ span: 4 }} label="Title" name="title" rules={[requireRule]}>
+              <Form.Item labelCol={{ span: 4 }} label="タイトル" name="title" rules={[requireRule]}>
                 <Input />
               </Form.Item>
             </Col>
@@ -151,7 +151,7 @@ const StyleCollectionForm = (props: Props) => {
                   <Form.Item
                     labelCol={{ span: 7 }}
                     wrapperCol={{ span: 16 }}
-                    label="Preview"
+                    label="画像プレビュー"
                     name="previewImageUrl"
                     rules={[requireRule]}
                   >

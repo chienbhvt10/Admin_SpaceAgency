@@ -16,8 +16,8 @@ export default function UserRowActions(props: IProps) {
 
       <Popconfirm
         title={props.title}
-        cancelText="No"
-        okText="Yes"
+        cancelText="いいえ"
+        okText="はい"
         placement="left"
         onConfirm={props.onDelete(props.record)}
         icon={<QuestionCircleOutlined style={{ color: 'red' }} />}

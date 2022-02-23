@@ -13,6 +13,7 @@ export interface CreateThemeInputType extends CreateThemeVariables {
   titleCategory: string;
   insidePreviewUrl: string;
   outsidePreviewUrl: string;
+  diagramImageUrl: string;
 }
 
 export interface CreateThemeAction {
