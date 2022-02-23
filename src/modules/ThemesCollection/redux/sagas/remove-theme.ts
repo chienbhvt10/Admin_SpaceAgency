@@ -13,7 +13,7 @@ export function* removeThemeAsync(action: RemoveThemeAction) {
     const { pagination } = yield select((state: RootState) => state.users.usersState);
     yield put(actionThemes({ pagination }));
     yield put(actionRemoveThemeSuccess(data));
-    NotificationSuccess('Thông báo!', 'Delete theme success');
+    NotificationSuccess('通知!', 'タイプの追加に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionRemoveThemeError(err));

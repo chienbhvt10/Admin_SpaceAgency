@@ -3,7 +3,7 @@ import { CommonPath } from 'commons/base-routes';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import HeaderCreateUpdate from 'commons/components/layouts/HeaderCreateUpdate';
 import { useUploadImages } from 'commons/hooks/useUploadImages/useUploadImages';
-import { CreateThemeTypeInput, TypeForm } from 'commons/type';
+import { ThemeTypeInput, TypeForm } from 'commons/type';
 import { ITheme } from 'graphql/generated/graphql';
 import 'modules/ThemesCollection/style/style.scss';
 import React from 'react';
@@ -18,19 +18,22 @@ interface Props {
   type: TypeForm;
   onCancel?(): void;
   onChange?(): void;
-  onFinish?: (values: CreateThemeTypeInput) => void;
+  onFinish?: (values: ThemeTypeInput) => void;
 }
-const requireRule = { required: true, message: 'This is required information!' };
+const requireRule = { required: true, message: 'この項目は必須です。' };
 
 const ThemesForm = (props: Props) => {
   const { loading, type, items, onFinish, title } = props;
   const { uploadImages } = useUploadImages();
-  const [form] = Form.useForm<CreateThemeTypeInput>();
+  const [form] = Form.useForm<ThemeTypeInput>();
   const [loadingInside, setLoadingInside] = React.useState<boolean>(false);
   const [loadingOutside, setLoadingOutside] = React.useState<boolean>(false);
+  const [loadingDiagram, setLoadingDiagram] = React.useState<boolean>(false);
+
   const [objUrlImage, setObjUrlImage] = React.useState({
     insidePreviewUrl: '',
     outsidePreviewUrl: '',
+    diagramImageUrl: '',
   });
   const navigate = useNavigate();
 
@@ -45,10 +48,12 @@ const ThemesForm = (props: Props) => {
         price: items.price?.value || 0,
         insidePreviewUrl: items.themeImage?.insidePreviewUrl || '',
         outsidePreviewUrl: items.themeImage?.outsidePreviewUrl || '',
+        diagramImageUrl: items?.themeImage?.diagramImage || '',
       });
       setObjUrlImage({
         insidePreviewUrl: items?.themeImage?.insidePreviewUrl || '',
         outsidePreviewUrl: items?.themeImage?.outsidePreviewUrl || '',
+        diagramImageUrl: items?.themeImage?.diagramImage || '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,6 +64,7 @@ const ThemesForm = (props: Props) => {
       form.setFieldsValue({
         insidePreviewUrl: objUrlImage.insidePreviewUrl,
         outsidePreviewUrl: objUrlImage.outsidePreviewUrl,
+        diagramImageUrl: objUrlImage.diagramImageUrl,
       });
     }
   }, [objUrlImage, form]);
@@ -73,6 +79,11 @@ const ThemesForm = (props: Props) => {
   const handleResetOutsideUrl = () => {
     form.setFieldsValue({
       outsidePreviewUrl: '',
+    });
+  };
+  const handleResetDiagramUrl = () => {
+    form.setFieldsValue({
+      diagramImageUrl: '',
     });
   };
   const handleChangeInside = async (info: any) => {
@@ -98,7 +109,17 @@ const ThemesForm = (props: Props) => {
       });
     }
   };
-
+  const handleChangeDiagram = async (info: any) => {
+    setLoadingDiagram(true);
+    const urlImage = (await uploadImages(info)) as string;
+    setLoadingDiagram(false);
+    if (urlImage) {
+      setObjUrlImage({
+        ...objUrlImage,
+        diagramImageUrl: urlImage,
+      });
+    }
+  };
   const onCancel = () => {
     navigate(CommonPath.THEME_COLLECTION);
   };
@@ -127,7 +148,7 @@ const ThemesForm = (props: Props) => {
                   label="名称"
                   name="name"
                 >
-                  <Input placeholder="Name" />
+                  <Input placeholder="名称" />
                 </Form.Item>
               </Col>
               <Col span={22}>
@@ -189,10 +210,10 @@ const ThemesForm = (props: Props) => {
                         rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
-                        label="Inside Preview"
+                        label="内部プレビュー"
                         name="insidePreviewUrl"
                       >
-                        <Input placeholder="Inside Preview" disabled={true} />
+                        <Input placeholder="内部プレビュー" disabled={true} />
                       </Form.Item>
                     </Col>
                     <Col span={16} offset={6}>
@@ -212,10 +233,10 @@ const ThemesForm = (props: Props) => {
                         rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
-                        label="Outside Preview"
+                        label="外部プレビュー"
                         name="outsidePreviewUrl"
                       >
-                        <Input placeholder="Outside Preview" disabled={true} />
+                        <Input placeholder="外部プレビュー" disabled={true} />
                       </Form.Item>
                     </Col>
                     <Col span={16} offset={6}>
@@ -235,19 +256,19 @@ const ThemesForm = (props: Props) => {
                         rules={[requireRule]}
                         labelCol={{ span: 6, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 16 }}
-                        label="Outside Preview"
-                        name="outsidePreviewUrl"
+                        label="Diagram Image"
+                        name="diagramImageUrl"
                       >
-                        <Input placeholder="Outside Preview" disabled={true} />
+                        <Input placeholder="Diagram Image" disabled={true} />
                       </Form.Item>
                     </Col>
                     <Col span={16} offset={6}>
                       <div style={{ marginLeft: '5px', height: '300px' }}>
                         <UploadDragger
-                          loading={loadingOutside}
-                          handleChange={handleChangeOutside}
-                          imageUrl={objUrlImage.outsidePreviewUrl}
-                          resetToDefault={() => handleResetOutsideUrl()}
+                          loading={loadingDiagram}
+                          handleChange={handleChangeDiagram}
+                          imageUrl={objUrlImage.diagramImageUrl}
+                          resetToDefault={() => handleResetDiagramUrl()}
                         />
                       </div>
                     </Col>

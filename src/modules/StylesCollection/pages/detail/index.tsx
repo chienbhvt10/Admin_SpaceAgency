@@ -24,7 +24,7 @@ const StyleCollectionDetail = () => {
   }, []);
 
   React.useEffect(() => {
-    setTitle('Update Style Collection');
+    setTitle('デザイン一覧更新');
   }, []);
 
   const onCancel = () => {
@@ -54,7 +54,7 @@ const StyleCollectionDetail = () => {
     <StyleCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <StyleCollectionDetailForm
-        title="Update Style Collection"
+        title="デザイン一覧更新"
         onFinish={onFinishUpdateStyle}
         type={TypeForm.UPDATE}
         item={item}
@@ -69,14 +69,14 @@ export default StyleCollectionDetail;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'HOME',
+    breadcrumbName: 'Home',
   },
   {
     path: CommonPath.STYLES_COLLECTION,
-    breadcrumbName: 'スタイル一覧',
+    breadcrumbName: 'デザイン一覧',
   },
   {
     path: CommonPath.STYLES_COLLECTION_DETAIL,
-    breadcrumbName: 'Update Style Collection',
+    breadcrumbName: 'デザイン一覧更新',
   },
 ];

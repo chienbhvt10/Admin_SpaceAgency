@@ -26,7 +26,7 @@ const StyleCollectionTable = (props: IProps) => {
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: '名称',
+      title: 'タイトル',
       dataIndex: 'title',
       key: 'title',
       sortDirections: ['descend', 'ascend'],
@@ -34,7 +34,7 @@ const StyleCollectionTable = (props: IProps) => {
       width: 300,
     },
     {
-      title: 'テーマ',
+      title: 'タイプ',
       dataIndex: 'theme',
       key: 'theme',
       sortDirections: ['descend', 'ascend'],
@@ -60,7 +60,7 @@ const StyleCollectionTable = (props: IProps) => {
       render: (_, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
     {
-      title: '編集',
+      title: 'ツール',
       dataIndex: '',
       key: '#',
       width: 120,
@@ -69,7 +69,7 @@ const StyleCollectionTable = (props: IProps) => {
           onDelete={onDelete}
           onEdit={onEdit}
           record={record}
-          title="Are you sure to delete this style?"
+          title="このデザインを削除します。よろしいですか。"
         />
       ),
     },

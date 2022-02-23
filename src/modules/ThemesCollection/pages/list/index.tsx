@@ -1,19 +1,18 @@
-import { CommonPath } from 'commons/base-routes';
-import PageHeader from 'commons/components/layouts/PageHeader';
-import ThemeCollectionLayout from 'commons/components/layouts/ThemesCollection';
-import { setTitle } from 'helpers/dom';
-import React from 'react';
-import { FormSearch } from 'commons/components/layouts/FormSearch';
-import TableThemes from './Table';
-import { Button, TablePaginationConfig, Row, Col } from 'antd';
-import { useNavigate } from 'react-router';
 import { PlusOutlined } from '@ant-design/icons';
-import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
-import TableHeader from 'commons/components/layouts/TableHeader';
-import { OrderOfSorter } from 'helpers/string';
+import { Button, Col, Row, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
+import { CommonPath } from 'commons/base-routes';
+import { FormSearch } from 'commons/components/layouts/FormSearch';
+import PageHeader from 'commons/components/layouts/PageHeader';
+import TableHeader from 'commons/components/layouts/TableHeader';
+import ThemeCollectionLayout from 'commons/components/layouts/ThemesCollection';
 import { TypeKeyFilterTheme, TypePagination } from 'commons/type';
-import { FilterInput } from 'graphql/generated/graphql';
+import { setTitle } from 'helpers/dom';
+import { OrderOfSorter } from 'helpers/string';
+import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
+import React from 'react';
+import { useNavigate } from 'react-router';
+import TableThemes from './Table';
 
 const ThemeCollectionPage = () => {
   const navigate = useNavigate();
@@ -26,15 +25,15 @@ const ThemeCollectionPage = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
+      breadcrumbName: 'Home',
     },
     {
       path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'テーマ一覧',
+      breadcrumbName: 'タイプ一覧',
     },
   ];
   React.useEffect(() => {
-    setTitle('テーマ一覧');
+    setTitle('タイプ一覧');
     filterTheme([]);
   }, []);
 
@@ -85,10 +84,10 @@ const ThemeCollectionPage = () => {
     <ThemeCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="テーマ一覧"
+        title="タイプ一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            New Theme
+            新タイプ
           </Button>
         }
       >

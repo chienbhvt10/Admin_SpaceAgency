@@ -3,5 +3,6 @@ mutation createThemeImage($createThemeImageInput: CreateThemeImageInput!) {
     id
     outsidePreviewUrl
     insidePreviewUrl
+    diagramImage
   }
 }

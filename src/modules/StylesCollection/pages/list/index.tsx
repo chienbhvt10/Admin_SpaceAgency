@@ -32,16 +32,16 @@ const StyleCollectionPage = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
+      breadcrumbName: 'Home',
     },
     {
       path: CommonPath.THEME_COLLECTION,
-      breadcrumbName: 'スタイル一覧',
+      breadcrumbName: 'デザイン一覧',
     },
   ];
   React.useEffect(() => {
     filterStyles([]);
-    setTitle('スタイル一覧');
+    setTitle('デザイン一覧');
   }, []);
 
   React.useEffect(() => {
@@ -112,7 +112,7 @@ const StyleCollectionPage = () => {
     <StyleCollectionLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader
-        title="スタイル一覧"
+        title="デザイン一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
             Style

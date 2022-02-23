@@ -16,7 +16,7 @@ export function* updateStyleAsync(action: UpdateStyleAction) {
     });
     yield put(actionUpdateStyleSuccess(data.updateStyle));
     getNavigate(CommonPath.STYLES_COLLECTION);
-    NotificationSuccess('Thông báo!', 'Update Style Success.');
+    NotificationSuccess('通知!', 'Update Style Success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateStyleError(err));

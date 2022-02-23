@@ -12,7 +12,7 @@ export function* removeMaterialAsync(action: RemoveMaterialAction) {
     const { pagination } = yield select((state: RootState) => state.materials.materialsState);
     yield put(actionRemoveMaterialSuccess(data.removeMaterial));
     yield put(actionMaterials({ pagination }));
-    NotificationSuccess('Thông báo!', 'Delete material success');
+    NotificationSuccess('通知!', 'カスタマイズの削除に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionRemoveMaterialError(err));
