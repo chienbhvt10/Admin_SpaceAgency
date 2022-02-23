@@ -6,7 +6,7 @@ export const REMOVE_APPOINTMENT_ERROR = 'REMOVE_APPOINTMENT_ERROR';
 
 export interface RemoveAppointmentState {
   loading: boolean;
-  dataRemoveAppointment?: IRequest;
+  dataRemoveAppointment?: IAppointmentRequest;
 }
 
 export interface RemoveAppointmentAction {

@@ -9,6 +9,7 @@ import requestsSaga from 'modules/ContactRequest/redux/sagas';
 import simulationsSaga from 'modules/CustomerSimulation/redux/sagas';
 import appointmentSaga from 'modules/AppointmentRequest/redux/sagas';
 import documentSaga from 'modules/DocumentRequest/redux/sagas';
+import businessCustomerSaga from 'modules/BusinessCustomer/redux/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     requestsSaga(),
     appointmentSaga(),
     documentSaga(),
+    businessCustomerSaga(),
     commonSaga.checkErrorAsync(),
   ]);
 }

@@ -1,0 +1,5 @@
+query getListBusinessCustomers($where: WhereInput, $pagination: PaginationInput) {
+  businessCustomers(where: $where, pagination: $pagination) {
+    ...IBusinessCustomer
+  }
+}

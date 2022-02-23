@@ -10,6 +10,7 @@ import {
   newMaterialCollectionRouter,
   updateMaterialCollectionRouter,
 } from 'modules/MaterialsCollection/router';
+import { businessCustomerRouter } from 'modules/BusinessCustomer/routes';
 import {
   newStyleCollectionRouter,
   styleCollectionDetailRouter,
@@ -48,6 +49,7 @@ const routes: RouteObject[] = [
   { ...contactRequestDetailRouter },
   { ...appointmentRequestRouter },
   { ...documentRequestRouter },
+  { ...businessCustomerRouter },
 ];
 
 export default routes;

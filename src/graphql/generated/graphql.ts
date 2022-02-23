@@ -1260,6 +1260,8 @@ export type IAppointmentRequest = { __typename: 'AppointmentRequest', createdAt?
 
 export type AuthFields = { __typename?: 'Auth', refreshToken?: string | null, accessToken?: string | null };
 
+export type IBusinessCustomer = { __typename: 'BusinessCustomer', createdAt?: any | null, updatedAt?: any | null, id: string, companyName: string, representative: string, furiquana: string, email: string, questionTitle: string, questionContent: string };
+
 export type IDocumentRequest = { __typename: 'DocumentRequest', id: string, documentType: DocumentType, requesterFullName: string, furigana: string, age?: DocumentRequestAge | null, address: string, tel: string, question?: string | null, email: string, desiredContactMethod?: DesiredContactMethod | null, currentHouseType?: CurrentHouseType | null, hasLand?: boolean | null, desiredDeploymentTime?: DesiredDeploymentTime | null, marketingChannels?: Array<string> | null };
 
 export type IMaterial = { __typename?: 'Material', createdAt?: any | null, updatedAt?: any | null, id: string, title?: string | null, materialTypes?: Array<{ __typename?: 'MaterialType', createdAt?: any | null, id: string, title?: string | null, code3d?: string | null, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null, updatedAt?: any | null, refId: string, refType: RefType } | null, materialImage?: { __typename?: 'MaterialImage', id: string, previewImageUrl?: string | null } | null }> | null, style?: { __typename?: 'Style', id: string, title?: string | null, code3d?: string | null, description?: string | null, price?: { __typename?: 'Price', id: string, value: number, unit: CurrencyUnit, createdAt?: any | null, updatedAt?: any | null, refId: string, refType: RefType } | null, theme?: { __typename?: 'Theme', id: string, title: string, description?: string | null, code3D?: string | null, createdAt: any, updatedAt: any } | null, styleImage?: { __typename?: 'StyleImage', id: string, previewImageUrl: string } | null } | null };
@@ -1316,6 +1318,21 @@ export type MeVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Me = { __typename?: 'Query', me: { __typename?: 'User', id: string, email?: string | null, firstName?: string | null, lastName?: string | null, firstNameF?: string | null, lastNameF?: string | null, address?: string | null, phone?: string | null, role: Role, status: UserStatus } };
+
+export type RemoveBusinessCustomerVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveBusinessCustomer = { __typename?: 'Mutation', removeBusinessCustomer: { __typename: 'BusinessCustomer', createdAt?: any | null, updatedAt?: any | null, id: string, companyName: string, representative: string, furiquana: string, email: string, questionTitle: string, questionContent: string } };
+
+export type GetListBusinessCustomersVariables = Exact<{
+  where?: InputMaybe<WhereInput>;
+  pagination?: InputMaybe<PaginationInput>;
+}>;
+
+
+export type GetListBusinessCustomers = { __typename?: 'Query', businessCustomers?: Array<{ __typename: 'BusinessCustomer', createdAt?: any | null, updatedAt?: any | null, id: string, companyName: string, representative: string, furiquana: string, email: string, questionTitle: string, questionContent: string }> | null };
 
 export type RemoveRequestVariables = Exact<{
   id: Scalars['String'];
@@ -1594,6 +1611,20 @@ export const AuthFields = gql`
   accessToken
 }
     `;
+export const IBusinessCustomer = gql`
+    fragment IBusinessCustomer on BusinessCustomer {
+  __typename
+  createdAt
+  updatedAt
+  id
+  companyName
+  representative
+  furiquana
+  email
+  questionTitle
+  questionContent
+}
+    `;
 export const IDocumentRequest = gql`
     fragment IDocumentRequest on DocumentRequest {
   __typename
@@ -1841,6 +1872,20 @@ export const MeDocument = gql`
   }
 }
     ${IUsersFields}`;
+export const RemoveBusinessCustomerDocument = gql`
+    mutation removeBusinessCustomer($id: String!) {
+  removeBusinessCustomer(id: $id) {
+    ...IBusinessCustomer
+  }
+}
+    ${IBusinessCustomer}`;
+export const GetListBusinessCustomersDocument = gql`
+    query getListBusinessCustomers($where: WhereInput, $pagination: PaginationInput) {
+  businessCustomers(where: $where, pagination: $pagination) {
+    ...IBusinessCustomer
+  }
+}
+    ${IBusinessCustomer}`;
 export const RemoveRequestDocument = gql`
     mutation removeRequest($id: String!) {
   removeRequest(id: $id) {
@@ -2115,6 +2160,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     me(variables?: MeVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Me> {
       return withWrapper((wrappedRequestHeaders) => client.request<Me>(MeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'me');
+    },
+    removeBusinessCustomer(variables: RemoveBusinessCustomerVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveBusinessCustomer> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveBusinessCustomer>(RemoveBusinessCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeBusinessCustomer');
+    },
+    getListBusinessCustomers(variables?: GetListBusinessCustomersVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetListBusinessCustomers> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListBusinessCustomers>(GetListBusinessCustomersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListBusinessCustomers');
     },
     removeRequest(variables: RemoveRequestVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RemoveRequest> {
       return withWrapper((wrappedRequestHeaders) => client.request<RemoveRequest>(RemoveRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeRequest');

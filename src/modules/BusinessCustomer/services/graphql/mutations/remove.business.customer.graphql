@@ -1,0 +1,5 @@
+mutation removeBusinessCustomer($id: String!) {
+  removeBusinessCustomer(id: $id) {
+    ...IBusinessCustomer
+  }
+}
