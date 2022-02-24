@@ -63,7 +63,7 @@ const FilterForm = (props: Props) => {
                 loading={loadingTheme}
                 data={arrThemes || []}
                 formItem={{
-                  label: 'テーマ',
+                  label: 'タイプ',
                   name: 'theme',
                   labelCol: { span: 6 },
                   wrapperCol: { span: 16, style: { marginLeft: '10px' } },

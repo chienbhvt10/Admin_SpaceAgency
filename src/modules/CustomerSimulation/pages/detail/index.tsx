@@ -57,10 +57,10 @@ const routes = [
   },
   {
     path: CommonPath.USER_SIMULATE_COLLECTION,
-    breadcrumbName: 'カスタマーシミュレーション',
+    breadcrumbName: 'ユーザーのシミュレーション一覧',
   },
   {
     path: CommonPath.USER_SIMULATE_COLLECTION_DETAIL,
-    breadcrumbName: 'カスタマーシミュレーションの詳細',
+    breadcrumbName: 'シミュレーション 承認',
   },
 ];

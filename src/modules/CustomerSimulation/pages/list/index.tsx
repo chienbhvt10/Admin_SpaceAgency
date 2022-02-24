@@ -33,7 +33,7 @@ const CustomerSimulationPage = () => {
 
   React.useEffect(() => {
     filterSimulations([]);
-    setTitle('Customer Simulation Collections');
+    setTitle('ユーザーのシミュレーション一覧');
   }, []);
 
   React.useEffect(() => {
@@ -108,7 +108,7 @@ const CustomerSimulationPage = () => {
   return (
     <CustomerSimulationLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <TableHeader title="Customer Simulation Collections">
+      <TableHeader title="ユーザーのシミュレーション一覧">
         <Row justify="center">
           <Col span={23}>
             <FilterForm
@@ -141,10 +141,10 @@ export default CustomerSimulationPage;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'HOME',
+    breadcrumbName: 'Home',
   },
   {
     path: CommonPath.USER_SIMULATE_COLLECTION,
-    breadcrumbName: 'User Simulation Collections',
+    breadcrumbName: 'ユーザーのシミュレーション一覧',
   },
 ];

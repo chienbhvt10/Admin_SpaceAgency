@@ -115,7 +115,7 @@ function ListUserManagement() {
         title="ユーザー管理"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
-            New User
+            ユーザ
           </Button>
         }
       >

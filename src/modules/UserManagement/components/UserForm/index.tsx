@@ -1,12 +1,14 @@
 import { Button, Col, Form, FormItemProps, FormProps, Input, Radio, Row, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
+import { CommonPath } from 'commons/base-routes';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import { TypeActiveAccount, TypeForm, TypeRole } from 'commons/type';
 import { CreateUserInput, IUsersFields, UpdateUserInput } from 'graphql/generated/graphql';
 import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
 import React from 'react';
+import { useNavigate } from 'react-router';
 import FormHeader from '../FormHeader';
 
 const layout: FormProps = {
@@ -20,10 +22,9 @@ interface IProps {
   loading: boolean;
   item?: IUsersFields;
   type: TypeForm;
-  onCancel?(): void;
   onChange?(): void;
 }
-const requireRule = { required: true, message: 'This is required information!' };
+const requireRule = { required: true, message: 'この項目は必須です。' };
 const requireEmail = {
   required: true,
   type: 'email',
@@ -31,9 +32,10 @@ const requireEmail = {
 };
 
 function ThemeForm(props: IProps) {
-  const { loading, item, onCancel, onChange, title } = props;
+  const { loading, item, onChange, title } = props;
   const { updateUser } = useUpdateUser();
   const { createUser } = useCreateUser();
+  const navigate = useNavigate();
   const [form] = Form.useForm<IUsersFields>();
   const inputCreate: CreateUserInput = {
     email: '',
@@ -113,6 +115,9 @@ function ThemeForm(props: IProps) {
       });
     }
   };
+  const onCancel = () => {
+    navigate(CommonPath.USERS_MANAGEMENT);
+  };
   return (
     <>
       <Form
@@ -145,7 +150,7 @@ function ThemeForm(props: IProps) {
                 <Col span={20}>
                   <Form.Item
                     labelCol={{ span: 6 }}
-                    label={<Title level={5}>Password</Title>}
+                    label={<Title level={5}>パスワード</Title>}
                     name="password"
                     rules={[requireRule]}
                     {...tailLayout}
@@ -157,7 +162,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>First Name</Title>}
+                  label={<Title level={5}>名</Title>}
                   name="firstName"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -168,7 +173,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>First NameF</Title>}
+                  label={<Title level={5}>名（フリガナ）</Title>}
                   name="firstNameF"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -179,7 +184,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Last Name</Title>}
+                  label={<Title level={5}>姓</Title>}
                   name="lastName"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -191,7 +196,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Last NameF</Title>}
+                  label={<Title level={5}>姓（フリガナ）</Title>}
                   name="lastNameF"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -213,7 +218,7 @@ function ThemeForm(props: IProps) {
               <Col span={20}>
                 <Form.Item
                   labelCol={{ span: 6 }}
-                  label={<Title level={5}>Address</Title>}
+                  label={<Title level={5}>住所</Title>}
                   name="address"
                   rules={[requireRule]}
                   {...tailLayout}
@@ -221,16 +226,16 @@ function ThemeForm(props: IProps) {
                   <TextArea />
                 </Form.Item>
               </Col>
-              <Col span={20}>
-                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Content</Title>} name="content">
+              {/* <Col span={20}>
+                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Gender</Title>} name="gender">
                   <Radio.Group>
                     <Radio value="male">Male</Radio>
                     <Radio value="female">Female</Radio>
                   </Radio.Group>
                 </Form.Item>
-              </Col>
+              </Col> */}
               <Col span={20}>
-                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Role</Title>} name="role">
+                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>ロール</Title>} name="role">
                   <Select placeholder="---全部---">
                     <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
                     <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
@@ -239,8 +244,9 @@ function ThemeForm(props: IProps) {
                 </Form.Item>
               </Col>
               <Col span={20}>
-                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Status</Title>} name="status">
+                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>状態</Title>} name="status">
                   <Select placeholder="---全部---">
+                    <Option value={TypeActiveAccount.NOT_ACTIVE}>{TypeActiveAccount.NOT_ACTIVE}</Option>
                     <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
                     <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
                   </Select>
@@ -251,7 +257,7 @@ function ThemeForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 16 }}
-                label="Avatar"
+                label="アバター"
                 name="avatar"
                 rules={[requireRule]}
               >

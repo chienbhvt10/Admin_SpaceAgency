@@ -22,7 +22,7 @@ const CustomerSimulationTable = (props: IProps) => {
   const expandedRowRender = (record: ISimulation): React.ReactNode => {
     const columns: ColumnsType<MaterialType> = [
       {
-        title: 'Material',
+        title: 'カスタマイズ',
         dataIndex: 'material',
         key: 'material',
         sorter: false,
@@ -31,7 +31,7 @@ const CustomerSimulationTable = (props: IProps) => {
         render: (_: any, record) => <p style={{ textAlign: 'center' }}>{record.material?.title}</p>,
       },
       {
-        title: 'Price',
+        title: '価格',
         dataIndex: 'price',
         key: 'price',
         align: 'center',
@@ -52,14 +52,14 @@ const CustomerSimulationTable = (props: IProps) => {
 
   const tableColumns: ColumnsType<ISimulation> = [
     {
-      title: 'STT',
+      title: 'No',
       dataIndex: '#',
       key: '#',
       width: 40,
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: 'Customer Name',
+      title: '顧客名',
       dataIndex: 'customerName',
       key: 'customerName',
       width: 200,
@@ -71,16 +71,16 @@ const CustomerSimulationTable = (props: IProps) => {
         </>
       ),
     },
+    // {
+    //   title: 'Type',
+    //   dataIndex: 'type',
+    //   key: 'type',
+    //   width: 150,
+    //   sorter: false,
+    //   // render: (_: any, record) => <>{record.requests?.type}</>,
+    // },
     {
-      title: 'Type',
-      dataIndex: 'type',
-      key: 'type',
-      width: 150,
-      sorter: false,
-      // render: (_: any, record) => <>{record.requests?.type}</>,
-    },
-    {
-      title: 'Design',
+      title: 'デザイン',
       dataIndex: 'design',
       key: 'design',
       width: 150,
@@ -88,7 +88,7 @@ const CustomerSimulationTable = (props: IProps) => {
       render: (_: any, record) => <>{record.simulationComponent?.style?.title}</>,
     },
     {
-      title: 'Total Price',
+      title: '合計',
       dataIndex: 'totalPrice',
       key: 'totalPrice',
       width: 100,
@@ -96,20 +96,24 @@ const CustomerSimulationTable = (props: IProps) => {
       render: (_: any, record) => <>{totalPrice(record.simulationComponent?.materialTypes || [])}</>,
     },
     {
-      title: 'Status',
+      title: '状態',
       dataIndex: 'status',
       key: 'status',
       width: 100,
       sorter: true,
     },
     {
-      title: 'Tool',
+      title: 'ツール',
       dataIndex: '',
       key: 'tool',
       width: 50,
       sorter: false,
       render: (_, record) => (
-        <TableRowAction onDelete={onDelete} record={record} title="Are you sure to delete this Simulation?" />
+        <TableRowAction
+          onDelete={onDelete}
+          record={record}
+          title="このシミュレーションを削除します。よろしいですか。"
+        />
       ),
     },
   ];

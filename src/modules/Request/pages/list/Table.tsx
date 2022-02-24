@@ -64,7 +64,7 @@ function RequestTable(props: IProps) {
       width: 100,
     },
     {
-      title: 'Status',
+      title: '状態',
       dataIndex: 'status',
       key: 'status',
       sorter: false,
@@ -77,7 +77,7 @@ function RequestTable(props: IProps) {
       width: 100,
       render: (_: any, record: IRequest) => (
         <UserRowActions
-          title="Are you sure you want to delete this request?"
+          title="このお問い合わせを削除します。よろしいですか。"
           record={record}
           onDelete={props.onDelete}
           onEdit={props.onEdit}

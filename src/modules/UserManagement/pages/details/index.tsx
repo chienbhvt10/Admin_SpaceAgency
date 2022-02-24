@@ -22,7 +22,7 @@ function DetailUserManagement() {
   }, [id]);
 
   React.useEffect(() => {
-    setTitle('Detail User');
+    setTitle('ユーザー情報の編集');
   }, []);
   const routes = [
     {
@@ -35,13 +35,13 @@ function DetailUserManagement() {
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,
-      breadcrumbName: 'Update User Management',
+      breadcrumbName: 'ユーザー情報の編集',
     },
   ];
   return (
     <UserManagementLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <DetailUserForm title="Update User" type={TypeForm.UPDATE} item={item} loading={loadingUserUpdate} />
+      <DetailUserForm title="ユーザー情報の編集" type={TypeForm.UPDATE} item={item} loading={loadingUserUpdate} />
     </UserManagementLayout>
   );
 }

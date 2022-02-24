@@ -115,7 +115,7 @@ const StyleCollectionPage = () => {
         title="デザイン一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={onNew}>
-            Style
+            デザイン
           </Button>
         }
       >

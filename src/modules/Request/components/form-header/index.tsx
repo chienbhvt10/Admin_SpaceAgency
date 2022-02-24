@@ -24,10 +24,10 @@ const ButtonGroup = ({ loading, onDone, onReject, onApprove }: IProps) => {
         size="large"
         loading={loading}
       >
-        Reject
+        拒否
       </Button>
       <Button onClick={onApprove} type="primary" size="large" htmlType="submit" loading={loading}>
-        Approve
+        承認
       </Button>
     </div>
   );

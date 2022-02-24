@@ -176,7 +176,7 @@ const MaterialForm = (props: Props) => {
                   <Col span={11} style={{ marginLeft: '18px' }}>
                     <FormDropdown
                       formItem={{
-                        label: 'テーマ',
+                        label: 'タイプ',
                         name: 'themeId',
                         labelCol: { span: 6 },
                         wrapperCol: { span: 16, style: { marginLeft: '10px' } },
@@ -210,7 +210,7 @@ const MaterialForm = (props: Props) => {
                   labelCol={{ span: 3, style: { marginRight: 20 } }}
                   wrapperCol={{ span: 19 }}
                   className="name"
-                  label="Material Name"
+                  label="名称"
                   name="name"
                 >
                   <Input />
@@ -279,7 +279,7 @@ const MaterialForm = (props: Props) => {
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
-                        label="Image Preview"
+                        label="画像プレビュー"
                         name="imagePreview"
                         rules={[requireRule]}
                       >
@@ -336,7 +336,7 @@ const MaterialForm = (props: Props) => {
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
-                        label="Image Preview"
+                        label="画像プレビュー"
                         name="imagePreview2"
                         rules={[requireRule]}
                       >

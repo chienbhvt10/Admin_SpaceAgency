@@ -183,6 +183,7 @@ export enum TypePagination {
 export enum TypeActiveAccount {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
+  NOT_ACTIVE = 'NOT_ACTIVE',
 }
 export enum TypeRole {
   ADMIN = 'ADMIN',

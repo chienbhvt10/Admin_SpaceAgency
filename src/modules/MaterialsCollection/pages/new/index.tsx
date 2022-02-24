@@ -12,7 +12,7 @@ const MaterialCreateNew = () => {
   const { createMaterials, loading } = useCreateMaterials();
 
   React.useEffect(() => {
-    setTitle('Create Material');
+    setTitle('カスタマイズの追加');
   }, []);
 
   const onFinish = (values: CreateMaterialsTypeInput) => {
@@ -58,18 +58,18 @@ const MaterialCreateNew = () => {
     },
     {
       path: CommonPath.MATERIAL_COLLECTION,
-      breadcrumbName: 'Material Collection',
+      breadcrumbName: 'カスタマイズ一覧',
     },
     {
       path: CommonPath.MATERIAL_COLLECTION_NEW,
-      breadcrumbName: 'Create Material Collection',
+      breadcrumbName: 'カスタマイズの追加',
     },
   ];
   return (
     <div>
       <MaterialCollectionLayout>
         <PageHeader title="" breadcrumb={{ routes }} />
-        <MaterialForm title="Create Material Collection" type={TypeForm.CREATE} loading={loading} onFinish={onFinish} />
+        <MaterialForm title="カスタマイズの追加" type={TypeForm.CREATE} loading={loading} onFinish={onFinish} />
       </MaterialCollectionLayout>
     </div>
   );

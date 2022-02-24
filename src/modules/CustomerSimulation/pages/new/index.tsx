@@ -12,7 +12,7 @@ const NewCustomerSimulation = () => {
   const { loading } = useCreateCustomerSimulation();
   const navigate = useNavigate();
   React.useEffect(() => {
-    setTitle('Create Customer Simulation');
+    setTitle('新しいユーザーシミュレーション一覧');
   });
   const onCancel = () => {
     navigate(CommonPath.USER_SIMULATE_COLLECTION);
@@ -20,15 +20,15 @@ const NewCustomerSimulation = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
+      breadcrumbName: 'Home',
     },
     {
       path: CommonPath.USER_SIMULATE_COLLECTION,
-      breadcrumbName: 'User Simulation Collections',
+      breadcrumbName: 'ユーザーのシミュレーション一覧',
     },
     {
       path: CommonPath.USER_SIMULATE_COLLECTION_NEW,
-      breadcrumbName: 'New User Simulation Collections',
+      breadcrumbName: '新しいユーザーシミュレーション一覧',
     },
   ];
   return (
@@ -36,7 +36,7 @@ const NewCustomerSimulation = () => {
       <PageHeader title="" breadcrumb={{ routes }} />
       <CreateCustomerSimulationForm
         loading={loading}
-        title="Create Customer Simulation"
+        title="新しいユーザーシミュレーション一覧"
         type={TypeForm.CREATE}
         onCancel={onCancel}
       />

@@ -12,7 +12,7 @@ export function* removeSimulationAsync(action: RemoveSimulationAction) {
     const { pagination } = yield select((state: RootState) => state.simulations.simulationsState);
     if (data.removeSimulation) yield put(actionRemoveSimulationSuccess(data.removeSimulation));
     yield put(actionSimulations({ pagination }));
-    NotificationSuccess('Thông báo!', 'Delete simulation success');
+    NotificationSuccess('通知', 'シミュレーションの削除に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionRemoveSimulationError(err));

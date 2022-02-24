@@ -15,7 +15,7 @@ const MaterialUpdate = () => {
   const { getDetailMaterial, item } = useDetailMaterial();
   const { updateMaterial, loading } = useUpdateMaterial();
   React.useEffect(() => {
-    setTitle('Update Material');
+    setTitle('カスタマイズ更新');
   }, []);
   React.useEffect(() => {
     if (id) {
@@ -65,15 +65,15 @@ const MaterialUpdate = () => {
   const routes = [
     {
       path: CommonPath.DEFAULT_PATH,
-      breadcrumbName: 'HOME',
+      breadcrumbName: 'Home',
     },
     {
       path: CommonPath.MATERIAL_COLLECTION,
-      breadcrumbName: 'マテリアル一覧',
+      breadcrumbName: 'カスタマイズ一覧',
     },
     {
       path: CommonPath.MATERIAL_COLLECTION_DETAIL,
-      breadcrumbName: 'Update Material Collection',
+      breadcrumbName: 'カスタマイズ更新',
     },
   ];
   return (
@@ -83,7 +83,7 @@ const MaterialUpdate = () => {
         <MaterialForm
           onFinish={onFinish}
           item={item}
-          title="Update Material Collection"
+          title="カスタマイズ更新"
           type={TypeForm.UPDATE}
           loading={loading}
         />
