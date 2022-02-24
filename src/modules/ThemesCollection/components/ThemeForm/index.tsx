@@ -142,8 +142,8 @@ const ThemesForm = (props: Props) => {
               <Col span={22}>
                 <Form.Item
                   rules={[requireRule]}
-                  labelCol={{ span: 3, style: { marginRight: 20 } }}
-                  wrapperCol={{ span: 20 }}
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 16 }}
                   className="name"
                   label="名称"
                   name="name"
@@ -153,8 +153,8 @@ const ThemesForm = (props: Props) => {
               </Col>
               <Col span={22}>
                 <Form.Item
-                  labelCol={{ span: 3, style: { marginRight: 20 } }}
-                  wrapperCol={{ span: 20 }}
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 16 }}
                   className=""
                   label="英語表記"
                   rules={[requireRule]}
@@ -165,8 +165,8 @@ const ThemesForm = (props: Props) => {
               </Col>
               <Col span={22}>
                 <Form.Item
-                  labelCol={{ span: 3, style: { marginRight: 20 } }}
-                  wrapperCol={{ span: 20 }}
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 16 }}
                   className=""
                   label="詳細"
                   name="description"
@@ -174,104 +174,106 @@ const ThemesForm = (props: Props) => {
                   <TextArea placeholder="詳細" rows={5} showCount maxLength={1000} />
                 </Form.Item>
               </Col>
-              <Col span={22} className="price-order-box">
-                <Row>
-                  <Col span={12}>
-                    <Form.Item
-                      labelCol={{ span: 6, style: { marginRight: 20 } }}
-                      wrapperCol={{ span: 16 }}
-                      label="価格"
-                      name="price"
-                      rules={[requireRule]}
-                    >
-                      <InputNumber style={{ width: '100%' }} min={0} />
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      labelCol={{ span: 6, style: { marginRight: 20 } }}
-                      wrapperCol={{ span: 16 }}
-                      label="3Dコード"
-                      name="code"
-                    >
-                      <Input placeholder="コード" style={{ width: '100%' }} />
-                    </Form.Item>
-                  </Col>
-                </Row>
+              <Col span={22}>
+                <Form.Item
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 8 }}
+                  label="価格"
+                  name="price"
+                  rules={[requireRule]}
+                >
+                  <InputNumber style={{ width: '100%' }} min={0} />
+                </Form.Item>
+              </Col>
+              <Col span={22}>
+                <Form.Item
+                  labelCol={{ span: 4, style: { marginRight: 20 } }}
+                  wrapperCol={{ span: 8 }}
+                  label="3Dコード"
+                  name="code"
+                >
+                  <Input placeholder="コード" style={{ width: '100%' }} />
+                </Form.Item>
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
                 <Title level={4}>Image Upload</Title>
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
                 <Row>
-                  <Col span={12}>
-                    <Col span={24}>
-                      <Form.Item
-                        rules={[requireRule]}
-                        labelCol={{ span: 6, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 16 }}
-                        label="内部プレビュー"
-                        name="insidePreviewUrl"
-                      >
-                        <Input placeholder="内部プレビュー" disabled={true} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={16} offset={6}>
-                      <div style={{ marginLeft: '5px', height: '300px' }}>
-                        <UploadDragger
-                          loading={loadingInside}
-                          handleChange={handleChangeInside}
-                          imageUrl={objUrlImage.insidePreviewUrl}
-                          resetToDefault={() => handleResetInsideUrl()}
-                        />
-                      </div>
-                    </Col>
+                  <Col span={8}>
+                    <Row justify="center">
+                      <Col span={22}>
+                        <Form.Item
+                          rules={[requireRule]}
+                          labelCol={{ span: 24, style: { marginRight: 20 } }}
+                          wrapperCol={{ span: 24 }}
+                          label="内部プレビュー"
+                          name="insidePreviewUrl"
+                        >
+                          <Input placeholder="内部プレビュー" disabled={true} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={22}>
+                        <div style={{ height: '300px' }}>
+                          <UploadDragger
+                            loading={loadingInside}
+                            handleChange={handleChangeInside}
+                            imageUrl={objUrlImage.insidePreviewUrl}
+                            resetToDefault={() => handleResetInsideUrl()}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
-                  <Col span={12}>
-                    <Col span={24}>
-                      <Form.Item
-                        rules={[requireRule]}
-                        labelCol={{ span: 6, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 16 }}
-                        label="外部プレビュー"
-                        name="outsidePreviewUrl"
-                      >
-                        <Input placeholder="外部プレビュー" disabled={true} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={16} offset={6}>
-                      <div style={{ marginLeft: '5px', height: '300px' }}>
-                        <UploadDragger
-                          loading={loadingOutside}
-                          handleChange={handleChangeOutside}
-                          imageUrl={objUrlImage.outsidePreviewUrl}
-                          resetToDefault={() => handleResetOutsideUrl()}
-                        />
-                      </div>
-                    </Col>
+                  <Col span={8}>
+                    <Row justify="center">
+                      <Col span={22}>
+                        <Form.Item
+                          rules={[requireRule]}
+                          labelCol={{ span: 24, style: { marginRight: 20 } }}
+                          wrapperCol={{ span: 24 }}
+                          label="外部プレビュー"
+                          name="outsidePreviewUrl"
+                        >
+                          <Input placeholder="外部プレビュー" disabled={true} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={22}>
+                        <div style={{ height: '300px' }}>
+                          <UploadDragger
+                            loading={loadingOutside}
+                            handleChange={handleChangeOutside}
+                            imageUrl={objUrlImage.outsidePreviewUrl}
+                            resetToDefault={() => handleResetOutsideUrl()}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
-                  <Col span={12} style={{ marginTop: 25 }}>
-                    <Col span={24}>
-                      <Form.Item
-                        rules={[requireRule]}
-                        labelCol={{ span: 6, style: { marginRight: 20 } }}
-                        wrapperCol={{ span: 16 }}
-                        label="Diagram Image"
-                        name="diagramImageUrl"
-                      >
-                        <Input placeholder="Diagram Image" disabled={true} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={16} offset={6}>
-                      <div style={{ marginLeft: '5px', height: '300px' }}>
-                        <UploadDragger
-                          loading={loadingDiagram}
-                          handleChange={handleChangeDiagram}
-                          imageUrl={objUrlImage.diagramImageUrl}
-                          resetToDefault={() => handleResetDiagramUrl()}
-                        />
-                      </div>
-                    </Col>
+                  <Col span={8}>
+                    <Row justify="center">
+                      <Col span={22}>
+                        <Form.Item
+                          rules={[requireRule]}
+                          labelCol={{ span: 24, style: { marginRight: 20 } }}
+                          wrapperCol={{ span: 24 }}
+                          label="Diagram Image"
+                          name="diagramImageUrl"
+                        >
+                          <Input placeholder="Diagram Image" disabled={true} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={22}>
+                        <div style={{ height: '300px' }}>
+                          <UploadDragger
+                            loading={loadingDiagram}
+                            handleChange={handleChangeDiagram}
+                            imageUrl={objUrlImage.diagramImageUrl}
+                            resetToDefault={() => handleResetDiagramUrl()}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </Col>
