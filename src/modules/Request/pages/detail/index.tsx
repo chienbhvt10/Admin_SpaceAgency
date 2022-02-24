@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: CommonPath.CONTACT_REQUEST,
-    breadcrumbName: 'スタイル一覧',
+    breadcrumbName: 'お問い合わせ一覧',
   },
   {
     path: CommonPath.CONTACT_REQUEST_DETAIL,

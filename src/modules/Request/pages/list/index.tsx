@@ -25,7 +25,7 @@ function RequestPage() {
 
   React.useEffect(() => {
     filterRequests([]);
-    setTitle('お問い合わせ');
+    setTitle('お問い合わせ一覧');
   }, []);
   React.useEffect(() => {
     if (value) {

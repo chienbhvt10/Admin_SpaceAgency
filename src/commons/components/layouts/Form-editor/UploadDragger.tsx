@@ -29,37 +29,37 @@ export default function UploadDragger(props: IProps) {
     async (file: any) => {
       const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isJpgOrPng) {
-        message.error('Bạn chỉ có thể tải lên tệp JPG / PNG!');
-        throw new Error('Bạn chỉ có thể tải lên tệp JPG / PNG! ');
+        message.error('画像の形式はJPG/PNGである。');
+        throw new Error('画像の形式はJPG/PNGである。');
       }
       const isLt2M = file.size / 1024 / 1024 < 5;
       if (!isLt2M) {
-        message.error('Hình ảnh phải có kích thước nhỏ hơn 5MB!');
-        throw new Error('Hình ảnh phải có kích thước nhỏ hơn 5MB! ');
+        message.error('ファイルのサイズが上限を超過しています。最大:5MB。');
+        throw new Error('ファイルのサイズが上限を超過しています。最大:5MB。');
       }
       const dimensions = await getDimensions(file);
 
       if (props.mustBeSquare === true && dimensions.width !== dimensions.height) {
-        message.error('Ảnh phải là hình vuông');
-        throw new Error('Ảnh phải là hình vuông');
+        message.error('画像の形は四角である。');
+        throw new Error('画像の形は四角である。');
       }
 
       if (props.height !== undefined && props.width !== undefined) {
         if (dimensions.width !== props.width || dimensions.height !== props.height) {
-          message.error('Ảnh phải có kích thước: ' + props.width + 'x' + props.height);
-          throw new Error('Ảnh phải có kích thước: ' + props.width + 'x' + props.height);
+          message.error('Xの画像を設定してください。 ' + props.width + 'x' + props.height);
+          throw new Error('Xの画像を設定してください。 ' + props.width + 'x' + props.height);
         }
       }
       if (props.height !== undefined && props.width === undefined) {
         if (dimensions.height !== props.height) {
-          message.error('Kích thước sai, phải là: ... X ' + props.height);
-          throw new Error('Kích thước sai, phải là: ... X ' + props.height);
+          message.error('サイズが間違っています。Yの画像を設定してください。' + props.height);
+          throw new Error('サイズが間違っています。Yの画像を設定してください。' + props.height);
         }
       }
       if (props.width !== undefined && props.height === undefined) {
         if (dimensions.width !== props.width) {
-          message.error('Kích thước sai, phải là: ' + props.width + 'x ...');
-          throw new Error('Kích thước sai, phải là: ' + props.width + 'x ...');
+          message.error('サイズが間違っています。Xの画像を設定してください。' + props.width + 'x ...');
+          throw new Error('サイズが間違っています。Xの画像を設定してください。' + props.width + 'x ...');
         }
       }
     },

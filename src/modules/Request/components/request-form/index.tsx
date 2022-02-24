@@ -113,7 +113,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Furigana</Title>}
+                label={<Title level={5}>フリガナ</Title>}
                 name="furigana"
                 {...tailLayout}
               >
@@ -122,7 +122,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Phone</Title>}
+                label={<Title level={5}>電話番号</Title>}
                 name="phone"
                 {...tailLayout}
               >
@@ -142,7 +142,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Status</Title>}
+                label={<Title level={5}>状態</Title>}
                 name="status"
                 {...tailLayout}
               >
@@ -151,7 +151,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Type</Title>}
+                label={<Title level={5}>タイプ</Title>}
                 name="type"
                 {...tailLayout}
               >
@@ -160,7 +160,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Postcode</Title>}
+                label={<Title level={5}>郵便番号</Title>}
                 name="postcode"
                 {...tailLayout}
               >
@@ -169,7 +169,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Address</Title>}
+                label={<Title level={5}>住所</Title>}
                 name="address"
                 {...tailLayout}
               >

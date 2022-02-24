@@ -22,7 +22,7 @@ export function* createUserAsync(action: CreateUserAction) {
     );
     getNavigate(CommonPath.USERS_MANAGEMENT);
     yield put(actionCreateUserSuccess(data.createCustomer));
-    NotificationSuccess('Thông báo!', 'Create user success.');
+    NotificationSuccess('通知', 'ユーザー追加に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionCreateUserError(err));

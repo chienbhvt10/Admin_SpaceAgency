@@ -20,7 +20,7 @@ function TableMaterial(props: IProps) {
   const expandedRowRender = (data: IMaterial) => {
     const columnsType: ColumnsType<MaterialType> = [
       {
-        title: 'タイプ',
+        title: 'タイトル',
         dataIndex: 'title',
         key: '#',
       },
@@ -44,7 +44,7 @@ function TableMaterial(props: IProps) {
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: '名称',
+      title: 'タイトル',
       dataIndex: 'title',
       key: 'title',
       sorter: true,
@@ -60,7 +60,7 @@ function TableMaterial(props: IProps) {
     // },
     {
       title: '作成日',
-      dataIndex: 'status',
+      dataIndex: 'createAt',
       key: 'createdAt',
       sorter: false,
       width: 120,
@@ -69,28 +69,28 @@ function TableMaterial(props: IProps) {
     },
     {
       title: 'デザイン',
-      dataIndex: 'design',
-      key: 'design',
+      dataIndex: 'style',
+      key: 'style',
       sorter: false,
       width: 180,
       render: (_: any, record) => <>{record.style?.title}</>,
     },
     {
-      title: 'Theme',
+      title: 'タイプ',
       dataIndex: 'style',
-      key: 'design',
+      key: 'theme',
       sorter: false,
       width: 180,
       render: (_: any, record) => <>{record.style?.theme?.title}</>,
     },
     {
-      title: '編集',
+      title: 'ツール',
       dataIndex: '',
       key: '#',
       width: 120,
       render: (_: any, record: any) => (
         <UserRowActions
-          title="Are you sure you want to delete this material?"
+          title="このカスタマイズを削除します。よろしいですか。"
           record={record}
           onDelete={props.onDelete}
           onEdit={props.onEdit}

@@ -2,8 +2,8 @@ import { Col, Form, Input, Radio, Row } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
 import { SimulationTypeInput, TypeForm } from 'commons/type';
-import { ISimulation, RequestType } from 'graphql/generated/graphql';
-import { formatPricePercent, formatRequestType, totalPrice } from 'helpers/string';
+import { ISimulation } from 'graphql/generated/graphql';
+import { formatPricePercent } from 'helpers/string';
 import FormHeader from 'modules/CustomerSimulation/components/form-header';
 import React from 'react';
 import StyleListTable from '../style-list-table';
@@ -22,7 +22,7 @@ const CustomerSimulationForm = (props: Props) => {
   const { item, loading, title, type, onCancel, onFinish } = props;
   const [form] = Form.useForm<SimulationTypeInput>();
   const taxRate = formatPricePercent(10);
-  const [totPrice, setTotPrice] = React.useState<number>();
+  const [totalPrice, setTotPrice] = React.useState<number>();
 
   // React.useEffect(() => {
   //   if (item) {
@@ -114,7 +114,7 @@ const CustomerSimulationForm = (props: Props) => {
                 <Col span={8}>
                   <Form.Item
                     labelCol={{ span: 12, style: { marginRight: 15 } }}
-                    label="住所"
+                    label="郵便番号"
                     name="postCode"
                     rules={[requireRule]}
                   >
@@ -137,18 +137,18 @@ const CustomerSimulationForm = (props: Props) => {
               <Form.Item
                 labelCol={{ span: 4, style: { marginRight: 15 } }}
                 name="ownerConstruction"
-                label="オーナー建設"
+                label="現在土地はお持ちですか"
               >
                 <Radio.Group>
                   <Radio value="yes">はい</Radio>
-                  <Radio value="notYet">まだ</Radio>
+                  <Radio value="notYet">持っていない</Radio>
                 </Radio.Group>
               </Form.Item>
             </Col>
             <Col span={22}>
               <Form.Item
                 labelCol={{ span: 4, style: { marginRight: 15 } }}
-                label="その他ご質問"
+                label="質問"
                 name="otherQuestion"
                 rules={[requireRule]}
               >
@@ -173,7 +173,7 @@ const CustomerSimulationForm = (props: Props) => {
                 <Col span={5} offset={1}>
                   <Title level={5}>{taxRate} x 5,000,000</Title>
                   <Title style={{ marginTop: 0 }} level={5}>
-                    {totPrice}
+                    {totalPrice}
                   </Title>
                 </Col>
               </Row>

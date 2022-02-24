@@ -12,7 +12,7 @@ export function* updateUserAsync(action: UpdateUserAction) {
     const data: UpdateUser = yield apis.updateUser(action.payload);
     yield put(actionUpdateUserSuccess(data.updateUser));
     getNavigate(CommonPath.USERS_MANAGEMENT);
-    NotificationSuccess('Thông báo!', 'Update User Success.');
+    NotificationSuccess('通知', 'Update User Success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateUserError(err));

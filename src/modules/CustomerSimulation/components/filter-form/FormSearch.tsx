@@ -30,14 +30,14 @@ const FormSearch = (props: Props) => {
         </Col>
         <Col span={4} style={{ display: 'flex' }}>
           <BaseButton
-            text="Reset"
+            text="リセット"
             disabled={props.disabled}
             backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
             onClick={onReset}
             marginLeft={'10px'}
           />
           <BaseButton
-            text="Search"
+            text="検索"
             disabled={props.disabled}
             border="1px solid #007BFF"
             backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}

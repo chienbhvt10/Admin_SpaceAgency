@@ -46,27 +46,34 @@ function CustomUserManagementTable(props: IProps) {
       width: 300,
     },
     {
-      title: 'Role',
+      title: '電話番号',
+      dataIndex: 'phone',
+      key: 'phone',
+      sorter: false,
+      width: 120,
+    },
+    {
+      title: 'ロール',
       dataIndex: 'role',
       key: 'role',
       sorter: false,
       width: 120,
     },
+    // {
+    //   title: '状態',
+    //   dataIndex: 'status',
+    //   key: 'status',
+    //   sorter: false,
+    //   width: 120,
+    // },
     {
-      title: 'Is Active',
-      dataIndex: 'isActive',
-      key: 'isActive',
-      sorter: false,
-      width: 120,
-    },
-    {
-      title: '編集',
+      title: 'ツール',
       dataIndex: '',
       key: 'Action',
       width: 120,
       render: (_: any, record: IUsersFields) => (
         <UserRowActions
-          title="Are you sure you want to delete this user?"
+          title="このユーザーを削除します。よろしいですか。"
           record={record}
           onDelete={props.onDelete}
           onEdit={props.onEdit}

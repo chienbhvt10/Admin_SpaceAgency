@@ -10,7 +10,7 @@ import React from 'react';
 function NewUserManagement() {
   const { loading } = useCreateUser();
   React.useEffect(() => {
-    setTitle('Create User');
+    setTitle('ユーザー管理');
   }, []);
   const routes = [
     {
@@ -23,13 +23,13 @@ function NewUserManagement() {
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,
-      breadcrumbName: 'Create User Management',
+      breadcrumbName: 'ユーザー作成',
     },
   ];
   return (
     <UserManagementLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <DetailUserForm title="Create User" type={TypeForm.CREATE} loading={loading} />
+      <DetailUserForm title="ユーザー作成" type={TypeForm.CREATE} loading={loading} />
     </UserManagementLayout>
   );
 }

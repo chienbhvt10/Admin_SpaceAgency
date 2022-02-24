@@ -31,7 +31,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'title',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      width: 300,
+      width: 200,
     },
     {
       title: 'タイプ',
@@ -39,7 +39,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'theme',
       sortDirections: ['descend', 'ascend'],
       sorter: false,
-      width: 300,
+      width: 200,
       render: (_, record) => <>{record.theme?.title}</>,
     },
     {
@@ -48,7 +48,7 @@ const StyleCollectionTable = (props: IProps) => {
       key: 'code3d',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
-      width: 100,
+      width: 150,
     },
     {
       title: '価格',

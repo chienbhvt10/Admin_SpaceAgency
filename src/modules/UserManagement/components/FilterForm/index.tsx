@@ -35,7 +35,7 @@ const FilterForm = (props: Props) => {
         <Col span={24}>
           <Row justify="center">
             <Col span={12}>
-              <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Role" name="role">
+              <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="ロール" name="role">
                 <Select placeholder="---全部---" onChange={onRoleChange}>
                   <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
                   <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
@@ -44,7 +44,7 @@ const FilterForm = (props: Props) => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="Status" name="status">
+              <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="状態" name="status">
                 <Select placeholder="---全部---" onChange={onStatusChange}>
                   <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
                   <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
@@ -57,7 +57,11 @@ const FilterForm = (props: Props) => {
           <Row>
             <Col span={18}>
               <Form.Item labelCol={{ span: 4 }} label="キーワード" name="keyword">
-                <Input value={value} onChange={onChange} placeholder="Type username, email to search..." />
+                <Input
+                  value={value}
+                  onChange={onChange}
+                  placeholder="ユーザー名、Eメール等の検索キーワードを入力してください。"
+                />
               </Form.Item>
             </Col>
             <Col span={4}>

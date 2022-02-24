@@ -15,7 +15,7 @@ export function* updateRequestStatusAsync(action: UpdateRequestStatusAction) {
     });
     yield put(actionUpdateRequestStatusSuccess(data.updateRequestStatus));
     getNavigate(CommonPath.CONTACT_REQUEST);
-    NotificationSuccess('Thông báo!', 'Update Request Status Success.');
+    NotificationSuccess('通知', 'Update Request Status Success.');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateRequestStatusError(err));
