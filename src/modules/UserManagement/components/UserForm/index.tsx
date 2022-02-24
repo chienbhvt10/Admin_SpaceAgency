@@ -134,140 +134,146 @@ function ThemeForm(props: IProps) {
       >
         <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
           <Row>
-            <Col span={16}>
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>Eメール</Title>}
-                  name="email"
-                  rules={[requireRule, requireEmail]}
-                  {...tailLayout}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              {props.type === TypeForm.CREATE && (
+            <Col span={12}>
+              <Row justify="center">
                 <Col span={20}>
                   <Form.Item
                     labelCol={{ span: 6 }}
-                    label={<Title level={5}>パスワード</Title>}
-                    name="password"
+                    label={<Title level={5}>Eメール</Title>}
+                    name="email"
+                    rules={[requireRule, requireEmail]}
+                    {...tailLayout}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                {props.type === TypeForm.CREATE && (
+                  <Col span={20}>
+                    <Form.Item
+                      labelCol={{ span: 6 }}
+                      label={<Title level={5}>パスワード</Title>}
+                      name="password"
+                      rules={[requireRule]}
+                      {...tailLayout}
+                    >
+                      <Input onChange={handleChangePassword} />
+                    </Form.Item>
+                  </Col>
+                )}
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>名</Title>}
+                    name="firstName"
                     rules={[requireRule]}
                     {...tailLayout}
                   >
-                    <Input onChange={handleChangePassword} />
+                    <Input />
                   </Form.Item>
                 </Col>
-              )}
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>名</Title>}
-                  name="firstName"
-                  rules={[requireRule]}
-                  {...tailLayout}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>名（フリガナ）</Title>}
-                  name="firstNameF"
-                  rules={[requireRule]}
-                  {...tailLayout}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>姓</Title>}
-                  name="lastName"
-                  rules={[requireRule]}
-                  {...tailLayout}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>姓</Title>}
+                    name="lastName"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>電話番号</Title>}
+                    name="phone"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={12}>
+              <Row justify="center">
+                <Col span={20}>
+                  <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>ロール</Title>} name="role">
+                    <Select placeholder="---全部---">
+                      <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
+                      <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
+                      <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
+                    </Select>
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>名（フリガナ）</Title>}
+                    name="firstNameF"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
 
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>姓（フリガナ）</Title>}
-                  name="lastNameF"
-                  rules={[requireRule]}
-                  {...tailLayout}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>電話番号</Title>}
-                  name="phone"
-                  rules={[requireRule]}
-                  {...tailLayout}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={20}>
-                <Form.Item
-                  labelCol={{ span: 6 }}
-                  label={<Title level={5}>住所</Title>}
-                  name="address"
-                  rules={[requireRule]}
-                  {...tailLayout}
-                >
-                  <TextArea />
-                </Form.Item>
-              </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>姓（フリガナ）</Title>}
+                    name="lastNameF"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>住所</Title>}
+                    name="address"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    <TextArea />
+                  </Form.Item>
+                </Col>
+              </Row>
               {/* <Col span={20}>
                 <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>Gender</Title>} name="gender">
                   <Radio.Group>
-                    <Radio value="male">Male</Radio>
+                  <Radio value="male">Male</Radio>
                     <Radio value="female">Female</Radio>
                   </Radio.Group>
-                </Form.Item>
+                  </Form.Item>
               </Col> */}
-              <Col span={20}>
-                <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>ロール</Title>} name="role">
-                  <Select placeholder="---全部---">
-                    <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
-                    <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
-                    <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={20}>
+              {/* <Col span={20}>
                 <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>状態</Title>} name="status">
                   <Select placeholder="---全部---">
-                    <Option value={TypeActiveAccount.NOT_ACTIVE}>{TypeActiveAccount.NOT_ACTIVE}</Option>
-                    <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
-                    <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
+                  <Option value={TypeActiveAccount.NOT_ACTIVE}>{TypeActiveAccount.NOT_ACTIVE}</Option>
+                  <Option value={TypeActiveAccount.ACTIVE}>{TypeActiveAccount.ACTIVE}</Option>
+                  <Option value={TypeActiveAccount.INACTIVE}>{TypeActiveAccount.INACTIVE}</Option>
                   </Select>
-                </Form.Item>
-              </Col>
+                  </Form.Item>
+              </Col> */}
             </Col>
-            <Col span={8}>
+            {/* <Col span={8}>
               <Form.Item
-                labelCol={{ span: 6 }}
-                wrapperCol={{ span: 16 }}
-                label="アバター"
+              labelCol={{ span: 6 }}
+              wrapperCol={{ span: 16 }}
+              label="アバター"
                 name="avatar"
                 rules={[requireRule]}
-              >
+                >
                 <Input />
-              </Form.Item>
-
-              <Col span={23} style={{ height: '350px' }}>
+                </Form.Item>
+                
+                <Col span={23} style={{ height: '350px' }}>
                 <UploadDragger />
-              </Col>
-            </Col>
+                </Col>
+              </Col> */}
           </Row>
         </FormHeader>
       </Form>

@@ -46,19 +46,26 @@ function CustomUserManagementTable(props: IProps) {
       width: 300,
     },
     {
+      title: '電話番号',
+      dataIndex: 'phone',
+      key: 'phone',
+      sorter: false,
+      width: 120,
+    },
+    {
       title: 'ロール',
       dataIndex: 'role',
       key: 'role',
       sorter: false,
       width: 120,
     },
-    {
-      title: '状態',
-      dataIndex: 'status',
-      key: 'status',
-      sorter: false,
-      width: 120,
-    },
+    // {
+    //   title: '状態',
+    //   dataIndex: 'status',
+    //   key: 'status',
+    //   sorter: false,
+    //   width: 120,
+    // },
     {
       title: 'ツール',
       dataIndex: '',
