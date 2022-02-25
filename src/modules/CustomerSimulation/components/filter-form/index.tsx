@@ -10,6 +10,7 @@ interface Props {
   options?: any;
   onChangeTheme?: (value: string) => void;
   onChangeStyle?: (value: string) => void;
+  onChangeUser?: (value: string) => void;
   onReset: () => void;
   handleSearch: () => void;
   disabled: boolean;
@@ -18,13 +19,13 @@ interface Props {
 }
 
 const { RangePicker } = DatePicker;
-const dateFormat = 'YYYY/MM/DD';
+// const dateFormat = 'YYYY/MM/DD';
 const FilterForm = (props: Props) => {
   const [form] = useForm();
   const { getAllThemes, arrThemes, loading: loadingTheme } = useGetAllThemes();
   const { getAllStyles, arrStyles, loading: loadingStyle } = useGetAllStyles();
   const { getAllUser, arrUsers, loading: loadingUser } = useGetAllUser();
-  const { onChangeTheme, onReset, handleSearch, disabled, value, onChangeStyle, onChangeValue } = props;
+  const { onChangeTheme, onReset, handleSearch, disabled, value, onChangeStyle, onChangeValue, onChangeUser } = props;
 
   const onDropdownVisibleChangeTheme = (open: boolean) => {
     if (open) {
@@ -48,7 +49,7 @@ const FilterForm = (props: Props) => {
     form.setFieldsValue({
       theme: undefined,
       design: undefined,
-      date: undefined,
+      // date: undefined,
       user: undefined,
     });
     onReset && onReset();
@@ -78,7 +79,7 @@ const FilterForm = (props: Props) => {
                 data={arrStyles || []}
                 formItem={{
                   label: 'デザイン',
-                  name: 'design',
+                  name: 'style',
                   labelCol: { span: 6 },
                   wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                 }}
@@ -101,9 +102,10 @@ const FilterForm = (props: Props) => {
                   labelCol: { span: 6 },
                   wrapperCol: { span: 16, style: { marginLeft: '10px' } },
                 }}
+                onSelect={onChangeUser}
               />
             </Col>
-            <Col span={12}>
+            {/* <Col span={12}>
               <Form.Item
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 16, style: { marginLeft: '10px' } }}
@@ -112,7 +114,7 @@ const FilterForm = (props: Props) => {
               >
                 <RangePicker style={{ width: '100%' }} format={dateFormat} />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
         </Col>
         <Col span={22}>

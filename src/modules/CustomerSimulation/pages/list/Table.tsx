@@ -66,8 +66,7 @@ const CustomerSimulationTable = (props: IProps) => {
       sorter: true,
       render: (_: any, record) => (
         <>
-          {record.user?.firstName}
-          {record.user?.lastName}
+          {record.user?.firstName} {record.user?.lastName}
         </>
       ),
     },
@@ -81,7 +80,7 @@ const CustomerSimulationTable = (props: IProps) => {
     // },
     {
       title: 'デザイン',
-      dataIndex: 'design',
+      dataIndex: 'style',
       key: 'design',
       width: 150,
       sorter: false,

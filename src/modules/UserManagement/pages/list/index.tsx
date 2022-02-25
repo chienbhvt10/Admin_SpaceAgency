@@ -23,6 +23,10 @@ function ListUserManagement() {
   const [role, setRole] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const [status, setStatus] = React.useState<string>('');
+  const arrFilter: FilterInput[] = [
+    { key: TypeKeyFilterUser.EMAIL, value: '' },
+    { key: TypeKeyFilterUser.ROLE, value: '' },
+  ];
 
   React.useEffect(() => {
     filterUser([]);
@@ -46,11 +50,6 @@ function ListUserManagement() {
   const onStatusChange = (value: any) => {
     setStatus(value);
   };
-  const arrFilter: FilterInput[] = [
-    { key: TypeKeyFilterUser.EMAIL, value: '' },
-    { key: TypeKeyFilterUser.ROLE, value: '' },
-    { key: TypeKeyFilterUser.STATUS, value: '' },
-  ];
 
   const routes = [
     {
@@ -92,14 +91,7 @@ function ListUserManagement() {
   const handleSearch = () => {
     const newFilter = arrFilter.map((i) => ({
       ...i,
-      value:
-        i.key === TypeKeyFilterUser.EMAIL
-          ? value
-          : i.key === TypeKeyFilterUser.ROLE
-          ? role
-          : i.key === TypeKeyFilterUser.STATUS
-          ? status
-          : '',
+      value: i.key === TypeKeyFilterUser.EMAIL ? value : i.key === TypeKeyFilterUser.ROLE ? role : '',
     }));
     filterUser(newFilter);
   };

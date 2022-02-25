@@ -93,7 +93,7 @@ export default function UploadDragger(props: IProps) {
   return (
     <>
       {state.imageUrl ? (
-        <div className="container" style={{ marginLeft: '16px' }}>
+        <div className="container">
           <Modal
             visible={stateIMG.previewVisible}
             onCancel={() => {
