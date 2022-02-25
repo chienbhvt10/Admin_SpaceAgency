@@ -103,7 +103,7 @@ const FilterForm = (props: Props) => {
                 }}
               />
             </Col>
-            <Col span={12}>
+            {/* <Col span={12}>
               <Form.Item
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 16, style: { marginLeft: '10px' } }}
@@ -112,7 +112,7 @@ const FilterForm = (props: Props) => {
               >
                 <RangePicker style={{ width: '100%' }} format={dateFormat} />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
         </Col>
         <Col span={22}>
