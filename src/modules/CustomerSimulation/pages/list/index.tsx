@@ -26,10 +26,17 @@ const CustomerSimulationPage = () => {
   const [value, setValue] = React.useState<string>('');
   const [themeId, setThemeId] = React.useState<string>('');
   const [styleId, setStyleId] = React.useState<string>('');
+  const [userId, setUserId] = React.useState<string>('');
+
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const { removeSimulation } = useRemoveSimulation();
-  const arrFilter: FilterInput[] = [{ key: TypeKeyFilterUserSimulation.NAME, value: '' }];
+  const arrFilter: FilterInput[] = [
+    { key: TypeKeyFilterUserSimulation.NAME, value: '' },
+    { key: TypeKeyFilterUserSimulation.STYLE, value: '' },
+    { key: TypeKeyFilterUserSimulation.THEME, value: '' },
+    { key: TypeKeyFilterUserSimulation.CUSTOMER, value: '' },
+  ];
 
   React.useEffect(() => {
     filterSimulations([]);
@@ -85,6 +92,9 @@ const CustomerSimulationPage = () => {
     setStyleId(value);
   };
 
+  const onChangeUser = (value: string) => {
+    setUserId(value);
+  };
   const onReset = () => {
     setValue('');
     setDisabled(true);
@@ -101,6 +111,8 @@ const CustomerSimulationPage = () => {
           ? styleId
           : i.key === TypeKeyFilterUserSimulation.THEME
           ? themeId
+          : i.key === TypeKeyFilterUserSimulation.CUSTOMER
+          ? userId
           : '',
     }));
     filterSimulations(newFilter);
@@ -119,6 +131,7 @@ const CustomerSimulationPage = () => {
               onReset={onReset}
               disabled={disabled}
               onChangeStyle={onChangeStyle}
+              onChangeUser={onChangeUser}
             />
           </Col>
           <Col span={23}>

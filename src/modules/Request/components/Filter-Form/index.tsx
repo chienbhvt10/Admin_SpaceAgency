@@ -29,7 +29,7 @@ export const FormSearch = (props: IProps) => {
               wrapperCol={{ span: 18, style: { marginLeft: '10px' } }}
               name="search"
             >
-              <Input onChange={props.onChange} placeholder="キーワードを入力してください。..." />
+              <Input onChange={props.onChange} placeholder="Eメール等の検索キーワードを入力してください。" />
             </Form.Item>
           </Form>
         </Col>

@@ -193,7 +193,6 @@ export enum TypeRole {
 
 export enum TypeKeyFilterUser {
   EMAIL = 'email',
-  STATUS = 'status',
   ROLE = 'role',
 }
 export enum TypeKeyFilterMaterials {
@@ -205,6 +204,7 @@ export enum TypeKeyFilterUserSimulation {
   NAME = 'firstName',
   THEME = 'theme',
   STYLE = 'style',
+  CUSTOMER = 'user',
   START_DATE = '',
   END_DATE = '',
 }
@@ -213,12 +213,6 @@ export enum TypeKeyFilterTheme {
   THEME = 'id',
 }
 export enum TypeKeyFilterRequest {
-  EMAIL = 'email',
-}
-export enum TypeKeyFilterAppointment {
-  EMAIL = 'email',
-}
-export enum TypeKeyFilterDocument {
   EMAIL = 'email',
 }
 export enum TypeKeyFilterStyle {

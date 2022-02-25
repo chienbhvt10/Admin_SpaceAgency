@@ -30,20 +30,20 @@ function CustomUserManagementTable(props: IProps) {
       render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
     },
     {
-      title: '氏名',
-      dataIndex: 'fullName',
-      key: 'fullName',
-      sorter: false,
-      width: 300,
-      render: (_, record: IUsersFields, __) => <Text>{record.firstName + ' ' + record.lastName}</Text>,
-    },
-    {
       title: 'Eメール',
       dataIndex: 'email',
       key: 'email',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
       width: 300,
+    },
+    {
+      title: '氏名',
+      dataIndex: 'fullName',
+      key: 'fullName',
+      sorter: false,
+      width: 300,
+      render: (_, record: IUsersFields, __) => <Text>{record.firstName + ' ' + record.lastName}</Text>,
     },
     {
       title: '電話番号',
