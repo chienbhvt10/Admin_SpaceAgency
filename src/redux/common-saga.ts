@@ -1,8 +1,9 @@
-import { put, take } from 'redux-saga/effects';
-import { NotificationError, NotificationSuccess } from 'commons/components/Notification';
-import { actionLoadingError } from './actions';
-import { getNavigate } from 'helpers/history';
 import { CommonPath } from 'commons/base-routes';
+import { NotificationSuccess } from 'commons/components/Notification';
+import { clientError } from 'helpers/error';
+import { getNavigate } from 'helpers/history';
+import { put, take } from 'redux-saga/effects';
+import { actionLoadingError } from './actions';
 export interface ResponseGenerator {
   payload: any;
 }
@@ -13,12 +14,8 @@ export function* checkErrorAsync() {
       getNavigate(CommonPath.LOGIN_PATH);
       return;
     }
+    clientError(action.payload.response.errors[0].code);
     yield put(actionLoadingError());
-    let message = action.payload.message || 'Có lỗi xảy ra vui lòng thử lại sau';
-    if (action.payload.response && action.payload.response?.errors?.length) {
-      message = action.payload.response?.errors[0].message;
-    }
-    NotificationError('Cảnh báo', message);
   }
 }
 
