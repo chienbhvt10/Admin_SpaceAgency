@@ -87,7 +87,7 @@ const ThemeCollectionPage = () => {
         title="タイプ一覧"
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            新タイプ
+            タイプ
           </Button>
         }
       >

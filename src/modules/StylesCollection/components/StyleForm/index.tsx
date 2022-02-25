@@ -158,8 +158,8 @@ const StyleCollectionForm = (props: Props) => {
                     <Input disabled={true} />
                   </Form.Item>
                 </Col>
-                <Col span={16} offset={6}>
-                  <div style={{ marginLeft: '5px', height: '300px' }}>
+                <Col span={16} offset={7}>
+                  <div style={{ height: '300px' }}>
                     <UploadDragger
                       loading={loadingImage}
                       handleChange={handleChangePreviewUrl}

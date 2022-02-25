@@ -44,7 +44,7 @@ const CustomerSimulationPage = () => {
   }, []);
 
   React.useEffect(() => {
-    if (value || themeId || styleId) {
+    if (value || themeId || styleId || userId) {
       setDisabled(false);
     } else {
       setDisabled(true);

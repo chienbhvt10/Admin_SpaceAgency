@@ -286,8 +286,8 @@ const MaterialForm = (props: Props) => {
                         <Input disabled={true} />
                       </Form.Item>
                     </Col>
-                    <Col span={21} offset={1}>
-                      <div style={{ marginLeft: '6px', height: '300px' }}>
+                    <Col span={21} offset={2}>
+                      <div style={{ height: '300px' }}>
                         <UploadDragger
                           loading={loadingImage}
                           handleChange={handleChangePreviewUrl}
@@ -343,8 +343,8 @@ const MaterialForm = (props: Props) => {
                         <Input disabled={true} />
                       </Form.Item>
                     </Col>
-                    <Col span={21} offset={1}>
-                      <div style={{ marginLeft: '6px', height: '300px' }}>
+                    <Col span={21} offset={2}>
+                      <div style={{ height: '300px' }}>
                         <UploadDragger
                           loading={loadingImage2}
                           handleChange={handleChangePreviewUrl2}

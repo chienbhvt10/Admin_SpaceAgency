@@ -103,7 +103,7 @@ export const dataNav: DataNav[] = [
     item: [
       {
         key: '1',
-        nameSub: 'タイプ覧',
+        nameSub: 'タイプ一覧',
         router: CommonPath.THEME_COLLECTION,
       },
       {
@@ -131,7 +131,7 @@ export const dataNav: DataNav[] = [
       },
       {
         key: '5',
-        nameSub: 'お問い合わせ',
+        nameSub: 'お問い合わせ一覧',
         router: CommonPath.CONTACT_REQUEST,
       },
     ],
