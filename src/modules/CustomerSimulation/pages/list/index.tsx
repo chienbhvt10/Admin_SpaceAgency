@@ -123,7 +123,7 @@ const CustomerSimulationPage = () => {
       <TableHeader title="ユーザーのシミュレーション一覧">
         <Row justify="center">
           <Col span={23}>
-            <FilterForm
+            {/* <FilterForm
               onChangeTheme={onChangeTheme}
               value={value}
               handleSearch={handleSearch}
@@ -132,7 +132,7 @@ const CustomerSimulationPage = () => {
               disabled={disabled}
               onChangeStyle={onChangeStyle}
               onChangeUser={onChangeUser}
-            />
+            /> */}
           </Col>
           <Col span={23}>
             <CustomerSimulationTable

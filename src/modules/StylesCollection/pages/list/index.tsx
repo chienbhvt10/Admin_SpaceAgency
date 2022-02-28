@@ -103,8 +103,10 @@ const StyleCollectionPage = () => {
   const onChangeValue = (e: any) => {
     setSearchValue(e.target.value);
   };
+
   const onReset = () => {
     setSearchValue('');
+    setThemeId('');
     setDisabled(true);
     filterStyles([]);
   };
