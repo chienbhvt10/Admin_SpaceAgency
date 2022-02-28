@@ -25,6 +25,9 @@ build:
     - cat "$DEV_ENV" > "$(pwd)/.env"
     - yarn build:prod
     - echo "Build project complete."
+  except:
+    - staging
+    - master
 
 deploy:      # This job runs in the deploy stage.
   tags: [deploy]
