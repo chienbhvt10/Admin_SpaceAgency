@@ -61,7 +61,7 @@ deploy-stag-job:      # This job runs in the deploy stage.
     - echo "FAIL" > .job_status
     - echo "Deploying application..."
     - cat "$STAG_ENV" > ".env"
-    - scp -o StrictHostKeyChecking=no .env $STAG_SERVER_USER@$STAG_SERVER_IP:deploy/api
+    - scp -o StrictHostKeyChecking=no .env $STAG_SERVER_USER@$STAG_SERVER_IP:$SRC_PATH
     - ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP -p $SERVER_PORT "cd $SRC_PATH && git reset --hard origin/develop && git pull && docker-compose up -d --build --remove-orphans"
     - echo "Application successfully deployed."
     - echo "SUCCESS" > .job_status
