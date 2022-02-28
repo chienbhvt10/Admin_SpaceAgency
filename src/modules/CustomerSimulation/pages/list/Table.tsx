@@ -1,6 +1,6 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
-import { ISimulation, MaterialType } from 'graphql/generated/graphql';
+import { ISimulation, MaterialType, SimulationStatus } from 'graphql/generated/graphql';
 import { NumberOfRow, totalPrice } from 'helpers/string';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
@@ -23,12 +23,12 @@ const CustomerSimulationTable = (props: IProps) => {
     const columns: ColumnsType<MaterialType> = [
       {
         title: 'カスタマイズ',
-        dataIndex: 'material',
+        dataIndex: 'title',
         key: 'material',
         sorter: false,
         align: 'center',
         width: 620,
-        render: (_: any, record) => <p style={{ textAlign: 'center' }}>{record.material?.title}</p>,
+        render: (_: any, record) => <>{record.title}</>,
       },
       {
         title: '価格',
@@ -37,7 +37,7 @@ const CustomerSimulationTable = (props: IProps) => {
         align: 'center',
         sorter: false,
         width: 300,
-        render: (_any, record) => <p style={{ textAlign: 'center' }}>{record.price?.value}</p>,
+        render: (_any, record) => <>{record.price?.value}</>,
       },
     ];
     return (
@@ -100,6 +100,17 @@ const CustomerSimulationTable = (props: IProps) => {
       key: 'status',
       width: 100,
       sorter: true,
+      render: (_, value, __) => (
+        <>
+          {value.status === SimulationStatus.Draft
+            ? '下書き'
+            : value.status === SimulationStatus.Deleted
+            ? '削除'
+            : value.status === SimulationStatus.Completed
+            ? '完成'
+            : ''}
+        </>
+      ),
     },
     {
       title: 'ツール',

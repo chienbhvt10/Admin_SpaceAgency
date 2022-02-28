@@ -15,7 +15,7 @@ const RequestStatusUpdate = () => {
   const navigate = useNavigate();
   const { updateRequestStatus, loading } = useUpdateRequestStatus();
   React.useEffect(() => {
-    setTitle('リクエストステータス更新');
+    setTitle('問い合わせ状態の更新');
   }, []);
 
   React.useEffect(() => {
@@ -35,7 +35,7 @@ const RequestStatusUpdate = () => {
     <RequestLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
       <ContactRequestForm
-        title="リクエストステータス更新"
+        title="問い合わせ状態の更新"
         onFinish={onFinishUpdateRequestStatus}
         type={TypeForm.UPDATE}
         item={item}
@@ -57,6 +57,6 @@ const routes = [
   },
   {
     path: CommonPath.CONTACT_REQUEST_DETAIL,
-    breadcrumbName: 'リクエストステータス更新',
+    breadcrumbName: '問い合わせ状態の更新',
   },
 ];

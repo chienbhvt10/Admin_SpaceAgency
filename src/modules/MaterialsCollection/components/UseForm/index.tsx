@@ -81,7 +81,7 @@ const MaterialForm = (props: Props) => {
         themeId: item.style?.theme?.id || undefined,
         styleId: item.style?.id || undefined,
         codePremium: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
-        codeStandard: (item && item.materialTypes && item.materialTypes[0]?.code3d) || '',
+        codeStandard: (item && item.materialTypes && item.materialTypes[1]?.code3d) || '',
         // description: (item && item.style?.description && item.style.description) || '',
         priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
         pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,

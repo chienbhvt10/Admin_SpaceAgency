@@ -35,7 +35,7 @@ function ContactRequestForm(props: IProps) {
     phone: item?.phone || '',
     requesterFullName: item?.requesterFullName || '',
     content: item?.content || '',
-    hasLand: item?.hasLand ? '持っている。' : 'まだ決まっていない。',
+    hasLand: item?.hasLand ? '持っている' : 'まだ決まっていない',
     postcode: item?.postcode || '',
     type: item?.type,
     status: item?.status,
