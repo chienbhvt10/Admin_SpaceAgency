@@ -59,7 +59,7 @@ const FilterForm = (props: Props) => {
       <Row justify="center">
         <Col span={22}>
           <Row>
-            <Col span={12}>
+            {/* <Col span={12}>
               <SelectFormItem
                 loading={loadingTheme}
                 data={arrThemes || []}
@@ -86,7 +86,7 @@ const FilterForm = (props: Props) => {
                 onDropdownVisibleChange={onDropdownVisibleChangeStyle}
                 onSelect={onChangeStyle}
               />
-            </Col>
+            </Col> */}
           </Row>
         </Col>
         <Col span={22}>

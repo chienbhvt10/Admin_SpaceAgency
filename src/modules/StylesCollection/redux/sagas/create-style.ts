@@ -27,7 +27,7 @@ export function* createStyleAsync(action: CreateStyleAction) {
     );
     getNavigate(CommonPath.STYLES_COLLECTION);
     yield put(actionCreateStyleSuccess(createStyleData.createStyle));
-    NotificationSuccess('通知!', 'Create style success.');
+    NotificationSuccess('通知!', 'デザイン作成に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionCreateStyleError(err));

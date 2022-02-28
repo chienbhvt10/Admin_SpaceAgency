@@ -13,7 +13,7 @@ export function* removeStyleAsync(action: RemoveStyleAction) {
     const { pagination } = yield select((state: RootState) => state.styles.stylesState);
     yield put(actionStyles({ pagination }));
     yield put(actionRemoveStyleSuccess(data.removeStyle));
-    NotificationSuccess('通知!', 'Delete style success');
+    NotificationSuccess('通知!', 'デザイン削除に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionRemoveStyleError(err));

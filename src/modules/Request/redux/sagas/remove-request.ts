@@ -13,7 +13,7 @@ export function* removeRequestAsync(action: RemoveRequestAction) {
     const { pagination } = yield select((state: RootState) => state.requests.requestsState);
     yield put(actionRequests({ pagination }));
     yield put(actionRemoveRequestSuccess(data.removeRequest));
-    NotificationSuccess('通知', 'Delete request success');
+    NotificationSuccess('通知', 'リクエスト削除に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionRemoveRequestError(err));

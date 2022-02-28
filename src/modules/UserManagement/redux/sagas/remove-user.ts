@@ -14,7 +14,7 @@ export function* removeUserAsync(action: RemoveUserAction) {
     const { pagination } = yield select((state: RootState) => state.users.usersState);
     yield put(actionUsers({ pagination }));
     yield put(actionRemoveUserSuccess(data.removeUser));
-    NotificationSuccess('通知', 'Delete user success');
+    NotificationSuccess('通知', 'ユーザー削除に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionRemoveUserError(err));

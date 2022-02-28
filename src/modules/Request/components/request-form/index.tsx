@@ -35,7 +35,7 @@ function ContactRequestForm(props: IProps) {
     phone: item?.phone || '',
     requesterFullName: item?.requesterFullName || '',
     content: item?.content || '',
-    hasLand: item?.hasLand ? 'Has land' : 'Landless',
+    hasLand: item?.hasLand ? '持っている。' : 'まだ決まっていない。',
     postcode: item?.postcode || '',
     type: item?.type,
     status: item?.status,
@@ -131,7 +131,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>Has land</Title>}
+                label={<Title level={5}>持っている。</Title>}
                 name="hasLand"
                 {...tailLayout}
               >
