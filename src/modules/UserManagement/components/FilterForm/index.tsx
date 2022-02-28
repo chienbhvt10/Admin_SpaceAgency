@@ -8,16 +8,14 @@ interface Props {
   handleSearch: () => void;
   onChange: (e: any) => void;
   onReset?: () => void;
-  onStatusChange?: (value: any) => void;
   onRoleChange?: (value: any) => void;
   role: string;
-  status: string;
   value: string;
   disabled?: boolean;
 }
 
 const FilterForm = (props: Props) => {
-  const { onReset, handleSearch, onChange, value, onRoleChange, onStatusChange, disabled } = props;
+  const { onReset, handleSearch, onChange, value, onRoleChange, disabled } = props;
 
   const [form] = Form.useForm<any>();
 
@@ -31,8 +29,8 @@ const FilterForm = (props: Props) => {
   };
   return (
     <Form form={form} className="filter-form">
-      <Row>
-        <Col span={24}>
+      <Row justify="center">
+        <Col span={22} style={{ marginLeft: '33px' }}>
           <Col span={12}>
             <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="ロール" name="role">
               <Select placeholder="---全部---" onChange={onRoleChange}>
@@ -51,43 +49,37 @@ const FilterForm = (props: Props) => {
               </Form.Item>
             </Col> */}
         </Col>
-        <Col span={24}>
-          <Row>
-            <Col span={18}>
-              <Form.Item labelCol={{ span: 4 }} label="キーワード" name="keyword">
-                <Input value={value} onChange={onChange} placeholder="Eメール等の検索キーワードを入力してください。" />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Row justify="space-between">
-                <Col span={12}>
-                  <Row justify="space-around">
-                    <BaseButton
-                      text="リセット"
-                      disabled={disabled}
-                      width={'90%'}
-                      backgroundColor={props.disabled ? '#C0C0C0' : '#6C757D'}
-                      onClick={() => {
-                        resetFields();
-                      }}
-                    />
-                  </Row>
-                </Col>
-                <Col span={12}>
-                  <Row justify="space-around">
-                    <BaseButton
-                      text="検索"
-                      disabled={disabled}
-                      width={'90%'}
-                      border="1px solid #007BFF"
-                      backgroundColor={props.disabled ? '#C0C0C0' : '#007BFF'}
-                      onClick={handleSearch}
-                    />
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+        <Col span={22}>
+          <Col span={24} style={{ marginLeft: '20px' }}>
+            <Row>
+              <Col span={18}>
+                <Form.Item labelCol={{ span: 4 }} wrapperCol={{ span: 19 }} label="キーワード" name="keyword">
+                  <Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Eメール等の検索キーワードを入力してください。"
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={4} style={{ display: 'flex' }}>
+                <BaseButton
+                  text="リセット"
+                  disabled={disabled}
+                  backgroundColor={disabled ? '#C0C0C0' : '#6C757D'}
+                  onClick={resetFields}
+                  marginLeft={'10px'}
+                />
+                <BaseButton
+                  text="検索"
+                  disabled={disabled}
+                  border="1px solid #007BFF"
+                  backgroundColor={disabled ? '#C0C0C0' : '#007BFF'}
+                  onClick={handleSearch}
+                  marginLeft={'10px'}
+                />
+              </Col>
+            </Row>
+          </Col>
         </Col>
       </Row>
     </Form>

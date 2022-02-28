@@ -38,6 +38,7 @@ const FilterForm = (props: Props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value]);
+
   const resetFields = () => {
     form.setFieldsValue({ themeId: undefined, search: '' });
     onReset && onReset();

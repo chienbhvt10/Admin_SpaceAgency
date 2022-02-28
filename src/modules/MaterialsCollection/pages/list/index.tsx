@@ -132,6 +132,10 @@ const MaterialCollectionPage = () => {
   const onReset = () => {
     setValue('');
     setDisabled(true);
+    setSelectId({
+      styleId: '',
+      themeId: '',
+    });
     form.setFieldsValue({
       styleId: undefined,
       themeId: undefined,

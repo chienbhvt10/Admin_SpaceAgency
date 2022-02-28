@@ -22,7 +22,6 @@ function ListUserManagement() {
   const [value, setValue] = React.useState<string>('');
   const [role, setRole] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(false);
-  const [status, setStatus] = React.useState<string>('');
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterUser.EMAIL, value: '' },
     { key: TypeKeyFilterUser.ROLE, value: '' },
@@ -34,21 +33,18 @@ function ListUserManagement() {
   }, []);
 
   React.useEffect(() => {
-    if (role || status || value) {
+    if (role || value) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [role, status, value]);
+  }, [role, value]);
 
   const onChangeValue = (e: any) => {
     setValue(e.target.value);
   };
   const onRoleChange = (value: any) => {
     setRole(value);
-  };
-  const onStatusChange = (value: any) => {
-    setStatus(value);
   };
 
   const routes = [
@@ -97,6 +93,7 @@ function ListUserManagement() {
   };
   const onReset = () => {
     setValue('');
+    setRole('');
     setDisabled(true);
     filterUser([]);
   };
@@ -116,10 +113,8 @@ function ListUserManagement() {
             <FilterForm
               role={role}
               disabled={disabled}
-              status={status}
               value={value}
               onRoleChange={onRoleChange}
-              onStatusChange={onStatusChange}
               onChange={onChangeValue}
               handleSearch={handleSearch}
               onReset={onReset}
