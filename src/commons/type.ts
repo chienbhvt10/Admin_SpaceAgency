@@ -131,7 +131,7 @@ export const dataNav: DataNav[] = [
       },
       {
         key: '5',
-        nameSub: 'お問い合わせ一覧',
+        nameSub: '問い合わせ一覧',
         router: CommonPath.CONTACT_REQUEST,
       },
     ],
