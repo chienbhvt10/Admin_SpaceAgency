@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, TablePaginationConfig, Row, Col } from 'antd';
+import { Button, TablePaginationConfig, Row, Col, Form } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
@@ -13,16 +13,23 @@ import FilterForm from 'modules/UserManagement/components/FilterForm';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import { useRemoveUser } from 'modules/UserManagement/hooks/useRemoveUser';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { actionResetFilterSuccess } from 'redux/actions';
+import { RootState } from 'redux/reducers';
 import CustomUserManagementTable from './Table';
 
 function ListUserManagement() {
   const { dataUsers, loading, paginationTable, updatePaginationAndSorterUser, pagination, filterUser } = useListUsers();
   const navigate = useNavigate();
   const { removeUser } = useRemoveUser();
+  const dispatch = useDispatch();
+  const { isReset } = useSelector((state: RootState) => state.resetFilterReducer);
   const [value, setValue] = React.useState<string>('');
   const [role, setRole] = React.useState<string>('');
   const [disabled, setDisabled] = React.useState<boolean>(false);
+  const [form] = Form.useForm<any>();
+
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterUser.EMAIL, value: '' },
     { key: TypeKeyFilterUser.ROLE, value: '' },
@@ -32,7 +39,12 @@ function ListUserManagement() {
     filterUser([]);
     setTitle('ユーザー管理');
   }, []);
-
+  React.useEffect(() => {
+    if (isReset) {
+      onReset();
+      dispatch(actionResetFilterSuccess());
+    }
+  }, [isReset]);
   React.useEffect(() => {
     if (role || value) {
       setDisabled(false);
@@ -96,6 +108,11 @@ function ListUserManagement() {
     setValue('');
     setRole('');
     setDisabled(true);
+    form.setFieldsValue({
+      role: undefined,
+      status: undefined,
+      keyword: '',
+    });
     filterUser([]);
   };
   return (
@@ -112,6 +129,7 @@ function ListUserManagement() {
         <Row justify="center">
           <Col span={23}>
             <FilterForm
+              form={form}
               role={role}
               disabled={disabled}
               value={value}

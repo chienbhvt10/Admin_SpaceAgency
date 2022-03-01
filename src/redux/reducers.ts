@@ -6,7 +6,9 @@ import styles, { StylesModuleState } from 'modules/StylesCollection/redux/reduce
 import materials, { MaterialsModuleState } from 'modules/MaterialsCollection/redux/reducers';
 import simulations, { SimulationsModuleState } from 'modules/CustomerSimulation/redux/reducers';
 import loadingReducer from '../utils/loading/redux/loadingReducer';
-import { LoadingState } from './action-types';
+import resetFilterReducer from '../utils/reset-filter/redux/reset-filter';
+
+import { LoadingState, ResetFilterState } from './action-types';
 import requests, { RequestsModuleState } from 'modules/Request/redux/reducers';
 
 export interface RootState {
@@ -14,6 +16,7 @@ export interface RootState {
   themes: ThemesModuleState;
   users: UsersModuleState;
   loadingReducer: LoadingState;
+  resetFilterReducer: ResetFilterState;
   styles: StylesModuleState;
   materials: MaterialsModuleState;
   simulations: SimulationsModuleState;
@@ -23,6 +26,7 @@ export interface RootState {
 export default combineReducers<RootState>({
   auth,
   loadingReducer,
+  resetFilterReducer,
   themes,
   users,
   styles,
