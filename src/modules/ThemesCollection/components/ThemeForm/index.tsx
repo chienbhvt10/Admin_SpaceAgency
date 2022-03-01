@@ -257,10 +257,10 @@ const ThemesForm = (props: Props) => {
                           rules={[requireRule]}
                           labelCol={{ span: 24, style: { marginRight: 20 } }}
                           wrapperCol={{ span: 24 }}
-                          label="Diagram Image"
+                          label="ハウスマップ画像"
                           name="diagramImageUrl"
                         >
-                          <Input placeholder="Diagram Image" disabled={true} />
+                          <Input placeholder="ハウスマップ画像" disabled={true} />
                         </Form.Item>
                       </Col>
                       <Col span={22}>

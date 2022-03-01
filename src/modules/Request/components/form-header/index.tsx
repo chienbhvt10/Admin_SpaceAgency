@@ -15,7 +15,7 @@ const ButtonGroup = ({ loading, onDone, onReject, onApprove }: IProps) => {
   return (
     <div className="button-group">
       <Button onClick={onDone} size="large">
-        Done
+        完成
       </Button>
       <Button
         onClick={onReject}

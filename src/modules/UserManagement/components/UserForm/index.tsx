@@ -28,7 +28,7 @@ const requireRule = { required: true, message: 'この項目は必須です。' 
 const requireEmail = {
   required: true,
   type: 'email',
-  message: 'The input is not valid E-mail!',
+  message: 'メール形式が正しくありません。',
 };
 
 function ThemeForm(props: IProps) {

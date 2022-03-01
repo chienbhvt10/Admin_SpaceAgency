@@ -23,16 +23,25 @@ function TableMaterial(props: IProps) {
         title: 'タイトル',
         dataIndex: 'title',
         key: '#',
+        align: 'center',
       },
-      { title: 'コード', dataIndex: 'code3d', key: '#' },
+      {
+        title: 'コード',
+        dataIndex: 'code3d',
+        key: '#',
+        align: 'center',
+
+        render: (_: any, record) => <>{record.code3d}</>,
+      },
       {
         title: '価格',
         key: '#',
         dataIndex: 'price',
+        align: 'center',
         render: (_: any, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
       },
     ];
-    return <Table columns={columnsType} dataSource={data.materialTypes || []} pagination={false} />;
+    return <Table columns={columnsType} bordered dataSource={data.materialTypes || []} pagination={false} />;
   };
 
   const columns: ColumnsType<IMaterial> = [

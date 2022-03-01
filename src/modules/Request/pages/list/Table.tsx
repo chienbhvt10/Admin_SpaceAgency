@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import UserRowActions from 'commons/components/layouts/ActionTable';
-import { IRequest } from 'graphql/generated/graphql';
+import { IRequest, RequestStatus, RequestType, SimulationStatus } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
 import React from 'react';
 interface IProps {
@@ -55,6 +55,17 @@ function RequestTable(props: IProps) {
       key: 'type',
       sorter: false,
       width: 100,
+      render: (_, value, __) => (
+        <>
+          {value.type === RequestType.Other
+            ? 'その他'
+            : value.type === RequestType.Meeting
+            ? '資料請求'
+            : value.type === RequestType.SendDocument
+            ? '面談'
+            : ''}
+        </>
+      ),
     },
     {
       title: '郵便番号',
@@ -68,7 +79,18 @@ function RequestTable(props: IProps) {
       dataIndex: 'status',
       key: 'status',
       sorter: false,
-      width: 60,
+      width: 100,
+      render: (_, value, __) => (
+        <>
+          {value.status === RequestStatus.Open
+            ? 'オーペン'
+            : value.status === RequestStatus.Accepted
+            ? '承認'
+            : value.status === RequestStatus.Rejected
+            ? '拒否'
+            : ''}
+        </>
+      ),
     },
     {
       title: 'ツール',

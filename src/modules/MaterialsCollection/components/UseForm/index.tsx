@@ -81,7 +81,7 @@ const MaterialForm = (props: Props) => {
         themeId: item.style?.theme?.id || undefined,
         styleId: item.style?.id || undefined,
         codePremium: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
-        codeStandard: (item && item.materialTypes && item.materialTypes[0]?.code3d) || '',
+        codeStandard: (item && item.materialTypes && item.materialTypes[1]?.code3d) || '',
         // description: (item && item.style?.description && item.style.description) || '',
         priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
         pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
@@ -246,7 +246,7 @@ const MaterialForm = (props: Props) => {
                         labelCol={{ span: 24 }}
                         wrapperCol={{ span: 23 }}
                         className="name"
-                        label="Name Standard"
+                        label="スタンダード名"
                         name="nameStandard"
                       >
                         <Input />
@@ -256,7 +256,7 @@ const MaterialForm = (props: Props) => {
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
-                        label="Price Standard"
+                        label="スタンダード価格"
                         name="priceStandard"
                         rules={[requireRule]}
                       >
@@ -268,7 +268,7 @@ const MaterialForm = (props: Props) => {
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
                         className="code"
-                        label="Code Standard"
+                        label="スタンダードコード"
                         name="codeStandard"
                       >
                         <Input />
@@ -304,7 +304,7 @@ const MaterialForm = (props: Props) => {
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
                         className="name"
-                        label="Name Premium"
+                        label="プレミアム名"
                         name="namePremium"
                       >
                         <Input />
@@ -314,7 +314,7 @@ const MaterialForm = (props: Props) => {
                       <Form.Item
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
-                        label="Price Premium"
+                        label="プレミアム価格"
                         name="pricePremium"
                         rules={[requireRule]}
                       >
@@ -326,7 +326,7 @@ const MaterialForm = (props: Props) => {
                         labelCol={{ span: 24, style: { marginRight: 20 } }}
                         wrapperCol={{ span: 23 }}
                         className="code"
-                        label="Code Premium"
+                        label="プレミアムコード"
                         name="codePremium"
                       >
                         <Input />
