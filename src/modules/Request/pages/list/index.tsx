@@ -25,7 +25,7 @@ function RequestPage() {
 
   React.useEffect(() => {
     filterRequests([]);
-    setTitle('お問い合わせ一覧');
+    setTitle('問い合わせ一覧');
   }, []);
   React.useEffect(() => {
     if (value) {
@@ -83,7 +83,7 @@ function RequestPage() {
   return (
     <RequestLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <TableHeader title="お問い合わせ一覧">
+      <TableHeader title="問い合わせ一覧">
         <Row justify="center">
           <Col span={23}>
             <FormSearch
@@ -113,10 +113,10 @@ export default RequestPage;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'HOME',
+    breadcrumbName: 'Home',
   },
   {
     path: CommonPath.CONTACT_REQUEST,
-    breadcrumbName: 'お問い合わせ一覧',
+    breadcrumbName: '問い合わせ一覧',
   },
 ];

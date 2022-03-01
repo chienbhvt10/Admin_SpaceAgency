@@ -80,13 +80,13 @@ const MaterialForm = (props: Props) => {
         name: item.title || '',
         themeId: item.style?.theme?.id || undefined,
         styleId: item.style?.id || undefined,
-        codePremium: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
-        codeStandard: (item && item.materialTypes && item.materialTypes[1]?.code3d) || '',
-        // description: (item && item.style?.description && item.style.description) || '',
-        priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
-        pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
         nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
+        priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
+        codeStandard: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
         namePremium: (item && item.materialTypes && item?.materialTypes[1]?.title) || '',
+        pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
+        codePremium: (item && item.materialTypes && item?.materialTypes[1]?.code3d) || '',
+        // description: (item && item.style?.description && item.style.description) || '',
       });
       setThemeId(item.style?.theme?.id);
       setObjUrlImage({
@@ -270,6 +270,7 @@ const MaterialForm = (props: Props) => {
                         className="code"
                         label="スタンダードコード"
                         name="codeStandard"
+                        rules={[requireRule]}
                       >
                         <Input />
                       </Form.Item>
@@ -328,6 +329,7 @@ const MaterialForm = (props: Props) => {
                         className="code"
                         label="プレミアムコード"
                         name="codePremium"
+                        rules={[requireRule]}
                       >
                         <Input />
                       </Form.Item>
