@@ -122,8 +122,8 @@ const CustomerSimulationPage = () => {
       <PageHeader title="" breadcrumb={{ routes }} />
       <TableHeader title="ユーザーのシミュレーション一覧">
         <Row justify="center">
-          <Col span={23}>
-            {/* <FilterForm
+          {/* <Col span={23}>
+            <FilterForm
               onChangeTheme={onChangeTheme}
               value={value}
               handleSearch={handleSearch}
@@ -132,8 +132,8 @@ const CustomerSimulationPage = () => {
               disabled={disabled}
               onChangeStyle={onChangeStyle}
               onChangeUser={onChangeUser}
-            /> */}
-          </Col>
+            />
+          </Col> */}
           <Col span={23}>
             <CustomerSimulationTable
               onDelete={onDelete}

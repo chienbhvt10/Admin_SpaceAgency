@@ -3,7 +3,7 @@ import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { SorterResult } from 'antd/lib/table/interface';
 import Text from 'antd/lib/typography/Text';
 import UserRowActions from 'commons/components/layouts/ActionTable';
-import { IUsersFields } from 'graphql/generated/graphql';
+import { IUsersFields, Role } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import React from 'react';
@@ -58,6 +58,17 @@ function CustomUserManagementTable(props: IProps) {
       key: 'role',
       sorter: false,
       width: 120,
+      render: (_, value, __) => (
+        <>
+          {value.role === Role.Admin
+            ? '管理者'
+            : value.role === Role.Sysadmin
+            ? 'システム管理者'
+            : value.role === Role.Customer
+            ? 'ユーザー'
+            : ''}
+        </>
+      ),
     },
     // {
     //   title: '状態',
