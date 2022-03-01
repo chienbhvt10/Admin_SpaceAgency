@@ -1,7 +1,8 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, PageHeader, TablePaginationConfig, Row, Col } from 'antd';
+import { Button, TablePaginationConfig, Row, Col } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
+import PageHeader from 'commons/components/layouts/PageHeader';
 import TableHeader from 'commons/components/layouts/TableHeader';
 import UserManagementLayout from 'commons/components/layouts/UserManagement';
 import { TypeKeyFilterUser, TypePagination } from 'commons/type';
