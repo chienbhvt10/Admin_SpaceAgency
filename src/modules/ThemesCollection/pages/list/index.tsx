@@ -11,11 +11,16 @@ import { setTitle } from 'helpers/dom';
 import { OrderOfSorter } from 'helpers/string';
 import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { actionResetFilterSuccess } from 'redux/actions';
+import { RootState } from 'redux/reducers';
 import TableThemes from './Table';
 
 const ThemeCollectionPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isReset } = useSelector((state: RootState) => state.resetFilterReducer);
   const { dataThemes, loading, paginationTable, pagination, updatePaginationAndSorterThemes, filterTheme } =
     useListThemes();
   const [value, setValue] = React.useState<string>('');
@@ -37,6 +42,12 @@ const ThemeCollectionPage = () => {
     filterTheme([]);
   }, []);
 
+  React.useEffect(() => {
+    if (isReset) {
+      onReset();
+      dispatch(actionResetFilterSuccess());
+    }
+  }, [isReset]);
   React.useEffect(() => {
     if (value) {
       setDisabled(false);

@@ -1,4 +1,4 @@
-import { Col, Form, Input, Row, Select } from 'antd';
+import { Col, Form, Input, Row, Select, FormInstance } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import { FormSearch } from 'commons/components/layouts/FormSearch';
@@ -6,6 +6,7 @@ import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes'
 import React from 'react';
 const { Option } = Select;
 interface Props {
+  form: FormInstance;
   value: string;
   themeId: string;
   onChangeTheme: (value: any) => void;
@@ -15,8 +16,7 @@ interface Props {
   disabled?: boolean;
 }
 const FilterForm = (props: Props) => {
-  const [form] = useForm();
-  const { value, onChangeValue, handleSearch, onReset, onChangeTheme, disabled } = props;
+  const { value, onChangeValue, handleSearch, onReset, onChangeTheme, disabled, form } = props;
   const { getAllThemes, dataAllThemes } = useGetAllThemes();
 
   const themeOptions = dataAllThemes.map((theme, index) => (
@@ -31,18 +31,14 @@ const FilterForm = (props: Props) => {
     }
   };
   React.useEffect(() => {
-    if (!props.value) {
+    if (!value) {
       form.setFieldsValue({
         search: '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.value]);
+  }, [value]);
 
-  const resetFields = () => {
-    form.setFieldsValue({ themeId: undefined, search: '' });
-    onReset && onReset();
-  };
   return (
     <Form className="filter-form" form={form}>
       <Row justify="center">
@@ -66,7 +62,7 @@ const FilterForm = (props: Props) => {
                   text="リセット"
                   disabled={disabled}
                   backgroundColor={disabled ? '#C0C0C0' : '#6C757D'}
-                  onClick={resetFields}
+                  onClick={onReset}
                   marginLeft={'10px'}
                 />
                 <BaseButton

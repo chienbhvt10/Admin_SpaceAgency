@@ -13,10 +13,15 @@ import { useRemoveRequest } from 'modules/Request/hooks/useRemoveRequest';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import RequestTable from './Table';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import { actionResetFilterSuccess } from 'redux/actions';
 
 function RequestPage() {
   const { dataRequests, loading, paginationTable, updatePaginationAndSorterRequests, pagination, filterRequests } =
     useListRequests();
+  const dispatch = useDispatch();
+  const { isReset } = useSelector((state: RootState) => state.resetFilterReducer);
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>('');
   const navigate = useNavigate();
@@ -27,6 +32,12 @@ function RequestPage() {
     filterRequests([]);
     setTitle('問い合わせ一覧');
   }, []);
+  React.useEffect(() => {
+    if (isReset) {
+      onReset();
+      dispatch(actionResetFilterSuccess());
+    }
+  }, [isReset]);
   React.useEffect(() => {
     if (value) {
       setDisabled(false);

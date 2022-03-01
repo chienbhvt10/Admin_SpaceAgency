@@ -1,10 +1,11 @@
-import { Col, Form, Input, Row, Select } from 'antd';
+import { Col, Form, FormInstance, Input, Row, Select } from 'antd';
 import BaseButton from 'commons/components/layouts/BaseButton';
 import { TypeActiveAccount, TypeRole } from 'commons/type';
 import React from 'react';
 
 const { Option } = Select;
 interface Props {
+  form: FormInstance;
   handleSearch: () => void;
   onChange: (e: any) => void;
   onReset?: () => void;
@@ -15,18 +16,7 @@ interface Props {
 }
 
 const FilterForm = (props: Props) => {
-  const { onReset, handleSearch, onChange, value, onRoleChange, disabled } = props;
-
-  const [form] = Form.useForm<any>();
-
-  const resetFields = () => {
-    form.setFieldsValue({
-      role: undefined,
-      status: undefined,
-      keyword: '',
-    });
-    onReset && onReset();
-  };
+  const { onReset, handleSearch, onChange, value, onRoleChange, disabled, form } = props;
   return (
     <Form form={form} className="filter-form">
       <Row justify="center">
@@ -34,9 +24,9 @@ const FilterForm = (props: Props) => {
           <Col span={12}>
             <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="ロール" name="role">
               <Select placeholder="---全部---" onChange={onRoleChange}>
-                <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
-                <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
-                <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
+                <Option value={TypeRole.SYSADMIN}>システム管理者</Option>
+                <Option value={TypeRole.ADMIN}>管理者</Option>
+                <Option value={TypeRole.CUSTOMER}>ユーザー</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -66,7 +56,7 @@ const FilterForm = (props: Props) => {
                   text="リセット"
                   disabled={disabled}
                   backgroundColor={disabled ? '#C0C0C0' : '#6C757D'}
-                  onClick={resetFields}
+                  onClick={onReset}
                   marginLeft={'10px'}
                 />
                 <BaseButton
