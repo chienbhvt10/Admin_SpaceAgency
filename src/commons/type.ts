@@ -28,7 +28,6 @@ export interface CreateMaterialsTypeInput {
   codeStandard: string;
   codePremium: string;
   name: string;
-  // description?: string;
   styleId?: string;
   imagePreview?: string;
   imagePreview2?: string;
@@ -39,7 +38,6 @@ export interface CreateMaterialsTypeInput {
   order?: string;
   priceStandard: number;
   pricePremium: number;
-  themeId?: string;
 }
 export interface UpdateRequestStatusTypeInput {
   requesterFullName: string;

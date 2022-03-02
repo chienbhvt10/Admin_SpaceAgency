@@ -43,7 +43,7 @@ const FilterForm = (props: Props) => {
     <Form className="filter-form" form={form}>
       <Row justify="center">
         <Col span={22} style={{ marginLeft: '33px' }}>
-          <Form.Item labelCol={{ span: 3 }} wrapperCol={{ span: 14 }} label="タイプ" name="themeId">
+          <Form.Item labelCol={{ span: 3 }} wrapperCol={{ span: 8 }} label="タイプ" name="themeId">
             <Select onDropdownVisibleChange={onDropdownVisibleChange} placeholder="---全部---" onSelect={onChangeTheme}>
               {themeOptions}
             </Select>
