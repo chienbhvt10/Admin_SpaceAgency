@@ -22,7 +22,7 @@ const FilterForm = (props: Props) => {
       <Row justify="center">
         <Col span={22} style={{ marginLeft: '33px' }}>
           <Col span={12}>
-            <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} label="ロール" name="role">
+            <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="ロール" name="role">
               <Select placeholder="---全部---" onChange={onRoleChange}>
                 <Option value={TypeRole.SYSADMIN}>システム管理者</Option>
                 <Option value={TypeRole.ADMIN}>管理者</Option>
