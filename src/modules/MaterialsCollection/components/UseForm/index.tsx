@@ -29,9 +29,9 @@ const MaterialForm = (props: Props) => {
   const { uploadImages } = useUploadImages();
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [loadingImage2, setLoadingImage2] = useState<boolean>(false);
-  const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
-  const [themeId, setThemeId] = React.useState<string>();
-  const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
+  // const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
+  // const [themeId, setThemeId] = React.useState<string>();
+  // const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
   const { dataAllStyles, getAllStyles, loading: loadingSelectStyle } = useGetAllStyles();
   const [dataFilterStyles, setDataFilterStyles] = React.useState<IStyle[]>([]);
   const [form] = Form.useForm<CreateMaterialsTypeInput>();
@@ -48,37 +48,35 @@ const MaterialForm = (props: Props) => {
     pricePremium: 0,
     priceStandard: 0,
     styleId: undefined,
-    themeId: undefined,
   });
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    getAllThemes();
+    // getAllThemes();
     getAllStyles();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     if (dataAllStyles) {
-      if (themeId) {
-        setVisibleStyleDropdown(false);
-        const arrStyles = dataAllStyles?.filter((i) => i.theme?.id === themeId);
-        if (arrStyles) {
-          setDataFilterStyles(arrStyles);
-        }
-      } else {
-        setDataFilterStyles(dataAllStyles || []);
-      }
+      // if (themeId) {
+      //   setVisibleStyleDropdown(false);
+      //   const arrStyles = dataAllStyles?.filter((i) => i.theme?.id === themeId);
+      //   if (arrStyles) {
+      //     setDataFilterStyles(arrStyles);
+      //   }
+      // } else {
+      setDataFilterStyles(dataAllStyles || []);
+      // }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [themeId, dataAllStyles]);
+  }, [dataAllStyles]);
 
   React.useEffect(() => {
     if (item && item?.materialTypes) {
       setUpdateMaterialInput({
         ...updateMaterialInput,
         name: item.title || '',
-        themeId: item.style?.theme?.id || undefined,
         styleId: item.style?.id || undefined,
         nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
         priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
@@ -88,7 +86,7 @@ const MaterialForm = (props: Props) => {
         codePremium: (item && item.materialTypes && item?.materialTypes[1]?.code3d) || '',
         // description: (item && item.style?.description && item.style.description) || '',
       });
-      setThemeId(item.style?.theme?.id);
+      // setThemeId(item.style?.theme?.id);
       setObjUrlImage({
         previewUrl: item?.materialTypes[0].materialImage?.previewImageUrl || '',
         previewUrl2: item?.materialTypes[1].materialImage?.previewImageUrl || '',
@@ -116,17 +114,17 @@ const MaterialForm = (props: Props) => {
     navigate(CommonPath.MATERIAL_COLLECTION);
   };
 
-  const onSelectTheme = (value: string) => {
-    if (value) {
-      form.setFieldsValue({
-        styleId: undefined,
-      });
-      setThemeId(value);
-      setVisibleStyleDropdown(false);
-    } else {
-      setThemeId(undefined);
-    }
-  };
+  // const onSelectTheme = (value: string) => {
+  //   if (value) {
+  //     form.setFieldsValue({
+  //       styleId: undefined,
+  //     });
+  //     // setThemeId(value);
+  //     setVisibleStyleDropdown(false);
+  //   } else {
+  //     // setThemeId(undefined);
+  //   }
+  // };
 
   const handleResetPreviewUrl = () => {
     form.setFieldsValue({
@@ -172,8 +170,8 @@ const MaterialForm = (props: Props) => {
           <HeaderCreateUpdate loading={loading} onCancel={onCancel} title={<Title level={2}>{title}</Title>}>
             <Row justify="center">
               <Col span={22}>
-                <Row>
-                  <Col span={11} style={{ marginLeft: '18px' }}>
+                <Row justify="center">
+                  {/* <Col span={11} style={{ marginLeft: '18px' }}>
                     <FormDropdown
                       formItem={{
                         label: 'タイプ',
@@ -187,17 +185,17 @@ const MaterialForm = (props: Props) => {
                       items={dataAllThemes}
                       options={[]}
                     />
-                  </Col>
-                  <Col span={11} offset={1}>
+                  </Col> */}
+                  <Col span={16} offset={1}>
                     <FormDropdown
                       formItem={{
                         label: 'デザイン',
                         name: 'styleId',
-                        labelCol: { span: 6 },
-                        wrapperCol: { span: 16, style: { marginLeft: '10px' } },
+                        labelCol: { span: 4 },
+                        wrapperCol: { span: 16, style: { marginLeft: 10 } },
                         rules: [requireRule],
                       }}
-                      disabled={visibleStyleDropdown}
+                      // disabled={visibleStyleDropdown}
                       loading={loadingSelectStyle}
                       items={dataFilterStyles}
                       options={[]}
@@ -206,15 +204,20 @@ const MaterialForm = (props: Props) => {
                 </Row>
               </Col>
               <Col span={22}>
-                <Form.Item
-                  labelCol={{ span: 3, style: { marginRight: 20 } }}
-                  wrapperCol={{ span: 19 }}
-                  className="name"
-                  label="名称"
-                  name="name"
-                >
-                  <Input />
-                </Form.Item>
+                <Row justify="center">
+                  <Col span={16} offset={1}>
+                    <Form.Item
+                      labelCol={{ span: 4, style: { marginRight: 10 } }}
+                      wrapperCol={{ span: 16 }}
+                      className="name"
+                      label="名称"
+                      name="name"
+                      rules={[requireRule]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
               </Col>
 
               {/* <Col span={22}>
@@ -248,6 +251,7 @@ const MaterialForm = (props: Props) => {
                         className="name"
                         label="スタンダード名"
                         name="nameStandard"
+                        rules={[requireRule]}
                       >
                         <Input />
                       </Form.Item>
@@ -307,6 +311,7 @@ const MaterialForm = (props: Props) => {
                         className="name"
                         label="プレミアム名"
                         name="namePremium"
+                        rules={[requireRule]}
                       >
                         <Input />
                       </Form.Item>

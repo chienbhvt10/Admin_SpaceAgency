@@ -37,9 +37,6 @@ const MaterialUpdate = () => {
             value: values.priceStandard || 0,
           },
           title: values.nameStandard || '',
-          material: {
-            id: values.themeId || '',
-          },
           previewImageUrl: values.imagePreview,
         },
         {
@@ -50,9 +47,6 @@ const MaterialUpdate = () => {
             value: values?.pricePremium || 0,
           },
           title: values.namePremium || '',
-          material: {
-            id: values.themeId || '',
-          },
           previewImageUrl: values.imagePreview2,
         },
       ],

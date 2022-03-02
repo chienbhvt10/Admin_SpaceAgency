@@ -1,27 +1,20 @@
+import { PieChartOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { DataNav, dataNav } from 'commons/type';
 import { getNavigate } from 'helpers/history';
 import { findDataNav } from 'helpers/string';
+import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
+import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
+import { useGetAllUser } from 'modules/UserManagement/hooks/useGetAllUser';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { actionResetFilter } from 'redux/actions';
 import HeaderLayout from '../header';
 import RenderIcon from './component/renderIcon';
-import { PieChartOutlined } from '@ant-design/icons';
 import './nav.scss';
-import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
-import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
-import { useGetAllUser } from 'modules/UserManagement/hooks/useGetAllUser';
-import { useListThemes } from 'modules/ThemesCollection/hooks/useListThemes';
-import { useListMaterial } from 'modules/MaterialsCollection/hooks/useListMaterial';
-import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
-import { useListRequests } from 'modules/Request/hooks/useListRequest';
-import { useListSimulations } from 'modules/CustomerSimulation/hooks/useListCustomerSimulation';
-import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
-import { useDispatch } from 'react-redux';
-import resetFilter from 'utils/reset-filter/redux/reset-filter';
-import { actionResetFilter } from 'redux/actions';
 const { Sider } = Layout;
 interface IProps {
   children: React.ReactNode;
@@ -32,12 +25,6 @@ function NavBar(props: IProps) {
   const [keyNav, setKeyNav] = React.useState<string>();
   const [openKeys, setOpenKeys] = React.useState<string[]>(['menu_1', 'menu_2', 'menu_3']);
   const dispatch = useDispatch();
-  // const { filterTheme } = useListThemes();
-  // const { filterMaterials } = useListMaterial();
-  // const { filterStyles } = useListStyles();
-  // const { filterRequests } = useListRequests();
-  // const { filterSimulations } = useListSimulations();
-  // const { filterUser } = useListUsers();
 
   const { defaultThemes } = useGetAllThemes();
   const { defaultStyles } = useGetAllStyles();
@@ -82,12 +69,6 @@ function NavBar(props: IProps) {
     defaultThemes();
     defaultStyles();
     defaultUser();
-    // filterMaterials([]);
-    // filterRequests([]);
-    // filterSimulations([]);
-    // filterTheme([]);
-    // filterStyles([]);
-    // filterUser([]);
   };
   return (
     <Layout className="layout-nav">
