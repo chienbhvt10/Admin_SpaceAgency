@@ -17,7 +17,10 @@ import { useRemoveMaterial } from 'modules/MaterialsCollection/hooks/useRemoveMa
 import { useGetAllStyles } from 'modules/StylesCollection/hooks/useGetAllStyles';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { actionResetFilterSuccess } from 'redux/actions';
+import { RootState } from 'redux/reducers';
 import './style.scss';
 import TableMaterial from './Table';
 
@@ -26,6 +29,8 @@ const MaterialCollectionPage = () => {
   const [form] = useForm();
   const { dataMaterials, pagination, filterMaterials, paginationTable, loading, updatePaginationAndSorterMaterials } =
     useListMaterial();
+  const dispatch = useDispatch();
+  const { isReset } = useSelector((state: RootState) => state.resetFilterReducer);
   const { removeMaterial } = useRemoveMaterial();
   const { getAllStyles, dataAllStyles, loading: loadingAllThemes } = useGetAllStyles();
   const { getAllThemes, dataAllThemes, loading: loadingAllStyles } = useGetAllThemes();
@@ -45,7 +50,12 @@ const MaterialCollectionPage = () => {
     filterMaterials([]);
     setTitle('カスタマイズ一覧');
   }, []);
-
+  React.useEffect(() => {
+    if (isReset) {
+      onReset();
+      dispatch(actionResetFilterSuccess());
+    }
+  }, [isReset]);
   React.useEffect(() => {
     if (value || selectId.themeId || selectId.styleId) {
       setDisabled(false);

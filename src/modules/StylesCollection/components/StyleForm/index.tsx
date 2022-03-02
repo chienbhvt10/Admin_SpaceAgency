@@ -114,7 +114,7 @@ const StyleCollectionForm = (props: Props) => {
             <Col span={22}>
               <Row>
                 <Col span={16}>
-                  <Form.Item labelCol={{ span: 6 }} label="3Dコード" name="code3d">
+                  <Form.Item labelCol={{ span: 6 }} label="3Dコード" name="code3d" rules={[requireRule]}>
                     <Input />
                   </Form.Item>
                 </Col>
@@ -143,7 +143,7 @@ const StyleCollectionForm = (props: Props) => {
             </Col>
 
             <Col className="image-upload-title" span={24}>
-              <Title level={3}>Image Upload</Title>
+              <Title level={3}>画像アップロード</Title>
             </Col>
             <Col span={22}>
               <Col span={14}>

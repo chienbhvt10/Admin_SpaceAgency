@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Row, TablePaginationConfig } from 'antd';
+import { Button, Col, Form, Row, TablePaginationConfig } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
 import PageHeader from 'commons/components/layouts/PageHeader';
@@ -13,13 +13,21 @@ import FilterForm from 'modules/StylesCollection/components/FilterForm';
 import { useListStyles } from 'modules/StylesCollection/hooks/useListStyle';
 import { useRemoveStyle } from 'modules/StylesCollection/hooks/useRemoveStyle';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { actionResetFilterSuccess } from 'redux/actions';
+import { RootState } from 'redux/reducers';
 import StyleCollectionTable from './Table';
 
 const StyleCollectionPage = () => {
   const { dataStyles, loading, paginationTable, updatePaginationAndSorterStyles, pagination, filterStyles } =
     useListStyles();
+  const [form] = Form.useForm<any>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { isReset } = useSelector((state: RootState) => state.resetFilterReducer);
+
   const { removeStyle } = useRemoveStyle();
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [themeId, setThemeId] = React.useState<string>('');
@@ -44,6 +52,12 @@ const StyleCollectionPage = () => {
     setTitle('デザイン一覧');
   }, []);
 
+  React.useEffect(() => {
+    if (isReset) {
+      onReset();
+      dispatch(actionResetFilterSuccess());
+    }
+  }, [isReset]);
   React.useEffect(() => {
     if (searchValue || themeId) {
       setDisabled(false);
@@ -108,6 +122,7 @@ const StyleCollectionPage = () => {
     setSearchValue('');
     setThemeId('');
     setDisabled(true);
+    form.setFieldsValue({ themeId: undefined, search: '' });
     filterStyles([]);
   };
   return (
@@ -124,6 +139,7 @@ const StyleCollectionPage = () => {
         <Row justify="center">
           <Col span={23}>
             <FilterForm
+              form={form}
               themeId={themeId}
               disabled={disabled}
               onChangeTheme={onChangeTheme}

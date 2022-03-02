@@ -4,11 +4,11 @@ import React from 'react';
 
 function HomePage() {
   React.useEffect(() => {
-    setTitle('Trang chu');
+    setTitle('ホーム');
   }, []);
   return (
     <HomeLayout>
-      <div id="homePage">Home</div>
+      <div id="homePage">ホーム</div>
     </HomeLayout>
   );
 }

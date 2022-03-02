@@ -14,7 +14,7 @@ export default function PageHeader(props: any & { title: string; extra?: ReactNo
     if (route.path === '/') {
       return (
         <Link to="/">
-          <HomeOutlined style={{ padding: 5 }} /> Home
+          <HomeOutlined style={{ padding: 5 }} /> ホーム
         </Link>
       );
     }

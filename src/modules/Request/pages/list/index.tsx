@@ -13,10 +13,15 @@ import { useRemoveRequest } from 'modules/Request/hooks/useRemoveRequest';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import RequestTable from './Table';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import { actionResetFilterSuccess } from 'redux/actions';
 
 function RequestPage() {
   const { dataRequests, loading, paginationTable, updatePaginationAndSorterRequests, pagination, filterRequests } =
     useListRequests();
+  const dispatch = useDispatch();
+  const { isReset } = useSelector((state: RootState) => state.resetFilterReducer);
   const [disabled, setDisabled] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>('');
   const navigate = useNavigate();
@@ -25,8 +30,14 @@ function RequestPage() {
 
   React.useEffect(() => {
     filterRequests([]);
-    setTitle('お問い合わせ一覧');
+    setTitle('問い合わせ一覧');
   }, []);
+  React.useEffect(() => {
+    if (isReset) {
+      onReset();
+      dispatch(actionResetFilterSuccess());
+    }
+  }, [isReset]);
   React.useEffect(() => {
     if (value) {
       setDisabled(false);
@@ -83,7 +94,7 @@ function RequestPage() {
   return (
     <RequestLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <TableHeader title="お問い合わせ一覧">
+      <TableHeader title="問い合わせ一覧">
         <Row justify="center">
           <Col span={23}>
             <FormSearch
@@ -113,10 +124,10 @@ export default RequestPage;
 const routes = [
   {
     path: CommonPath.DEFAULT_PATH,
-    breadcrumbName: 'HOME',
+    breadcrumbName: 'Home',
   },
   {
     path: CommonPath.CONTACT_REQUEST,
-    breadcrumbName: 'お問い合わせ一覧',
+    breadcrumbName: '問い合わせ一覧',
   },
 ];

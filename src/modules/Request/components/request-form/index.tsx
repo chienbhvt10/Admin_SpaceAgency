@@ -131,7 +131,7 @@ function ContactRequestForm(props: IProps) {
               <Form.Item
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 14 }}
-                label={<Title level={5}>持っている。</Title>}
+                label={<Title level={5}> 建築土地の有無</Title>}
                 name="hasLand"
                 {...tailLayout}
               >

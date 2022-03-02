@@ -191,12 +191,13 @@ const ThemesForm = (props: Props) => {
                   wrapperCol={{ span: 8 }}
                   label="3Dコード"
                   name="code"
+                  rules={[requireRule]}
                 >
                   <Input placeholder="コード" style={{ width: '100%' }} />
                 </Form.Item>
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
-                <Title level={4}>Image Upload</Title>
+                <Title level={4}>画像アップロード</Title>
               </Col>
               <Col span={22} style={{ marginBottom: '20px' }}>
                 <Row>

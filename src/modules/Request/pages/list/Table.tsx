@@ -54,7 +54,7 @@ function RequestTable(props: IProps) {
       dataIndex: 'type',
       key: 'type',
       sorter: false,
-      width: 100,
+      width: 150,
       render: (_, value, __) => (
         <>
           {value.type === RequestType.Other
@@ -72,14 +72,14 @@ function RequestTable(props: IProps) {
       dataIndex: 'postcode',
       key: 'postcode',
       sorter: false,
-      width: 100,
+      width: 150,
     },
     {
       title: '状態',
       dataIndex: 'status',
       key: 'status',
       sorter: false,
-      width: 100,
+      width: 150,
       render: (_, value, __) => (
         <>
           {value.status === RequestStatus.Open
@@ -96,7 +96,7 @@ function RequestTable(props: IProps) {
       title: 'ツール',
       dataIndex: '',
       key: 'Action',
-      width: 100,
+      width: 120,
       render: (_: any, record: IRequest) => (
         <UserRowActions
           title="このお問い合わせを削除します。よろしいですか。"
