@@ -28,6 +28,30 @@ build:
   except:
     - staging
     - master
+    
+build-staging:
+  stage: build
+  cache:
+    policy: pull-push
+    key: app_cache_stg
+    paths:
+    - node_modules/
+    - .next/
+    - yarn.lock
+  script:
+    - node -v
+    - yarn -v
+    - echo $CI_JOB_ID    
+    - cat "$STAG_ENV" > ".env"
+    - cat .env
+    - echo "Installing dependence..."
+    - yarn    
+    - echo "Installing dependence complete."  
+    - echo "Start build project..."
+    - yarn build:prod
+    - echo "Build project complete."
+  only:
+    - staging
 
 deploy:      # This job runs in the deploy stage.
   tags: [deploy]
