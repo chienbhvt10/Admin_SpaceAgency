@@ -92,14 +92,13 @@ const CustomerSimulationTable = (props: IProps) => {
       key: 'totalPrice',
       width: 100,
       sorter: true,
-      render: (_: any, record) => <>{totalPrice(record.simulationComponent?.materialTypes || [])}</>,
+      render: (_: any, record) => <>{record.quotation?.amountGross}</>,
     },
     {
       title: '状態',
       dataIndex: 'status',
       key: 'status',
       width: 100,
-      sorter: true,
       render: (_, value, __) => (
         <>
           {value.status === SimulationStatus.Draft

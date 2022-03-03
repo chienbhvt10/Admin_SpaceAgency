@@ -3,4 +3,6 @@ fragment IQuotation on Quotation {
   updatedAt
   id
   taxRate
+  amountNet
+  amountGross
 }
