@@ -100,7 +100,12 @@ export function clientError(code: string) {
   if (code === 'B0015') {
     NotificationError('', 'ユーザーはすでにアクティブしています。');
   }
-
+  if (code === 'B018 ') {
+    NotificationError('', 'デザインに登録されているタイプを削除できません。');
+  }
+  if (code === 'B019 ') {
+    NotificationError('', 'カスタマイズに登録されているデザインを削除できません。');
+  }
   if (code === 'N000') {
     NotificationError('', 'リソースが見つかりません。');
   }
