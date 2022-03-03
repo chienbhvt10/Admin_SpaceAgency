@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { ISimulation, MaterialType, SimulationStatus } from 'graphql/generated/graphql';
-import { NumberOfRow, totalPrice } from 'helpers/string';
+import { NumberOfRow } from 'helpers/string';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
 
