@@ -43,11 +43,11 @@ build-staging:
     - yarn -v
     - echo $CI_JOB_ID    
     - cat "$STAG_ENV" > ".env"
+    - cat .env
     - echo "Installing dependence..."
     - yarn    
     - echo "Installing dependence complete."  
     - echo "Start build project..."
-    - cat "$STAG_ENV" > "$(pwd)/.env"
     - yarn build:prod
     - echo "Build project complete."
   only:
