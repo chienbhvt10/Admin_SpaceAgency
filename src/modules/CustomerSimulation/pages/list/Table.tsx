@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { ISimulation, MaterialType, SimulationStatus } from 'graphql/generated/graphql';
-import { NumberOfRow, totalPrice } from 'helpers/string';
+import { NumberOfRow } from 'helpers/string';
 import TableRowAction from 'modules/CustomerSimulation/components/table-row-action';
 import React from 'react';
 
@@ -92,14 +92,13 @@ const CustomerSimulationTable = (props: IProps) => {
       key: 'totalPrice',
       width: 100,
       sorter: true,
-      render: (_: any, record) => <>{totalPrice(record.simulationComponent?.materialTypes || [])}</>,
+      render: (_: any, record) => <>{record.quotation?.amountGross}</>,
     },
     {
       title: '状態',
       dataIndex: 'status',
       key: 'status',
       width: 100,
-      sorter: true,
       render: (_, value, __) => (
         <>
           {value.status === SimulationStatus.Draft
