@@ -22,7 +22,7 @@ export function* createMaterialsAsync(action: CreateMaterialsAction) {
     );
     getNavigate(CommonPath.MATERIAL_COLLECTION);
     yield put(actionCreateMaterialsSuccess(data));
-    NotificationSuccess('通知!', 'カスタマイズ作成に成功しました。');
+    NotificationSuccess('通知!', 'カスタマイズ追加に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionCreateMaterialsError(err));

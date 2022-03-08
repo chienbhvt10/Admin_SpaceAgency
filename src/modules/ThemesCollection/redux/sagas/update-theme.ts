@@ -40,7 +40,7 @@ export function* updateThemeAsync(action: UpdateThemeAction) {
     });
     getNavigate(CommonPath.THEME_COLLECTION);
     yield put(actionUpdateThemeSuccess(data));
-    NotificationSuccess('通知!', 'タイプの編集に成功しました。');
+    NotificationSuccess('通知!', 'タイプ更新に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateThemeError(err));
