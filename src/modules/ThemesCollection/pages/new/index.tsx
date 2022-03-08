@@ -38,7 +38,7 @@ const ThemesCreateNew = () => {
     <div>
       <ThemeCollectionLayout>
         <PageHeader title="" breadcrumb={{ routes }} />
-        <ThemesForm onFinish={onFinishCreateTheme} loading={loading} title="新タイプ" type={TypeForm.CREATE} />
+        <ThemesForm onFinish={onFinishCreateTheme} loading={loading} title="タイプ追加" type={TypeForm.CREATE} />
       </ThemeCollectionLayout>
     </div>
   );
@@ -56,6 +56,6 @@ const routes = [
   },
   {
     path: CommonPath.THEME_COLLECTION_NEW,
-    breadcrumbName: '新タイプ',
+    breadcrumbName: 'タイプ追加',
   },
 ];

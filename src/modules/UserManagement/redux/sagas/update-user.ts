@@ -12,7 +12,7 @@ export function* updateUserAsync(action: UpdateUserAction) {
     const data: UpdateUser = yield apis.updateUser(action.payload);
     yield put(actionUpdateUserSuccess(data.updateUser));
     getNavigate(CommonPath.USERS_MANAGEMENT);
-    NotificationSuccess('通知', 'ユーザー設定に成功しました。');
+    NotificationSuccess('通知', 'ユーザー更新に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateUserError(err));
