@@ -1,9 +1,8 @@
-import { Button, Col, Form, FormItemProps, FormProps, Input, Radio, Row, Select, Upload } from 'antd';
+import { Col, Form, FormItemProps, FormProps, Input, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
 import { CommonPath } from 'commons/base-routes';
-import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
-import { TypeActiveAccount, TypeForm, TypeRole } from 'commons/type';
+import { TypeForm, TypeRole } from 'commons/type';
 import { CreateUserInput, IUsersFields, UpdateUserInput } from 'graphql/generated/graphql';
 import { useCreateUser } from 'modules/UserManagement/hooks/useCreateUser';
 import { useUpdateUser } from 'modules/UserManagement/hooks/useUpdateUser';
@@ -25,12 +24,22 @@ interface IProps {
   onChange?(): void;
 }
 const requireRule = { required: true, message: 'この項目は必須です。' };
-const requireEmail = {
-  required: true,
-  type: 'email',
-  message: 'メール形式が正しくありません。',
+const emailFormatRule = {
+  pattern: /^\w+([+\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+  message: 'メールアドレスが正しくありません',
 };
-
+const furiganaRule = {
+  pattern: /^([ァ-ヶー]+)$/,
+  message: '全角カタカナのみで入力して下さい',
+};
+const passwordRule = {
+  min: 8,
+  message: 'パスワードは8文字以上でご入力ください',
+};
+const phoneRule = {
+  pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+  message: '電話番号の形が正しくありません。',
+};
 function ThemeForm(props: IProps) {
   const { loading, item, onChange, title } = props;
   const { updateUser } = useUpdateUser();
@@ -141,7 +150,7 @@ function ThemeForm(props: IProps) {
                     labelCol={{ span: 6 }}
                     label={<Title level={5}>Eメール</Title>}
                     name="email"
-                    rules={[requireRule, requireEmail]}
+                    rules={[requireRule, emailFormatRule]}
                     {...tailLayout}
                   >
                     <Input />
@@ -153,7 +162,7 @@ function ThemeForm(props: IProps) {
                       labelCol={{ span: 6 }}
                       label={<Title level={5}>パスワード</Title>}
                       name="password"
-                      rules={[requireRule]}
+                      rules={[requireRule, passwordRule]}
                       {...tailLayout}
                     >
                       <Input onChange={handleChangePassword} />
@@ -187,7 +196,7 @@ function ThemeForm(props: IProps) {
                     labelCol={{ span: 6 }}
                     label={<Title level={5}>電話番号</Title>}
                     name="phone"
-                    rules={[requireRule]}
+                    rules={[requireRule, phoneRule]}
                     {...tailLayout}
                   >
                     <Input />
@@ -200,9 +209,7 @@ function ThemeForm(props: IProps) {
                 <Col span={20}>
                   <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>ロール</Title>} name="role">
                     <Select placeholder="---全部---">
-                      <Option value={TypeRole.ADMIN}>{TypeRole.ADMIN}</Option>
                       <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
-                      <Option value={TypeRole.SYSADMIN}>{TypeRole.SYSADMIN}</Option>
                     </Select>
                   </Form.Item>
                 </Col>
@@ -211,7 +218,7 @@ function ThemeForm(props: IProps) {
                     labelCol={{ span: 6 }}
                     label={<Title level={5}>名（フリガナ）</Title>}
                     name="firstNameF"
-                    rules={[requireRule]}
+                    rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
                     <Input />
@@ -223,7 +230,7 @@ function ThemeForm(props: IProps) {
                     labelCol={{ span: 6 }}
                     label={<Title level={5}>姓（フリガナ）</Title>}
                     name="lastNameF"
-                    rules={[requireRule]}
+                    rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
                     <Input />
