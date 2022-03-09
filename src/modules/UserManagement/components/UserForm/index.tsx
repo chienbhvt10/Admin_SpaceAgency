@@ -134,6 +134,7 @@ function ThemeForm(props: IProps) {
         name="basic"
         initialValues={{
           ...props.item,
+          role: TypeRole.CUSTOMER,
         }}
         form={form}
         onValuesChange={onChange}
@@ -196,7 +197,7 @@ function ThemeForm(props: IProps) {
                     labelCol={{ span: 6 }}
                     label={<Title level={5}>電話番号</Title>}
                     name="phone"
-                    rules={[requireRule, phoneRule]}
+                    rules={[phoneRule]}
                     {...tailLayout}
                   >
                     <Input />
@@ -208,9 +209,7 @@ function ThemeForm(props: IProps) {
               <Row justify="center">
                 <Col span={20}>
                   <Form.Item labelCol={{ span: 6 }} label={<Title level={5}>ロール</Title>} name="role">
-                    <Select placeholder="---全部---">
-                      <Option value={TypeRole.CUSTOMER}>{TypeRole.CUSTOMER}</Option>
-                    </Select>
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -241,7 +240,6 @@ function ThemeForm(props: IProps) {
                     labelCol={{ span: 6 }}
                     label={<Title level={5}>住所</Title>}
                     name="address"
-                    rules={[requireRule]}
                     {...tailLayout}
                   >
                     <TextArea />
