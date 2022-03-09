@@ -12,7 +12,7 @@ export function* updateMaterialAsync(action: UpdateMaterialAction) {
     const data: UpdateMaterial = yield apis.updateMaterials(action.payload);
     yield put(actionUpdateMaterialSuccess(data.updateMaterial));
     getNavigate(CommonPath.MATERIAL_COLLECTION);
-    NotificationSuccess('通知!', 'カスタマイズの編集に成功しました。');
+    NotificationSuccess('通知!', 'カスタマイズ更新に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionUpdateMaterialError(err));

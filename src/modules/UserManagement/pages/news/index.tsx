@@ -23,13 +23,13 @@ function NewUserManagement() {
     },
     {
       path: CommonPath.USERS_MANAGEMENT_DETAIL,
-      breadcrumbName: 'ユーザー作成',
+      breadcrumbName: 'ユーザー追加',
     },
   ];
   return (
     <UserManagementLayout>
       <PageHeader title="" breadcrumb={{ routes }} />
-      <DetailUserForm title="ユーザー作成" type={TypeForm.CREATE} loading={loading} />
+      <DetailUserForm title="ユーザー追加" type={TypeForm.CREATE} loading={loading} />
     </UserManagementLayout>
   );
 }

@@ -48,7 +48,7 @@ export function* createThemeAsync(action: CreateThemeAction) {
     );
     getNavigate(CommonPath.THEME_COLLECTION);
     yield put(actionCreateThemeSuccess(data.createTheme));
-    NotificationSuccess('通知!', 'タイプの追加に成功しました。');
+    NotificationSuccess('通知!', 'タイプ追加に成功しました。');
     yield put(actionLoadingSuccess());
   } catch (err: any) {
     yield put(actionCreateThemeError(err));

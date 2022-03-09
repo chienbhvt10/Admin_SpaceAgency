@@ -56,14 +56,14 @@ const MaterialCreateNew = () => {
     },
     {
       path: CommonPath.MATERIAL_COLLECTION_NEW,
-      breadcrumbName: 'カスタマイズの追加',
+      breadcrumbName: 'カスタマイズ追加',
     },
   ];
   return (
     <div>
       <MaterialCollectionLayout>
         <PageHeader title="" breadcrumb={{ routes }} />
-        <MaterialForm title="カスタマイズの追加" type={TypeForm.CREATE} loading={loading} onFinish={onFinish} />
+        <MaterialForm title="カスタマイズ追加" type={TypeForm.CREATE} loading={loading} onFinish={onFinish} />
       </MaterialCollectionLayout>
     </div>
   );
