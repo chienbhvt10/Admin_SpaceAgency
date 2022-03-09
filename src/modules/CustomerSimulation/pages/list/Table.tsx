@@ -46,6 +46,9 @@ const CustomerSimulationTable = (props: IProps) => {
         dataSource={record.simulationComponent?.materialTypes || []}
         columns={columns}
         pagination={false}
+        locale={{
+          emptyText: 'データがありません',
+        }}
       />
     );
   };
@@ -142,6 +145,9 @@ const CustomerSimulationTable = (props: IProps) => {
       rowKey={rowKey}
       onChange={onChange}
       bordered
+      locale={{
+        emptyText: 'データがありません',
+      }}
     />
   );
 };

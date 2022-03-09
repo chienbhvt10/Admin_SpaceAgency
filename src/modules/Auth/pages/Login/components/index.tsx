@@ -29,7 +29,7 @@ function FormLogin(props: any) {
   return (
     <div id="loginForm">
       <div className="loginForm__container">
-        <h3>Login</h3>
+        <h3>ログイン</h3>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -39,20 +39,20 @@ function FormLogin(props: any) {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your username!' }]}>
+          <Form.Item label="Eメール" name="email" rules={[{ required: true, message: 'IDを入力して下さい。' }]}>
             <Input />
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="パスワード"
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: 'パスワードを入力して下さい。' }]}
           >
             <Input.Password />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" loading={stateLoading}>
-              Login
+              ログイン
             </Button>
           </Form.Item>
         </Form>

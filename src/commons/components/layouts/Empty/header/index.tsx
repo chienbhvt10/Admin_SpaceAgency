@@ -20,12 +20,12 @@ const HeaderLayout = () => {
     <Menu>
       <Menu.Item key="0">
         <a target="_blank" rel="noopener noreferrer">
-          Profile
+          プロフィール
         </a>
       </Menu.Item>
       <Menu.Item key="1">
         <a target="_blank" rel="noopener noreferrer" onClick={onLogout}>
-          Logout
+          ログアウト
         </a>
       </Menu.Item>
     </Menu>

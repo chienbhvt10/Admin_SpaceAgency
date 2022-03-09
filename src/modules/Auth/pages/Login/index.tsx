@@ -5,7 +5,7 @@ import React from 'react';
 
 function LoginPage() {
   React.useEffect(() => {
-    setTitle('Đăng Nhập');
+    setTitle('ログイン');
   }, []);
 
   return (

@@ -120,6 +120,9 @@ function RequestTable(props: IProps) {
           ...pagination,
           showSizeChanger: false,
         }}
+        locale={{
+          emptyText: 'データがありません',
+        }}
       />
     </div>
   );
