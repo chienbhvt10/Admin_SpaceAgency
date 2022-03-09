@@ -96,6 +96,9 @@ function TableThemes(props: IProps) {
         rowKey={rowKey}
         onChange={onChange}
         bordered
+        locale={{
+          emptyText: 'データがありません',
+        }}
       />
     </div>
   );

@@ -105,6 +105,9 @@ function CustomUserManagementTable(props: IProps) {
           ...pagination,
           showSizeChanger: false,
         }}
+        locale={{
+          emptyText: 'データがありません',
+        }}
       />
     </div>
   );

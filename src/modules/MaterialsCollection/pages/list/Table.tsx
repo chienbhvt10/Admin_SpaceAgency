@@ -41,7 +41,17 @@ function TableMaterial(props: IProps) {
         render: (_: any, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
       },
     ];
-    return <Table columns={columnsType} bordered dataSource={data.materialTypes || []} pagination={false} />;
+    return (
+      <Table
+        columns={columnsType}
+        bordered
+        dataSource={data.materialTypes || []}
+        pagination={false}
+        locale={{
+          emptyText: 'データがありません',
+        }}
+      />
+    );
   };
 
   const columns: ColumnsType<IMaterial> = [
@@ -122,6 +132,9 @@ function TableMaterial(props: IProps) {
         rowKey={rowKey}
         onChange={onChange}
         bordered
+        locale={{
+          emptyText: 'データがありません',
+        }}
       />
     </div>
   );
