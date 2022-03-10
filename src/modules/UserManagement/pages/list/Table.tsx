@@ -3,6 +3,7 @@ import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { SorterResult } from 'antd/lib/table/interface';
 import Text from 'antd/lib/typography/Text';
 import UserRowActions from 'commons/components/layouts/ActionTable';
+import { TypeRole } from 'commons/type';
 import { IUsersFields, Role } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
@@ -58,17 +59,6 @@ function CustomUserManagementTable(props: IProps) {
       key: 'role',
       sorter: false,
       width: 120,
-      render: (_, value, __) => (
-        <>
-          {value.role === Role.Admin
-            ? '管理者'
-            : value.role === Role.Sysadmin
-            ? 'システム管理者'
-            : value.role === Role.Customer
-            ? 'ユーザー'
-            : ''}
-        </>
-      ),
     },
     // {
     //   title: '状態',
@@ -83,12 +73,18 @@ function CustomUserManagementTable(props: IProps) {
       key: 'Action',
       width: 120,
       render: (_: any, record: IUsersFields) => (
-        <UserRowActions
-          title="このユーザーを削除します。よろしいですか。"
-          record={record}
-          onDelete={props.onDelete}
-          onEdit={props.onEdit}
-        />
+        <>
+          {record.role !== Role.Admin ? (
+            <UserRowActions
+              title="このユーザーを削除します。よろしいですか。"
+              record={record}
+              onDelete={props.onDelete}
+              onEdit={props.onEdit}
+            />
+          ) : (
+            ''
+          )}
+        </>
       ),
     },
   ];

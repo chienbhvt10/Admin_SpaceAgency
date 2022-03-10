@@ -9,4 +9,5 @@ fragment IUsersFields on User {
   phone
   role
   status
+  postcode
 }
