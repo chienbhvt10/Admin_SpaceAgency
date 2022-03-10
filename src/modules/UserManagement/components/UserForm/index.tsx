@@ -55,6 +55,7 @@ function ThemeForm(props: IProps) {
     lastNameF: '',
     address: '',
     phone: '',
+    postcode: '',
   };
   const [createInput, setCreateUserInput] = React.useState<CreateUserInput>(inputCreate);
   const [updateInput, setUpdateUserInput] = React.useState<UpdateUserInput>({
@@ -79,6 +80,7 @@ function ThemeForm(props: IProps) {
         firstNameF: item.firstNameF,
         lastNameF: item.lastNameF,
         phone: item.phone,
+        postcode: item.postcode,
       });
     }
   }, [item]);
@@ -111,6 +113,7 @@ function ThemeForm(props: IProps) {
         firstNameF: values.firstNameF || '',
         lastNameF: values.lastNameF || '',
         phone: values.phone || '',
+        postcode: values.postcode,
       };
       createUser({ createUserInput });
     }
@@ -157,19 +160,6 @@ function ThemeForm(props: IProps) {
                     <Input />
                   </Form.Item>
                 </Col>
-                {props.type === TypeForm.CREATE && (
-                  <Col span={20}>
-                    <Form.Item
-                      labelCol={{ span: 6 }}
-                      label={<Title level={5}>パスワード</Title>}
-                      name="password"
-                      rules={[requireRule, passwordRule]}
-                      {...tailLayout}
-                    >
-                      <Input onChange={handleChangePassword} />
-                    </Form.Item>
-                  </Col>
-                )}
                 <Col span={20}>
                   <Form.Item
                     labelCol={{ span: 6 }}
@@ -192,6 +182,19 @@ function ThemeForm(props: IProps) {
                     <Input />
                   </Form.Item>
                 </Col>
+                {props.type === TypeForm.CREATE && (
+                  <Col span={20}>
+                    <Form.Item
+                      labelCol={{ span: 6 }}
+                      label={<Title level={5}>パスワード</Title>}
+                      name="password"
+                      rules={[requireRule, passwordRule]}
+                      {...tailLayout}
+                    >
+                      <Input onChange={handleChangePassword} />
+                    </Form.Item>
+                  </Col>
+                )}
                 <Col span={20}>
                   <Form.Item
                     labelCol={{ span: 6 }}
@@ -233,6 +236,16 @@ function ThemeForm(props: IProps) {
                     {...tailLayout}
                   >
                     <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>郵便番号</Title>}
+                    name="postcode"
+                    {...tailLayout}
+                  >
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 <Col span={20}>

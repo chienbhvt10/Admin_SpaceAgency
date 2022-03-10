@@ -50,27 +50,16 @@ function RequestTable(props: IProps) {
       width: 150,
     },
     {
-      title: 'タイプ',
-      dataIndex: 'type',
-      key: 'type',
-      sorter: false,
-      width: 150,
-      render: (_, value, __) => (
-        <>
-          {value.type === RequestType.Other
-            ? 'その他'
-            : value.type === RequestType.Meeting
-            ? '資料請求'
-            : value.type === RequestType.SendDocument
-            ? '面談'
-            : ''}
-        </>
-      ),
-    },
-    {
       title: '郵便番号',
       dataIndex: 'postcode',
       key: 'postcode',
+      sorter: false,
+      width: 150,
+    },
+    {
+      title: 'タイプ',
+      dataIndex: 'type',
+      key: 'type',
       sorter: false,
       width: 150,
     },
@@ -80,17 +69,6 @@ function RequestTable(props: IProps) {
       key: 'status',
       sorter: false,
       width: 150,
-      render: (_, value, __) => (
-        <>
-          {value.status === RequestStatus.Open
-            ? 'オーペン'
-            : value.status === RequestStatus.Accepted
-            ? '承認'
-            : value.status === RequestStatus.Rejected
-            ? '拒否'
-            : ''}
-        </>
-      ),
     },
     {
       title: 'ツール',

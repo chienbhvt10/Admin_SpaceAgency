@@ -102,17 +102,6 @@ const CustomerSimulationTable = (props: IProps) => {
       dataIndex: 'status',
       key: 'status',
       width: 100,
-      render: (_, value, __) => (
-        <>
-          {value.status === SimulationStatus.Draft
-            ? '下書き'
-            : value.status === SimulationStatus.Deleted
-            ? '削除'
-            : value.status === SimulationStatus.Completed
-            ? '完成'
-            : ''}
-        </>
-      ),
     },
     {
       title: 'ツール',

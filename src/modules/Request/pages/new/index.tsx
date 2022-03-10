@@ -19,10 +19,10 @@ const routes = [
   },
   {
     path: CommonPath.CONTACT_REQUEST,
-    breadcrumbName: 'お問い合わせ一覧',
+    breadcrumbName: '問い合わせ一覧',
   },
   {
     path: CommonPath.CONTACT_REQUEST_DETAIL,
-    breadcrumbName: 'お問い合わせ作成',
+    breadcrumbName: '問い合わせ作成',
   },
 ];
