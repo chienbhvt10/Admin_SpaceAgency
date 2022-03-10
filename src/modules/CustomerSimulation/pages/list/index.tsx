@@ -49,7 +49,7 @@ const CustomerSimulationPage = () => {
     } else {
       setDisabled(true);
     }
-  }, [themeId, styleId, value]);
+  }, [themeId, styleId, value, userId]);
 
   const onDelete = (record: ISimulation) => () => {
     removeSimulation({

@@ -85,6 +85,9 @@ const StyleCollectionTable = (props: IProps) => {
       pagination={{
         ...pagination,
       }}
+      locale={{
+        emptyText: 'データがありません',
+      }}
     />
   );
 };

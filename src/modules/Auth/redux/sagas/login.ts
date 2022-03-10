@@ -14,7 +14,7 @@ export function* loginAsync(action: LoginAction) {
   try {
     const data: LoginAdmin = yield apis.loginApi(action.payload);
     yield put(loginSuccess(data.loginAdmin));
-    NotificationSuccess('Thông báo', 'Đăng nhập thành công');
+    NotificationSuccess('通知', 'ログインに成功しました。');
     getNavigate(CommonPath.DEFAULT_PATH);
     yield put(actionLoadingSuccess());
   } catch (err: any) {
