@@ -1,5 +1,4 @@
 import { Button, Card } from 'antd';
-import { TypeForm } from 'commons/type';
 import React from 'react';
 
 interface IProps {
@@ -14,7 +13,7 @@ interface IProps {
 const ButtonGroup = ({ loading, onDone, onReject, onApprove }: IProps) => {
   return (
     <div className="button-group">
-      <Button onClick={onDone} size="large">
+      <Button onClick={onDone} size="large" htmlType="submit">
         完成
       </Button>
       <Button

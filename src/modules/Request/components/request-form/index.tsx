@@ -1,9 +1,8 @@
-import { Col, Form, FormItemProps, FormProps, Input, Radio, Row, Select } from 'antd';
+import { Col, Form, FormItemProps, FormProps, Input, Row, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
 import { TypeForm, UpdateRequestStatusTypeInput } from 'commons/type';
-import { IRequest, RequestStatus, UpdateRequestStatusVariables } from 'graphql/generated/graphql';
-import { useUpdateRequestStatus } from 'modules/Request/hooks/useUpdateRequestStatus';
+import { IRequest, RequestStatus } from 'graphql/generated/graphql';
 import React from 'react';
 import FormHeader from '../form-header';
 
@@ -18,14 +17,12 @@ interface IProps {
   loading: boolean;
   item?: IRequest;
   type: TypeForm;
-  onCancel?(): void;
   onChange?(): void;
   onFinish?: (values: UpdateRequestStatusTypeInput) => void;
 }
 
 function ContactRequestForm(props: IProps) {
-  const { loading, item, onCancel, onChange, title, type, onFinish } = props;
-  const { updateRequestStatus } = useUpdateRequestStatus();
+  const { loading, item, onChange, title, type, onFinish } = props;
   const [form] = Form.useForm<UpdateRequestStatusTypeInput>();
 
   const updateRequestVariables = {

@@ -61,9 +61,6 @@ export function formatRequestType(type: RequestType) {
   return undefined;
 }
 export function formatPriceJapan(price: number) {
-  if (price === 0) {
-    return 0;
-  }
   return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(price);
 }
 export function formatPricePercent(percent: number) {
