@@ -23,9 +23,9 @@ const FormHeader = (props: IProps) => {
             <Button size="large" onClick={onCancel}>
               キャンセル
             </Button>
-            <Button size="large" htmlType="submit" loading={loading}>
+            {/* <Button size="large" htmlType="submit" loading={loading}>
               保存
-            </Button>
+            </Button> */}
           </div>
         }
       >

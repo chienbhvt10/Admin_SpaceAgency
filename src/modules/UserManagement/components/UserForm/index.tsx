@@ -157,7 +157,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, emailFormatRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -168,7 +168,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -179,7 +179,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 {props.type === TypeForm.CREATE && (
@@ -191,7 +191,7 @@ function ThemeForm(props: IProps) {
                       rules={[requireRule, passwordRule]}
                       {...tailLayout}
                     >
-                      <Input onChange={handleChangePassword} />
+                      <Input onChange={handleChangePassword} disabled />
                     </Form.Item>
                   </Col>
                 )}
@@ -203,7 +203,7 @@ function ThemeForm(props: IProps) {
                     rules={[phoneRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    <Input disabled />
                   </Form.Item>
                 </Col>
               </Row>
@@ -223,7 +223,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    <Input disabled />
                   </Form.Item>
                 </Col>
 
@@ -235,7 +235,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -255,7 +255,7 @@ function ThemeForm(props: IProps) {
                     name="address"
                     {...tailLayout}
                   >
-                    <TextArea />
+                    <TextArea disabled />
                   </Form.Item>
                 </Col>
               </Row>

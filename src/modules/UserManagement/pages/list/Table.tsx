@@ -6,6 +6,7 @@ import UserRowActions from 'commons/components/layouts/ActionTable';
 import { TypeRole } from 'commons/type';
 import { IUsersFields, Role } from 'graphql/generated/graphql';
 import { NumberOfRow } from 'helpers/string';
+import TableRowAction from 'modules/UserManagement/components/table-row-action';
 import { useListUsers } from 'modules/UserManagement/hooks/useListUsers';
 import React from 'react';
 interface IProps {
@@ -75,7 +76,7 @@ function CustomUserManagementTable(props: IProps) {
       render: (_: any, record: IUsersFields) => (
         <>
           {record.role !== Role.Admin ? (
-            <UserRowActions
+            <TableRowAction
               title="このユーザーを削除します。よろしいですか。"
               record={record}
               onDelete={props.onDelete}

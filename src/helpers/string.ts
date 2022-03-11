@@ -62,7 +62,7 @@ export function formatRequestType(type: RequestType) {
 }
 export function formatPriceJapan(price: number) {
   if (price === 0) {
-    return 0;
+    return Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(price);
   }
   return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(price);
 }
