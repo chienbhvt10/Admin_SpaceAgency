@@ -94,7 +94,7 @@ function NavBar(props: IProps) {
           onClick={onSelect}
           expandIcon={<></>}
         >
-          <Menu.Item key="-1" icon={<PieChartOutlined />}>
+          <Menu.Item key="-1" icon={<PieChartOutlined />} style={{ marginTop: 0 }}>
             ダッシュボード
           </Menu.Item>
           {dataNav.map((i) => {
