@@ -1,4 +1,4 @@
-import { Col, Form, FormItemProps, FormProps, Input, Row, Select } from 'antd';
+import { Col, Form, FormItemProps, FormProps, Input, Row } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
 import { CommonPath } from 'commons/base-routes';
@@ -13,7 +13,6 @@ import FormHeader from '../FormHeader';
 const layout: FormProps = {
   layout: 'horizontal',
 };
-const { Option } = Select;
 const tailLayout: FormItemProps = {};
 
 interface IProps {
@@ -41,7 +40,7 @@ const phoneRule = {
   message: '電話番号の形が正しくありません。',
 };
 function ThemeForm(props: IProps) {
-  const { loading, item, onChange, title } = props;
+  const { loading, item, onChange, title, type } = props;
   const { updateUser } = useUpdateUser();
   const { createUser } = useCreateUser();
   const navigate = useNavigate();
@@ -55,6 +54,7 @@ function ThemeForm(props: IProps) {
     lastNameF: '',
     address: '',
     phone: '',
+    postcode: '',
   };
   const [createInput, setCreateUserInput] = React.useState<CreateUserInput>(inputCreate);
   const [updateInput, setUpdateUserInput] = React.useState<UpdateUserInput>({
@@ -79,6 +79,7 @@ function ThemeForm(props: IProps) {
         firstNameF: item.firstNameF,
         lastNameF: item.lastNameF,
         phone: item.phone,
+        postcode: item.postcode,
       });
     }
   }, [item]);
@@ -111,6 +112,7 @@ function ThemeForm(props: IProps) {
         firstNameF: values.firstNameF || '',
         lastNameF: values.lastNameF || '',
         phone: values.phone || '',
+        postcode: values.postcode,
       };
       createUser({ createUserInput });
     }
@@ -142,7 +144,7 @@ function ThemeForm(props: IProps) {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
+        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel} type={type}>
           <Row>
             <Col span={12}>
               <Row justify="center">
@@ -154,7 +156,29 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, emailFormatRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>名</Title>}
+                    name="firstName"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>姓</Title>}
+                    name="lastName"
+                    rules={[requireRule]}
+                    {...tailLayout}
+                  >
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
                 {props.type === TypeForm.CREATE && (
@@ -173,34 +197,12 @@ function ThemeForm(props: IProps) {
                 <Col span={20}>
                   <Form.Item
                     labelCol={{ span: 6 }}
-                    label={<Title level={5}>名</Title>}
-                    name="firstName"
-                    rules={[requireRule]}
-                    {...tailLayout}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={20}>
-                  <Form.Item
-                    labelCol={{ span: 6 }}
-                    label={<Title level={5}>姓</Title>}
-                    name="lastName"
-                    rules={[requireRule]}
-                    {...tailLayout}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={20}>
-                  <Form.Item
-                    labelCol={{ span: 6 }}
                     label={<Title level={5}>電話番号</Title>}
                     name="phone"
                     rules={[phoneRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
               </Row>
@@ -220,7 +222,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
 
@@ -232,7 +234,17 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
-                    <Input />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
+                  </Form.Item>
+                </Col>
+                <Col span={20}>
+                  <Form.Item
+                    labelCol={{ span: 6 }}
+                    label={<Title level={5}>郵便番号</Title>}
+                    name="postcode"
+                    {...tailLayout}
+                  >
+                    <Input disabled />
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -242,7 +254,7 @@ function ThemeForm(props: IProps) {
                     name="address"
                     {...tailLayout}
                   >
-                    <TextArea />
+                    <TextArea disabled />
                   </Form.Item>
                 </Col>
               </Row>

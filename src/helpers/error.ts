@@ -47,6 +47,9 @@ export function clientError(code: string) {
   if (code === 'A023') {
     NotificationError('', 'トークンのデコードに失敗しました。');
   }
+  if (code === 'A024') {
+    NotificationError('', 'メールが既に存在しています。ご確認の上、再度お試しください。');
+  }
   if (code === 'F000') {
     NotificationError('', 'アクセス拒否。');
   }

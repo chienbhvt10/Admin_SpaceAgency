@@ -31,22 +31,22 @@ const MaterialUpdate = () => {
       materialTypes: [
         {
           id: (item && item.materialTypes && item?.materialTypes[0]?.id) || '',
+          title: values.nameStandard,
           code3d: values.codeStandard || '',
           price: {
             unit: CurrencyUnit.Jpy,
             value: values.priceStandard || 0,
           },
-          title: values.nameStandard || '',
           previewImageUrl: values.imagePreview,
         },
         {
           id: (item && item.materialTypes && item?.materialTypes[1]?.id) || '',
+          title: values.namePremium,
           code3d: values.codePremium || '',
           price: {
             unit: CurrencyUnit.Jpy,
             value: values?.pricePremium || 0,
           },
-          title: values.namePremium || '',
           previewImageUrl: values.imagePreview2,
         },
       ],

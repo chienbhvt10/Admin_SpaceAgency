@@ -8,10 +8,11 @@ interface IProps {
   loading: boolean;
   children: React.ReactElement;
   onCancel?(): void;
+  type: TypeForm;
 }
 
 const FormHeader = (props: IProps) => {
-  const { title, loading, children, onCancel } = props;
+  const { title, loading, children, onCancel, type } = props;
   return (
     <div className="form-header">
       <Card
@@ -23,9 +24,13 @@ const FormHeader = (props: IProps) => {
             <Button size="large" onClick={onCancel}>
               キャンセル
             </Button>
-            <Button size="large" htmlType="submit" loading={loading}>
-              保存
-            </Button>
+            {type === TypeForm.CREATE ? (
+              <Button size="large" htmlType="submit" loading={loading}>
+                保存
+              </Button>
+            ) : (
+              <></>
+            )}
           </div>
         }
       >
