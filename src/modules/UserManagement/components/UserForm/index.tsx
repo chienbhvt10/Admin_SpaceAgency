@@ -1,4 +1,4 @@
-import { Col, Form, FormItemProps, FormProps, Input, Row, Select } from 'antd';
+import { Col, Form, FormItemProps, FormProps, Input, Row } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/typography/Title';
 import { CommonPath } from 'commons/base-routes';
@@ -13,7 +13,6 @@ import FormHeader from '../FormHeader';
 const layout: FormProps = {
   layout: 'horizontal',
 };
-const { Option } = Select;
 const tailLayout: FormItemProps = {};
 
 interface IProps {
@@ -41,7 +40,7 @@ const phoneRule = {
   message: '電話番号の形が正しくありません。',
 };
 function ThemeForm(props: IProps) {
-  const { loading, item, onChange, title } = props;
+  const { loading, item, onChange, title, type } = props;
   const { updateUser } = useUpdateUser();
   const { createUser } = useCreateUser();
   const navigate = useNavigate();
@@ -145,7 +144,7 @@ function ThemeForm(props: IProps) {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel}>
+        <FormHeader title={<Title level={2}>{title}</Title>} loading={loading} onCancel={onCancel} type={type}>
           <Row>
             <Col span={12}>
               <Row justify="center">
@@ -157,7 +156,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, emailFormatRule]}
                     {...tailLayout}
                   >
-                    <Input disabled />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -168,7 +167,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule]}
                     {...tailLayout}
                   >
-                    <Input disabled />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
                 <Col span={20}>
@@ -179,7 +178,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule]}
                     {...tailLayout}
                   >
-                    <Input disabled />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
                 {props.type === TypeForm.CREATE && (
@@ -191,7 +190,7 @@ function ThemeForm(props: IProps) {
                       rules={[requireRule, passwordRule]}
                       {...tailLayout}
                     >
-                      <Input onChange={handleChangePassword} disabled />
+                      <Input onChange={handleChangePassword} />
                     </Form.Item>
                   </Col>
                 )}
@@ -203,7 +202,7 @@ function ThemeForm(props: IProps) {
                     rules={[phoneRule]}
                     {...tailLayout}
                   >
-                    <Input disabled />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
               </Row>
@@ -223,7 +222,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
-                    <Input disabled />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
 
@@ -235,7 +234,7 @@ function ThemeForm(props: IProps) {
                     rules={[requireRule, furiganaRule]}
                     {...tailLayout}
                   >
-                    <Input disabled />
+                    {type === TypeForm.CREATE ? <Input /> : <Input disabled />}
                   </Form.Item>
                 </Col>
                 <Col span={20}>
