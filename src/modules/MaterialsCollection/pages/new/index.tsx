@@ -21,7 +21,7 @@ const MaterialCreateNew = () => {
         title: values.name,
         materialTypes: [
           {
-            title: 'STANDARD',
+            title: values.nameStandard,
             code3d: values.codeStandard,
             price: {
               unit: CurrencyUnit.Jpy,
@@ -30,7 +30,7 @@ const MaterialCreateNew = () => {
             previewImageUrl: values.imagePreview,
           },
           {
-            title: 'PREMIUM',
+            title: values.namePremium,
             code3d: values.codePremium,
             price: {
               unit: CurrencyUnit.Jpy,

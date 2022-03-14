@@ -43,8 +43,8 @@ const MaterialForm = (props: Props) => {
     codePremium: '',
     codeStandard: '',
     name: '',
-    namePremium: 'PREMIUM',
-    nameStandard: 'STANDARD',
+    namePremium: '',
+    nameStandard: '',
     pricePremium: 0,
     priceStandard: 0,
     styleId: undefined,
@@ -253,7 +253,7 @@ const MaterialForm = (props: Props) => {
                         name="nameStandard"
                         rules={[requireRule]}
                       >
-                        <Input disabled />
+                        <Input />
                       </Form.Item>
                     </Col>
                     <Col span={22} offset={2}>
@@ -313,7 +313,7 @@ const MaterialForm = (props: Props) => {
                         name="namePremium"
                         rules={[requireRule]}
                       >
-                        <Input disabled />
+                        <Input />
                       </Form.Item>
                     </Col>
                     <Col span={22} offset={2}>
