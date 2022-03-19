@@ -62,6 +62,7 @@ deploy:      # This job runs in the deploy stage.
     - whoami
     - echo "FAIL" > .job_status
     - echo "Deploying application..."
+    - cat "$DEV_ENV" > ".env"
     - echo $SERVER_USER@$SERVER_IP:$SERVER_PORT
     - scp -o StrictHostKeyChecking=no .env $SERVER_USER@$SERVER_IP:$SRC_PATH
     - ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP -p $SERVER_PORT "cd $SRC_PATH && git pull && docker-compose up -d --build --remove-orphans"
@@ -104,6 +105,7 @@ deploy-prod-job:      # This job runs in the deploy stage.
     - whoami
     - echo "FAIL" > .job_status
     - echo "Deploying application..."
+    - cat "$PROD_ENV" > ".env"
     - scp -o StrictHostKeyChecking=no .env $PROD_SERVER_USER@$PROD_SERVER_IP:deploy/admin
     - ssh -o StrictHostKeyChecking=no $PROD_SERVER_USER@$PROD_SERVER_IP -p "cd $SRC_PATH && git pull && docker-compose up -d --build --remove-orphans"
     - echo "Application successfully deployed."
