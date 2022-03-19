@@ -106,7 +106,7 @@ deploy-prod-job:      # This job runs in the deploy stage.
     - echo "FAIL" > .job_status
     - echo "Deploying application..."
     - cat "$PROD_ENV" > ".env"
-    - cat .env
+    - echo $PROD_SERVER_USER@$PROD_SERVER_IP:deploy/admin
     - scp -o StrictHostKeyChecking=no .env $PROD_SERVER_USER@$PROD_SERVER_IP:deploy/admin
     - ssh -o StrictHostKeyChecking=no $PROD_SERVER_USER@$PROD_SERVER_IP -p "cd $SRC_PATH && git pull && docker-compose up -d --build --remove-orphans"
     - echo "Application successfully deployed."
