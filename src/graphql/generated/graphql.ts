@@ -973,6 +973,7 @@ export type Request = {
 
 export enum RequestStatus {
   Accepted = 'ACCEPTED',
+  Done = 'DONE',
   Open = 'OPEN',
   Rejected = 'REJECTED'
 }
