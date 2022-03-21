@@ -51,7 +51,7 @@ function ContactRequestForm(props: IProps) {
   const onDone = () => {
     form.setFieldsValue({
       ...updateRequestVariables,
-      status: RequestStatus.Open,
+      status: RequestStatus.Done,
     });
   };
   const onReject = () => {

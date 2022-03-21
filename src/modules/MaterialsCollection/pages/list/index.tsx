@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Row, TablePaginationConfig } from 'antd';
+import { Button, Col, Form, Row, TablePaginationConfig, Select } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { SorterResult } from 'antd/lib/table/interface';
 import { CommonPath } from 'commons/base-routes';
@@ -24,6 +24,7 @@ import { RootState } from 'redux/reducers';
 import './style.scss';
 import TableMaterial from './Table';
 
+const { Option } = Select;
 const MaterialCollectionPage = () => {
   const navigate = useNavigate();
   const [form] = useForm();
@@ -40,6 +41,11 @@ const MaterialCollectionPage = () => {
     themeId: '',
     styleId: '',
   });
+  const styleOptions = dataAllStyles?.map((style, index) => (
+    <Option key={index} value={style.id}>
+      {style.title}({style.theme?.title})
+    </Option>
+  ));
   const arrFilter: FilterInput[] = [
     { key: TypeKeyFilterMaterials.NAME, value: '' },
     { key: TypeKeyFilterMaterials.STYLE, value: '', isRef: true },
@@ -182,18 +188,15 @@ const MaterialCollectionPage = () => {
                   />
                 </Col> */}
                 <Col span={12}>
-                  <FormDropdown
-                    formItem={{
-                      label: 'デザイン',
-                      name: 'styleId',
-                      labelCol: { span: 6 },
-                      wrapperCol: { span: 16 },
-                    }}
-                    loading={loadingAllStyles}
-                    onDropdownVisibleChange={onDropdownVisibleChangeStyles}
-                    items={dataAllStyles}
-                    options={[]}
-                  />
+                  <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="タイプ" name="themeId">
+                    <Select
+                      onDropdownVisibleChange={onDropdownVisibleChangeStyles}
+                      placeholder="---全部---"
+                      onSelect={onValuesChange}
+                    >
+                      {styleOptions}
+                    </Select>
+                  </Form.Item>
                 </Col>
               </Row>
             </Form>
