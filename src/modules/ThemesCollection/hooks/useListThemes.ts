@@ -11,6 +11,7 @@ export const useListThemes = () => {
     { key: 'title', value: SortValue.Asc },
     { key: 'code3D', value: SortValue.Asc },
     { key: 'price', value: SortValue.Asc },
+    { key: 'createdAt', value: SortValue.Desc },
   ];
   const { loading, pagination, where, dataThemes, total } = useSelector((state: RootState) => state.themes.themesState);
   const variables: GetListThemesVariables = {
