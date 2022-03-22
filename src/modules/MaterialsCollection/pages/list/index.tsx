@@ -188,7 +188,7 @@ const MaterialCollectionPage = () => {
                   />
                 </Col> */}
                 <Col span={12}>
-                  <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="タイプ" name="themeId">
+                  <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="デザイン" name="styleId">
                     <Select
                       onDropdownVisibleChange={onDropdownVisibleChangeStyles}
                       placeholder="---全部---"
