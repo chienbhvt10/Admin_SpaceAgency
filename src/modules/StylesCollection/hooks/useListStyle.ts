@@ -13,6 +13,7 @@ export const useListStyles = () => {
     { key: 'order', value: SortValue.Asc },
     { key: 'code3d', value: SortValue.Asc },
     { key: 'price', value: SortValue.Asc },
+    { key: 'createdAt', value: SortValue.Asc },
   ];
   const { loading, pagination, where, dataStyles, total } = useSelector((state: RootState) => state.styles.stylesState);
   const variables: GetListStylesVariables = {

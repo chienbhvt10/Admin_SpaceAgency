@@ -25,6 +25,13 @@ export const NumberOfRow = (index: number, current: number, pageSize?: number) =
   }
   return null;
 };
+
+export const NumberOfRowDesc = (index: number, current: number, length: number, pageSize?: number) => {
+  if (pageSize) {
+    return length - index - (current - 1) * pageSize;
+  }
+  return null;
+};
 export const OrderOfSorter = (order?: SortOrder) => {
   if (order === 'descend') {
     return SortValue.Desc;

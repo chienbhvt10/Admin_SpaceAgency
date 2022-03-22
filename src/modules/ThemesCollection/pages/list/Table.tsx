@@ -3,7 +3,7 @@ import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { CommonPath } from 'commons/base-routes';
 import UserRowActions from 'commons/components/layouts/ActionTable';
 import { ITheme } from 'graphql/generated/graphql';
-import { formatPriceJapan, NumberOfRow } from 'helpers/string';
+import { formatPriceJapan, NumberOfRow, NumberOfRowDesc } from 'helpers/string';
 import { useNavigate } from 'react-router';
 import { useRemoveTheme } from '../../hooks/useRemoveTheme';
 interface IProps {
@@ -18,7 +18,7 @@ function TableThemes(props: IProps) {
   const { removeTheme } = useRemoveTheme();
   const { items, loading, onChange, handleAdd, pagination } = props;
   const rowKey = (item: ITheme) => `${item.id}`;
-  const { current, pageSize } = pagination;
+  const { current, pageSize, total } = pagination;
   const onEdit = (record: ITheme) => () => {
     navigate(CommonPath.THEME_COLLECTION_UPDATE + record.id);
   };
@@ -31,7 +31,7 @@ function TableThemes(props: IProps) {
       dataIndex: '#',
       key: '#',
       width: 60,
-      render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
+      render: (_, __, index) => <>{NumberOfRowDesc(index, current, total, pageSize)}</>,
     },
     {
       title: 'タイトル',

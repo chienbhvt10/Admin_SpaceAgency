@@ -1,4 +1,4 @@
-import { Col, Form, Input, InputNumber, Row, Typography } from 'antd';
+import { Col, Form, Input, InputNumber, Row, Select, Typography } from 'antd';
 import { CommonPath } from 'commons/base-routes';
 import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger';
 import FormDropdown from 'commons/components/layouts/FormDropdown';
@@ -23,7 +23,7 @@ interface Props {
   onFinish?: (values: CreateMaterialsTypeInput) => void;
 }
 const requireRule = { required: true, message: 'この項目は必須です。' };
-
+const { Option } = Select;
 const MaterialForm = (props: Props) => {
   const { loading, item, title, onFinish, type } = props;
   const { uploadImages } = useUploadImages();
@@ -50,7 +50,11 @@ const MaterialForm = (props: Props) => {
     styleId: undefined,
   });
   const navigate = useNavigate();
-
+  const styleOptions = dataAllStyles?.map((style, index) => (
+    <Option key={index} value={style.id}>
+      {style.title}({style.theme?.title})
+    </Option>
+  ));
   React.useEffect(() => {
     // getAllThemes();
     getAllStyles();
@@ -84,7 +88,6 @@ const MaterialForm = (props: Props) => {
         namePremium: (item && item.materialTypes && item?.materialTypes[1]?.title) || '',
         pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
         codePremium: (item && item.materialTypes && item?.materialTypes[1]?.code3d) || '',
-        // description: (item && item.style?.description && item.style.description) || '',
       });
       // setThemeId(item.style?.theme?.id);
       setObjUrlImage({
@@ -187,19 +190,15 @@ const MaterialForm = (props: Props) => {
                     />
                   </Col> */}
                   <Col span={16} offset={1}>
-                    <FormDropdown
-                      formItem={{
-                        label: 'デザイン',
-                        name: 'styleId',
-                        labelCol: { span: 4 },
-                        wrapperCol: { span: 16, style: { marginLeft: 10 } },
-                        rules: [requireRule],
-                      }}
-                      // disabled={visibleStyleDropdown}
-                      loading={loadingSelectStyle}
-                      items={dataFilterStyles}
-                      options={[]}
-                    />
+                    <Form.Item
+                      labelCol={{ span: 4 }}
+                      wrapperCol={{ span: 16, style: { marginLeft: 10 } }}
+                      label="デザイン"
+                      name="styleId"
+                      rules={[requireRule]}
+                    >
+                      <Select placeholder="---全部---">{styleOptions}</Select>
+                    </Form.Item>
                   </Col>
                 </Row>
               </Col>
@@ -219,28 +218,6 @@ const MaterialForm = (props: Props) => {
                   </Col>
                 </Row>
               </Col>
-
-              {/* <Col span={22}>
-                <Form.Item
-                  labelCol={{ span: 2, style: { marginRight: 20 } }}
-                  wrapperCol={{ span: 20 }}
-                  className=""
-                  label="詳細"
-                  name="description"
-                >
-                  <TextArea rows={5} showCount maxLength={1000} />
-                </Form.Item>
-              </Col> */}
-
-              {/* <Col span={22} className="price-order-box">
-                <Form.Item labelCol={{ span: 4, style: { marginRight: 20 } }} label="Order" name="order">
-                  <InputNumber style={{ width: '100%', marginLeft: '6px' }} />
-                </Form.Item>
-              </Col> */}
-
-              {/* <Col className="image-upload-title" span={24} style={{ marginBottom: '50px' }}>
-                <Title level={3}>Type Collection</Title>
-              </Col> */}
               <Col span={19} style={{ marginBottom: '50px', marginLeft: '40px' }}>
                 <Row justify="center">
                   <Col span={11} style={{ marginLeft: 20 }}>
