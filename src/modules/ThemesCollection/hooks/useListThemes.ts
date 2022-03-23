@@ -8,10 +8,9 @@ import { actionThemes } from '../redux/actions';
 export const useListThemes = () => {
   const dispatch = useDispatch();
   const arrSortDefault: SortInput[] = [
-    { key: 'title', value: SortValue.Asc },
-    { key: 'code3D', value: SortValue.Asc },
-    { key: 'price', value: SortValue.Asc },
-    { key: 'createdAt', value: SortValue.Asc },
+    { key: 'title', value: undefined },
+    { key: 'code3D', value: undefined },
+    { key: 'value', value: undefined },
   ];
   const { loading, pagination, where, dataThemes, total } = useSelector((state: RootState) => state.themes.themesState);
   const variables: GetListThemesVariables = {
@@ -28,7 +27,7 @@ export const useListThemes = () => {
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
-        value: i.key === sortInput.key ? sortInput.value : i.value,
+        value: i.key === sortInput.key ? sortInput.value : undefined,
       }));
       dispatch(
         actionThemes({

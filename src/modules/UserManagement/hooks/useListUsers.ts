@@ -7,7 +7,7 @@ import { actionUsers } from '../redux/actions';
 
 export function useListUsers() {
   const dispatch = useDispatch();
-  const arrSortDefault: SortInput[] = [{ key: 'email', value: SortValue.Asc }];
+  const arrSortDefault: SortInput[] = [{ key: 'email', value: undefined }];
   const { loading, dataUsers, pagination, where, total } = useSelector((state: RootState) => state.users.usersState);
   const variables: GetListUsersVariables = {
     pagination,
@@ -22,7 +22,7 @@ export function useListUsers() {
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
-        value: i.key === sortInput.key ? sortInput.value : i.value,
+        value: i.key === sortInput.key ? sortInput.value : undefined,
       }));
       dispatch(
         actionUsers({
