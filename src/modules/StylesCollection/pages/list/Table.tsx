@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 import { IStyle } from 'graphql/generated/graphql';
-import { formatPriceJapan, NumberOfRow } from 'helpers/string';
+import { formatPriceJapan, NumberOfRowDesc } from 'helpers/string';
 import TableRowAction from 'modules/StylesCollection/components/Table-action';
 import React from 'react';
 interface IProps {
@@ -14,7 +14,7 @@ interface IProps {
 }
 const StyleCollectionTable = (props: IProps) => {
   const { items, loading, onChange, pagination, onDelete, onEdit } = props;
-  const { current, pageSize } = pagination;
+  const { current, pageSize, total } = pagination;
   const rowKey = (item: IStyle) => `${item.id}`;
 
   const columns: ColumnsType<IStyle> = [
@@ -23,7 +23,7 @@ const StyleCollectionTable = (props: IProps) => {
       dataIndex: '#',
       key: '#',
       width: 60,
-      render: (_, __, index) => <>{NumberOfRow(index, current, pageSize)}</>,
+      render: (_, __, index) => <>{NumberOfRowDesc(index, current, total, pageSize)}</>,
     },
     {
       title: 'タイトル',
