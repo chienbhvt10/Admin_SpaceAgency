@@ -3,6 +3,8 @@ fragment IStyle on Style {
   title
   code3d
   description
+  createdAt
+  updatedAt
   price {
     ...IPrice
   }

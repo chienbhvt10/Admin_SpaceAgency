@@ -13,7 +13,10 @@ import { actionSimulations } from '../redux/actions/list-simulations';
 
 export const useListSimulations = () => {
   const dispatch = useDispatch();
-  const arrSortDefault: SortInput[] = [{ key: 'title', value: undefined }];
+  const arrSortDefault: SortInput[] = [
+    { key: 'title', value: undefined },
+    { key: 'amountGross', value: undefined },
+  ];
   const { loading, pagination, where, dataSimulations, total } = useSelector(
     (state: RootState) => state.simulations.simulationsState,
   );
