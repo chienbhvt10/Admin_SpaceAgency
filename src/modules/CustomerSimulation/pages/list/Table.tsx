@@ -91,8 +91,8 @@ const CustomerSimulationTable = (props: IProps) => {
     },
     {
       title: '合計',
-      dataIndex: 'totalPrice',
-      key: 'totalPrice',
+      dataIndex: 'amountGross',
+      key: 'amountGross',
       width: 100,
       sorter: true,
       render: (_: any, record) => <>{formatPriceJapan(record.quotation?.amountGross || 0)}</>,

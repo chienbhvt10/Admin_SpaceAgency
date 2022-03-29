@@ -14,11 +14,8 @@ import { actionSimulations } from '../redux/actions/list-simulations';
 export const useListSimulations = () => {
   const dispatch = useDispatch();
   const arrSortDefault: SortInput[] = [
-    { key: 'title', value: SortValue.Asc },
-    { key: 'theme', value: SortValue.Asc },
-    { key: 'order', value: SortValue.Asc },
-    { key: 'code3d', value: SortValue.Asc },
-    { key: 'price', value: SortValue.Asc },
+    { key: 'title', value: undefined },
+    { key: 'amountGross', value: undefined },
   ];
   const { loading, pagination, where, dataSimulations, total } = useSelector(
     (state: RootState) => state.simulations.simulationsState,
@@ -37,7 +34,7 @@ export const useListSimulations = () => {
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
-        value: i.key === sortInput.key ? sortInput.value : i.value,
+        value: i.key === sortInput.key ? sortInput.value : undefined,
       }));
       dispatch(
         actionSimulations({
