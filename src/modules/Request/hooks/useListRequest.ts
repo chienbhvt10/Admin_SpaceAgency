@@ -8,9 +8,8 @@ import { RootState } from 'redux/reducers';
 export const useListRequests = () => {
   const dispatch = useDispatch();
   const arrSortDefault: SortInput[] = [
-    { key: 'email', value: SortValue.Asc },
-    { key: 'phone', value: SortValue.Asc },
-    { key: 'requesterFullName', value: SortValue.Asc },
+    { key: 'email', value: undefined },
+    { key: 'requesterFullName', value: undefined },
   ];
   const { loading, pagination, where, dataRequests, total } = useSelector(
     (state: RootState) => state.requests.requestsState,
@@ -29,7 +28,7 @@ export const useListRequests = () => {
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
-        value: i.key === sortInput.key ? sortInput.value : i.value,
+        value: i.key === sortInput.key ? sortInput.value : undefined,
       }));
       dispatch(
         actionRequests({

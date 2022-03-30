@@ -52,10 +52,10 @@ const StyleCollectionTable = (props: IProps) => {
     },
     {
       title: '価格',
-      dataIndex: 'price',
+      dataIndex: 'value',
       sortDirections: ['descend', 'ascend'],
-      key: 'price',
-      sorter: false,
+      key: 'value',
+      sorter: true,
       width: 150,
       render: (_, record) => <>{formatPriceJapan(record.price?.value || 0)}</>,
     },
