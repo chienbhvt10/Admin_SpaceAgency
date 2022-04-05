@@ -8,12 +8,10 @@ import { actionStyles } from '../redux/actions';
 export const useListStyles = () => {
   const dispatch = useDispatch();
   const arrSortDefault: SortInput[] = [
-    { key: 'title', value: SortValue.Asc },
-    { key: 'theme', value: SortValue.Asc },
-    { key: 'order', value: SortValue.Asc },
-    { key: 'code3d', value: SortValue.Asc },
-    { key: 'price', value: SortValue.Asc },
-    { key: 'createdAt', value: SortValue.Asc },
+    { key: 'title', value: undefined },
+    { key: 'theme', value: undefined },
+    { key: 'code3d', value: undefined },
+    { key: 'value', value: undefined },
   ];
   const { loading, pagination, where, dataStyles, total } = useSelector((state: RootState) => state.styles.stylesState);
   const variables: GetListStylesVariables = {
@@ -30,7 +28,7 @@ export const useListStyles = () => {
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
-        value: i.key === sortInput.key ? sortInput.value : i.value,
+        value: i.key === sortInput.key ? sortInput.value : undefined,
       }));
       dispatch(
         actionStyles({

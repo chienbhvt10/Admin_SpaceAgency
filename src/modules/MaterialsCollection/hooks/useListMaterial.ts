@@ -13,7 +13,7 @@ import { actionMaterials } from '../redux/actions';
 
 export const useListMaterial = () => {
   const dispatch = useDispatch();
-  const arrSortDefault: SortInput[] = [{ key: 'title', value: SortValue.Asc }];
+  const arrSortDefault: SortInput[] = [{ key: 'title', value: undefined }];
   const { loading, pagination, where, dataMaterials, total } = useSelector(
     (state: RootState) => state.materials.materialsState,
   );
@@ -31,7 +31,7 @@ export const useListMaterial = () => {
     if (sortInput && sortInput.value) {
       const sort = arrSort.map((i) => ({
         ...i,
-        value: i.key === sortInput.key ? sortInput.value : i.value,
+        value: i.key === sortInput.key ? sortInput.value : undefined,
       }));
       dispatch(
         actionMaterials({

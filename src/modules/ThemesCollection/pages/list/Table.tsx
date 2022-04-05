@@ -61,7 +61,7 @@ function TableThemes(props: IProps) {
     {
       title: '価格',
       dataIndex: 'price',
-      key: 'price',
+      key: 'value',
       sortDirections: ['descend', 'ascend'],
       sorter: true,
       width: 150,

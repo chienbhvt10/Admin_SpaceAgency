@@ -46,7 +46,6 @@ function RequestTable(props: IProps) {
       dataIndex: 'phone',
       key: 'phone',
       sortDirections: ['descend', 'ascend'],
-      sorter: true,
       width: 150,
     },
     {
