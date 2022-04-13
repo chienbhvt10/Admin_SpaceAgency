@@ -12,7 +12,6 @@ build:
       - node_modules/
       - .next/
       - .env
-      - yarn.lock
   script:
     - node -v
     - yarn -v
@@ -37,7 +36,6 @@ build-staging:
     paths:
       - node_modules/
       - .next/
-      - yarn.lock
   script:
     - node -v
     - yarn -v
