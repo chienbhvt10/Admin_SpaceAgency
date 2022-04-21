@@ -24,6 +24,7 @@ interface IProps {
   resetToDefault?: () => void;
 }
 
+const urlImage = env.apiEndPointUrlImage;
 export default function UploadDragger(props: IProps) {
   const beforeUpload = useCallback(
     async (file: any) => {
@@ -102,11 +103,11 @@ export default function UploadDragger(props: IProps) {
             footer={null}
             closeIcon={<CloseSquareOutlined size={3} style={{ fontSize: '30px', color: 'black' }} />}
           >
-            <img alt="ImgProduct" src={props.imageUrl} style={{ width: '100%' }} />
+            <img alt="ImgProduct" src={urlImage + props.imageUrl} style={{ width: '100%' }} />
           </Modal>
           <input
             type="image"
-            src={state.imageUrl}
+            src={urlImage + state.imageUrl}
             value={props.value?.id}
             className="image"
             alt="avatar"
