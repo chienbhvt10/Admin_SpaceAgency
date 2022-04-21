@@ -7,6 +7,7 @@ export async function uploadImage(info: any) {
   formData.append('image', info.file.originFileObj);
   try {
     const res = await postFormData(URL_POST_IMAGE, formData);
+    console.log(res,'dsamnvlkndslvk')
     return res;
   } catch (error) {
     return error;

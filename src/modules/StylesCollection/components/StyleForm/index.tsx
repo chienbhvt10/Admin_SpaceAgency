@@ -3,6 +3,7 @@ import UploadDragger from 'commons/components/layouts/Form-editor/UploadDragger'
 import { useUploadImages } from 'commons/hooks/useUploadImages/useUploadImages';
 import { CreateStyleTypeInput, TypeForm } from 'commons/type';
 import { IStyle } from 'graphql/generated/graphql';
+import { cutStringUrl } from 'helpers/string';
 import { useGetAllThemes } from 'modules/ThemesCollection/hooks/useGetAllThemes';
 import React, { useState } from 'react';
 import '../../styles/style-form.scss';
@@ -52,7 +53,7 @@ const StyleCollectionForm = (props: Props) => {
   React.useEffect(() => {
     if (previewImageUrl) {
       form.setFieldsValue({
-        previewImageUrl: previewImageUrl,
+        previewImageUrl,
       });
     }
   }, [previewImageUrl, form]);
