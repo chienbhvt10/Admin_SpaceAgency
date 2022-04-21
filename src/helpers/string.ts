@@ -1,6 +1,7 @@
 // export const formatString = (str: string) => {
 import { SortOrder } from 'antd/lib/table/interface';
 import { dataNav } from 'commons/type';
+import env from 'env';
 import { MaterialType, RequestType, SortValue } from 'graphql/generated/graphql';
 import moment from 'moment';
 //   if (str) return str.replace(/[&\/\\#,+()$~%.'":*?<>{}\[\]^|]/g, '');
@@ -79,4 +80,11 @@ export function formatPricePercent(percent: number) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(percent);
+}
+
+export function cutStringUrl(url: string) {
+  const lengthUrlEndPoint = env.apiEndPointUrlImage.length
+  if (lengthUrlEndPoint > 0) {
+    return url.slice(lengthUrlEndPoint)
+  }
 }
