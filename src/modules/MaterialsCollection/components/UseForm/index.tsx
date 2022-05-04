@@ -48,6 +48,9 @@ const MaterialForm = (props: Props) => {
     pricePremium: 0,
     priceStandard: 0,
     styleId: undefined,
+    description: '',
+    descriptionStandard: '',
+    descriptionPremium: ''
   });
   const navigate = useNavigate();
   const styleOptions = dataAllStyles?.map((style, index) => (
@@ -88,6 +91,8 @@ const MaterialForm = (props: Props) => {
         namePremium: (item && item.materialTypes && item?.materialTypes[1]?.title) || '',
         pricePremium: (item && item.materialTypes && item?.materialTypes[1]?.price?.value) || 0,
         codePremium: (item && item.materialTypes && item?.materialTypes[1]?.code3d) || '',
+        descriptionStandard: (item && item.materialTypes && item?.materialTypes[0].description) || '',
+        descriptionPremium: (item && item.materialTypes && item?.materialTypes[1].description) || ''
       });
       // setThemeId(item.style?.theme?.id);
       setObjUrlImage({
@@ -163,7 +168,7 @@ const MaterialForm = (props: Props) => {
         <Form
           name="basic"
           initialValues={{
-            ...item,
+            ...item
           }}
           form={form}
           onFinish={onFinish}
@@ -278,6 +283,18 @@ const MaterialForm = (props: Props) => {
                         />
                       </div>
                     </Col>
+                    <Col span={22} offset={2}>
+                      <Form.Item
+                        labelCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
+                        className="name"
+                        label="説明"
+                        name="descriptionStandard"
+                        rules={[requireRule]}
+                      >
+                        <Input />
+                      </Form.Item>
+                    </Col>
                   </Col>
 
                   <Col span={11}>
@@ -336,6 +353,18 @@ const MaterialForm = (props: Props) => {
                           resetToDefault={() => handleResetPreviewUrl2()}
                         />
                       </div>
+                    </Col>
+                    <Col span={22} offset={2}>
+                      <Form.Item
+                        labelCol={{ span: 24 }}
+                        wrapperCol={{ span: 23 }}
+                        className="name"
+                        label="説明"
+                        name="descriptionPremium"
+                        rules={[requireRule]}
+                      >
+                        <Input />
+                      </Form.Item>
                     </Col>
                   </Col>
                 </Row>
