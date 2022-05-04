@@ -107,7 +107,7 @@ export default function UploadDragger(props: IProps) {
           </Modal>
           <input
             type="image"
-            src={urlImage + state.imageUrl}
+            src={state.imageUrl}
             value={props.value?.id}
             className="image"
             alt="avatar"
