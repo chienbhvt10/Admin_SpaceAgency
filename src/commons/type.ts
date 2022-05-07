@@ -38,6 +38,9 @@ export interface CreateMaterialsTypeInput {
   order?: string;
   priceStandard: number;
   pricePremium: number;
+  description: string;
+  descriptionStandard: string;
+  descriptionPremium: string;
 }
 export interface UpdateRequestStatusTypeInput {
   requesterFullName: string;

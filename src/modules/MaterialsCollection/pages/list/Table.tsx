@@ -34,6 +34,14 @@ function TableMaterial(props: IProps) {
         render: (_: any, record) => <>{record.code3d}</>,
       },
       {
+        title: '説明',
+        dataIndex: 'description',
+        key: '#',
+        align: 'center',
+
+        render: (_: any, record) => <>{record.description === null ? "it's still null": record.description}</>,
+      },
+      {
         title: '価格',
         key: '#',
         dataIndex: 'price',

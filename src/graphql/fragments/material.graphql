@@ -16,6 +16,7 @@ fragment IMaterialType on MaterialType {
   id
   title
   code3d
+  description
   price {
     ...IPrice
   }
