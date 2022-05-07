@@ -23,6 +23,7 @@ const MaterialCreateNew = () => {
           {
             title: values.nameStandard,
             code3d: values.codeStandard,
+            description: values.descriptionStandard,
             price: {
               unit: CurrencyUnit.Jpy,
               value: values.priceStandard,
@@ -32,6 +33,7 @@ const MaterialCreateNew = () => {
           {
             title: values.namePremium,
             code3d: values.codePremium,
+            description: values.descriptionPremium,
             price: {
               unit: CurrencyUnit.Jpy,
               value: values.pricePremium,
@@ -42,6 +44,7 @@ const MaterialCreateNew = () => {
         style: {
           id: values.styleId || '',
         },
+        description: values.description
       },
     });
   };

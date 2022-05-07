@@ -28,11 +28,13 @@ const MaterialUpdate = () => {
     const updateMaterialInput: UpdateMaterialInput = {
       id: item?.id || '',
       title: values.name || '',
+      description: values.description,
       materialTypes: [
         {
           id: (item && item.materialTypes && item?.materialTypes[0]?.id) || '',
           title: values.nameStandard,
           code3d: values.codeStandard || '',
+          description: values.descriptionStandard,
           price: {
             unit: CurrencyUnit.Jpy,
             value: values.priceStandard || 0,
@@ -43,6 +45,7 @@ const MaterialUpdate = () => {
           id: (item && item.materialTypes && item?.materialTypes[1]?.id) || '',
           title: values.namePremium,
           code3d: values.codePremium || '',
+          description: values.descriptionPremium,
           price: {
             unit: CurrencyUnit.Jpy,
             value: values?.pricePremium || 0,
