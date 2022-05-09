@@ -29,6 +29,7 @@ const MaterialCreateNew = () => {
               value: values.priceStandard,
             },
             previewImageUrl: values.imagePreview,
+            imageDetailUrl: values.imageDetail
           },
           {
             title: values.namePremium,
@@ -39,6 +40,7 @@ const MaterialCreateNew = () => {
               value: values.pricePremium,
             },
             previewImageUrl: values.imagePreview2,
+            imageDetailUrl: values.imageDetail2
           },
         ],
         style: {

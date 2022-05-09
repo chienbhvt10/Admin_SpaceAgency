@@ -40,6 +40,7 @@ const MaterialUpdate = () => {
             value: values.priceStandard || 0,
           },
           previewImageUrl: values.imagePreview,
+          imageDetailUrl: values.imageDetail
         },
         {
           id: (item && item.materialTypes && item?.materialTypes[1]?.id) || '',
@@ -51,6 +52,7 @@ const MaterialUpdate = () => {
             value: values?.pricePremium || 0,
           },
           previewImageUrl: values.imagePreview2,
+          imageDetailUrl: values.imageDetail2
         },
       ],
       style: {

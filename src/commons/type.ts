@@ -31,6 +31,8 @@ export interface CreateMaterialsTypeInput {
   styleId?: string;
   imagePreview?: string;
   imagePreview2?: string;
+  imageDetail?: string;
+  imageDetail2?: string;
   nameStandard: string;
   namePremium: string;
   nameImage1?: string;
