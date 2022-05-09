@@ -3,6 +3,7 @@ fragment IMaterial on Material {
   updatedAt
   id
   title
+  description
   materialTypes {
     ...IMaterialType
   }
@@ -12,7 +13,7 @@ fragment IMaterial on Material {
 }
 fragment IMaterialType on MaterialType {
   createdAt
-  createdAt
+  updatedAt
   id
   title
   code3d
@@ -27,4 +28,5 @@ fragment IMaterialType on MaterialType {
 fragment IMaterialImage on MaterialImage {
   id
   previewImageUrl
+  imageDetailUrl
 }
