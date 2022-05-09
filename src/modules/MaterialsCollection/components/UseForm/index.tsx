@@ -85,6 +85,7 @@ const MaterialForm = (props: Props) => {
         ...updateMaterialInput,
         name: item.title || '',
         styleId: item.style?.id || undefined,
+        description: item.description || '',
         nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
         priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
         codeStandard: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
@@ -216,6 +217,22 @@ const MaterialForm = (props: Props) => {
                       className="name"
                       label="名称"
                       name="name"
+                      rules={[requireRule]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={22}>
+                <Row justify="center">
+                  <Col span={16} offset={1}>
+                    <Form.Item
+                      labelCol={{ span: 4, style: { marginRight: 10 } }}
+                      wrapperCol={{ span: 16 }}
+                      className="name"
+                      label="説明"
+                      name="description"
                       rules={[requireRule]}
                     >
                       <Input />

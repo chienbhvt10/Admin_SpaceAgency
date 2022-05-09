@@ -44,7 +44,7 @@ const MaterialCreateNew = () => {
         style: {
           id: values.styleId || '',
         },
-        description: 'ok on'
+        description: values.description
       },
     });
   };
