@@ -23,4 +23,6 @@ fragment IStyle on Style {
 fragment IStyleImage on StyleImage {
   id
   previewImageUrl
+  insideImage
+  outsideImage
 }
