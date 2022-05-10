@@ -30,6 +30,8 @@ const StyleCollectionForm = (props: Props) => {
   const { dataAllThemes, getAllThemes } = useGetAllThemes();
   const { uploadImages, loading: loadingImage } = useUploadImages();
   const [previewImageUrl, setPreviewImageUrl] = useState('');
+  const [insideImageUrl, setInsideImageUrl] = useState('');
+  const [outsideImageUrl, setOutsideImageUrl] = useState('');
 
   React.useEffect(() => {
     getAllThemes();
@@ -45,8 +47,12 @@ const StyleCollectionForm = (props: Props) => {
         price: item.price?.value || 0,
         title: item.title || '',
         previewImageUrl: item.styleImage?.previewImageUrl,
+        insideImageUrl: item.styleImage?.insideImage || '',
+        outsideImageUrl: item.styleImage?.outsideImage || '',
       });
       setPreviewImageUrl(item?.styleImage?.previewImageUrl || '');
+      setInsideImageUrl(item?.styleImage?.insideImage || '');
+      setOutsideImageUrl(item?.styleImage?.outsideImage || '');
     }
   }, [type, form, item]);
 
@@ -57,6 +63,20 @@ const StyleCollectionForm = (props: Props) => {
       });
     }
   }, [previewImageUrl, form]);
+  React.useEffect(() => {
+    if (insideImageUrl) {
+      form.setFieldsValue({
+        insideImageUrl,
+      });
+    }
+  }, [insideImageUrl, form]);
+  React.useEffect(() => {
+    if (outsideImageUrl) {
+      form.setFieldsValue({
+        outsideImageUrl,
+      });
+    }
+  }, [outsideImageUrl, form]);
   const onFinishFailed = () => {};
 
   const themeOptions = dataAllThemes.map((theme, index) => (
@@ -72,6 +92,24 @@ const StyleCollectionForm = (props: Props) => {
   const handleResetPreviewUrl = () => {
     form.setFieldsValue({
       previewImageUrl: '',
+    });
+  };
+  const handleChangeInsideUrl = async (info: any) => {
+    const urlImage = (await uploadImages(info)) as string;
+    setInsideImageUrl(urlImage);
+  };
+  const handleResetInsideUrl = () => {
+    form.setFieldsValue({
+      insideImageUrl: '',
+    });
+  };
+  const handleChangeOutsideUrl = async (info: any) => {
+    const urlImage = (await uploadImages(info)) as string;
+    setOutsideImageUrl(urlImage);
+  };
+  const handleResetOutsideUrl = () => {
+    form.setFieldsValue({
+      outsideImageUrl: '',
     });
   };
   return (
@@ -166,6 +204,56 @@ const StyleCollectionForm = (props: Props) => {
                       handleChange={handleChangePreviewUrl}
                       imageUrl={previewImageUrl}
                       resetToDefault={() => handleResetPreviewUrl()}
+                    />
+                  </div>
+                </Col>
+              </Col>
+            </Col>
+            <Col span={22}>
+              <Col span={14}>
+                <Col span={24}>
+                  <Form.Item
+                    labelCol={{ span: 7 }}
+                    wrapperCol={{ span: 16 }}
+                    label="内部プレビュー"
+                    name="insideImageUrl"
+                    rules={[requireRule]}
+                  >
+                    <Input disabled={true} />
+                  </Form.Item>
+                </Col>
+                <Col span={16} offset={7}>
+                  <div style={{ height: '300px' }}>
+                    <UploadDragger
+                      loading={loadingImage}
+                      handleChange={handleChangeInsideUrl}
+                      imageUrl={insideImageUrl}
+                      resetToDefault={() => handleResetInsideUrl()}
+                    />
+                  </div>
+                </Col>
+              </Col>
+            </Col>
+            <Col span={22}>
+              <Col span={14}>
+                <Col span={24}>
+                  <Form.Item
+                    labelCol={{ span: 7 }}
+                    wrapperCol={{ span: 16 }}
+                    label="外部プレビュー"
+                    name="outsideImageUrl"
+                    rules={[requireRule]}
+                  >
+                    <Input disabled={true} />
+                  </Form.Item>
+                </Col>
+                <Col span={16} offset={7}>
+                  <div style={{ height: '300px' }}>
+                    <UploadDragger
+                      loading={loadingImage}
+                      handleChange={handleChangeOutsideUrl}
+                      imageUrl={outsideImageUrl}
+                      resetToDefault={() => handleResetOutsideUrl()}
                     />
                   </div>
                 </Col>

@@ -72,6 +72,8 @@ export interface CreateStyleTypeInput {
   code3d: string;
   description: string;
   previewImageUrl: string;
+  insideImageUrl: string;
+  outsideImageUrl: string;
   price: number;
   themeId: string;
   title: string;
