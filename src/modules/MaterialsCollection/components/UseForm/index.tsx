@@ -29,6 +29,8 @@ const MaterialForm = (props: Props) => {
   const { uploadImages } = useUploadImages();
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [loadingImage2, setLoadingImage2] = useState<boolean>(false);
+  const [loadingImage3, setLoadingImage3] = useState<boolean>(false);
+  const [loadingImage4, setLoadingImage4] = useState<boolean>(false);
   // const [visibleStyleDropdown, setVisibleStyleDropdown] = useState<boolean>(true);
   // const [themeId, setThemeId] = React.useState<string>();
   // const { dataAllThemes, getAllThemes, loading: loadingSelectTheme } = useGetAllThemes();
@@ -38,6 +40,8 @@ const MaterialForm = (props: Props) => {
   const [objUrlImage, setObjUrlImage] = React.useState({
     previewUrl: '',
     previewUrl2: '',
+    detailUrl: '',
+    detailUrl2: ''
   });
   const [updateMaterialInput, setUpdateMaterialInput] = React.useState<CreateMaterialsTypeInput>({
     codePremium: '',
@@ -85,6 +89,7 @@ const MaterialForm = (props: Props) => {
         ...updateMaterialInput,
         name: item.title || '',
         styleId: item.style?.id || undefined,
+        description: item.description || '',
         nameStandard: (item && item.materialTypes && item?.materialTypes[0]?.title) || '',
         priceStandard: (item && item.materialTypes && item?.materialTypes[0]?.price?.value) || 0,
         codeStandard: (item && item.materialTypes && item?.materialTypes[0]?.code3d) || '',
@@ -98,6 +103,8 @@ const MaterialForm = (props: Props) => {
       setObjUrlImage({
         previewUrl: item?.materialTypes[0].materialImage?.previewImageUrl || '',
         previewUrl2: item?.materialTypes[1].materialImage?.previewImageUrl || '',
+        detailUrl: item?.materialTypes[0].materialImage?.imageDetailUrl || '',
+        detailUrl2: item?.materialTypes[1].materialImage?.imageDetailUrl || '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,6 +121,8 @@ const MaterialForm = (props: Props) => {
       form.setFieldsValue({
         imagePreview: objUrlImage.previewUrl,
         imagePreview2: objUrlImage.previewUrl2,
+        imageDetail: objUrlImage.detailUrl,
+        imageDetail2: objUrlImage.detailUrl2,
       });
     }
   }, [objUrlImage, form]);
@@ -144,6 +153,16 @@ const MaterialForm = (props: Props) => {
       imagePreview2: '',
     });
   };
+  const handleResetDetailUrl = () => {
+    form.setFieldsValue({
+      imageDetail: '',
+    });
+  };
+  const handleResetDetailUrl2 = () => {
+    form.setFieldsValue({
+      imageDetail2: '',
+    });
+  };
   const handleChangePreviewUrl = async (info: any) => {
     setLoadingImage(true);
     const urlImage = (await uploadImages(info)) as string;
@@ -160,6 +179,24 @@ const MaterialForm = (props: Props) => {
     setObjUrlImage({
       ...objUrlImage,
       previewUrl2: urlImage,
+    });
+  };
+  const handleChangeDetailUrl = async (info: any) => {
+    setLoadingImage3(true);
+    const urlImage = (await uploadImages(info)) as string;
+    setLoadingImage3(false);
+    setObjUrlImage({
+      ...objUrlImage,
+      detailUrl: urlImage,
+    });
+  };
+  const handleChangeDetailUrl2 = async (info: any) => {
+    setLoadingImage4(true);
+    const urlImage = (await uploadImages(info)) as string;
+    setLoadingImage4(false);
+    setObjUrlImage({
+      ...objUrlImage,
+      detailUrl2: urlImage,
     });
   };
   return (
@@ -219,6 +256,22 @@ const MaterialForm = (props: Props) => {
                       rules={[requireRule]}
                     >
                       <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={22}>
+                <Row justify="center">
+                  <Col span={16} offset={1}>
+                    <Form.Item
+                      labelCol={{ span: 4, style: { marginRight: 10 } }}
+                      wrapperCol={{ span: 16 }}
+                      className="name"
+                      label="説明"
+                      name="description"
+                      rules={[requireRule]}
+                    >
+                      <Input.TextArea rows={4} maxLength={2048} />
                     </Form.Item>
                   </Col>
                 </Row>
@@ -285,6 +338,27 @@ const MaterialForm = (props: Props) => {
                     </Col>
                     <Col span={22} offset={2}>
                       <Form.Item
+                        labelCol={{ span: 24, style: { marginRight: 20 } }}
+                        wrapperCol={{ span: 23 }}
+                        label="画像プ詳細"
+                        name="imageDetail"
+                        rules={[requireRule]}
+                      >
+                        <Input disabled={true} />
+                      </Form.Item>
+                    </Col>
+                    <Col span={21} offset={2}>
+                      <div style={{ height: '300px' }}>
+                        <UploadDragger
+                          loading={loadingImage3}
+                          handleChange={handleChangeDetailUrl}
+                          imageUrl={objUrlImage.detailUrl}
+                          resetToDefault={() => handleResetDetailUrl()}
+                        />
+                      </div>
+                    </Col>
+                    <Col span={22} offset={2}>
+                      <Form.Item
                         labelCol={{ span: 24 }}
                         wrapperCol={{ span: 23 }}
                         className="name"
@@ -292,7 +366,7 @@ const MaterialForm = (props: Props) => {
                         name="descriptionStandard"
                         rules={[requireRule]}
                       >
-                        <Input />
+                        <Input.TextArea rows={4} maxLength={2048} />
                       </Form.Item>
                     </Col>
                   </Col>
@@ -356,6 +430,27 @@ const MaterialForm = (props: Props) => {
                     </Col>
                     <Col span={22} offset={2}>
                       <Form.Item
+                        labelCol={{ span: 24, style: { marginRight: 20 } }}
+                        wrapperCol={{ span: 23 }}
+                        label="画像プ詳細"
+                        name="imageDetail2"
+                        rules={[requireRule]}
+                      >
+                        <Input disabled={true} />
+                      </Form.Item>
+                    </Col>
+                    <Col span={21} offset={2}>
+                      <div style={{ height: '300px' }}>
+                        <UploadDragger
+                          loading={loadingImage4}
+                          handleChange={handleChangeDetailUrl2}
+                          imageUrl={objUrlImage.detailUrl2}
+                          resetToDefault={() => handleResetDetailUrl2()}
+                        />
+                      </div>
+                    </Col>
+                    <Col span={22} offset={2}>
+                      <Form.Item
                         labelCol={{ span: 24 }}
                         wrapperCol={{ span: 23 }}
                         className="name"
@@ -363,7 +458,7 @@ const MaterialForm = (props: Props) => {
                         name="descriptionPremium"
                         rules={[requireRule]}
                       >
-                        <Input />
+                        <Input.TextArea rows={4} maxLength={2048} />
                       </Form.Item>
                     </Col>
                   </Col>
