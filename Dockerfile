@@ -1,7 +1,5 @@
 FROM node:16 As development
 
-RUN apk add --no-cache python2 g++ make
-
 WORKDIR /usr/src/app
 
 COPY package*.json ./
