@@ -31,6 +31,8 @@ export interface CreateMaterialsTypeInput {
   styleId?: string;
   imagePreview?: string;
   imagePreview2?: string;
+  imageDetail?: string;
+  imageDetail2?: string;
   nameStandard: string;
   namePremium: string;
   nameImage1?: string;
@@ -70,6 +72,8 @@ export interface CreateStyleTypeInput {
   code3d: string;
   description: string;
   previewImageUrl: string;
+  insideImageUrl: string;
+  outsideImageUrl: string;
   price: number;
   themeId: string;
   title: string;

@@ -36,6 +36,8 @@ const StyleCollectionDetail = () => {
       updateStyleInput: {
         id: item?.id || '',
         previewImageUrl: values.previewImageUrl || '',
+        insideImage: values.insideImageUrl || '',
+        outsideImage: values.outsideImageUrl || '',
         code3d: values?.code3d || '',
         description: values.description || '',
         price: {

@@ -25,6 +25,8 @@ const NewStyleCollection = () => {
     createStyle({
       createStyleInput: {
         previewImageUrl: values.previewImageUrl,
+        insideImage: values.insideImageUrl,
+        outsideImage: values.outsideImageUrl,
         title: values.title || '',
         code3d: values.code3d || '',
         description: values.description || '',
